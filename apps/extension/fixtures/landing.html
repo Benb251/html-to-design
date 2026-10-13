@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Web2Design capture fixture</title>
+<style>
+html { background: #f0f4fa; } body { margin: 0; font: 16px/24px Arial, sans-serif; color: #16243a; }
+header { background: #24365b; color: white; padding: 24px; } main { max-width: 760px; margin: 32px auto; padding: 16px; }
+h1 { font-size: 36px; line-height: 44px; font-weight: 700; letter-spacing: -0.5px; }
+p { font-size: 16px; line-height: 24px; } button { background: #245dc0; border: 2px solid #163f8a; border-radius: 8px; padding: 12px 20px; font: 600 16px/24px Arial, sans-serif; color: white; }
+.card { margin-top: 32px; padding: 24px; border: 2px solid #93a8ca; border-radius: 16px; background: #dce8ff; }
+.nested { background: white; border-radius: 8px; padding: 16px; } .faded { opacity: 0.5; }
+.swatch { width: 80px; height: 32px; background: #edbb52; border-radius: 4px; }
+footer { margin-top: 800px; padding: 24px; background: #e0e6f0; } .hidden { display: none; }
+</style></head><body><header>Web2Design</header><main><section><h1>Capture a rendered landing page</h1><p>Editable text, document geometry and simple styles. <strong>Nested text stays editable.</strong></p><button type="button">Try capture</button></section>
+<section class="card"><h2>Colored card</h2><p>Uniform border and rounded corners.</p><div class="nested"><p>Nested container</p><div class="swatch"></div></div></section>
+<section class="faded"><p>One opacity group, not opacity multiplied into children.</p></section><p class="hidden">Do not capture me</p></main><footer>Scroll down and capture again. Ordinary content should keep its document coordinates.</footer></body></html>

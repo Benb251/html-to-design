@@ -1,0 +1,25 @@
+{
+  "name": "@web2design/extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "fixture": "node scripts/serve-fixture.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@web2design/capture-engine": "0.1.0",
+    "@web2design/design-schema": "0.1.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.24",
+    "esbuild": "^0.25.0",
+    "@web2design/test-fixtures": "0.1.0",
+    "@types/node": "^22.0.0",
+    "jsdom": "^27.0.0",
+    "@types/jsdom": "^27.0.0"
+  }
+}

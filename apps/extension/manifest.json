@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Web2Design",
+  "version": "0.1.0",
+  "description": "Capture rendered page structure as local Web2Design V0.1 JSON.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "action": {
+    "default_title": "Web2Design",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'"
+  }
+}

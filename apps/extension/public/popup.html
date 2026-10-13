@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Web2Design</title><link rel="stylesheet" href="popup.css"></head>
+<body><h1>Web2Design</h1><p>Current page: <strong id="page">Loading…</strong></p><button id="capture" type="button">Capture Page</button>
+<p>Status: <span id="status" role="status" aria-live="polite">Ready</span></p><p id="details"></p>
+<div><button id="copy" type="button" disabled>Copy JSON</button> <button id="download" type="button" disabled>Download JSON</button></div>
+<label for="json">Validated Design Schema JSON</label><textarea id="json" readonly hidden spellcheck="false"></textarea>
+<p class="note">Local export only. Images/SVG and advanced styles are reported as warnings. Closing this popup discards its result; capture again to export.</p>
+<script src="popup.js"></script></body></html>

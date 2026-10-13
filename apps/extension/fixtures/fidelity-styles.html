@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Web2Design style fidelity</title>
+<style>
+body { margin: 20px; font: 16px/24px Arial, sans-serif; background: rgba(200,220,240,.25); }
+.swatch { width: 120.5px; height: 40.25px; margin-bottom: 8px; }
+#solid { background: rgba(18,52,86,.25); opacity: .5; }
+#transparent { background: transparent; border: 2px solid #123456; }
+#border { background: #eef; border: 2px solid rgba(18,52,86,.5); }
+#radius { background: #eef; border-radius: 12.5px; }
+#corners { background: #eef; border-radius: 1.25px 2.5px 3.75px 5px; }
+#clamped { background: #eef; border-radius: 80px; }
+#shadow { box-shadow: 0 4px 12px 2.5px rgba(0,0,0,.15); }
+#outer { opacity: .5; background: #eef; padding: 10px; }
+#inner { opacity: .5; }
+#srgb { background: color(srgb .2 .4 .6 / .5); }
+#dashed { border: 2px dashed #123456; } #dotted { border: 2px dotted #123456; } #double { border: 3px double #123456; }
+</style></head><body>
+<div class="swatch" id="solid"></div><div class="swatch" id="transparent"></div>
+<div class="swatch" id="border"></div><div class="swatch" id="radius"></div>
+<div class="swatch" id="corners"></div><div class="swatch" id="clamped"></div>
+<div class="swatch" id="shadow"><span>Shadow only</span></div>
+<div id="outer"><span id="inner">Nested opacity</span></div>
+<div class="swatch" id="srgb"></div><div class="swatch" id="dashed"></div>
+<div class="swatch" id="dotted"></div><div class="swatch" id="double"></div>
+</body></html>

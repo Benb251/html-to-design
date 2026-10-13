@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fidelity Assets</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; padding: 24px; background: #ffffff; color: #111827; }
+    .grid { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+    .card { padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; width: 140px; }
+    img, svg, canvas, video { display: block; }
+    .accent-path { fill: rgb(255, 64, 0); stroke: rgb(0, 0, 0); stroke-width: 2px; }
+  </style>
+</head>
+<body>
+  <h1>Asset Capture Fixture</h1>
+  <div class="grid">
+    <!-- 1. Standard PNG image with object-fit -->
+    <div class="card" id="card-png">
+      <img id="png-img" src="/dot.png" width="48" height="48" style="object-fit: cover;" alt="PNG">
+    </div>
+
+    <!-- 2. Relative image URL -->
+    <div class="card" id="card-relative">
+      <img id="relative-img" src="./dot.png" width="48" height="48" alt="Relative">
+    </div>
+
+    <!-- 3. Duplicate image URL -->
+    <div class="card" id="card-duplicate">
+      <img id="duplicate-img" src="/dot.png" width="48" height="48" alt="Duplicate">
+    </div>
+
+    <!-- 4. Data URL image -->
+    <div class="card" id="card-data">
+      <img id="data-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" width="32" height="32" alt="Data URL">
+    </div>
+
+    <!-- 5. srcset selected image -->
+    <div class="card" id="card-srcset">
+      <img id="srcset-img" srcset="/dot.png 1x, /dot.png 2x" src="/dot.png" width="48" height="48" alt="Srcset">
+    </div>
+
+    <!-- 6. Inline SVG with shape -->
+    <div class="card" id="card-inline-svg">
+      <svg id="inline-svg" viewBox="0 0 24 24" width="24" height="24">
+        <circle cx="12" cy="12" r="10" fill="rgb(0, 128, 255)"></circle>
+      </svg>
+    </div>
+
+    <!-- 7. Inline SVG styled through CSS class -->
+    <div class="card" id="card-css-svg">
+      <svg id="css-styled-svg" viewBox="0 0 24 24" width="24" height="24">
+        <path class="accent-path" d="M2 2h20v20H2z"></path>
+      </svg>
+    </div>
+
+    <!-- 8. SVG using <defs> and local gradient -->
+    <div class="card" id="card-defs-svg">
+      <svg id="defs-svg" viewBox="0 0 40 40" width="40" height="40">
+        <defs>
+          <linearGradient id="grad1">
+            <stop offset="0%" stop-color="rgb(255, 0, 0)"></stop>
+            <stop offset="100%" stop-color="rgb(0, 0, 255)"></stop>
+          </linearGradient>
+        </defs>
+        <rect width="40" height="40" fill="url(#grad1)"></rect>
+      </svg>
+    </div>
+
+    <!-- 9. Broken image (returns 404) -->
+    <div class="card" id="card-broken">
+      <img id="broken-img" src="/nonexistent-image-404.png" width="40" height="40" alt="Broken">
+    </div>
+
+    <!-- 10. Unsupported canvas and video elements -->
+    <div class="card" id="card-canvas">
+      <canvas id="unsupported-canvas" width="60" height="40"></canvas>
+    </div>
+    <div class="card" id="card-video">
+      <video id="unsupported-video" width="60" height="40"></video>
+    </div>
+  </div>
+</body>
+</html>

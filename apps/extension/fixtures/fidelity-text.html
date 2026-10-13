@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Web2Design text fidelity</title>
+<style>
+body { margin: 0; padding: 20px; font: 16px/24px Arial, sans-serif; color: #123456; }
+.text { margin-bottom: 12px; background: #eef; }
+#padded { width: 300px; padding: 18.75px; border: 2px solid #123456; }
+#multiline { width: 100px; }
+#typography { font-family: Arial, sans-serif; font-size: 18.75px; font-weight: 700; font-style: italic; line-height: 28.5px; letter-spacing: .5px; text-align: center; color: rgba(18,52,86,.5); padding: 10px; }
+#pre { white-space: pre; } #pre-wrap { white-space: pre-wrap; width: 100px; }
+#nowrap { white-space: nowrap; width: 80px; } #pre-line, #pre-line-leading { white-space: pre-line; }
+#normal-height { line-height: normal; }
+#space-only { white-space: pre; }
+</style></head><body>
+<div class="text" id="padded">Padded text</div>
+<div class="text" id="multiline">One two three four five six seven eight nine</div>
+<div class="text" id="typography">Typography</div>
+<div class="text" id="direct">First<!-- separate direct text node --> Second</div>
+<div class="text" id="inline-space"><span>One</span> <span>Two</span></div>
+<div class="text" id="normal">  one   two
+ three  </div>
+<div class="text" id="pre">one  two
+ three</div>
+<div class="text" id="pre-wrap">one  two
+ three</div>
+<div class="text" id="nowrap">one  two
+ three</div>
+<div class="text" id="pre-line">one  two
+ three</div>
+<div class="text" id="pre-line-leading">
+one
+two</div>
+<div class="text" id="breaks">First line<br>Second line</div>
+<div class="text" id="normal-height">Normal height</div>
+<div class="text" id="space-only">   </div>
+<div class="text" id="nbsp">&nbsp;</div>
+</body></html>

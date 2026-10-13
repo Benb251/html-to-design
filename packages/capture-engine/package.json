@@ -1,0 +1,26 @@
+{
+  "name": "@web2design/capture-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@web2design/design-schema": "0.1.0"
+  },
+  "devDependencies": {
+    "jsdom": "^27.0.0",
+    "@types/jsdom": "^27.0.0"
+  }
+}

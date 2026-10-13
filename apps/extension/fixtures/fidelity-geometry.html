@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Web2Design geometry fidelity</title>
+<style>
+body { margin: 0; font: 16px/24px Arial, sans-serif; }
+.stage { margin: 17.25px; padding: 20.5px; border: 2px solid #123456; width: 360.5px; background: #eef; }
+.box { width: 120.5px; height: 33.25px; padding: 10px; border: 2px solid #123456; margin: 7.5px; background: #abc; }
+#border-box { box-sizing: border-box; height: 57.25px; }
+#nested { position: absolute; left: 300.5px; top: 220.25px; padding: 10.5px; border: 2px solid #123456; background: #def; }
+#inner { width: 33.3333px; height: 18.75px; margin: 3.25px; background: #123456; }
+#negative { position: absolute; left: -18.75px; top: 120.5px; width: 40.5px; height: 18.75px; background: #abc; }
+#long { position: absolute; left: 1100.5px; top: 2400.25px; width: 120.5px; height: 33.25px; background: #abc; }
+.end { height: 2800px; width: 1400px; }
+</style></head><body>
+<div class="stage"><div class="box" id="content-box"></div><div class="box" id="border-box"></div></div>
+<div id="nested"><div id="inner"></div></div>
+<div id="negative"></div><div id="long"></div><div class="end"></div>
+</body></html>

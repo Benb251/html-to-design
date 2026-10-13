@@ -1,0 +1,26 @@
+{
+  "name": "web2design",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0",
+    "npm": ">=10"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @web2design/design-schema && npm run build -w @web2design/test-fixtures && npm run build -w @web2design/capture-engine && npm run build -w @web2design/extension",
+    "typecheck": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "test": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^5.0.4"
+  }
+}
