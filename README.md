@@ -24,15 +24,15 @@ The Design Schema is that boundary. Capture implementations may use DOM APIs, br
 
 ```text
 apps/
-  extension/        # Manifest V3 popup + first capture pipeline
-  figma-plugin/     # reserved package shell for later renderer integration
+  extension/        # Manifest V3 popup + capture pipeline
+  figma-plugin/     # Figma plugin shell, UI, message protocol & schema validation
 packages/
   capture-engine/   # rendered DOM to validated schema
   design-schema/    # Design Schema V0.1 implementation
   test-fixtures/    # deterministic example documents
 ```
 
-The `figma-renderer` package will be added when renderer implementation begins.
+The `figma-renderer` package will be attached in W2D-007 after the validation boundary.
 
 ## Commands
 
@@ -50,11 +50,11 @@ Use `npm ci` for a reproducible install from the lockfile. Package builds emit o
 
 ## Current scope
 
-M0 tooling, W2D-001 workspace bootstrap, W2D-002 Design Schema V0.1, W2D-003 first capture, W2D-004 geometry/basic style fidelity, and W2D-005 image/SVG asset capture are implemented. The Figma plugin is still a reserved package shell. The Chrome extension builds into `apps/extension/dist` and captures the current rendered page into validated JSON. Schema version remains `"0.1"`.
+W2D-001 through W2D-005 (M1 Capture) and W2D-006 (Figma Plugin Shell) are implemented. The Figma plugin builds into `apps/figma-plugin/dist/` (`manifest.json`, `main.js`, `ui.html`, `sample-w2d-document.json`) and handles document reception, typed message bridging, and authoritative Design Schema V0.1 validation. Canvas rendering is reserved for W2D-007.
 
-Follow [the Chrome extension workflow](apps/extension/README.md) to load the unpacked extension and test the local landing-page fixture. [The capture-engine contract](packages/capture-engine/README.md) lists today's supported cases and limitations.
+Follow [the Figma plugin workflow](apps/figma-plugin/README.md) to load the development plugin into Figma. Follow [the Chrome extension workflow](apps/extension/README.md) to load the unpacked extension.
 
-Run `npm run smoke -w @web2design/extension` after building for the compiled-content rendered-browser fidelity suite. See [fixture coverage](apps/extension/fixtures/README.md) and [W2D-005 report](docs/w2d-005-report.md) for checks and verification boundaries.
+Run `npm run smoke -w @web2design/extension` after building for the compiled-content rendered-browser fidelity suite. See [W2D-006 report](docs/w2d-006-report.md) for verification boundaries and test coverage.
 
 See [the schema contract](packages/design-schema/README.md) for coordinates, normalized style units, assets, validation, and version evolution, and [the fixtures](packages/test-fixtures/README.md) for the seven deterministic examples.
 

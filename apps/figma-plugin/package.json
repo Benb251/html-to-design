@@ -1,6 +1,20 @@
 {
   "name": "@web2design/figma-plugin",
-  "version": "0.0.0",
-  "private": true
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@web2design/design-schema": "0.1.0"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.141.0",
+    "@types/node": "^22.0.0",
+    "@web2design/test-fixtures": "0.1.0",
+    "esbuild": "^0.25.12"
+  }
 }
-

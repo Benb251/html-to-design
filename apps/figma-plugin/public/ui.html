@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Web2Design Importer</title>
+  <link rel="stylesheet" href="ui.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-title-row">
+        <h1 class="app-title">Web2Design Importer</h1>
+        <span class="schema-badge">V0.1</span>
+      </div>
+      <p class="app-subtitle">Validate and prepare captured web designs for Figma</p>
+    </header>
+
+    <main class="app-body">
+      <section class="input-section">
+        <div class="section-header">
+          <label for="json-input" class="input-label">Paste Web2Design JSON</label>
+          <label for="file-input" class="file-picker-label">
+            <span>Browse file</span>
+            <input type="file" id="file-input" accept=".json,application/json">
+          </label>
+        </div>
+
+        <textarea
+          id="json-input"
+          class="json-textarea"
+          placeholder="Paste Web2Design V0.1 JSON document here..."
+          spellcheck="false"
+        ></textarea>
+
+        <div class="action-row">
+          <button id="validate-btn" class="btn btn-primary" type="button">Validate &amp; Prepare</button>
+          <button id="sample-btn" class="btn btn-secondary" type="button">Load Sample</button>
+          <button id="clear-btn" class="btn btn-ghost" type="button">Clear</button>
+        </div>
+      </section>
+
+      <section class="status-section">
+        <div class="status-bar status-waiting" id="status-bar">
+          <span class="status-indicator"></span>
+          <span class="status-text" id="status-text">Waiting for document input</span>
+        </div>
+      </section>
+
+      <section id="summary-section" class="summary-section hidden">
+        <div class="summary-card">
+          <div class="card-header">
+            <h2 class="card-title">Document Summary</h2>
+            <span class="card-badge" id="summary-schema-version">Schema 0.1</span>
+          </div>
+
+          <div class="meta-grid">
+            <div class="meta-item">
+              <span class="meta-label">Page / Title</span>
+              <span class="meta-val" id="summary-page-title">—</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Viewport</span>
+              <span class="meta-val" id="summary-viewport">—</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Captured</span>
+              <span class="meta-val" id="summary-captured-at">—</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Source</span>
+              <span class="meta-val" id="summary-source-kind">—</span>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-pill">
+              <span class="stat-num" id="stat-total-nodes">0</span>
+              <span class="stat-name">Total Nodes</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="stat-frames">0</span>
+              <span class="stat-name">Frames</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="stat-text">0</span>
+              <span class="stat-name">Text</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="stat-rectangles">0</span>
+              <span class="stat-name">Rectangles</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="stat-images">0</span>
+              <span class="stat-name">Images</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="stat-svgs">0</span>
+              <span class="stat-name">SVGs</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="stat-assets">0</span>
+              <span class="stat-name">Assets</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="stat-warnings">0</span>
+              <span class="stat-name">Warnings</span>
+            </div>
+          </div>
+
+          <div class="ready-banner">
+            <span class="ready-icon">✓</span>
+            <span class="ready-text">Document valid. Ready for W2D-007 Figma canvas rendering.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="error-section" class="error-section hidden">
+        <div class="error-card">
+          <div class="error-card-header">
+            <span class="error-icon">✕</span>
+            <h2 class="error-card-title" id="error-title">Validation Error</h2>
+          </div>
+          <p class="error-message" id="error-message"></p>
+          <div class="issues-list" id="issues-list"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="ui.js"></script>
+</body>
+</html>

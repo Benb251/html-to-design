@@ -1,0 +1,15 @@
+{
+  "name": "Web2Design",
+  "id": "web2design",
+  "api": "1.0.0",
+  "main": "main.js",
+  "ui": "ui.html",
+  "editorType": [
+    "figma"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  }
+}
