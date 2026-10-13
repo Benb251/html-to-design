@@ -105,13 +105,27 @@ describe("Figma plugin - message handling protocol", () => {
     expect(response.type).toBe("validation-success");
     if (response.type === "validation-success") {
       expect(response.summary.totalNodes).toBe(2);
-      expect(response.summary.schemaVersion).toBe("0.3");
+      expect(response.summary.schemaVersion).toBe("0.4");
       expect(response.document).toEqual(simpleTextFixture);
     }
     expect(harness.notifications[0]).toEqual({
       message: "Web2Design document validated",
       options: undefined,
     });
+  });
+
+  it("parses and validates a V0.3 document retaining schemaVersion 0.3", async () => {
+    const harness = createHarness();
+    const v03Doc = { ...simpleTextFixture, schemaVersion: "0.3" };
+
+    await handleUiMessage({ type: "validate-document", raw: v03Doc }, harness.postMessage, harness.notify);
+
+    expect(harness.messages.length).toBe(1);
+    const response = harness.messages[0]!;
+    expect(response.type).toBe("validation-success");
+    if (response.type === "validation-success") {
+      expect(response.summary.schemaVersion).toBe("0.3");
+    }
   });
 
   it("parses and validates a V0.2 document retaining schemaVersion 0.2", async () => {
@@ -177,7 +191,7 @@ describe("Figma plugin - message handling protocol", () => {
 
   it("rejects invalid schema version with validation issues", async () => {
     const harness = createHarness();
-    const invalidDoc = { ...simpleTextFixture, schemaVersion: "0.4" };
+    const invalidDoc = { ...simpleTextFixture, schemaVersion: "0.5" };
 
     await handleUiMessage({ type: "validate-document", raw: invalidDoc }, harness.postMessage, harness.notify);
 

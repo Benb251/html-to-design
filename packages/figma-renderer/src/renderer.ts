@@ -46,6 +46,31 @@ function tagPluginData(figmaNode: SceneNode, schemaNode: DesignNode): void {
   }
 }
 
+function applyFrameClipping(
+  frame: FrameNode,
+  schema: SchemaFrameNode,
+  warnings: WarningCollector,
+): void {
+  const clip = schema.clip;
+  if (!clip || (!clip.x && !clip.y)) {
+    frame.clipsContent = false;
+    return;
+  }
+
+  if (clip.x && clip.y) {
+    frame.clipsContent = true;
+    return;
+  }
+
+  // Single-axis clipping: approximated with both-axis clipsContent=true
+  frame.clipsContent = true;
+  warnings.warn(
+    "AXIS_CLIP_APPROXIMATED",
+    `Single-axis clipping (clipX=${clip.x}, clipY=${clip.y}) on node '${schema.id}' is approximated by native Figma FrameNode.clipsContent=true on both axes.`,
+    schema.id,
+  );
+}
+
 export async function renderDesignDocument(
   rawDocument: VersionedDesignDocument,
   host: FigmaRendererHost,
@@ -68,6 +93,7 @@ export async function renderDesignDocument(
 
   rootFrame.resize(Math.max(1, rootSchema.width), Math.max(1, rootSchema.height));
   rootFrame.layoutMode = "NONE";
+  applyFrameClipping(rootFrame, rootSchema, warnings);
 
   // Root placement centered in viewport
   const viewportCenter = options?.viewportCenter ?? host.getViewportCenter?.();
@@ -105,6 +131,7 @@ export async function renderDesignDocument(
               frame.y = localCoords.y;
               frame.resize(Math.max(0.01, childSchema.width), Math.max(0.01, childSchema.height));
               frame.layoutMode = "NONE";
+              applyFrameClipping(frame, childSchema, warnings);
 
               applyVisualStyle(
                 frame,

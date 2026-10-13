@@ -1,0 +1,86 @@
+[
+  {
+    "id": "framework-01-react",
+    "title": "React Documentation & Landing",
+    "url": "https://react.dev",
+    "w2d010ClippingCount": 112,
+    "domObserved": {
+      "bothAxisHiddenOrClip": 199,
+      "singleAxisClip": 9,
+      "autoOrScroll": 12,
+      "clipMarginCount": 0,
+      "totalObserved": 208
+    },
+    "totalNodes": 1170,
+    "bothAxisSchemaClips": 34,
+    "singleAxisSchemaClips": 9,
+    "nativeFigmaClips": 43,
+    "createdNodes": 1170,
+    "skippedNodes": 0,
+    "captureDurationMs": 457,
+    "schemaValid": true,
+    "wireVersion": "0.4",
+    "rendererSuccess": true,
+    "warnings": {
+      "axisApproxWarnings": 9,
+      "scrollDeferredWarnings": 1,
+      "clipMarginWarnings": 0
+    }
+  },
+  {
+    "id": "complex-css-01-tailwind",
+    "title": "Tailwind CSS",
+    "url": "https://tailwindcss.com",
+    "w2d010ClippingCount": 74,
+    "domObserved": {
+      "bothAxisHiddenOrClip": 170,
+      "singleAxisClip": 1,
+      "autoOrScroll": 6,
+      "clipMarginCount": 0,
+      "totalObserved": 171
+    },
+    "totalNodes": 1156,
+    "bothAxisSchemaClips": 47,
+    "singleAxisSchemaClips": 1,
+    "nativeFigmaClips": 48,
+    "createdNodes": 1156,
+    "skippedNodes": 0,
+    "captureDurationMs": 450,
+    "schemaValid": true,
+    "wireVersion": "0.4",
+    "rendererSuccess": true,
+    "warnings": {
+      "axisApproxWarnings": 1,
+      "scrollDeferredWarnings": 1,
+      "clipMarginWarnings": 0
+    }
+  },
+  {
+    "id": "docs-01-nodejs",
+    "title": "Node.js Official Documentation & Portal",
+    "url": "https://nodejs.org/en",
+    "w2d010ClippingCount": 42,
+    "domObserved": {
+      "bothAxisHiddenOrClip": 29,
+      "singleAxisClip": 5,
+      "autoOrScroll": 11,
+      "clipMarginCount": 0,
+      "totalObserved": 34
+    },
+    "totalNodes": 258,
+    "bothAxisSchemaClips": 1,
+    "singleAxisSchemaClips": 1,
+    "nativeFigmaClips": 2,
+    "createdNodes": 258,
+    "skippedNodes": 0,
+    "captureDurationMs": 136,
+    "schemaValid": true,
+    "wireVersion": "0.4",
+    "rendererSuccess": true,
+    "warnings": {
+      "axisApproxWarnings": 1,
+      "scrollDeferredWarnings": 1,
+      "clipMarginWarnings": 0
+    }
+  }
+]

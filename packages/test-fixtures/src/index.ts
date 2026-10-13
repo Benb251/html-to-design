@@ -476,3 +476,240 @@ export const historicalV02GradientFixture = {
   assets: [],
 };
 
+export const historicalV03BorderShadowFixture = {
+  schemaVersion: "0.3" as const,
+  capture: {
+    capturedAt: "2026-10-13T07:00:00.000Z",
+    source: { kind: "fixture", name: "Web2Design fixtures", version: "0.1.0" },
+    page: { url: "https://example.com/fixture", title: "Fixture" },
+  },
+  viewport: {
+    width: 800,
+    height: 600,
+    devicePixelRatio: 1,
+    scrollX: 0,
+    scrollY: 0,
+  },
+  root: {
+    id: "root",
+    type: "frame" as const,
+    name: "Page",
+    x: 0,
+    y: 0,
+    width: 800,
+    height: 600,
+    visible: true,
+    opacity: 1,
+    children: [
+      {
+        id: "rect-v03",
+        type: "rectangle" as const,
+        x: 24,
+        y: 24,
+        width: 320,
+        height: 180,
+        visible: true,
+        opacity: 1,
+        children: [] as [],
+        style: {
+          fills: [{ type: "solid" as const, color: { r: 1, g: 1, b: 1, a: 1 } }],
+          border: {
+            top: { width: 1, style: "solid" as const, color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+            right: { width: 2, style: "solid" as const, color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+            bottom: { width: 3, style: "solid" as const, color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+            left: { width: 4, style: "solid" as const, color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+          },
+          cornerRadius: 12,
+          boxShadows: [
+            {
+              offsetX: 0,
+              offsetY: 4,
+              blurRadius: 12,
+              spreadRadius: 0,
+              color: { r: 0, g: 0, b: 0, a: 0.18 },
+              inset: false,
+            },
+            {
+              offsetX: 0,
+              offsetY: 1,
+              blurRadius: 2,
+              spreadRadius: 0,
+              color: { r: 0, g: 0, b: 0, a: 0.1 },
+              inset: true,
+            },
+          ],
+        },
+      },
+    ],
+  },
+  assets: [],
+};
+
+export const bothAxisClipFixture = documentWith([
+  {
+    id: "clip-both-frame",
+    type: "frame",
+    x: 24,
+    y: 24,
+    width: 200,
+    height: 100,
+    visible: true,
+    opacity: 1,
+    clip: { x: true, y: true },
+    style: {
+      fills: [{ type: "solid", color: white }],
+    },
+    children: [
+      {
+        id: "child-rect-overflow",
+        type: "rectangle",
+        x: 150,
+        y: 50,
+        width: 100,
+        height: 100,
+        visible: true,
+        opacity: 1,
+        children: [],
+        style: {
+          fills: [{ type: "solid", color: { r: 0.2, g: 0.4, b: 0.8, a: 1 } }],
+        },
+      },
+    ],
+  },
+]);
+
+export const xOnlyClipFixture = documentWith([
+  {
+    id: "clip-x-frame",
+    type: "frame",
+    x: 24,
+    y: 24,
+    width: 200,
+    height: 100,
+    visible: true,
+    opacity: 1,
+    clip: { x: true, y: false },
+    children: [
+      {
+        id: "child-x-overflow",
+        type: "rectangle",
+        x: 150,
+        y: 20,
+        width: 100,
+        height: 60,
+        visible: true,
+        opacity: 1,
+        children: [],
+      },
+    ],
+  },
+]);
+
+export const yOnlyClipFixture = documentWith([
+  {
+    id: "clip-y-frame",
+    type: "frame",
+    x: 24,
+    y: 24,
+    width: 200,
+    height: 100,
+    visible: true,
+    opacity: 1,
+    clip: { x: false, y: true },
+    children: [
+      {
+        id: "child-y-overflow",
+        type: "rectangle",
+        x: 20,
+        y: 80,
+        width: 100,
+        height: 60,
+        visible: true,
+        opacity: 1,
+        children: [],
+      },
+    ],
+  },
+]);
+
+export const nestedClipsFixture = documentWith([
+  {
+    id: "outer-clip-frame",
+    type: "frame",
+    x: 24,
+    y: 24,
+    width: 300,
+    height: 200,
+    visible: true,
+    opacity: 1,
+    clip: { x: true, y: true },
+    children: [
+      {
+        id: "inner-clip-frame",
+        type: "frame",
+        x: 50,
+        y: 50,
+        width: 150,
+        height: 100,
+        visible: true,
+        opacity: 1,
+        clip: { x: true, y: false },
+        children: [
+          {
+            id: "deep-child",
+            type: "rectangle",
+            x: 100,
+            y: 80,
+            width: 100,
+            height: 100,
+            visible: true,
+            opacity: 1,
+            children: [],
+          },
+        ],
+      },
+    ],
+  },
+]);
+
+export const roundedClipFrameFixture = documentWith([
+  {
+    id: "rounded-clip-card",
+    type: "frame",
+    x: 24,
+    y: 24,
+    width: 240,
+    height: 160,
+    visible: true,
+    opacity: 1,
+    clip: { x: true, y: true },
+    style: {
+      fills: [{ type: "solid", color: white }],
+      cornerRadius: 24,
+      border: {
+        top: { width: 1, style: "solid", color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+        right: { width: 1, style: "solid", color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+        bottom: { width: 1, style: "solid", color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+        left: { width: 1, style: "solid", color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+      },
+    },
+    children: [
+      {
+        id: "clipped-image-box",
+        type: "rectangle",
+        x: 0,
+        y: 0,
+        width: 240,
+        height: 120,
+        visible: true,
+        opacity: 1,
+        children: [],
+        style: {
+          fills: [{ type: "solid", color: { r: 0.2, g: 0.6, b: 1, a: 1 } }],
+        },
+      },
+    ],
+  },
+]);
+
+

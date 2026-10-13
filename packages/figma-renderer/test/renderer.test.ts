@@ -31,7 +31,7 @@ describe("figma-renderer - renderDesignDocument", () => {
     // Traceability metadata
     expect(root.getPluginData("web2design:id")).toBe("root");
     expect(root.getPluginData("web2design:type")).toBe("frame");
-    expect(root.getPluginData("web2design:schemaVersion")).toBe("0.3");
+    expect(root.getPluginData("web2design:schemaVersion")).toBe("0.4");
 
     // Children
     expect(root.children.length).toBe(1);
@@ -167,4 +167,107 @@ describe("figma-renderer - renderDesignDocument", () => {
       expect(deriveNodeName(node)).toBe("section");
     });
   });
+
+  describe("W2D-014 FrameNode.clipsContent rendering", () => {
+    function createDocWithClip(clip?: { x: boolean; y: boolean }) {
+      return {
+        schemaVersion: "0.4" as const,
+        capture: {
+          capturedAt: "2026-10-13T07:00:00.000Z",
+          source: { kind: "fixture", name: "Web2Design", version: "0.1.0" },
+          page: { url: "https://example.com/fixture", title: "Fixture" },
+        },
+        viewport: { width: 800, height: 600, devicePixelRatio: 1, scrollX: 0, scrollY: 0 },
+        root: {
+          id: "root",
+          type: "frame" as const,
+          x: 0,
+          y: 0,
+          width: 800,
+          height: 600,
+          visible: true,
+          opacity: 1,
+          children: [
+            {
+              id: "clip-frame",
+              type: "frame" as const,
+              x: 50,
+              y: 50,
+              width: 200,
+              height: 100,
+              visible: true,
+              opacity: 1,
+              ...(clip ? { clip } : {}),
+              children: [
+                {
+                  id: "oversized-child",
+                  type: "rectangle" as const,
+                  x: 150,
+                  y: 50,
+                  width: 100,
+                  height: 100,
+                  visible: true,
+                  opacity: 1,
+                  children: [] as [],
+                },
+              ],
+            },
+          ],
+        },
+        assets: [],
+      };
+    }
+
+    it("renders both-axis clip with clipsContent = true and no warnings", async () => {
+      const host = new FakeFigmaHost();
+      const doc = createDocWithClip({ x: true, y: true });
+      const result = await renderDesignDocument(doc, host);
+
+      const root = host.roots[0]!;
+      const frame = root.children[0]! as unknown as FakeFrameNode;
+      expect(frame.clipsContent).toBe(true);
+      expect(result.warnings.length).toBe(0);
+
+      // Child geometry is preserved non-destructively
+      const child = frame.children[0]! as unknown as FakeFrameNode;
+      expect(child.width).toBe(100);
+      expect(child.height).toBe(100);
+      expect(child.x).toBe(100); // 150 - 50 relative to parent
+      expect(child.y).toBe(0); // 50 - 50 relative to parent
+    });
+
+    it("renders unclipped container with clipsContent = false", async () => {
+      const host = new FakeFigmaHost();
+      const doc = createDocWithClip({ x: false, y: false });
+      const result = await renderDesignDocument(doc, host);
+
+      const root = host.roots[0]!;
+      const frame = root.children[0]! as unknown as FakeFrameNode;
+      expect(frame.clipsContent).toBe(false);
+      expect(result.warnings.length).toBe(0);
+    });
+
+    it("approximates x-only clipping with clipsContent = true and AXIS_CLIP_APPROXIMATED warning", async () => {
+      const host = new FakeFigmaHost();
+      const doc = createDocWithClip({ x: true, y: false });
+      const result = await renderDesignDocument(doc, host);
+
+      const root = host.roots[0]!;
+      const frame = root.children[0]! as unknown as FakeFrameNode;
+      expect(frame.clipsContent).toBe(true);
+      expect(result.warnings.some(w => w.code === "AXIS_CLIP_APPROXIMATED" && w.nodeId === "clip-frame")).toBe(true);
+    });
+
+    it("approximates y-only clipping with clipsContent = true and AXIS_CLIP_APPROXIMATED warning", async () => {
+      const host = new FakeFigmaHost();
+      const doc = createDocWithClip({ x: false, y: true });
+      const result = await renderDesignDocument(doc, host);
+
+      const root = host.roots[0]!;
+      const frame = root.children[0]! as unknown as FakeFrameNode;
+      expect(frame.clipsContent).toBe(true);
+      expect(result.warnings.some(w => w.code === "AXIS_CLIP_APPROXIMATED" && w.nodeId === "clip-frame")).toBe(true);
+    });
+  });
 });
+

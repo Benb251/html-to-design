@@ -15,8 +15,16 @@ interface BaseNode {
   style?: VisualStyle | undefined;
 }
 
+export const ClipBehaviorSchema = z.strictObject({
+  x: z.boolean(),
+  y: z.boolean(),
+});
+
+export type ClipBehavior = z.infer<typeof ClipBehaviorSchema>;
+
 export interface FrameNode extends BaseNode {
   type: "frame";
+  clip?: ClipBehavior | undefined;
   children: DesignNode[];
 }
 
@@ -66,7 +74,7 @@ function createBaseNodeShape<S extends z.ZodTypeAny>(styleSchema: S) {
   };
 }
 
-export function createNodeSchemas<S extends z.ZodTypeAny>(styleSchema: S) {
+export function createNodeSchemas<S extends z.ZodTypeAny>(styleSchema: S, allowClip: boolean = false) {
   const baseShape = createBaseNodeShape(styleSchema);
 
   const textNodeSchema = z.strictObject({
@@ -108,11 +116,20 @@ export function createNodeSchemas<S extends z.ZodTypeAny>(styleSchema: S) {
     }),
   ]);
 
-  const frameNodeSchema: z.ZodType<FrameNode> = z.strictObject({
-    ...baseShape,
-    type: z.literal("frame"),
-    children: z.lazy(() => z.array(designNodeSchema)),
-  }) as unknown as z.ZodType<FrameNode>;
+  const frameShape = allowClip
+    ? {
+        ...baseShape,
+        type: z.literal("frame"),
+        clip: ClipBehaviorSchema.optional(),
+        children: z.lazy(() => z.array(designNodeSchema)),
+      }
+    : {
+        ...baseShape,
+        type: z.literal("frame"),
+        children: z.lazy(() => z.array(designNodeSchema)),
+      };
+
+  const frameNodeSchema: z.ZodType<FrameNode> = z.strictObject(frameShape) as unknown as z.ZodType<FrameNode>;
 
   const designNodeSchema: z.ZodType<DesignNode> = z.lazy(() =>
     z.union([
@@ -134,21 +151,26 @@ export function createNodeSchemas<S extends z.ZodTypeAny>(styleSchema: S) {
   };
 }
 
-const v01Schemas = createNodeSchemas(VisualStyleSchemaV01);
+const v01Schemas = createNodeSchemas(VisualStyleSchemaV01, false);
 export const FrameNodeSchemaV01 = v01Schemas.frameNodeSchema;
 export const DesignNodeSchemaV01 = v01Schemas.designNodeSchema;
 
-const v02Schemas = createNodeSchemas(VisualStyleSchemaV02);
+const v02Schemas = createNodeSchemas(VisualStyleSchemaV02, false);
 export const FrameNodeSchemaV02: z.ZodType<FrameNode> = v02Schemas.frameNodeSchema;
 export const DesignNodeSchemaV02: z.ZodType<DesignNode> = v02Schemas.designNodeSchema;
 
-const v03Schemas = createNodeSchemas(VisualStyleSchemaV03);
+const v03Schemas = createNodeSchemas(VisualStyleSchemaV03, false);
 export const FrameNodeSchemaV03: z.ZodType<FrameNode> = v03Schemas.frameNodeSchema;
 export const DesignNodeSchemaV03: z.ZodType<DesignNode> = v03Schemas.designNodeSchema;
 
-export const TextNodeSchema: z.ZodType<TextNode> = v03Schemas.textNodeSchema;
-export const RectangleNodeSchema: z.ZodType<RectangleNode> = v03Schemas.rectangleNodeSchema;
-export const ImageNodeSchema: z.ZodType<ImageNode> = v03Schemas.imageNodeSchema;
-export const SvgNodeSchema: z.ZodType<SvgNode> = v03Schemas.svgNodeSchema;
-export const FrameNodeSchema: z.ZodType<FrameNode> = FrameNodeSchemaV03;
-export const DesignNodeSchema: z.ZodType<DesignNode> = v03Schemas.designNodeSchema;
+const v04Schemas = createNodeSchemas(VisualStyleSchemaV03, true);
+export const FrameNodeSchemaV04: z.ZodType<FrameNode> = v04Schemas.frameNodeSchema;
+export const DesignNodeSchemaV04: z.ZodType<DesignNode> = v04Schemas.designNodeSchema;
+
+export const TextNodeSchema: z.ZodType<TextNode> = v04Schemas.textNodeSchema;
+export const RectangleNodeSchema: z.ZodType<RectangleNode> = v04Schemas.rectangleNodeSchema;
+export const ImageNodeSchema: z.ZodType<ImageNode> = v04Schemas.imageNodeSchema;
+export const SvgNodeSchema: z.ZodType<SvgNode> = v04Schemas.svgNodeSchema;
+export const FrameNodeSchema: z.ZodType<FrameNode> = FrameNodeSchemaV04;
+export const DesignNodeSchema: z.ZodType<DesignNode> = v04Schemas.designNodeSchema;
+

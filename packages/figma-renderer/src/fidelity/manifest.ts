@@ -157,5 +157,21 @@ export const FIXTURE_MANIFEST: FixtureManifestEntry[] = [
       { code: "BORDER_CORNER_APPROXIMATED", nodeId: "w2d-element-19" },
     ],
   },
+  {
+    id: "chrome-clipping",
+    name: "Container Clipping Fidelity Capture",
+    kind: "chrome-capture",
+    sourcePath: "apps/extension/.smoke/fidelity-clipping.json",
+    description: "Browser capture testing overflow hidden/clip, single-axis clipping, uncropped descendant geometry, nested clips, rounded card clipping, image clipping, and gradient/border/shadow/pseudo interactions",
+    expectedCategories: ["GEOMETRY", "HIERARCHY", "FILL", "BORDER", "RADIUS", "SHADOW", "CLIPPING"],
+    expectedWarnings: [
+      { code: "OBJECT_FIT_APPROXIMATED", nodeId: "w2d-element-19-0" },
+      { code: "BORDER_COLOR_APPROXIMATED", nodeId: "w2d-element-23" },
+      { code: "BORDER_CORNER_APPROXIMATED", nodeId: "w2d-element-23" },
+      { code: "AXIS_CLIP_APPROXIMATED", nodeId: "w2d-element-33" },
+      { code: "AXIS_CLIP_APPROXIMATED", nodeId: "w2d-element-35" },
+    ],
+  },
 ];
+
 

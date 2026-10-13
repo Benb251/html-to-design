@@ -11,7 +11,7 @@ const candidates = [process.env.CHROME_PATH, "C:/Program Files/Google/Chrome/App
 let executable;
 for (const candidate of candidates) { try { await fs.access(candidate); executable = candidate; break; } catch { /* Try next configured path. */ } }
 if (!executable) throw new Error("Chrome was not found. Set CHROME_PATH. Manual extension loading is a separate check.");
-const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows"];
+const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows", "fidelity-clipping"];
 const fixtures = new Map(await Promise.all(names.map(async name => ["/" + name + ".html", await fs.readFile(new URL("../fixtures/" + name + ".html", import.meta.url))])));
 const dotPng = await fs.readFile(new URL("../fixtures/dot.png", import.meta.url));
 const content = await fs.readFile(new URL("../dist/content.js", import.meta.url), "utf8");
@@ -348,8 +348,8 @@ try {
       });
     }
     if (name === "fidelity-gradients") {
-      check("fidelity-gradients document valid V0.3 schema", () => {
-        assert.equal(doc.schemaVersion, "0.3");
+      check("fidelity-gradients document valid V0.4 schema", () => {
+        assert.equal(doc.schemaVersion, "0.4");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("linear gradient default direction (to bottom = 180deg)", () => {
@@ -447,8 +447,8 @@ try {
       });
     }
     if (name === "fidelity-borders-shadows") {
-      check("fidelity-borders-shadows document valid V0.3 schema", () => {
-        assert.equal(doc.schemaVersion, "0.3");
+      check("fidelity-borders-shadows document valid V0.4 schema", () => {
+        assert.equal(doc.schemaVersion, "0.4");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("1. uniform solid border regression", () => {
@@ -595,6 +595,149 @@ try {
         assert.equal(el.style.boxShadows.length, 2);
         assert.equal(el.style.boxShadows[0].inset, false);
         assert.equal(el.style.boxShadows[1].inset, true);
+      });
+    }
+    if (name === "fidelity-clipping") {
+      check("fidelity-clipping document valid V0.4 schema", () => {
+        assert.equal(doc.schemaVersion, "0.4");
+        assert.equal(safeParseDesignDocument(doc).success, true);
+      });
+      check("1. overflow:hidden both axes", () => {
+        const el = element("clip-hidden-both");
+        assert.deepEqual(el.clip, { x: true, y: true });
+        assert.equal(el.children.length, 1);
+      });
+      check("2. overflow:clip both axes", () => {
+        const el = element("clip-clip-both");
+        assert.deepEqual(el.clip, { x: true, y: true });
+      });
+      check("3. no clipping / overflow:visible", () => {
+        const el = element("clip-visible");
+        assert.equal(el.clip, undefined);
+      });
+      check("4. child partly outside right edge preserves uncropped geometry", () => {
+        const parent = element("child-partly-right");
+        assert.deepEqual(parent.clip, { x: true, y: true });
+        const child = parent.children[0];
+        assert.equal(child.width, 70);
+        near(child.x, parent.x + 111, "child x preserved");
+      });
+      check("5. child partly outside bottom edge preserves uncropped geometry", () => {
+        const parent = element("child-partly-bottom");
+        assert.deepEqual(parent.clip, { x: true, y: true });
+        const child = parent.children[0];
+        assert.equal(child.height, 60);
+        near(child.y, parent.y + 46, "child y preserved");
+      });
+      check("6. child completely outside parent preserved in schema", () => {
+        const parent = element("child-completely-outside");
+        assert.deepEqual(parent.clip, { x: true, y: true });
+        assert.equal(parent.children.length, 1);
+        const child = parent.children[0];
+        assert.equal(child.width, 60);
+        assert.equal(child.height, 40);
+        near(child.x, parent.x + 161, "completely outside child x");
+        near(child.y, parent.y + 101, "completely outside child y");
+      });
+      check("7. negative child x/y preserved", () => {
+        const parent = element("child-negative-xy");
+        assert.deepEqual(parent.clip, { x: true, y: true });
+        const child = parent.children[0];
+        near(child.x, parent.x - 19, "negative child x");
+        near(child.y, parent.y - 19, "negative child y");
+      });
+      check("8. nested clipping containers preserved independently", () => {
+        const outer = element("nested-outer");
+        assert.deepEqual(outer.clip, { x: true, y: true });
+        const inner = element("nested-inner");
+        assert.deepEqual(inner.clip, { x: true, y: true });
+        assert.equal(inner.children.length, 1);
+        const nestedChild = inner.children[0];
+        assert.equal(nestedChild.width, 60);
+      });
+      check("9. rounded overflow-hidden card retains cornerRadius and clip", () => {
+        const card = element("rounded-card");
+        assert.deepEqual(card.clip, { x: true, y: true });
+        assert.equal(card.style?.cornerRadius, 20);
+      });
+      check("10. image clipped by rounded frame", () => {
+        const imgFrame = element("image-clipped-frame");
+        assert.deepEqual(imgFrame.clip, { x: true, y: true });
+        assert.equal(imgFrame.style?.cornerRadius, 16);
+        assert.equal(imgFrame.children[0].type, "image");
+        assert.equal(imgFrame.children[0].width, 160);
+        assert.equal(imgFrame.children[0].height, 90);
+      });
+      check("11. gradient fill + clipping regression", () => {
+        const el = element("gradient-clipping");
+        assert.deepEqual(el.clip, { x: true, y: true });
+        assert.equal(el.style?.cornerRadius, 12);
+        assert.equal(el.style?.fills?.[0]?.type, "linear-gradient");
+      });
+      check("12. non-uniform border + clipping regression", () => {
+        const el = element("border-clipping");
+        assert.deepEqual(el.clip, { x: true, y: true });
+        assert.equal(el.style?.cornerRadius, 12);
+        assert.equal(el.style?.border?.top?.width, 2);
+        assert.equal(el.style?.border?.right?.width, 4);
+        assert.equal(el.style?.border?.bottom?.width, 6);
+        assert.equal(el.style?.border?.left?.width, 8);
+      });
+      check("13. outer shadow + clipping regression", () => {
+        const el = element("shadow-clipping");
+        assert.deepEqual(el.clip, { x: true, y: true });
+        assert.equal(el.style?.boxShadows?.length, 1);
+        assert.equal(el.style?.boxShadows?.[0]?.inset, false);
+      });
+      check("14. pseudo ::before overflowing owner", () => {
+        const pseudoBefore = byId.get(oracle.elements["pseudo-before-overflow"].id + "::before");
+        assert.ok(pseudoBefore, "::before must exist");
+        const owner = element("pseudo-before-overflow");
+        assert.deepEqual(owner.clip, { x: true, y: true });
+        assert.equal(pseudoBefore.width, 80);
+        near(pseudoBefore.x, owner.x + 101, "pseudo-before x preserved");
+      });
+      check("15. pseudo ::after overflowing owner", () => {
+        const pseudoAfter = byId.get(oracle.elements["pseudo-after-overflow"].id + "::after");
+        assert.ok(pseudoAfter, "::after must exist");
+        const owner = element("pseudo-after-overflow");
+        assert.deepEqual(owner.clip, { x: true, y: true });
+        assert.equal(pseudoAfter.width, 80);
+        near(pseudoAfter.x, owner.x + 101, "pseudo-after x preserved");
+      });
+      check("16. absolute positioned child bounds preserved", () => {
+        const parent = element("absolute-child-container");
+        assert.deepEqual(parent.clip, { x: true, y: true });
+        const child = parent.children[0];
+        assert.equal(child.width, 90);
+        near(child.x, parent.x - 29, "absolute child x preserved");
+      });
+      check("17. x-only clipping", () => {
+        const el = element("clip-x-only");
+        assert.deepEqual(el.clip, { x: true, y: false });
+      });
+      check("18. y-only clipping", () => {
+        const el = element("clip-y-only");
+        assert.deepEqual(el.clip, { x: false, y: true });
+      });
+      check("19. overflow:auto warning", () => {
+        const el = element("clip-auto");
+        assert.ok(doc.warnings.some(w => w.code === "SCROLL_CONTAINER_CLIPPING_DEFERRED" && w.nodeId === el.id));
+      });
+      check("20. overflow:scroll warning", () => {
+        const el = element("clip-scroll");
+        assert.ok(el);
+        assert.ok(doc.warnings.some(w => w.code === "SCROLL_CONTAINER_CLIPPING_DEFERRED"));
+      });
+      check("21. overflow-clip-margin warning", () => {
+        const el = element("clip-with-margin");
+        assert.ok(doc.warnings.some(w => w.code === "OVERFLOW_CLIP_MARGIN_UNSUPPORTED" && w.nodeId === el.id));
+      });
+      check("22. transformed overflowing child retains warning", () => {
+        const el = element("transformed-child-container");
+        assert.deepEqual(el.clip, { x: true, y: true });
+        const child = el.children[0];
+        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_APPROXIMATED" && w.nodeId === child.id));
       });
     }
     await fs.writeFile(new URL(name + ".json", evidence), JSON.stringify(doc, null, 2));

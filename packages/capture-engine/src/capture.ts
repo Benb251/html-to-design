@@ -57,6 +57,25 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     if (style.filter && style.filter !== "none") warnElement("FILTER_UNSUPPORTED", "Filters are not captured.");
     if (element.shadowRoot) warnElement("SHADOW_DOM_UNSUPPORTED", "Shadow-root content is omitted.");
     if (["input", "textarea", "select"].includes(tag)) warnElement("FORM_VALUE_UNSUPPORTED", "Live form values (including passwords) are not captured.");
+
+    const effOverflowX = style.overflowX || style.overflow || "visible";
+    const effOverflowY = style.overflowY || style.overflow || "visible";
+    const clipX = effOverflowX === "hidden" || effOverflowX === "clip";
+    const clipY = effOverflowY === "hidden" || effOverflowY === "clip";
+    const hasClip = clipX || clipY;
+
+    const isScrollContainer = (effOverflowX === "auto" || effOverflowX === "scroll" || effOverflowY === "auto" || effOverflowY === "scroll") &&
+      !(clipX && effOverflowY === "auto") && !(clipY && effOverflowX === "auto");
+    if (isScrollContainer) {
+      warnElement("SCROLL_CONTAINER_CLIPPING_DEFERRED", "Scroll container overflow auto/scroll clipping and scrollable extent are deferred; viewport clipping is not reconstructed.");
+    }
+    if ((clipX || clipY) && style.overflowClipMargin && style.overflowClipMargin !== "0px" && style.overflowClipMargin !== "normal" && style.overflowClipMargin !== "content-box") {
+      warnElement("OVERFLOW_CLIP_MARGIN_UNSUPPORTED", "Non-default overflow-clip-margin is not supported; standard container bounds are used.");
+    }
+    if (style.clipPath && style.clipPath !== "none") {
+      warnElement("CLIP_PATH_UNSUPPORTED", "CSS clip-path is not supported; shape clipping is not reconstructed.");
+    }
+
     const geometry = documentRect(rect, viewport.scrollX, viewport.scrollY);
     const visuals = decision === "capture" ? visualStyle(style, warnElement, style.transform && style.transform !== "none" ? undefined : rect) : {};
     if (element === document.body && canvasFromBody) delete visuals.fills;
@@ -161,8 +180,9 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
       warn,
     }).flatMap(emit);
 
+    const hasMeaningfulClip = hasClip && (contentChildren.length > 0 || beforeNodes.length > 0);
     const isFrame = decision === "capture" && (contentChildren.length > 0 || beforeNodes.length > 0) &&
-      (groups.has(tag) || styled || base.opacity < 1 || tag === "div" && (contentChildren.length > 1 || beforeNodes.length > 0) || (beforeNodes.length > 0 && styled));
+      (groups.has(tag) || styled || base.opacity < 1 || hasMeaningfulClip || tag === "div" && (contentChildren.length > 1 || beforeNodes.length > 0) || (beforeNodes.length > 0 && styled));
     // Reserve ancestors before descending so truncation preserves grouping and local opacity.
     if (isFrame) count++;
     const children: DesignNode[] = [...beforeNodes];
@@ -189,8 +209,10 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
 
     children.push(...afterNodes);
 
-    if (isFrame || (children.length > 0 && decision === "capture" && (groups.has(tag) || styled || base.opacity < 1 || (tag === "div" && children.length > 1)))) {
-      return [{ ...base, type: "frame", children }];
+    const activeClip = hasClip && children.length > 0 ? { x: clipX, y: clipY } : undefined;
+
+    if (isFrame || (children.length > 0 && decision === "capture" && (groups.has(tag) || styled || base.opacity < 1 || hasClip || (tag === "div" && children.length > 1)))) {
+      return [{ ...base, type: "frame", ...(activeClip ? { clip: activeClip } : {}), children }];
     }
     if (decision !== "capture") {
       if (children.length && base.opacity < 1 && style.display !== "contents") {
@@ -200,7 +222,7 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     }
     if (styled || base.opacity < 1) {
       if (children.length > 0) {
-        return [{ ...base, type: "frame", children }];
+        return [{ ...base, type: "frame", ...(activeClip ? { clip: activeClip } : {}), children }];
       }
       return emit({ ...base, type: "rectangle", children: [] });
     }
@@ -217,14 +239,19 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
   const rootStyle = visualStyle(htmlStyle, (code, message) => warn(code, message, "root"));
   const canvasColor = canvasFromBody && bodyStyle.display !== "none" ? cssColor(bodyStyle.backgroundColor) : undefined;
   if (canvasColor && canvasColor.a > 0) rootStyle.fills = [{ type: "solid", color: canvasColor }];
+  const htmlClipX = htmlStyle.overflowX === "hidden" || htmlStyle.overflowX === "clip";
+  const htmlClipY = htmlStyle.overflowY === "hidden" || htmlStyle.overflowY === "clip";
+  const rootClip = htmlClipX || htmlClipY ? { x: htmlClipX, y: htmlClipY } : undefined;
   const root: FrameNode = { id: "root", type: "frame", sourceTag: "html", name: document.title || "Page", x: 0, y: 0,
     width: Math.max(viewport.width, html.scrollWidth, body.scrollWidth, htmlBox.x + htmlBox.width, bodyBox.x + bodyBox.width), height: Math.max(viewport.height, html.scrollHeight, body.scrollHeight, htmlBox.y + htmlBox.height, bodyBox.y + bodyBox.height),
-    visible: true, opacity: htmlStyle.opacity === "" ? 1 : Math.min(1, Math.max(0, Number(htmlStyle.opacity))), style: rootStyle, children };
+    visible: true, opacity: htmlStyle.opacity === "" ? 1 : Math.min(1, Math.max(0, Number(htmlStyle.opacity))), style: rootStyle,
+    ...(rootClip ? { clip: rootClip } : {}),
+    children };
   const emittedIds = new Set<string>();
   const collect = (node: DesignNode) => { emittedIds.add(node.id); node.children.forEach(collect); };
   collect(root);
   for (const warning of warnings) if (warning.nodeId && !emittedIds.has(warning.nodeId)) delete warning.nodeId;
-  warn("CAPTURE_SCOPE", "W2D-013: rendered light-DOM boxes, synthetic pseudo-elements, editable text, basic styles, gradient fills, per-side borders, multi/inset shadows, images and inline SVG. Clipping, full paint order, media and advanced layout/style semantics are not reconstructed.");
+  warn("CAPTURE_SCOPE", "W2D-014: rendered light-DOM boxes, synthetic pseudo-elements, editable text, basic styles, gradient fills, per-side borders, multi/inset shadows, container clipping, images and inline SVG. Full paint order, media and advanced layout/style semantics are not reconstructed.");
   return parseDesignDocument({ schemaVersion: DESIGN_SCHEMA_VERSION, capture: { capturedAt: options.capturedAt ?? new Date().toISOString(),
     source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" }, page: { url: document.URL, title: document.title } },
     viewport, root, assets: assetRegistry.getAssets(), warnings }) as DesignDocument;

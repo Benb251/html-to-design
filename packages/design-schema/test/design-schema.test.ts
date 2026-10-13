@@ -278,7 +278,7 @@ describe("Design Schema V0.1", () => {
   });
 
   it("rejects an invalid schema version", () => {
-    const document = { ...createBaseDocument(), schemaVersion: "0.4" };
+    const document = { ...createBaseDocument(), schemaVersion: "0.5" };
     expect(safeParseDesignDocument(document).success).toBe(false);
   });
 
@@ -468,7 +468,8 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
     expect(isSupportedSchemaVersion("0.1")).toBe(true);
     expect(isSupportedSchemaVersion("0.2")).toBe(true);
     expect(isSupportedSchemaVersion("0.3")).toBe(true);
-    expect(isSupportedSchemaVersion("0.4")).toBe(false);
+    expect(isSupportedSchemaVersion("0.4")).toBe(true);
+    expect(isSupportedSchemaVersion("0.5")).toBe(false);
     expect(isSupportedSchemaVersion("1.0")).toBe(false);
     expect(isSupportedSchemaVersion(null)).toBe(false);
   });
@@ -480,11 +481,11 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
     expect(parsed.root.style?.fills?.[0]?.type).toBe("solid");
   });
 
-  it("upgrades/normalizes V0.1 documents to V0.3 with identical semantics", () => {
+  it("upgrades/normalizes V0.1 documents to V0.4 with identical semantics", () => {
     const v01Doc = createV01Document();
     const parsed = parseDesignDocument(v01Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.3");
+    expect(upgraded.schemaVersion).toBe("0.4");
     expect(upgraded.root.id).toBe(v01Doc.root.id);
     expect(upgraded.root.style?.fills).toEqual(v01Doc.root.style.fills);
     expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
@@ -850,7 +851,7 @@ describe("Design Schema V0.3 & Border/Shadow Support", () => {
     };
     const parsed = parseDesignDocument(v01Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.3");
+    expect(upgraded.schemaVersion).toBe("0.4");
     expect(upgraded.root.style?.border?.top).toEqual({
       width: 2,
       style: "solid",
@@ -861,11 +862,11 @@ describe("Design Schema V0.3 & Border/Shadow Support", () => {
     expect(upgraded.root.style?.border?.left).toEqual(upgraded.root.style?.border?.top);
   });
 
-  it("upgrades/normalizes V0.2 gradient documents to V0.3 preserving gradients and borders", () => {
+  it("upgrades/normalizes V0.2 gradient documents to V0.4 preserving gradients and borders", () => {
     const v02Doc = createV02Document();
     const parsed = parseDesignDocument(v02Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.3");
+    expect(upgraded.schemaVersion).toBe("0.4");
     expect(upgraded.root.style?.fills?.[0]?.type).toBe("linear-gradient");
     expect(upgraded.root.style?.border?.top.width).toBe(2);
     expect(upgraded.root.style?.border?.right.width).toBe(2);
@@ -942,4 +943,197 @@ describe("Design Schema V0.3 & Border/Shadow Support", () => {
     ).toBe(false);
   });
 });
+
+describe("Design Schema V0.4 & Clipping Support", () => {
+  function createV03Document(): unknown {
+    return {
+      schemaVersion: "0.3",
+      capture: {
+        capturedAt: "2026-10-13T07:00:00.000Z",
+        source: { kind: "fixture", name: "Web2Design", version: "0.1.0" },
+        page: { url: "https://example.com/v03", title: "V03 Doc" },
+      },
+      viewport: { width: 800, height: 600, devicePixelRatio: 1, scrollX: 0, scrollY: 0 },
+      root: {
+        id: "root",
+        type: "frame",
+        x: 0,
+        y: 0,
+        width: 800,
+        height: 600,
+        visible: true,
+        opacity: 1,
+        style: {
+          border: {
+            top: { width: 2, style: "solid", color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
+            right: { width: 2, style: "solid", color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
+            bottom: { width: 2, style: "solid", color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
+            left: { width: 2, style: "solid", color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
+          },
+          boxShadows: [
+            { offsetX: 0, offsetY: 4, blurRadius: 8, spreadRadius: 0, color: { r: 0, g: 0, b: 0, a: 0.2 }, inset: false },
+          ],
+        },
+        children: [
+          {
+            id: "child-box",
+            type: "rectangle",
+            x: 20,
+            y: 20,
+            width: 100,
+            height: 100,
+            visible: true,
+            opacity: 1,
+            children: [],
+          },
+        ],
+      },
+      assets: [],
+    };
+  }
+
+  function createV04Document(frameClip?: { x: boolean; y: boolean }): unknown {
+    return {
+      schemaVersion: "0.4",
+      capture: {
+        capturedAt: "2026-10-13T07:00:00.000Z",
+        source: { kind: "fixture", name: "Web2Design", version: "0.1.0" },
+        page: { url: "https://example.com/v04", title: "V04 Doc" },
+      },
+      viewport: { width: 800, height: 600, devicePixelRatio: 1, scrollX: 0, scrollY: 0 },
+      root: {
+        id: "root",
+        type: "frame",
+        x: 0,
+        y: 0,
+        width: 800,
+        height: 600,
+        visible: true,
+        opacity: 1,
+        ...(frameClip ? { clip: frameClip } : {}),
+        children: [
+          {
+            id: "inner-frame",
+            type: "frame",
+            x: 50,
+            y: 50,
+            width: 200,
+            height: 200,
+            visible: true,
+            opacity: 1,
+            clip: { x: true, y: false },
+            children: [
+              {
+                id: "child-rect",
+                type: "rectangle",
+                x: 100,
+                y: 100,
+                width: 300,
+                height: 300,
+                visible: true,
+                opacity: 1,
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
+      assets: [],
+    };
+  }
+
+  it("parses valid V0.4 documents with both-axis clip", () => {
+    const doc = createV04Document({ x: true, y: true });
+    const parsed = parseDesignDocument(doc);
+    expect(parsed.schemaVersion).toBe("0.4");
+    expect(parsed.root.clip).toEqual({ x: true, y: true });
+  });
+
+  it("parses valid V0.4 documents with single-axis clip and omitted clip", () => {
+    const docX = createV04Document({ x: true, y: false });
+    const parsedX = parseDesignDocument(docX);
+    expect(parsedX.root.clip).toEqual({ x: true, y: false });
+
+    const docY = createV04Document({ x: false, y: true });
+    const parsedY = parseDesignDocument(docY);
+    expect(parsedY.root.clip).toEqual({ x: false, y: true });
+
+    const docNone = createV04Document();
+    const parsedNone = parseDesignDocument(docNone);
+    expect(parsedNone.root.clip).toBeUndefined();
+  });
+
+  it("supports nested clipping frames preserving independent clip states", () => {
+    const doc = createV04Document({ x: true, y: true });
+    const parsed = parseDesignDocument(doc);
+    expect(parsed.root.clip).toEqual({ x: true, y: true });
+    const childFrame = parsed.root.children[0];
+    expect(childFrame).toBeDefined();
+    if (childFrame && childFrame.type === "frame") {
+      expect(childFrame.clip).toEqual({ x: true, y: false });
+    }
+  });
+
+  it("strictly rejects clip on RectangleNode, TextNode, ImageNode, SvgNode", () => {
+    const doc = createV04Document();
+    const withRectClip = JSON.parse(JSON.stringify(doc));
+    withRectClip.root.children[0].children[0].clip = { x: true, y: true };
+    expect(safeParseDesignDocument(withRectClip).success).toBe(false);
+  });
+
+  it("strictly rejects malformed clip data in V0.4", () => {
+    const doc = createV04Document();
+    const withStringX = JSON.parse(JSON.stringify(doc));
+    withStringX.root.clip = { x: "yes", y: true };
+    expect(safeParseDesignDocument(withStringX).success).toBe(false);
+
+    const withNumY = JSON.parse(JSON.stringify(doc));
+    withNumY.root.clip = { x: true, y: 1 };
+    expect(safeParseDesignDocument(withNumY).success).toBe(false);
+
+    const withExtraZ = JSON.parse(JSON.stringify(doc));
+    withExtraZ.root.clip = { x: true, y: true, z: false };
+    expect(safeParseDesignDocument(withExtraZ).success).toBe(false);
+
+    const withRawFigmaClip = JSON.parse(JSON.stringify(doc));
+    withRawFigmaClip.root.clipsContent = true;
+    expect(safeParseDesignDocument(withRawFigmaClip).success).toBe(false);
+  });
+
+  it("strictly rejects clip in historical V0.1, V0.2, V0.3 documents", () => {
+    const v03 = createV03Document() as Record<string, unknown>;
+    const v03WithClip = {
+      ...v03,
+      root: {
+        ...(v03.root as Record<string, unknown>),
+        clip: { x: true, y: true },
+      },
+    };
+    expect(safeParseDesignDocument(v03WithClip).success).toBe(false);
+
+    const v02WithClip = {
+      ...v03WithClip,
+      schemaVersion: "0.2",
+    };
+    expect(safeParseDesignDocument(v02WithClip).success).toBe(false);
+
+    const v01WithClip = {
+      ...v03WithClip,
+      schemaVersion: "0.1",
+    };
+    expect(safeParseDesignDocument(v01WithClip).success).toBe(false);
+  });
+
+  it("upgrades/normalizes V0.3 documents to V0.4 preserving all semantics and without phantom clip", () => {
+    const v03Doc = createV03Document();
+    const parsed = parseDesignDocument(v03Doc);
+    const upgraded = normalizeDesignDocument(parsed);
+    expect(upgraded.schemaVersion).toBe("0.4");
+    expect(upgraded.root.clip).toBeUndefined();
+    expect(upgraded.root.style?.border?.top.width).toBe(2);
+    expect(upgraded.root.style?.boxShadows?.length).toBe(1);
+    expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
+  });
+});
+
 

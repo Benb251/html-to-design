@@ -1,4 +1,4 @@
-# @web2design/figma-renderer — W2D-013
+# @web2design/figma-renderer — W2D-014
 
 Pure TypeScript rendering engine that translates validated Web2Design Design Schema documents into editable Figma node hierarchies.
 
@@ -11,9 +11,9 @@ The renderer converts absolute document-origin CSS pixel coordinates into Figma 
 ## Architecture
 
 ```text
-Versioned DesignDocument (V0.1, V0.2, or V0.3)
+Versioned DesignDocument (V0.1, V0.2, V0.3, or V0.4)
         ↓
-normalizeDesignDocument(doc)  [Upgraded to latest V0.3]
+normalizeDesignDocument(doc)  [Upgraded to latest V0.4]
         ↓
 renderDesignDocument(doc, host, options)
         ↓
@@ -21,7 +21,7 @@ FigmaRendererHost (minimal adapter boundary)
         ↓
 Native SceneNode Hierarchy:
   Web2Design — <Page Title> (FrameNode)
-   ├── FrameNode (nested frames with parent-local offsets)
+   ├── FrameNode (nested frames, clipsContent = true/false)
    ├── RectangleNode (fills, strokes, cornerRadius, drop/inner shadows)
    ├── TextNode (editable text, font cache, deterministic fallback)
    ├── RectangleNode + ImagePaint (embedded base64 / remote URL)
@@ -36,6 +36,9 @@ Native SceneNode Hierarchy:
 | Schema Entity | Figma Target | Implementation Notes |
 |---|---|---|
 | `frame` | `FrameNode` | Fixed dimensions, `layoutMode = "NONE"`, default fills cleared, parent-local coordinates. |
+| Container Clipping (`clip.x && clip.y`) | `FrameNode.clipsContent = true` | Both-axis clipping maps natively to Figma FrameNode clipping without cropping child geometry. |
+| Single-Axis Clipping (`clip.x !== clip.y`) | `FrameNode.clipsContent = true` + Warning | Figma exposes a single boolean; approximates containment fidelity and emits `AXIS_CLIP_APPROXIMATED`. |
+| Unclipped Container (`!clip.x && !clip.y`) | `FrameNode.clipsContent = false` | Default unclipped descendant behavior. |
 | `rectangle` | `RectangleNode` | Solid fills, linear/radial gradient fills, strokes, uniform/per-corner radius, multiple drop/inner shadows. |
 | `text` | `TextNode` | Editable characters, font resolver & cache, deterministic fallback, font size, line height, letter spacing, horizontal alignment, local opacity. |
 | `image` | `RectangleNode` (Image fill) | Data URLs, embedded base64, and remote image URLs. `cover` → `FILL`, `contain` → `FIT`. Placeholders created on network or decode failures. |
@@ -58,10 +61,10 @@ The renderer interacts with Figma strictly through a lightweight host adapter in
 - `base64Decode(data)`, `loadFontAsync(fontName)`, `listAvailableFontsAsync()`
 - `appendRoot(rootNode)`, `setSelection(nodes)`, `scrollAndZoomIntoView(nodes)`, `getViewportCenter()`
 
-In tests, `FakeFigmaHost` provides in-memory node structures. In production, `createFigmaHost()` delegates directly to Figma's global API.
+In tests, `FakeFigmaHost` provides in-memory node structures and supports `clipsContent: boolean` on FrameNodes. In production, `createFigmaHost()` delegates directly to Figma's global API.
 
 ## Fidelity Regression Suite
 
 Run with `npm run fidelity`:
-- 16 fixtures (7 canonical schema fixtures + 9 Chrome browser captures including `fidelity-borders-shadows`).
-- Evaluates geometry, hierarchy, text, fills, non-uniform strokes, radii, drop and inner shadows, images, SVGs, and assets.
+- 17 fixtures (7 canonical schema fixtures + 10 Chrome browser captures including `fidelity-clipping`).
+- Evaluates geometry, hierarchy, text, fills, non-uniform strokes, radii, drop and inner shadows, container clipping, images, SVGs, and assets.

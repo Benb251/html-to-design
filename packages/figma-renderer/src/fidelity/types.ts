@@ -11,7 +11,8 @@ export type FidelityCategory =
   | "IMAGE"
   | "SVG"
   | "WARNING"
-  | "ASSET";
+  | "ASSET"
+  | "CLIPPING";
 
 export interface NormalizedGradientStop {
   position: number;
@@ -91,6 +92,8 @@ export interface NormalizedRenderedNode {
   absoluteY: number;
 
   opacity: number;
+
+  clipsContent?: boolean | undefined;
 
   fills?: NormalizedFill[] | undefined;
   strokes?: NormalizedStroke[] | undefined;

@@ -263,6 +263,7 @@ interface NodeWithStrokeProperties {
   if (sourceId) result.sourceId = sourceId;
   if (sourceType) result.sourceType = sourceType;
   if (sourceTag) result.sourceTag = sourceTag;
+  if ("clipsContent" in node && (node as { clipsContent?: boolean }).clipsContent) result.clipsContent = true;
   if (fills && fills.length > 0) result.fills = fills;
   if (strokes && strokes.length > 0) result.strokes = strokes;
   if (radius) result.radius = radius;

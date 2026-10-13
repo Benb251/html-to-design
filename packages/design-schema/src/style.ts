@@ -149,8 +149,11 @@ export const VisualStyleSchemaV03 = z.strictObject({
 
 export type VisualStyleV03 = z.infer<typeof VisualStyleSchemaV03>;
 
-export const VisualStyleSchema = VisualStyleSchemaV03;
-export type VisualStyle = VisualStyleV03;
+export const VisualStyleSchemaV04 = VisualStyleSchemaV03;
+export type VisualStyleV04 = VisualStyleV03;
+
+export const VisualStyleSchema = VisualStyleSchemaV04;
+export type VisualStyle = VisualStyleV04;
 
 export const TextStyleSchema = z.strictObject({
   fontFamily: z.string().min(1),

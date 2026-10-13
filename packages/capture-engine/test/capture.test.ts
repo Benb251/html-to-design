@@ -154,7 +154,7 @@ describe("rendered traversal", () => {
 describe("export", () => {
   it("roundtrips pretty JSON through real validation and node counting", () => {
     const value = captureDocument(rendered().document, { capturedAt: at }), json = serializeCapture(value);
-    expect(json).toContain('\n  "schemaVersion": "0.3"'); expect(safeParseDesignDocument(JSON.parse(json)).success).toBe(true); expect(countNodes(value.root)).toBe(nodes(value.root).length);
+    expect(json).toContain('\n  "schemaVersion": "0.4"'); expect(safeParseDesignDocument(JSON.parse(json)).success).toBe(true); expect(countNodes(value.root)).toBe(nodes(value.root).length);
   });
   it("rejects unknown fields rather than weakening schema validation", () => {
     const value = captureDocument(rendered().document); expect(() => serializeCapture({ ...value, rawDom: {} })).toThrow();
@@ -165,3 +165,50 @@ describe("export", () => {
     expect(() => captureFilename("https://example.com", "bad")).toThrow();
   });
 });
+
+describe("W2D-014 container clipping capture", () => {
+  it("captures both-axis overflow:hidden as clip: { x: true, y: true }", () => {
+    const { document } = rendered('<div style="overflow:hidden"><span>Clipped text</span></div>');
+    const result = captureDocument(document);
+    const frame = nodes(result.root).find(n => n.sourceTag === "div");
+    expect(frame).toBeDefined();
+    expect(frame?.type).toBe("frame");
+    if (frame?.type === "frame") {
+      expect(frame.clip).toEqual({ x: true, y: true });
+    }
+  });
+
+  it("captures single-axis clipping independently", () => {
+    const { document: docX } = rendered('<div style="overflow-x:hidden;overflow-y:visible"><span>Text X</span></div>');
+    const resX = captureDocument(docX);
+    const frameX = nodes(resX.root).find(n => n.sourceTag === "div");
+    expect(frameX?.type).toBe("frame");
+    if (frameX?.type === "frame") {
+      expect(frameX.clip).toEqual({ x: true, y: false });
+    }
+
+    const { document: docY } = rendered('<div style="overflow-x:visible;overflow-y:clip"><span>Text Y</span></div>');
+    const resY = captureDocument(docY);
+    const frameY = nodes(resY.root).find(n => n.sourceTag === "div");
+    expect(frameY?.type).toBe("frame");
+    if (frameY?.type === "frame") {
+      expect(frameY.clip).toEqual({ x: false, y: true });
+    }
+  });
+
+  it("preserves unstyled wrapper with overflow:hidden and descendants as a FrameNode", () => {
+    const { document } = rendered('<div class="viewport" style="overflow:hidden"><p>Inside viewport</p></div>');
+    const result = captureDocument(document);
+    const viewportFrame = nodes(result.root).find(n => n.sourceTag === "div");
+    expect(viewportFrame).toBeDefined();
+    expect(viewportFrame?.type).toBe("frame");
+  });
+
+  it("emits SCROLL_CONTAINER_CLIPPING_DEFERRED for auto and scroll", () => {
+    const { document } = rendered('<div style="overflow:auto"><p>Scrollable</p></div>');
+    const result = captureDocument(document);
+    const warn = result.warnings?.find(w => w.code === "SCROLL_CONTAINER_CLIPPING_DEFERRED");
+    expect(warn).toBeDefined();
+  });
+});
+

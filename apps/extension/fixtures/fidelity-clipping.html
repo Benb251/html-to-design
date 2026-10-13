@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web2Design container clipping fidelity</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 20px;
+    font: 16px/24px Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+  }
+  .container {
+    position: relative;
+    width: 140px;
+    height: 70px;
+    margin-bottom: 16px;
+    background: #ffffff;
+    display: inline-block;
+    margin-right: 16px;
+    vertical-align: top;
+    border: 1px solid #cbd5e1;
+  }
+  .child-box {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background: #3b82f6;
+  }
+
+  /* 1. overflow:hidden both axes */
+  #clip-hidden-both {
+    overflow: hidden;
+  }
+  #clip-hidden-both .child-box {
+    top: 10px;
+    left: 100px;
+    width: 80px;
+    background: #2563eb;
+  }
+
+  /* 2. overflow:clip both axes */
+  #clip-clip-both {
+    overflow: clip;
+  }
+  #clip-clip-both .child-box {
+    top: 10px;
+    left: 100px;
+    width: 80px;
+    background: #059669;
+  }
+
+  /* 3. no clipping / overflow:visible */
+  #clip-visible {
+    overflow: visible;
+  }
+  #clip-visible .child-box {
+    top: 10px;
+    left: 100px;
+    width: 80px;
+    background: #d97706;
+  }
+
+  /* 4. child partly outside right edge */
+  #child-partly-right {
+    overflow: hidden;
+  }
+  #child-partly-right .child-box {
+    top: 10px;
+    left: 110px;
+    width: 70px;
+    background: #7c3aed;
+  }
+
+  /* 5. child partly outside bottom edge */
+  #child-partly-bottom {
+    overflow: hidden;
+  }
+  #child-partly-bottom .child-box {
+    top: 45px;
+    left: 20px;
+    height: 60px;
+    background: #dc2626;
+  }
+
+  /* 6. child completely outside parent */
+  #child-completely-outside {
+    overflow: hidden;
+  }
+  #child-completely-outside .child-box {
+    top: 100px;
+    left: 160px;
+    background: #db2777;
+  }
+
+  /* 7. negative child x/y */
+  #child-negative-xy {
+    overflow: hidden;
+  }
+  #child-negative-xy .child-box {
+    top: -20px;
+    left: -20px;
+    background: #475569;
+  }
+
+  /* 8. nested clipping containers */
+  #nested-outer {
+    overflow: hidden;
+    width: 160px;
+    height: 90px;
+    background: #f1f5f9;
+  }
+  #nested-inner {
+    overflow: hidden;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100px;
+    height: 50px;
+    background: #e2e8f0;
+    border: 1px solid #94a3b8;
+  }
+  #nested-inner .child-box {
+    top: 20px;
+    left: 70px;
+    width: 60px;
+    background: #0891b2;
+  }
+
+  /* 9. rounded overflow-hidden card */
+  #rounded-card {
+    overflow: hidden;
+    border-radius: 20px;
+    background: #fef08a;
+  }
+  #rounded-card .child-box {
+    top: 0;
+    left: 100px;
+    width: 60px;
+    height: 70px;
+    background: #ca8a04;
+  }
+
+  /* 10. image clipped by rounded frame */
+  #image-clipped-frame {
+    overflow: hidden;
+    border-radius: 16px;
+    width: 140px;
+    height: 70px;
+  }
+  #image-clipped-frame img {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 160px;
+    height: 90px;
+    display: block;
+  }
+
+  /* 11. gradient + clipping */
+  #gradient-clipping {
+    overflow: hidden;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+  }
+  #gradient-clipping .child-box {
+    top: 20px;
+    left: 90px;
+    width: 80px;
+    background: #ffffff;
+    opacity: 0.8;
+  }
+
+  /* 12. non-uniform border + clipping */
+  #border-clipping {
+    overflow: hidden;
+    border-radius: 12px;
+    border-top: 2px solid #ef4444;
+    border-right: 4px solid #3b82f6;
+    border-bottom: 6px solid #10b981;
+    border-left: 8px solid #f59e0b;
+  }
+  #border-clipping .child-box {
+    top: 10px;
+    left: 90px;
+    width: 70px;
+    background: #1e293b;
+  }
+
+  /* 13. outer shadow + clipping */
+  #shadow-clipping {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  }
+  #shadow-clipping .child-box {
+    top: 15px;
+    left: 95px;
+    width: 70px;
+    background: #14b8a6;
+  }
+
+  /* 14. ::before overflowing owner */
+  #pseudo-before-overflow {
+    overflow: hidden;
+  }
+  #pseudo-before-overflow::before {
+    content: "BEFORE";
+    position: absolute;
+    top: 10px;
+    left: 100px;
+    width: 80px;
+    height: 30px;
+    background: #f43f5e;
+    color: #ffffff;
+    font-size: 11px;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  /* 15. ::after overflowing owner */
+  #pseudo-after-overflow {
+    overflow: hidden;
+  }
+  #pseudo-after-overflow::after {
+    content: "AFTER";
+    position: absolute;
+    top: 30px;
+    left: 100px;
+    width: 80px;
+    height: 30px;
+    background: #8b5cf6;
+    color: #ffffff;
+    font-size: 11px;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  /* 16. absolute positioned child */
+  #absolute-child-container {
+    overflow: hidden;
+  }
+  #absolute-child-container .child-box {
+    top: 10px;
+    left: -30px;
+    width: 90px;
+    background: #0284c7;
+  }
+
+  /* 17. x-only clipping */
+  #clip-x-only {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  #clip-x-only .child-box {
+    top: 10px;
+    left: 100px;
+    width: 80px;
+    background: #ea580c;
+  }
+
+  /* 18. y-only clipping */
+  #clip-y-only {
+    overflow-x: visible;
+    overflow-y: hidden;
+  }
+  #clip-y-only .child-box {
+    top: 40px;
+    left: 20px;
+    height: 60px;
+    background: #16a34a;
+  }
+
+  /* 19. overflow:auto case */
+  #clip-auto {
+    overflow: auto;
+  }
+  #clip-auto .child-box {
+    top: 10px;
+    left: 20px;
+    background: #4f46e5;
+  }
+
+  /* 20. overflow:scroll case */
+  #clip-scroll {
+    overflow: scroll;
+  }
+  #clip-scroll .child-box {
+    top: 10px;
+    left: 20px;
+    background: #059669;
+  }
+
+  /* 21. overflow:clip + overflow-clip-margin */
+  #clip-with-margin {
+    overflow: clip;
+    overflow-clip-margin: 10px;
+  }
+  #clip-with-margin .child-box {
+    top: 10px;
+    left: 100px;
+    width: 80px;
+    background: #9333ea;
+  }
+
+  /* 22. transformed overflowing child retaining transform warning */
+  #transformed-child-container {
+    overflow: hidden;
+  }
+  #transformed-child-container .child-box {
+    top: 10px;
+    left: 90px;
+    width: 70px;
+    transform: rotate(5deg);
+    background: #f97316;
+  }
+</style>
+</head>
+<body>
+  <div class="container" id="clip-hidden-both"><div class="child-box"></div></div>
+  <div class="container" id="clip-clip-both"><div class="child-box"></div></div>
+  <div class="container" id="clip-visible"><div class="child-box"></div></div>
+  <div class="container" id="child-partly-right"><div class="child-box"></div></div>
+  <div class="container" id="child-partly-bottom"><div class="child-box"></div></div>
+  <div class="container" id="child-completely-outside"><div class="child-box"></div></div>
+  <div class="container" id="child-negative-xy"><div class="child-box"></div></div>
+  <div class="container" id="nested-outer">
+    <div id="nested-inner"><div class="child-box"></div></div>
+  </div>
+  <div class="container" id="rounded-card"><div class="child-box"></div></div>
+  <div class="container" id="image-clipped-frame"><img src="/dot.png" alt="Dot"></div>
+  <div class="container" id="gradient-clipping"><div class="child-box"></div></div>
+  <div class="container" id="border-clipping"><div class="child-box"></div></div>
+  <div class="container" id="shadow-clipping"><div class="child-box"></div></div>
+  <div class="container" id="pseudo-before-overflow"></div>
+  <div class="container" id="pseudo-after-overflow"></div>
+  <div class="container" id="absolute-child-container"><div class="child-box"></div></div>
+  <div class="container" id="clip-x-only"><div class="child-box"></div></div>
+  <div class="container" id="clip-y-only"><div class="child-box"></div></div>
+  <div class="container" id="clip-auto"><div class="child-box"></div></div>
+  <div class="container" id="clip-scroll"><div class="child-box"></div></div>
+  <div class="container" id="clip-with-margin"><div class="child-box"></div></div>
+  <div class="container" id="transformed-child-container"><div class="child-box"></div></div>
+</body>
+</html>

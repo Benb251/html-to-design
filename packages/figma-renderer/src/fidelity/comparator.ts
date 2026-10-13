@@ -804,6 +804,34 @@ export function compareWarnings(
   return { failures, expectedCount, unexpectedCount };
 }
 
+export function compareClipping(
+  schemaNode: DesignNode,
+  rendered: NormalizedRenderedNode,
+  fixtureId: string,
+): FidelityFailure[] {
+  const failures: FidelityFailure[] = [];
+
+  if (schemaNode.type === "frame") {
+    const expectedClip = Boolean(schemaNode.clip?.x || schemaNode.clip?.y);
+    const actualClip = Boolean(rendered.clipsContent);
+
+    if (expectedClip !== actualClip) {
+      failures.push({
+        fixtureId,
+        sourceId: schemaNode.id,
+        nodeType: schemaNode.type,
+        category: "CLIPPING",
+        property: "clipsContent",
+        expected: expectedClip,
+        actual: actualClip,
+        message: `node: ${schemaNode.id} expected clipsContent=${expectedClip} actual=${actualClip}`,
+      });
+    }
+  }
+
+  return failures;
+}
+
 export interface SourceIndex {
   bySourceId: Map<string, NormalizedRenderedNode>;
   duplicates: string[];
@@ -946,6 +974,12 @@ export function runDocumentFidelity(
     if (schemaNode.type === "svg" && cats.has("SVG")) {
       assetChecks++;
       failures.push(...compareSvg(schemaNode, rendered, manifestEntry.id));
+    }
+
+    // 10. Clipping
+    if (cats.has("CLIPPING") && schemaNode.type === "frame") {
+      styleChecks++;
+      failures.push(...compareClipping(schemaNode, rendered, manifestEntry.id));
     }
 
     // Recurse children for frames

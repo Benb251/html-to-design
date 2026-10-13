@@ -48,10 +48,10 @@ describe("representative Design Schema fixtures", () => {
     expect(frame.children.map((node: DesignNode) => node.type)).toEqual(["text", "text"]);
   });
 
-  it("parses and validates V0.3 per-side widths fixture", async () => {
+  it("parses and validates V0.4 per-side widths fixture", async () => {
     const { perSideWidthsFixture } = await import("../src/index.js");
     const doc = parseDesignDocument(perSideWidthsFixture);
-    expect(doc.schemaVersion).toBe("0.3");
+    expect(doc.schemaVersion).toBe("0.4");
     const rect = doc.root.children[0];
     expect(rect?.style?.border?.top.width).toBe(1);
     expect(rect?.style?.border?.right.width).toBe(2);
@@ -59,7 +59,7 @@ describe("representative Design Schema fixtures", () => {
     expect(rect?.style?.border?.left.width).toBe(4);
   });
 
-  it("parses and validates V0.3 multiple shadows and inset shadows", async () => {
+  it("parses and validates multiple shadows and inset shadows", async () => {
     const { multipleDropShadowsFixture, insetShadowFixture, mixedShadowStackFixture } = await import("../src/index.js");
     const multiDoc = parseDesignDocument(multipleDropShadowsFixture);
     expect(multiDoc.root.children[0]?.style?.boxShadows).toHaveLength(2);
@@ -71,29 +71,77 @@ describe("representative Design Schema fixtures", () => {
     expect(mixedDoc.root.children[0]?.style?.boxShadows?.[1]?.inset).toBe(true);
   });
 
-  it("upgrades and normalizes historical V0.1 fixture to V0.3", async () => {
+  it("upgrades and normalizes historical V0.1 fixture to V0.4", async () => {
     const { historicalV01Fixture } = await import("../src/index.js");
     const { normalizeDesignDocument } = await import("@web2design/design-schema");
     const parsed = parseDesignDocument(historicalV01Fixture);
     expect(parsed.schemaVersion).toBe("0.1");
     const doc = normalizeDesignDocument(parsed);
-    expect(doc.schemaVersion).toBe("0.3");
+    expect(doc.schemaVersion).toBe("0.4");
     const rect = doc.root.children[0];
     expect(rect?.style?.border?.top.width).toBe(1);
     expect(rect?.style?.border?.right.width).toBe(1);
     expect(rect?.style?.boxShadows?.[0]?.blurRadius).toBe(12);
   });
 
-  it("upgrades and normalizes historical V0.2 gradient fixture to V0.3", async () => {
+  it("upgrades and normalizes historical V0.2 gradient fixture to V0.4", async () => {
     const { historicalV02GradientFixture } = await import("../src/index.js");
     const { normalizeDesignDocument } = await import("@web2design/design-schema");
     const parsed = parseDesignDocument(historicalV02GradientFixture);
     expect(parsed.schemaVersion).toBe("0.2");
     const doc = normalizeDesignDocument(parsed);
-    expect(doc.schemaVersion).toBe("0.3");
+    expect(doc.schemaVersion).toBe("0.4");
     const rect = doc.root.children[0];
     expect(rect?.style?.fills?.[0]?.type).toBe("linear-gradient");
     expect(rect?.style?.border?.top.width).toBe(2);
   });
+
+  it("upgrades and normalizes historical V0.3 border/shadow fixture to V0.4", async () => {
+    const { historicalV03BorderShadowFixture } = await import("../src/index.js");
+    const { normalizeDesignDocument } = await import("@web2design/design-schema");
+    const parsed = parseDesignDocument(historicalV03BorderShadowFixture);
+    expect(parsed.schemaVersion).toBe("0.3");
+    const doc = normalizeDesignDocument(parsed);
+    expect(doc.schemaVersion).toBe("0.4");
+    const rect = doc.root.children[0];
+    expect(rect?.style?.border?.top.width).toBe(1);
+    expect(rect?.style?.border?.right.width).toBe(2);
+    expect(rect?.style?.border?.bottom.width).toBe(3);
+    expect(rect?.style?.border?.left.width).toBe(4);
+    expect(rect?.style?.boxShadows).toHaveLength(2);
+    expect(rect?.style?.boxShadows?.[0]?.inset).toBe(false);
+    expect(rect?.style?.boxShadows?.[1]?.inset).toBe(true);
+  });
+
+  it("parses and validates canonical V0.4 clipping fixtures", async () => {
+    const {
+      bothAxisClipFixture,
+      xOnlyClipFixture,
+      yOnlyClipFixture,
+      nestedClipsFixture,
+      roundedClipFrameFixture,
+    } = await import("../src/index.js");
+
+    const bothDoc = parseDesignDocument(bothAxisClipFixture);
+    expect(bothDoc.schemaVersion).toBe("0.4");
+    expect((bothDoc.root.children[0] as { clip?: unknown }).clip).toEqual({ x: true, y: true });
+
+    const xDoc = parseDesignDocument(xOnlyClipFixture);
+    expect((xDoc.root.children[0] as { clip?: unknown }).clip).toEqual({ x: true, y: false });
+
+    const yDoc = parseDesignDocument(yOnlyClipFixture);
+    expect((yDoc.root.children[0] as { clip?: unknown }).clip).toEqual({ x: false, y: true });
+
+    const nestedDoc = parseDesignDocument(nestedClipsFixture);
+    const outer = nestedDoc.root.children[0] as { type: string; clip?: unknown; children: Array<{ clip?: unknown }> };
+    expect(outer.clip).toEqual({ x: true, y: true });
+    expect(outer.children[0]?.clip).toEqual({ x: true, y: false });
+
+    const roundedDoc = parseDesignDocument(roundedClipFrameFixture);
+    const rounded = roundedDoc.root.children[0] as { clip?: unknown; style?: { cornerRadius?: number } };
+    expect(rounded.clip).toEqual({ x: true, y: true });
+    expect(rounded.style?.cornerRadius).toBe(24);
+  });
 });
+
 

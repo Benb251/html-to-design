@@ -1,6 +1,6 @@
 import http from "node:http";
 import { readFile } from "node:fs/promises";
-const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows"];
+const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows", "fidelity-clipping"];
 const fixtures = new Map(await Promise.all(names.map(async name => ["/" + name + ".html", await readFile(new URL("../fixtures/" + name + ".html", import.meta.url))])));
 const dotPng = await readFile(new URL("../fixtures/dot.png", import.meta.url));
 const server = http.createServer((request, response) => {
