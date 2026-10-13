@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { JSDOM } from "jsdom";
-import { safeParseDesignDocument, type DesignNode } from "@web2design/design-schema";
+import { safeParseDesignDocument, type DesignNode, type SolidFill } from "@web2design/design-schema";
 import { boxShadow, captureDocument, characters, cssColor, textStyle, visualStyle } from "../src/index.js";
 
 const flatten = (node: DesignNode): DesignNode[] => [node, ...node.children.flatMap(flatten)];
@@ -59,7 +59,7 @@ describe("W2D-004 computed styles", () => {
   });
   it("omits transparent fill and preserves fill alpha independently", () => {
     expect(visualStyle(css({ backgroundColor: "transparent" }), vi.fn()).fills).toBeUndefined();
-    expect(visualStyle(css({ backgroundColor: "rgba(20,40,60,.25)" }), vi.fn()).fills?.[0]?.color.a).toBe(.25);
+    expect((visualStyle(css({ backgroundColor: "rgba(20,40,60,.25)" }), vi.fn()).fills?.[0] as SolidFill)?.color.a).toBe(.25);
   });
   it("preserves circular per-corner radii already supported in V0.1", () => {
     expect(visualStyle(css({ borderTopLeftRadius: "1.25px", borderTopRightRadius: "2px 2px", borderBottomRightRadius: "3px", borderBottomLeftRadius: "4px" }), vi.fn()).cornerRadius).toEqual({ topLeft: 1.25, topRight: 2, bottomRight: 3, bottomLeft: 4 });
@@ -83,7 +83,7 @@ describe("W2D-004 text and hierarchy", () => {
     const { document, capture } = fixture('<p>canvas</p>');
     document.body.style.backgroundColor = "rgba(20,40,60,.25)"; document.body.style.opacity = ".5";
     const result = capture();
-    expect(result.root.style?.fills?.[0]?.color.a).toBe(.25);
+    expect((result.root.style?.fills?.[0] as SolidFill)?.color.a).toBe(.25);
     expect(result.root.children[0]?.style?.fills).toBeUndefined();
     expect(result.root.children[0]?.opacity).toBe(.5);
   });
@@ -91,8 +91,8 @@ describe("W2D-004 text and hierarchy", () => {
     const { document, capture } = fixture('<p>canvas</p>');
     document.documentElement.style.backgroundColor = "rgb(10,20,30)"; document.body.style.backgroundColor = "rgba(20,40,60,.25)";
     const result = capture();
-    expect(result.root.style?.fills?.[0]?.color.a).toBe(1);
-    expect(result.root.children[0]?.style?.fills?.[0]?.color.a).toBe(.25);
+    expect((result.root.style?.fills?.[0] as SolidFill)?.color.a).toBe(1);
+    expect((result.root.children[0]?.style?.fills?.[0] as SolidFill)?.color.a).toBe(.25);
   });
   it("does not propagate display-none body backgrounds to the canvas", () => {
     const { document, capture } = fixture('<p>hidden</p>');
@@ -102,7 +102,7 @@ describe("W2D-004 text and hierarchy", () => {
   it("keeps contained body backgrounds on the body box", () => {
     const { document, capture } = fixture('<p>contained</p>');
     document.body.style.backgroundColor = "rgb(20,40,60)"; document.body.style.contain = "paint";
-    const result = capture(); expect(result.root.style?.fills).toBeUndefined(); expect(result.root.children[0]?.style?.fills?.[0]?.color.a).toBe(1);
+    const result = capture(); expect(result.root.style?.fills).toBeUndefined(); expect((result.root.children[0]?.style?.fills?.[0] as SolidFill)?.color.a).toBe(1);
   });
   it("normalizes segment breaks in preformatted text without collapsing spaces", () => expect(characters("one\r\n  two\rthree", "pre-wrap")).toBe("one\n  two\nthree"));
   for (const [mode, expected] of [["normal", "one two three"], ["nowrap", "one two three"], ["pre", "one  two\n three"], ["pre-wrap", "one  two\n three"], ["pre-line", "one two\nthree"], ["break-spaces", "one  two\n three"]]) {
@@ -129,7 +129,7 @@ describe("W2D-004 text and hierarchy", () => {
     expect(all.find(node => node.sourceTag === "div" && node.type === "frame")?.opacity).toBe(.5);
     expect(all.find(node => node.sourceTag === "span" && node.type === "frame")?.opacity).toBe(.5);
     expect(all.find(node => node.type === "text")?.opacity).toBe(1);
-    expect(all.find(node => node.sourceTag === "div")?.style?.fills?.[0]?.color.a).toBe(.25);
+    expect((all.find(node => node.sourceTag === "div")?.style?.fills?.[0] as SolidFill)?.color.a).toBe(.25);
   });
   it("retains shadow-only containers and deterministically prunes empty structural wrappers", () => {
     const { capture } = fixture('<div><span>plain</span></div><div style="box-shadow:0px 4px 12px rgba(0,0,0,.15)"><span>shadowed</span></div>');

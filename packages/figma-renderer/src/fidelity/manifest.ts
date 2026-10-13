@@ -133,4 +133,13 @@ export const FIXTURE_MANIFEST: FixtureManifestEntry[] = [
     expectedCategories: ["GEOMETRY", "HIERARCHY", "TEXT", "FILL", "BORDER", "RADIUS"],
     expectedWarnings: [],
   },
+  {
+    id: "chrome-gradients",
+    name: "Gradients Fidelity Capture",
+    kind: "chrome-capture",
+    sourcePath: "apps/extension/.smoke/fidelity-gradients.json",
+    description: "Browser capture testing linear and radial CSS gradient fills, angles, rectangular transforms, stops, alpha, and ordering",
+    expectedCategories: ["GEOMETRY", "HIERARCHY", "FILL", "TEXT"],
+    expectedWarnings: [],
+  },
 ];

@@ -13,11 +13,18 @@ export type FidelityCategory =
   | "WARNING"
   | "ASSET";
 
+export interface NormalizedGradientStop {
+  position: number;
+  color: { r: number; g: number; b: number; a: number };
+}
+
 export interface NormalizedFill {
-  type: "SOLID" | "IMAGE";
+  type: "SOLID" | "IMAGE" | "GRADIENT_LINEAR" | "GRADIENT_RADIAL";
   color?: { r: number; g: number; b: number; a: number } | undefined;
   scaleMode?: string | undefined;
   imageHash?: string | null | undefined;
+  gradientStops?: NormalizedGradientStop[] | undefined;
+  gradientTransform?: [[number, number, number], [number, number, number]] | undefined;
 }
 
 export interface NormalizedStroke {

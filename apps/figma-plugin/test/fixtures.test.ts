@@ -37,10 +37,15 @@ describe("W2D-006 Section 17 - Representative and Real Document Validation", () 
       const res = runValidation(simpleTextFixture);
       expect(res.type).toBe("validation-success");
       if (res.type === "validation-success") {
-        expect(res.summary.schemaVersion).toBe("0.1");
+        expect(res.summary.schemaVersion).toBe("0.2");
         expect(res.summary.totalNodes).toBe(2);
         expect(res.summary.nodeCounts.text).toBe(1);
         expect(res.summary.assetCount).toBe(0);
+      }
+      const resV01 = runValidation({ ...simpleTextFixture, schemaVersion: "0.1" });
+      expect(resV01.type).toBe("validation-success");
+      if (resV01.type === "validation-success") {
+        expect(resV01.summary.schemaVersion).toBe("0.1");
       }
     });
 
@@ -114,7 +119,7 @@ describe("W2D-006 Section 17 - Representative and Real Document Validation", () 
     });
 
     it("handles 7. invalid schema version", () => {
-      const res = runValidation({ ...simpleTextFixture, schemaVersion: "0.2" });
+      const res = runValidation({ ...simpleTextFixture, schemaVersion: "0.3" });
       expect(res.type).toBe("validation-error");
       if (res.type === "validation-error") {
         expect(res.error.issues.some((i) => i.path.includes("schemaVersion"))).toBe(true);
@@ -147,6 +152,8 @@ describe("W2D-006 Section 17 - Representative and Real Document Validation", () 
       "fidelity-styles.json",
       "fidelity-text.json",
       "fidelity-limits.json",
+      "fidelity-pseudo.json",
+      "fidelity-gradients.json",
       "capture.json",
     ];
 
@@ -163,7 +170,7 @@ describe("W2D-006 Section 17 - Representative and Real Document Validation", () 
 
         expect(res.type, `Smoke capture "${filename}" should validate successfully`).toBe("validation-success");
         if (res.type === "validation-success") {
-          expect(res.summary.schemaVersion).toBe("0.1");
+          expect(["0.1", "0.2"]).toContain(res.summary.schemaVersion);
           expect(res.summary.totalNodes).toBeGreaterThan(0);
           expect(res.summary.viewport.width).toBeGreaterThan(0);
           expect(res.summary.viewport.height).toBeGreaterThan(0);

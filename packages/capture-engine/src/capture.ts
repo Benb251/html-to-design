@@ -224,8 +224,8 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
   const collect = (node: DesignNode) => { emittedIds.add(node.id); node.children.forEach(collect); };
   collect(root);
   for (const warning of warnings) if (warning.nodeId && !emittedIds.has(warning.nodeId)) delete warning.nodeId;
-  warn("CAPTURE_SCOPE", "W2D-011: rendered light-DOM boxes, synthetic pseudo-elements, editable text, basic styles, images and inline SVG. Clipping, full paint order, media and advanced layout/style semantics are not reconstructed.");
+  warn("CAPTURE_SCOPE", "W2D-012: rendered light-DOM boxes, synthetic pseudo-elements, editable text, basic styles, gradient fills, images and inline SVG. Clipping, full paint order, media and advanced layout/style semantics are not reconstructed.");
   return parseDesignDocument({ schemaVersion: DESIGN_SCHEMA_VERSION, capture: { capturedAt: options.capturedAt ?? new Date().toISOString(),
     source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" }, page: { url: document.URL, title: document.title } },
-    viewport, root, assets: assetRegistry.getAssets(), warnings });
+    viewport, root, assets: assetRegistry.getAssets(), warnings }) as DesignDocument;
 }

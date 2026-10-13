@@ -1,0 +1,1032 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Web2Design fidelity gradients",
+  "x": 100,
+  "y": 200,
+  "width": 800,
+  "height": 600,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "sourceTag": "html",
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      }
+    }
+  ],
+  "children": [
+    {
+      "figmaType": "FRAME",
+      "name": "body",
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 591.875,
+      "absoluteX": 0,
+      "absoluteY": 0,
+      "opacity": 1,
+      "sourceId": "w2d-element-body",
+      "sourceType": "frame",
+      "sourceTag": "body",
+      "children": [
+        {
+          "figmaType": "TEXT",
+          "name": "Text",
+          "x": 16,
+          "y": 37.4375,
+          "width": 525.1406,
+          "height": 36,
+          "absoluteX": 16,
+          "absoluteY": 37.4375,
+          "opacity": 1,
+          "sourceId": "w2d-text-1-0",
+          "sourceType": "text",
+          "sourceTag": "h1",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "text": {
+            "characters": "Web2Design Gradient Fidelity Test",
+            "fontFamily": "Arial",
+            "fontStyle": "Regular",
+            "fontSize": 32,
+            "lineHeight": 38.4,
+            "letterSpacing": 0,
+            "textAlignHorizontal": "LEFT"
+          }
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 16,
+          "y": 95.875,
+          "width": 768,
+          "height": 364,
+          "absoluteX": 16,
+          "absoluteY": 95.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-3",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "children": [
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 0,
+              "y": 0,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 16,
+              "absoluteY": 95.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-1",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      0,
+                      -1,
+                      0.5
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 136,
+              "y": 0,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 152,
+              "absoluteY": 95.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-3",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 272,
+              "y": 0,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 288,
+              "absoluteY": 95.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-5",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1,
+                      -1,
+                      0
+                    ],
+                    [
+                      1,
+                      1,
+                      0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 408,
+              "y": 0,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 424,
+              "absoluteY": 95.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-7",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      0.8,
+                      1.3333,
+                      0.1
+                    ],
+                    [
+                      -1.3333,
+                      0.8,
+                      1.1667
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 0,
+              "y": 76,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 16,
+              "absoluteY": 171.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-9",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      -0.8,
+                      1.3333,
+                      0.9
+                    ],
+                    [
+                      -1.3333,
+                      -0.8,
+                      1.1667
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 136,
+              "y": 76,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 152,
+              "absoluteY": 171.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-11",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 0.5,
+                      "color": {
+                        "r": 0,
+                        "g": 1,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      0,
+                      -1,
+                      0.5
+                    ],
+                    [
+                      1,
+                      0,
+                      0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 272,
+              "y": 76,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 288,
+              "absoluteY": 171.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-13",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 0.5
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 0.25
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 408,
+              "y": 76,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 424,
+              "absoluteY": 171.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-15",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 0.5,
+                      "color": {
+                        "r": 0,
+                        "g": 1,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 0,
+              "y": 152,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 16,
+              "absoluteY": 247.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-17",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 0.5,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 0.5,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 136,
+              "y": 152,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 152,
+              "absoluteY": 247.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-19",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_RADIAL",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      0.7071,
+                      0,
+                      0.5
+                    ],
+                    [
+                      0,
+                      0.7071,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 272,
+              "y": 152,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 288,
+              "absoluteY": 247.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-21",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_RADIAL",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      0.5831,
+                      0,
+                      0.5
+                    ],
+                    [
+                      0,
+                      0.9718,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 408,
+              "y": 152,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 424,
+              "absoluteY": 247.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-23",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_RADIAL",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      0.7071,
+                      0,
+                      0.5
+                    ],
+                    [
+                      0,
+                      0.7071,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 0,
+              "y": 228,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 16,
+              "absoluteY": 323.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-25",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_RADIAL",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1.0607,
+                      0,
+                      0.25
+                    ],
+                    [
+                      0,
+                      1.0607,
+                      0.75
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 136,
+              "y": 228,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 152,
+              "absoluteY": 323.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-27",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.1333,
+                    "g": 0.1333,
+                    "b": 0.1333,
+                    "a": 1
+                  }
+                },
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 0.5
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 0.5
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 272,
+              "y": 228,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 288,
+              "absoluteY": 323.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-29",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.9529,
+                    "g": 0.9569,
+                    "b": 0.9647,
+                    "a": 1
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "::before",
+                  "x": 5,
+                  "y": 5,
+                  "width": 40,
+                  "height": 40,
+                  "absoluteX": 293,
+                  "absoluteY": 328.875,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-29::before",
+                  "sourceType": "rectangle",
+                  "sourceTag": "::before",
+                  "fills": [
+                    {
+                      "type": "GRADIENT_LINEAR",
+                      "gradientStops": [
+                        {
+                          "position": 0,
+                          "color": {
+                            "r": 1,
+                            "g": 0,
+                            "b": 0,
+                            "a": 1
+                          }
+                        },
+                        {
+                          "position": 1,
+                          "color": {
+                            "r": 0,
+                            "g": 1,
+                            "b": 0,
+                            "a": 1
+                          }
+                        }
+                      ],
+                      "gradientTransform": [
+                        [
+                          1,
+                          0,
+                          0
+                        ],
+                        [
+                          0,
+                          1,
+                          0.5
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 136,
+              "y": 304,
+              "width": 100,
+              "height": 60,
+              "absoluteX": 152,
+              "absoluteY": 399.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-35",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0.1,
+                      "color": {
+                        "r": 1,
+                        "g": 0,
+                        "b": 0,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 0.9,
+                      "color": {
+                        "r": 0,
+                        "g": 0,
+                        "b": 1,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1,
+                      0,
+                      0
+                    ],
+                    [
+                      0,
+                      1,
+                      0.5
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "figmaType": "RECTANGLE",
+          "name": "div",
+          "x": 16,
+          "y": 475.875,
+          "width": 300,
+          "height": 100,
+          "absoluteX": 16,
+          "absoluteY": 475.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-5-1",
+          "sourceType": "rectangle",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "GRADIENT_LINEAR",
+              "gradientStops": [
+                {
+                  "position": 0,
+                  "color": {
+                    "r": 1,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                },
+                {
+                  "position": 1,
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 1,
+                    "a": 1
+                  }
+                }
+              ],
+              "gradientTransform": [
+                [
+                  0.6667,
+                  2,
+                  0.1667
+                ],
+                [
+                  -2,
+                  0.6667,
+                  1.5
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

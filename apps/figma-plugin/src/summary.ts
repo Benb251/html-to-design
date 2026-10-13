@@ -1,4 +1,4 @@
-import type { DesignDocument, DesignNode } from "@web2design/design-schema";
+import type { DesignNode, VersionedDesignDocument } from "@web2design/design-schema";
 import type { DocumentSummary } from "./messages.js";
 
 function walkNodes(node: DesignNode, visitor: (node: DesignNode) => void): void {
@@ -10,7 +10,7 @@ function walkNodes(node: DesignNode, visitor: (node: DesignNode) => void): void 
   }
 }
 
-export function computeDocumentSummary(document: DesignDocument): DocumentSummary {
+export function computeDocumentSummary(document: VersionedDesignDocument): DocumentSummary {
   let totalNodes = 0;
   const nodeCounts = {
     frame: 0,

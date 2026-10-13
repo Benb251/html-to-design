@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseDesignDocument } from "@web2design/design-schema";
+import { parseDesignDocument, type DesignNode, type SolidFill } from "@web2design/design-schema";
 import {
   representativeFixtures,
   nestedFramesFixture,
@@ -33,7 +33,7 @@ describe("representative Design Schema fixtures", () => {
 
   it("preserves the important visual and asset properties", () => {
     const card = parseDesignDocument(styledRectangleFixture).root.children[0];
-    expect(card?.style?.fills?.[0]?.color).toEqual({ r: 1, g: 1, b: 1, a: 1 });
+    expect((card?.style?.fills?.[0] as SolidFill)?.color).toEqual({ r: 1, g: 1, b: 1, a: 1 });
     expect(card?.style?.border?.width).toBe(1);
     expect(card?.style?.cornerRadius).toBe(12);
     const shadow = parseDesignDocument(shadowFixture).root.children[0]?.style?.boxShadows?.[0];
@@ -45,7 +45,7 @@ describe("representative Design Schema fixtures", () => {
     expect(image.assets.find((asset) => asset.id === imageNode.assetId)?.kind).toBe("image");
     const frame = parseDesignDocument(textCardFixture).root.children[0];
     if (frame?.type !== "frame") throw new Error("Expected text card");
-    expect(frame.children.map((node) => node.type)).toEqual(["text", "text"]);
+    expect(frame.children.map((node: DesignNode) => node.type)).toEqual(["text", "text"]);
   });
 });
 

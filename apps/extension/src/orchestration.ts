@@ -1,4 +1,4 @@
-import { safeParseDesignDocument, type DesignDocument } from "@web2design/design-schema";
+import { normalizeDesignDocument, safeParseDesignDocument, type DesignDocument } from "@web2design/design-schema";
 export function canCaptureUrl(url: string): boolean {
   try {
     const page = new URL(url);
@@ -16,7 +16,7 @@ export function decodeCaptureResponse(response: unknown): DesignDocument {
     const issue = result.issues[0];
     throw new Error("Capture failed schema validation: " + (issue ? issue.path.join(".") + ": " + issue.message : "invalid document"));
   }
-  return result.data;
+  return normalizeDesignDocument(result.data);
 }
 export async function captureActivePage(): Promise<DesignDocument> {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });

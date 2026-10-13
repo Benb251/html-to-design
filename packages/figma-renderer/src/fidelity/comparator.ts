@@ -1,10 +1,10 @@
 import type {
   Color,
-  DesignDocument,
   DesignNode,
   ImageNode,
   SvgNode,
   TextNode,
+  VersionedDesignDocument,
 } from "@web2design/design-schema";
 import type { RendererWarning } from "../types.js";
 import type {
@@ -185,8 +185,10 @@ export function compareFill(
     }
   } else if (schemaNode.type !== "image") {
     // If schema has no fills and is not an image, rendered node should not have accidental fills
-    const renderedSolidFills = (rendered.fills ?? []).filter((f) => f.type === "SOLID");
-    if (renderedSolidFills.length > 0) {
+    const renderedFills = (rendered.fills ?? []).filter(
+      (f) => f.type === "SOLID" || f.type === "GRADIENT_LINEAR" || f.type === "GRADIENT_RADIAL",
+    );
+    if (renderedFills.length > 0 && schemaFills.length === 0) {
       failures.push({
         fixtureId,
         sourceId: schemaNode.id,
@@ -194,9 +196,133 @@ export function compareFill(
         category: "FILL",
         property: "fills",
         expected: "empty",
-        actual: renderedSolidFills.length,
+        actual: renderedFills.length,
         message: `Node '${schemaNode.id}' has accidental fill when schema had none`,
       });
+    }
+  }
+
+  const linearSchemaFills = schemaFills.filter((f) => f.type === "linear-gradient");
+  if (linearSchemaFills.length > 0) {
+    const expected = linearSchemaFills[0]!;
+    const renderedGradients = (rendered.fills ?? []).filter((f) => f.type === "GRADIENT_LINEAR");
+
+    if (renderedGradients.length === 0) {
+      failures.push({
+        fixtureId,
+        sourceId: schemaNode.id,
+        nodeType: schemaNode.type,
+        category: "FILL",
+        property: "fills",
+        expected: "GRADIENT_LINEAR fill",
+        actual: "None",
+        message: `Node '${schemaNode.id}' missing linear gradient fill in rendered output`,
+      });
+    } else {
+      const actual = renderedGradients[0]!;
+      if (!actual.gradientTransform) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "FILL",
+          property: "gradientTransform",
+          expected: "Transform matrix",
+          actual: "None",
+          message: `Node '${schemaNode.id}' missing gradientTransform matrix`,
+        });
+      }
+      if ((actual.gradientStops?.length ?? 0) !== expected.stops.length) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "FILL",
+          property: "gradientStops.length",
+          expected: expected.stops.length,
+          actual: actual.gradientStops?.length ?? 0,
+          message: `Node '${schemaNode.id}' gradient stop count mismatch`,
+        });
+      } else if (actual.gradientStops) {
+        for (let i = 0; i < expected.stops.length; i++) {
+          const expStop = expected.stops[i]!;
+          const actStop = actual.gradientStops[i]!;
+          if (Math.abs(expStop.position - actStop.position) > 0.05) {
+            failures.push({
+              fixtureId,
+              sourceId: schemaNode.id,
+              nodeType: schemaNode.type,
+              category: "FILL",
+              property: `gradientStops[${i}].position`,
+              expected: expStop.position,
+              actual: actStop.position,
+              difference: Math.abs(expStop.position - actStop.position),
+              tolerance: 0.05,
+              message: `Node '${schemaNode.id}' gradient stop ${i} position mismatch`,
+            });
+          }
+          const diff = colorDiff(actStop.color, expStop.color, colorTol);
+          if (diff) {
+            failures.push({
+              fixtureId,
+              sourceId: schemaNode.id,
+              nodeType: schemaNode.type,
+              category: "FILL",
+              property: `gradientStops[${i}].color`,
+              expected: expStop.color,
+              actual: actStop.color,
+              difference: diff,
+              tolerance: colorTol,
+              message: `Node '${schemaNode.id}' gradient stop ${i} color mismatch: ${diff}`,
+            });
+          }
+        }
+      }
+    }
+  }
+
+  const radialSchemaFills = schemaFills.filter((f) => f.type === "radial-gradient");
+  if (radialSchemaFills.length > 0) {
+    const expected = radialSchemaFills[0]!;
+    const renderedGradients = (rendered.fills ?? []).filter((f) => f.type === "GRADIENT_RADIAL");
+
+    if (renderedGradients.length === 0) {
+      failures.push({
+        fixtureId,
+        sourceId: schemaNode.id,
+        nodeType: schemaNode.type,
+        category: "FILL",
+        property: "fills",
+        expected: "GRADIENT_RADIAL fill",
+        actual: "None",
+        message: `Node '${schemaNode.id}' missing radial gradient fill in rendered output`,
+      });
+    } else {
+      const actual = renderedGradients[0]!;
+      if (!actual.gradientTransform) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "FILL",
+          property: "gradientTransform",
+          expected: "Transform matrix",
+          actual: "None",
+          message: `Node '${schemaNode.id}' missing radial gradientTransform matrix`,
+        });
+      }
+      if ((actual.gradientStops?.length ?? 0) !== expected.stops.length) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "FILL",
+          property: "gradientStops.length",
+          expected: expected.stops.length,
+          actual: actual.gradientStops?.length ?? 0,
+          message: `Node '${schemaNode.id}' radial gradient stop count mismatch`,
+        });
+      }
     }
   }
 
@@ -503,7 +629,7 @@ export function compareImage(
   schemaNode: ImageNode,
   rendered: NormalizedRenderedNode,
   fixtureId: string,
-  doc: DesignDocument,
+  doc: VersionedDesignDocument,
 ): FidelityFailure[] {
   const failures: FidelityFailure[] = [];
 
@@ -629,7 +755,7 @@ export function buildSourceIndex(renderedTree: NormalizedRenderedNode): SourceIn
 }
 
 export function runDocumentFidelity(
-  doc: DesignDocument,
+  doc: VersionedDesignDocument,
   renderedTree: NormalizedRenderedNode,
   manifestEntry: FixtureManifestEntry,
   actualWarnings: RendererWarning[],

@@ -1,81 +1,123 @@
-# Design Schema V0.1
+# Design Schema V0.2
 
 `@web2design/design-schema` is the stable boundary between capture sources and design renderers.
+
+Current wire version: `"0.2"`.
+
+## Versions and Compatibility
+
+Design Schema evolves with explicit version boundaries:
+
+- **V0.1** (`"0.1"`): Solid fills only (`type: "solid"`). Strict schema rejecting gradient fills.
+- **V0.2** (`"0.2"`): Current producer version. Adds first-class renderer-neutral gradient fills (`linear-gradient` and `radial-gradient`).
+
+### Read Compatibility & Normalization
+
+All parser entrypoints (`parseDesignDocument`, `safeParseDesignDocument`) accept both `"0.1"` and `"0.2"` documents. Unknown versions (e.g. `"0.3"`, `"1.0"`) are explicitly rejected.
+
+```ts
+import {
+  parseDesignDocument,
+  safeParseDesignDocument,
+  normalizeDesignDocument,
+  upgradeDesignDocumentToLatest,
+  type VersionedDesignDocument,
+  type LatestDesignDocument,
+} from "@web2design/design-schema";
+
+// Parse any supported version (0.1 or 0.2)
+const versionedDoc = parseDesignDocument(json);
+
+// Normalize 0.1 documents to latest 0.2 representation without changing visual semantics
+const latestDoc = normalizeDesignDocument(versionedDoc);
+```
 
 ## Coordinates
 
 All node geometry uses CSS pixels. `x` and `y` are absolute coordinates relative to the captured document origin, not relative to the current viewport and not relative to the parent node. `width` and `height` are rendered CSS-pixel dimensions. Viewport scroll offsets are stored separately as capture metadata.
 
-This choice makes a V0.1 document deterministic and keeps the first renderer focused on visual fidelity. Parent-relative layout and Auto Layout inference can be derived later.
+This choice makes documents deterministic and keeps renderers focused on visual fidelity. Parent-relative layout and Auto Layout inference can be derived later.
 
-The origin is the document's top-left corner; positive x points right and positive y points down. Negative positions and fractional CSS pixels are preserved, with no implicit rounding or device-pixel scaling. A browser capture can normalize viewport rectangles by adding captured scroll offsets. The viewport describes the capture context, not the root's maximum dimensions. A renderer deriving local coordinates subtracts the parent's absolute position from the child's.
-
-Geometry is an axis-aligned rendered border box. Rotation, skew, clipping, and arbitrary transforms are not modeled by V0.1 and should generate capture warnings when fidelity is affected.
+The origin is the document's top-left corner; positive x points right and positive y points down. Negative positions and fractional CSS pixels are preserved.
 
 ## Document shape
 
 A document contains:
 
-- the explicit `schemaVersion` (`"0.1"`),
+- the explicit `schemaVersion` (`"0.2"` current wire version; `"0.1"` supported for backward compatibility),
 - capture metadata,
 - viewport metadata,
 - a frame root node,
 - an asset registry,
 - optional warnings for unsupported or approximated features.
 
-V0.1 node kinds are `frame`, `text`, `rectangle`, `image`, and `svg`. Leaf nodes carry an empty `children` array; frames own nested nodes.
+Node kinds are `frame`, `text`, `rectangle`, `image`, and `svg`. Leaf nodes carry an empty `children` array; frames own nested nodes.
 
-Visual styles model normalized fills, border, corner radius, and basic box shadows. Text nodes model normalized typography. The schema deliberately does not expose a raw CSS-property bag as its main styling contract.
+## Fill Model (V0.2)
 
-Children and fills are ordered from back to front; preserve that order when rendering. Frames are structural groups and do not imply clipping or layout inference. IDs are unique within each document. References to assets and warning nodes are checked across the entire nested tree.
+In V0.2, visual style fills support an ordered array of fills:
+
+```ts
+type Fill = SolidFill | LinearGradientFill | RadialGradientFill;
+```
+
+### 1. Solid Fill
+
+```ts
+interface SolidFill {
+  type: "solid";
+  color: Color; // { r, g, b, a } in [0, 1]
+}
+```
+
+### 2. Linear Gradient Fill
+
+Renderer-neutral representation of linear CSS gradients:
+
+```ts
+interface LinearGradientFill {
+  type: "linear-gradient";
+  angle: number; // 0..360 degrees (0deg = to top, 90deg = to right, 180deg = to bottom)
+  stops: GradientStop[]; // at least 2 stops
+}
+```
+
+### 3. Radial Gradient Fill
+
+Renderer-neutral representation of radial CSS gradients:
+
+```ts
+interface RadialGradientFill {
+  type: "radial-gradient";
+  center: { x: number; y: number }; // normalized [0, 1] relative to element box
+  radius: { x: number; y: number }; // normalized [0, 1] relative to element box
+  shape?: "circle" | "ellipse";
+  stops: GradientStop[]; // at least 2 stops
+}
+```
+
+### 4. Gradient Stops
+
+```ts
+interface GradientStop {
+  position: number; // normalized [0, 1], non-decreasing
+  color: Color; // { r, g, b, a } in [0, 1]
+}
+```
+
+## Layer Ordering
+
+CSS layers multiple backgrounds and background images over background colors:
+- In Design Schema, `fills` is ordered from top layer (`fills[0]`) to underlying layer (`fills[length - 1]`).
+- For example, a gradient painted over a solid color has `fills: [LinearGradientFill, SolidFill]`.
+- Renderers map this collection to target platform paint ordering (e.g. Figma plugin API bottom-to-top Paint order).
 
 ## Style and text units
 
 - Color uses normalized sRGB `r/g/b/a` channels in [0, 1]. An omitted color alpha becomes 1.
-- `opacity` is local to the node/group, in [0, 1]; capture sources must avoid multiplying inherited opacity into every child again.
+- `opacity` is local to the node/group, in [0, 1]; capture sources avoid multiplying inherited opacity into children.
 - Border width, corner radii, shadow offsets/blur/spread, font size, resolved line height, and letter spacing are all CSS pixels.
-- Borders are uniform around the box. Radii are a uniform scalar or four named circular corners. Elliptical radii and per-side borders require warnings until modeled in a later version.
-- Fills support solid color only. Shadows support ordered basic box shadows; an omitted `inset` becomes false.
-- `fontFamily` is the primary requested family. Optional `fontFallbacks` preserves ordered fallback candidates without committing the schema to a Figma font-resolution strategy.
-- Text uses one style per node. Mixed-style runs, text decorations, gradients, filters, blend modes, and CSS stacking-context reconstruction are deferred; capture sources must report unsupported or approximated features.
-
-## Assets
-
-Image and SVG nodes may reference asset records by ID. Asset sources support URL, data URL, and embedded base64 payloads. Records can carry a content hash, MIME type, and intrinsic dimensions. Downloading or resolving those assets belongs to a capture implementation and is outside this package.
-
-Asset IDs are unique. Image nodes require image-kind assets; SVG references require SVG-kind assets. Inline SVG content or an SVG asset reference is required. If both are supplied, inline content takes precedence, and the reference must still be valid.
-
-Convert blob-derived bytes to the embedded base64 source when a portable payload is needed; browser-local blob object handles are not schema values. Hashes are optional opaque provider-supplied fingerprints (prefer an algorithm-prefixed digest). The validator does not download URLs, verify bytes against hashes/MIME types, parse SVG XML, sanitize SVG, or resolve fonts; those responsibilities belong to future capture/import implementations.
-
-## Developer API
-
-```ts
-import {
-  parseDesignDocument,
-  safeParseDesignDocument,
-  DesignDocumentValidationError,
-  type DesignDocument,
-  type DesignNode,
-} from "@web2design/design-schema";
-
-const result = safeParseDesignDocument(payload);
-if (result.success) {
-  const document: DesignDocument = result.data;
-  // Renderer consumes this portable schema, independent of the capture source.
-} else {
-  // result.issues contains path, code, and message.
-}
-```
-
-`parseDesignDocument(input: unknown)` returns a validated document or throws `DesignDocumentValidationError` with normalized `issues`. `safeParseDesignDocument(input: unknown)` returns a success/failure union. No Zod schemas or errors are exposed through the package entry point. Parsing does not mutate the input; normalized defaults are present in the returned document.
-
-Inputs are JSON-compatible, acyclic documents. In-process circular object graphs are outside the wire contract. Warnings may be global or refer to an existing node; each has a stable code and a human-readable message.
-
-## Version evolution
-
-Unknown schema versions are rejected. A future schema revision should introduce a new explicit version and a deliberate migration step before parsing into the current renderer contract. Breaking changes must never be silently accepted as V0.1.
-
-Unknown object fields are rejected rather than silently discarded. New contract fields or changed semantics require an explicit schema revision; readers must not reinterpret a newer payload as `"0.1"`. The package's npm version (`0.1.0`) and the document wire version (`"0.1"`) have separate purposes: implementation patches can leave the wire version unchanged.
-
-Future migrations should be pure functions between explicit version contracts, selected at the package boundary before renderer use. No unused migration registry is introduced until another version exists.
-
+- Borders are uniform around the box. Radii are a uniform scalar or four named circular corners.
+- Shadows support ordered basic box shadows; an omitted `inset` becomes false.
+- `fontFamily` is the primary requested family. `fontFallbacks` preserves ordered fallback candidates.
+- Text uses one style per node.

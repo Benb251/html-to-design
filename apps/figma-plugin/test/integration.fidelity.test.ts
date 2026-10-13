@@ -4,7 +4,6 @@ import { resolve } from "node:path";
 import { simpleTextFixture } from "@web2design/test-fixtures";
 import { FakeFigmaHost, renderDesignDocument } from "@web2design/figma-renderer";
 import type { FakeFrameNode } from "@web2design/figma-renderer";
-import type { DesignDocument } from "@web2design/design-schema";
 import { handleUiMessage, type SessionState } from "../src/main.js";
 import type { PluginToUiMessage } from "../src/messages.js";
 
@@ -129,21 +128,21 @@ describe("W2D-008 - Figma Plugin Integration & Regression (Sections 35-38)", () 
   it("36. verifies fatal cleanup transaction rollback and non-rollback on child warning", async () => {
     // Part A: Recoverable child error does NOT trigger rollback
     const host1 = new FakeFigmaHost();
-    const docWithBrokenChild: DesignDocument = {
+    const docWithBrokenChild = {
       ...simpleTextFixture,
       root: {
         ...simpleTextFixture.root,
         children: [
           {
             id: "normal-rect",
-            type: "rectangle",
+            type: "rectangle" as const,
             x: 10,
             y: 10,
             width: 100,
             height: 100,
             visible: true,
             opacity: 1,
-            children: [],
+            children: [] as [],
           },
         ],
       },

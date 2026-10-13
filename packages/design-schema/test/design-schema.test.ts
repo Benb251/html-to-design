@@ -2,11 +2,15 @@ import { describe, expect, it } from "vitest";
 import {
   DESIGN_SCHEMA_VERSION,
   DesignDocumentValidationError,
+  isSupportedSchemaVersion,
+  normalizeDesignDocument,
   parseDesignDocument,
   safeParseDesignDocument,
+  upgradeDesignDocumentToLatest,
   type DesignDocument,
   type ImageNode,
   type RectangleNode,
+  type SolidFill,
   type TextNode,
 } from "../src/index.js";
 
@@ -177,7 +181,7 @@ describe("Design Schema V0.1", () => {
         cornerRadius: { topLeft: 1, topRight: 2, bottomRight: 3, bottomLeft: 4 },
       } },
     });
-    expect(parsed.root.style?.fills?.[0]?.color.a).toBe(1);
+    expect((parsed.root.style?.fills?.[0] as SolidFill)?.color.a).toBe(1);
     expect(parsed.root.style?.boxShadows?.[0]?.inset).toBe(false);
     expect(parsed.root.style?.cornerRadius).toEqual({
       topLeft: 1, topRight: 2, bottomRight: 3, bottomLeft: 4,
@@ -274,7 +278,7 @@ describe("Design Schema V0.1", () => {
   });
 
   it("rejects an invalid schema version", () => {
-    const document = { ...createBaseDocument(), schemaVersion: "0.2" };
+    const document = { ...createBaseDocument(), schemaVersion: "0.3" };
     expect(safeParseDesignDocument(document).success).toBe(false);
   });
 
@@ -424,6 +428,277 @@ describe("Design Schema V0.1", () => {
     const serialized = JSON.stringify(first);
     const second = parseDesignDocument(JSON.parse(serialized));
     expect(second).toEqual(first);
+  });
+});
+
+describe("Design Schema V0.2 & Gradient Fill Support", () => {
+  function createV01Document() {
+    return {
+      schemaVersion: "0.1" as const,
+      capture: {
+        capturedAt: "2026-10-13T07:00:00.000Z",
+        source: { kind: "test" },
+      },
+      viewport: {
+        width: 1280,
+        height: 720,
+        devicePixelRatio: 1,
+        scrollX: 0,
+        scrollY: 0,
+      },
+      root: {
+        id: "root",
+        type: "frame" as const,
+        x: 0,
+        y: 0,
+        width: 1280,
+        height: 720,
+        visible: true,
+        opacity: 1,
+        style: {
+          fills: [{ type: "solid" as const, color: { r: 1, g: 0, b: 0, a: 1 } }],
+        },
+        children: [],
+      },
+      assets: [],
+    };
+  }
+
+  it("identifies supported versions correctly", () => {
+    expect(isSupportedSchemaVersion("0.1")).toBe(true);
+    expect(isSupportedSchemaVersion("0.2")).toBe(true);
+    expect(isSupportedSchemaVersion("0.3")).toBe(false);
+    expect(isSupportedSchemaVersion("1.0")).toBe(false);
+    expect(isSupportedSchemaVersion(null)).toBe(false);
+  });
+
+  it("parses valid V0.1 documents without modification", () => {
+    const v01Doc = createV01Document();
+    const parsed = parseDesignDocument(v01Doc);
+    expect(parsed.schemaVersion).toBe("0.1");
+    expect(parsed.root.style?.fills?.[0]?.type).toBe("solid");
+  });
+
+  it("upgrades/normalizes V0.1 documents to V0.2 with identical semantics", () => {
+    const v01Doc = createV01Document();
+    const parsed = parseDesignDocument(v01Doc);
+    const upgraded = normalizeDesignDocument(parsed);
+    expect(upgraded.schemaVersion).toBe("0.2");
+    expect(upgraded.root.id).toBe(v01Doc.root.id);
+    expect(upgraded.root.style?.fills).toEqual(v01Doc.root.style.fills);
+    expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
+  });
+
+  it("strictly rejects gradient fills in V0.1 documents", () => {
+    const docWithGradient = {
+      ...createV01Document(),
+      root: {
+        ...createV01Document().root,
+        style: {
+          fills: [
+            {
+              type: "linear-gradient",
+              angle: 90,
+              stops: [
+                { position: 0, color: { r: 1, g: 0, b: 0, a: 1 } },
+                { position: 1, color: { r: 0, g: 0, b: 1, a: 1 } },
+              ],
+            },
+          ],
+        },
+      },
+    };
+    const result = safeParseDesignDocument(docWithGradient);
+    expect(result.success).toBe(false);
+  });
+
+  it("parses valid V0.2 linear gradient fills", () => {
+    const v02Doc = {
+      ...createV01Document(),
+      schemaVersion: "0.2" as const,
+      root: {
+        ...createV01Document().root,
+        style: {
+          fills: [
+            {
+              type: "linear-gradient" as const,
+              angle: 135,
+              stops: [
+                { position: 0, color: { r: 1, g: 0, b: 0, a: 0.5 } },
+                { position: 0.5, color: { r: 0, g: 1, b: 0, a: 1 } },
+                { position: 1, color: { r: 0, g: 0, b: 1, a: 0.8 } },
+              ],
+            },
+          ],
+        },
+      },
+    };
+    const parsed = parseDesignDocument(v02Doc);
+    expect(parsed.schemaVersion).toBe("0.2");
+    expect(parsed.root.style?.fills?.[0]?.type).toBe("linear-gradient");
+  });
+
+  it("parses valid V0.2 radial gradient fills", () => {
+    const v02Doc = {
+      ...createV01Document(),
+      schemaVersion: "0.2" as const,
+      root: {
+        ...createV01Document().root,
+        style: {
+          fills: [
+            {
+              type: "radial-gradient" as const,
+              center: { x: 0.25, y: 0.75 },
+              radius: { x: 0.5, y: 0.5 },
+              shape: "circle" as const,
+              stops: [
+                { position: 0, color: { r: 1, g: 1, b: 0, a: 1 } },
+                { position: 1, color: { r: 0, g: 0, b: 0, a: 0 } },
+              ],
+            },
+          ],
+        },
+      },
+    };
+    const parsed = parseDesignDocument(v02Doc);
+    expect(parsed.schemaVersion).toBe("0.2");
+    expect(parsed.root.style?.fills?.[0]?.type).toBe("radial-gradient");
+  });
+
+  it("parses layered fills (gradient + solid) preserving order", () => {
+    const v02Doc = {
+      ...createV01Document(),
+      schemaVersion: "0.2" as const,
+      root: {
+        ...createV01Document().root,
+        style: {
+          fills: [
+            {
+              type: "linear-gradient" as const,
+              angle: 90,
+              stops: [
+                { position: 0, color: { r: 1, g: 0, b: 0, a: 0.5 } },
+                { position: 1, color: { r: 0, g: 0, b: 1, a: 0.5 } },
+              ],
+            },
+            {
+              type: "solid" as const,
+              color: { r: 0.1, g: 0.1, b: 0.1, a: 1 },
+            },
+          ],
+        },
+      },
+    };
+    const parsed = parseDesignDocument(v02Doc);
+    expect(parsed.root.style?.fills?.length).toBe(2);
+    expect(parsed.root.style?.fills?.[0]?.type).toBe("linear-gradient");
+    expect(parsed.root.style?.fills?.[1]?.type).toBe("solid");
+  });
+
+  it("strictly rejects invalid gradient fills in V0.2", () => {
+    const base = {
+      ...createV01Document(),
+      schemaVersion: "0.2" as const,
+    };
+
+    // Unknown gradient type
+    expect(
+      safeParseDesignDocument({
+        ...base,
+        root: {
+          ...base.root,
+          style: {
+            fills: [{ type: "conic-gradient", stops: [] }],
+          },
+        },
+      }).success,
+    ).toBe(false);
+
+    // Fewer than 2 stops
+    expect(
+      safeParseDesignDocument({
+        ...base,
+        root: {
+          ...base.root,
+          style: {
+            fills: [
+              {
+                type: "linear-gradient",
+                angle: 90,
+                stops: [{ position: 0, color: { r: 1, g: 0, b: 0, a: 1 } }],
+              },
+            ],
+          },
+        },
+      }).success,
+    ).toBe(false);
+
+    // Stop position out of range
+    expect(
+      safeParseDesignDocument({
+        ...base,
+        root: {
+          ...base.root,
+          style: {
+            fills: [
+              {
+                type: "linear-gradient",
+                angle: 90,
+                stops: [
+                  { position: -0.1, color: { r: 1, g: 0, b: 0, a: 1 } },
+                  { position: 1, color: { r: 0, g: 0, b: 1, a: 1 } },
+                ],
+              },
+            ],
+          },
+        },
+      }).success,
+    ).toBe(false);
+
+    // Angle out of range
+    expect(
+      safeParseDesignDocument({
+        ...base,
+        root: {
+          ...base.root,
+          style: {
+            fills: [
+              {
+                type: "linear-gradient",
+                angle: 400,
+                stops: [
+                  { position: 0, color: { r: 1, g: 0, b: 0, a: 1 } },
+                  { position: 1, color: { r: 0, g: 0, b: 1, a: 1 } },
+                ],
+              },
+            ],
+          },
+        },
+      }).success,
+    ).toBe(false);
+
+    // Unknown extra field
+    expect(
+      safeParseDesignDocument({
+        ...base,
+        root: {
+          ...base.root,
+          style: {
+            fills: [
+              {
+                type: "linear-gradient",
+                angle: 90,
+                extraField: "forbidden",
+                stops: [
+                  { position: 0, color: { r: 1, g: 0, b: 0, a: 1 } },
+                  { position: 1, color: { r: 0, g: 0, b: 1, a: 1 } },
+                ],
+              },
+            ],
+          },
+        },
+      }).success,
+    ).toBe(false);
   });
 });
 

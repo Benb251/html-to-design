@@ -11,7 +11,7 @@ const candidates = [process.env.CHROME_PATH, "C:/Program Files/Google/Chrome/App
 let executable;
 for (const candidate of candidates) { try { await fs.access(candidate); executable = candidate; break; } catch { /* Try next configured path. */ } }
 if (!executable) throw new Error("Chrome was not found. Set CHROME_PATH. Manual extension loading is a separate check.");
-const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo"];
+const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients"];
 const fixtures = new Map(await Promise.all(names.map(async name => ["/" + name + ".html", await fs.readFile(new URL("../fixtures/" + name + ".html", import.meta.url))])));
 const dotPng = await fs.readFile(new URL("../fixtures/dot.png", import.meta.url));
 const content = await fs.readFile(new URL("../dist/content.js", import.meta.url), "utf8");
@@ -174,7 +174,7 @@ try {
       check("modern computed srgb fill", () => color(element("srgb").style.fills[0].color, { r: .2, g: .4, b: .6, a: .5 }));
     }
     if (name === "fidelity-limits") {
-      check("unsupported features omitted with bounded deterministic warnings", () => { for (const code of ["SHADOW_UNSUPPORTED", "BACKGROUND_IMAGE_UNSUPPORTED", "BORDER_UNSUPPORTED", "RADIUS_UNSUPPORTED", "TRANSFORM_APPROXIMATED", "PAINT_ORDER_UNSUPPORTED", "POSITION_CONTEXT_UNSUPPORTED"]) assert.equal(doc.warnings.filter(w => w.code === code).length, 1, code); for (const id of ["multiple", "inset"]) assert.equal(element(id).style.boxShadows, undefined); assert.equal(element("complex-border").style.border, undefined); assert.equal(element("ellipse").style.cornerRadius, undefined); assert.equal(element("gradient").style.fills[0].color.a, 1); });
+      check("unsupported features omitted with bounded deterministic warnings", () => { for (const code of ["SHADOW_UNSUPPORTED", "BACKGROUND_IMAGE_UNSUPPORTED", "BORDER_UNSUPPORTED", "RADIUS_UNSUPPORTED", "TRANSFORM_APPROXIMATED", "PAINT_ORDER_UNSUPPORTED", "POSITION_CONTEXT_UNSUPPORTED"]) assert.equal(doc.warnings.filter(w => w.code === code).length, 1, code); for (const id of ["multiple", "inset"]) assert.equal(element(id).style.boxShadows, undefined); assert.equal(element("complex-border").style.border, undefined); assert.equal(element("ellipse").style.cornerRadius, undefined); assert.equal(element("bg-image").style.fills[0].color.a, 1); });
       check("transform browser box and DOM order", () => { boxesMatch(element("transform"), oracle.elements["transform"].box); const strings = all.filter(node => node.type === "text").map(node => node.characters); assert.ok(strings.indexOf("Transformed") < strings.indexOf("Stacked")); });
       check("hidden subtrees and fixed/sticky excluded", () => { for (const id of ["hidden", "zero", "invisible", "fixed", "sticky"]) assert.equal(element(id), undefined); assert.ok(!JSON.stringify(doc).includes("Hidden omitted")); assert.ok(all.some(node => node.type === "text" && node.characters === "Visible override")); });
       check("safe wrapper pruning", () => { assert.equal(element("contents"), undefined); assert.equal(element("pruned"), undefined); assert.ok(all.some(node => node.type === "text" && node.characters === "Display contents")); assert.ok(all.some(node => node.type === "text" && node.characters === "Plain wrapper")); });
@@ -334,11 +334,116 @@ try {
         assert.equal(pseudo("hidden-pseudo", "::before"), undefined);
         assert.equal(pseudo("none-content", "::before"), undefined);
       });
-      check("unsupported content, gradient, and transform warnings", () => {
+      check("pseudo-element gradient captures native linear-gradient fill", () => {
+        const gradPseudo = pseudo("gradient-pseudo", "::before");
+        assert.ok(gradPseudo, "::before gradient node must exist");
+        assert.equal(gradPseudo.type, "rectangle");
+        assert.equal(gradPseudo.style?.fills?.[0]?.type, "linear-gradient");
+        assert.equal(gradPseudo.style?.fills?.[0]?.angle, 135);
+      });
+      check("unsupported pseudo content and transform warnings", () => {
         assert.equal(pseudo("unsupported-content", "::before"), undefined);
         assert.ok(doc.warnings.some(w => w.code === "PSEUDO_CONTENT_UNSUPPORTED"));
-        assert.ok(doc.warnings.some(w => w.code === "BACKGROUND_IMAGE_UNSUPPORTED"));
         assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_APPROXIMATED" && w.nodeId?.includes(oracle.elements["transformed-pseudo"].id)));
+      });
+    }
+    if (name === "fidelity-gradients") {
+      check("fidelity-gradients document valid V0.2 schema", () => {
+        assert.equal(doc.schemaVersion, "0.2");
+        assert.equal(safeParseDesignDocument(doc).success, true);
+      });
+      check("linear gradient default direction (to bottom = 180deg)", () => {
+        const el = element("linear-default");
+        assert.ok(el);
+        const fill = el.style?.fills?.[0];
+        assert.equal(fill?.type, "linear-gradient");
+        assert.equal(fill.angle, 180);
+        assert.equal(fill.stops.length, 2);
+        color(fill.stops[0].color, { r: 1, g: 0, b: 0, a: 1 });
+        color(fill.stops[1].color, { r: 0, g: 0, b: 1, a: 1 });
+      });
+      check("linear gradient keyword directions: to right, to bottom right", () => {
+        const toRight = element("linear-to-right");
+        assert.equal(toRight.style?.fills?.[0]?.angle, 90);
+
+        const toBottomRight = element("linear-to-bottom-right");
+        assert.ok(toBottomRight.style?.fills?.[0]?.angle !== undefined);
+        near(toBottomRight.style.fills[0].angle, 120.96, "diagonal angle on 100x60");
+      });
+      check("linear gradient explicit angles: 45deg and -45deg", () => {
+        const d45 = element("linear-45deg");
+        assert.equal(d45.style?.fills?.[0]?.angle, 45);
+
+        const dNeg45 = element("linear-neg-45deg");
+        assert.equal(dNeg45.style?.fills?.[0]?.angle, 315);
+      });
+      check("multi-stop and implicit stop positions", () => {
+        const three = element("linear-three-stop");
+        assert.equal(three.style?.fills?.[0]?.stops.length, 3);
+        near(three.style.fills[0].stops[0].position, 0, "stop 0");
+        near(three.style.fills[0].stops[1].position, 0.5, "stop 1");
+        near(three.style.fills[0].stops[2].position, 1, "stop 2");
+
+        const implicit = element("linear-implicit-stops");
+        assert.equal(implicit.style?.fills?.[0]?.stops.length, 3);
+        near(implicit.style.fills[0].stops[1].position, 0.5, "implicit middle stop");
+      });
+      check("alpha gradient preserves stop alpha independently", () => {
+        const alpha = element("linear-alpha");
+        const fill = alpha.style?.fills?.[0];
+        assert.equal(fill?.type, "linear-gradient");
+        near(fill.stops[0].color.a, 0.5, "stop 0 alpha");
+        near(fill.stops[1].color.a, 0.25, "stop 1 alpha");
+      });
+      check("hard stop duplicate positions preserved without deduplication", () => {
+        const hard = element("linear-hard-stop");
+        const fill = hard.style?.fills?.[0];
+        assert.equal(fill?.stops.length, 4);
+        near(fill.stops[1].position, 0.5, "hard stop 1");
+        near(fill.stops[2].position, 0.5, "hard stop 2");
+      });
+      check("radial gradient baseline: default, circle, ellipse, and offset center", () => {
+        const def = element("radial-default");
+        assert.equal(def.style?.fills?.[0]?.type, "radial-gradient");
+        near(def.style.fills[0].center.x, 0.5, "default center x");
+        near(def.style.fills[0].center.y, 0.5, "default center y");
+
+        const circle = element("radial-circle");
+        assert.equal(circle.style?.fills?.[0]?.type, "radial-gradient");
+
+        const ellipse = element("radial-ellipse");
+        assert.equal(ellipse.style?.fills?.[0]?.type, "radial-gradient");
+
+        const offset = element("radial-offset-center");
+        assert.equal(offset.style?.fills?.[0]?.type, "radial-gradient");
+        near(offset.style.fills[0].center.x, 0.25, "offset center x");
+        near(offset.style.fills[0].center.y, 0.75, "offset center y");
+      });
+      check("ordered fill layers: gradient over solid background color", () => {
+        const el = element("gradient-over-solid");
+        assert.equal(el.style?.fills?.length, 2);
+        assert.equal(el.style.fills[0].type, "linear-gradient");
+        assert.equal(el.style.fills[1].type, "solid");
+        color(el.style.fills[1].color, { r: 34 / 255, g: 34 / 255, b: 34 / 255, a: 1 });
+      });
+      check("synthetic pseudo-element captures gradient fill natively", () => {
+        const pseudoNode = byId.get(oracle.elements["pseudo-gradient"].id + "::before");
+        assert.ok(pseudoNode, "::before gradient node must exist");
+        assert.equal(pseudoNode.type, "rectangle");
+        assert.equal(pseudoNode.style?.fills?.[0]?.type, "linear-gradient");
+        assert.equal(pseudoNode.style?.fills?.[0]?.angle, 90);
+      });
+      check("rectangular 45deg gradient geometry on 300x100 box", () => {
+        const el = element("rectangular-45deg");
+        assert.equal(el.width, 300);
+        assert.equal(el.height, 100);
+        assert.equal(el.style?.fills?.[0]?.type, "linear-gradient");
+        assert.equal(el.style?.fills?.[0]?.angle, 45);
+      });
+      check("unsupported repeating, conic, hint, and url background warnings", () => {
+        assert.ok(doc.warnings.some(w => w.code === "GRADIENT_TYPE_UNSUPPORTED"));
+        assert.ok(doc.warnings.some(w => w.code === "GRADIENT_COLOR_HINT_APPROXIMATED"));
+        assert.ok(doc.warnings.some(w => w.code === "BACKGROUND_IMAGE_UNSUPPORTED"));
       });
     }
     await fs.writeFile(new URL(name + ".json", evidence), JSON.stringify(doc, null, 2));

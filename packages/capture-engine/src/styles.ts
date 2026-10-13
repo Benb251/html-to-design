@@ -1,9 +1,27 @@
-import type { BoxShadow, Color, TextStyle, VisualStyle } from "@web2design/design-schema";
+import type { BoxShadow, Color, Fill, TextStyle, VisualStyle } from "@web2design/design-schema";
+import { parseBackgroundGradientLayers } from "./gradients.js";
 export type Warn = (code: string, message: string, nodeId?: string) => void;
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
+const NAMED_COLORS: Record<string, Color> = {
+  transparent: { r: 0, g: 0, b: 0, a: 0 },
+  black: { r: 0, g: 0, b: 0, a: 1 },
+  white: { r: 1, g: 1, b: 1, a: 1 },
+  red: { r: 1, g: 0, b: 0, a: 1 },
+  green: { r: 0, g: 0.50196, b: 0, a: 1 },
+  lime: { r: 0, g: 1, b: 0, a: 1 },
+  blue: { r: 0, g: 0, b: 1, a: 1 },
+  yellow: { r: 1, g: 1, b: 0, a: 1 },
+  cyan: { r: 0, g: 1, b: 1, a: 1 },
+  magenta: { r: 1, g: 0, b: 1, a: 1 },
+  orange: { r: 1, g: 0.64706, b: 0, a: 1 },
+  purple: { r: 0.50196, g: 0, b: 0.50196, a: 1 },
+  pink: { r: 1, g: 0.75294, b: 0.79608, a: 1 },
+  gray: { r: 0.50196, g: 0.50196, b: 0.50196, a: 1 },
+  grey: { r: 0.50196, g: 0.50196, b: 0.50196, a: 1 },
+};
 export function cssColor(input: string): Color | undefined {
   const value = (input ?? "").trim().toLowerCase();
-  if (value === "transparent") return { r: 0, g: 0, b: 0, a: 0 };
+  if (value in NAMED_COLORS) return NAMED_COLORS[value];
   const hex = /^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.exec(value)?.[1];
   if (hex) {
     const expanded = hex.length < 5 ? [...hex].map(char => char + char).join("") : hex;
@@ -95,10 +113,26 @@ export function boxShadow(value: string, warn: Warn): BoxShadow | undefined {
 }
 export function visualStyle(style: CSSStyleDeclaration, warn: Warn, box?: { width: number; height: number }): VisualStyle {
   const result: VisualStyle = {};
+  const fills: Fill[] = [];
+  if (style.backgroundImage && style.backgroundImage !== "none") {
+    const bgClip = (style as CSSStyleDeclaration & { backgroundClip?: string; webkitBackgroundClip?: string }).backgroundClip
+      ?? (style as CSSStyleDeclaration & { webkitBackgroundClip?: string }).webkitBackgroundClip;
+    if (bgClip === "text") {
+      warn("GRADIENT_TEXT_UNSUPPORTED", "CSS background-clip: text gradients are not supported as node fills.");
+    } else {
+      const gradientLayers = parseBackgroundGradientLayers(style.backgroundImage, box, warn);
+      if (gradientLayers.length > 0) {
+        fills.push(...gradientLayers);
+        if (gradientLayers.length > 1) {
+          warn("MULTI_BACKGROUND_APPROXIMATED", `Captured multiple (${gradientLayers.length}) background gradient layers.`);
+        }
+      }
+    }
+  }
   const background = cssColor(style.backgroundColor);
-  if (background && background.a > 0) result.fills = [{ type: "solid", color: background }];
+  if (background && background.a > 0) fills.push({ type: "solid", color: background });
   else if (style.backgroundColor && !background) warn("BACKGROUND_COLOR_UNSUPPORTED", "Unsupported background color was omitted.");
-  if (style.backgroundImage && style.backgroundImage !== "none") warn("BACKGROUND_IMAGE_UNSUPPORTED", "Background images/gradients are not captured.");
+  if (fills.length > 0) result.fills = fills;
   const widths = [style.borderTopWidth, style.borderRightWidth, style.borderBottomWidth, style.borderLeftWidth].map(cssPixels);
   const borderStyles = [style.borderTopStyle, style.borderRightStyle, style.borderBottomStyle, style.borderLeftStyle];
   const colors = [style.borderTopColor, style.borderRightColor, style.borderBottomColor, style.borderLeftColor].map(cssColor);

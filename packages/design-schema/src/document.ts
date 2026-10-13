@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { AssetRecordSchema } from "./assets.js";
-import { FrameNodeSchema } from "./nodes.js";
-import type { DesignNode } from "./nodes.js";
-import { DESIGN_SCHEMA_VERSION } from "./version.js";
+import { FrameNodeSchemaV01, FrameNodeSchemaV02 } from "./nodes.js";
+import type { DesignNode, FrameNode } from "./nodes.js";
+import { DESIGN_SCHEMA_VERSION_V01, DESIGN_SCHEMA_VERSION_V02 } from "./version.js";
 
 const CaptureSourceSchema = z.strictObject({
   kind: z.string().min(1),
@@ -36,11 +36,20 @@ const WarningSchema = z.strictObject({
   nodeId: z.string().min(1).optional(),
 });
 
-const RawDesignDocumentSchema = z.strictObject({
-  schemaVersion: z.literal(DESIGN_SCHEMA_VERSION),
+const RawDesignDocumentV01Schema = z.strictObject({
+  schemaVersion: z.literal(DESIGN_SCHEMA_VERSION_V01),
   capture: CaptureMetadataSchema,
   viewport: ViewportMetadataSchema,
-  root: FrameNodeSchema,
+  root: FrameNodeSchemaV01,
+  assets: z.array(AssetRecordSchema),
+  warnings: z.array(WarningSchema).optional(),
+});
+
+const RawDesignDocumentV02Schema = z.strictObject({
+  schemaVersion: z.literal(DESIGN_SCHEMA_VERSION_V02),
+  capture: CaptureMetadataSchema,
+  viewport: ViewportMetadataSchema,
+  root: FrameNodeSchemaV02,
   assets: z.array(AssetRecordSchema),
   warnings: z.array(WarningSchema).optional(),
 });
@@ -58,7 +67,14 @@ function visitNodes(
   }
 }
 
-export const DesignDocumentSchema = RawDesignDocumentSchema.superRefine((document, ctx) => {
+function validateDocumentReferences(
+  document: {
+    assets: Array<{ id: string; kind: string }>;
+    root: FrameNode;
+    warnings?: Array<{ code: string; message: string; feature?: string | undefined; nodeId?: string | undefined }> | undefined;
+  },
+  ctx: z.RefinementCtx,
+): void {
   const assetById = new Map<string, (typeof document.assets)[number]>();
 
   document.assets.forEach((asset, index) => {
@@ -115,10 +131,32 @@ export const DesignDocumentSchema = RawDesignDocumentSchema.superRefine((documen
       });
     }
   });
-});
+}
 
-export type DesignDocument = z.infer<typeof DesignDocumentSchema>;
+export const DesignDocumentV01Schema = RawDesignDocumentV01Schema.superRefine(validateDocumentReferences);
+export const DesignDocumentV02Schema = RawDesignDocumentV02Schema.superRefine(validateDocumentReferences);
+
+export const DesignDocumentSchema = DesignDocumentV02Schema;
+
+export type DesignDocumentV01 = z.infer<typeof DesignDocumentV01Schema>;
+export type DesignDocumentV02 = z.infer<typeof DesignDocumentV02Schema>;
+
+export type VersionedDesignDocument = DesignDocumentV01 | DesignDocumentV02;
+export type LatestDesignDocument = DesignDocumentV02;
+export type DesignDocument = DesignDocumentV02;
+
 export type CaptureMetadata = z.infer<typeof CaptureMetadataSchema>;
 export type ViewportMetadata = z.infer<typeof ViewportMetadataSchema>;
 export type DesignWarning = z.infer<typeof WarningSchema>;
 
+export function normalizeDesignDocument(document: VersionedDesignDocument): DesignDocumentV02 {
+  if (document.schemaVersion === "0.2") {
+    return document as DesignDocumentV02;
+  }
+  return {
+    ...document,
+    schemaVersion: "0.2",
+  };
+}
+
+export const upgradeDesignDocumentToLatest = normalizeDesignDocument;

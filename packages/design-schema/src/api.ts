@@ -1,5 +1,9 @@
-import { DesignDocumentSchema } from "./document.js";
-import type { DesignDocument } from "./document.js";
+import {
+  DesignDocumentV01Schema,
+  DesignDocumentV02Schema,
+  type VersionedDesignDocument,
+} from "./document.js";
+import { isSupportedSchemaVersion, SUPPORTED_SCHEMA_VERSIONS } from "./version.js";
 
 export interface ValidationIssue {
   path: Array<string | number>;
@@ -8,7 +12,7 @@ export interface ValidationIssue {
 }
 
 export type SafeParseDesignDocumentResult =
-  | { success: true; data: DesignDocument }
+  | { success: true; data: VersionedDesignDocument }
   | { success: false; issues: ValidationIssue[] };
 
 export class DesignDocumentValidationError extends Error {
@@ -18,7 +22,7 @@ export class DesignDocumentValidationError extends Error {
   }
 }
 
-export function parseDesignDocument(input: unknown): DesignDocument {
+export function parseDesignDocument(input: unknown): VersionedDesignDocument {
   const result = safeParseDesignDocument(input);
   if (!result.success) {
     throw new DesignDocumentValidationError(result.issues);
@@ -27,7 +31,29 @@ export function parseDesignDocument(input: unknown): DesignDocument {
 }
 
 export function safeParseDesignDocument(input: unknown): SafeParseDesignDocumentResult {
-  const result = DesignDocumentSchema.safeParse(input);
+  if (typeof input !== "object" || input === null) {
+    return {
+      success: false,
+      issues: [{ path: [], code: "invalid_type", message: "Expected document object" }],
+    };
+  }
+
+  const version = (input as { schemaVersion?: unknown }).schemaVersion;
+  if (!isSupportedSchemaVersion(version)) {
+    return {
+      success: false,
+      issues: [
+        {
+          path: ["schemaVersion"],
+          code: "invalid_value",
+          message: `Unsupported schema version: ${String(version)}. Supported versions: ${SUPPORTED_SCHEMA_VERSIONS.join(", ")}`,
+        },
+      ],
+    };
+  }
+
+  const schema = version === "0.1" ? DesignDocumentV01Schema : DesignDocumentV02Schema;
+  const result = schema.safeParse(input);
 
   if (result.success) {
     return { success: true, data: result.data };
@@ -42,4 +68,3 @@ export function safeParseDesignDocument(input: unknown): SafeParseDesignDocument
     })),
   };
 }
-

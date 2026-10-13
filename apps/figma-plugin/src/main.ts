@@ -1,11 +1,11 @@
-import { safeParseDesignDocument, type DesignDocument } from "@web2design/design-schema";
+import { safeParseDesignDocument, type VersionedDesignDocument } from "@web2design/design-schema";
 import { renderDesignDocument, type FigmaRendererHost } from "@web2design/figma-renderer";
 import { createFigmaHost } from "./host.js";
 import type { PluginToUiMessage, UiToPluginMessage } from "./messages.js";
 import { computeDocumentSummary } from "./summary.js";
 
 export interface SessionState {
-  currentValidatedDoc: DesignDocument | null;
+  currentValidatedDoc: VersionedDesignDocument | null;
   isImporting: boolean;
 }
 

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web2Design fidelity gradients</title>
+<style>
+  body {
+    margin: 0;
+    padding: 16px;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    gap: 16px;
+  }
+  .box {
+    width: 100px;
+    height: 60px;
+    box-sizing: border-box;
+  }
+
+  /* 1. Default linear gradient (to bottom = 180deg) */
+  #linear-default {
+    background-image: linear-gradient(rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 2. Linear to right (90deg) */
+  #linear-to-right {
+    background-image: linear-gradient(to right, rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 3. Linear to bottom right (135deg on 1:1, or diagonal) */
+  #linear-to-bottom-right {
+    background-image: linear-gradient(to bottom right, rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 4. Linear 45deg */
+  #linear-45deg {
+    background-image: linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 5. Linear -45deg (normalized to 315deg) */
+  #linear-neg-45deg {
+    background-image: linear-gradient(-45deg, rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 6. Three-stop gradient */
+  #linear-three-stop {
+    background-image: linear-gradient(to bottom, rgb(255, 0, 0) 0%, rgb(0, 255, 0) 50%, rgb(0, 0, 255) 100%);
+  }
+
+  /* 7. Alpha gradient */
+  #linear-alpha {
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), rgba(0, 0, 255, 0.25));
+  }
+
+  /* 8. Implicit stop positions */
+  #linear-implicit-stops {
+    background-image: linear-gradient(to right, rgb(255, 0, 0), rgb(0, 255, 0), rgb(0, 0, 255));
+  }
+
+  /* 9. Hard stops */
+  #linear-hard-stop {
+    background-image: linear-gradient(to right, rgb(255, 0, 0) 0%, rgb(255, 0, 0) 50%, rgb(0, 0, 255) 50%, rgb(0, 0, 255) 100%);
+  }
+
+  /* 10. Radial default */
+  #radial-default {
+    background-image: radial-gradient(rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 11. Radial circle */
+  #radial-circle {
+    background-image: radial-gradient(circle, rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 12. Radial ellipse */
+  #radial-ellipse {
+    background-image: radial-gradient(ellipse, rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 13. Radial offset center */
+  #radial-offset-center {
+    background-image: radial-gradient(at 25% 75%, rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 14. Gradient over solid background */
+  #gradient-over-solid {
+    background-color: rgb(34, 34, 34);
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), rgba(0, 0, 255, 0.5));
+  }
+
+  /* 15. Pseudo-element linear gradient */
+  #pseudo-gradient {
+    position: relative;
+    background-color: #f3f4f6;
+  }
+  #pseudo-gradient::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 40px;
+    height: 40px;
+    background-image: linear-gradient(90deg, rgb(255, 0, 0), rgb(0, 255, 0));
+  }
+
+  /* 16. Unsupported repeating gradient */
+  #unsupported-repeating {
+    background-image: repeating-linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 0, 255) 20px);
+  }
+
+  /* 17. Unsupported conic gradient */
+  #unsupported-conic {
+    background-image: conic-gradient(rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+
+  /* 18. Unsupported/approximated color hint */
+  #approximated-hint {
+    background-image: linear-gradient(to right, rgb(255, 0, 0) 10%, 30%, rgb(0, 0, 255) 90%);
+  }
+
+  /* 19. Non-gradient url(...) remains unsupported */
+  #unsupported-url {
+    background-image: url("dot.png");
+  }
+
+  /* 20. Rectangular 45deg gradient geometry */
+  #rectangular-45deg {
+    width: 300px;
+    height: 100px;
+    background-image: linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 0, 255));
+  }
+</style>
+</head>
+<body>
+  <h1>Web2Design Gradient Fidelity Test</h1>
+  <div class="grid">
+    <div id="linear-default" class="box"></div>
+    <div id="linear-to-right" class="box"></div>
+    <div id="linear-to-bottom-right" class="box"></div>
+    <div id="linear-45deg" class="box"></div>
+    <div id="linear-neg-45deg" class="box"></div>
+    <div id="linear-three-stop" class="box"></div>
+    <div id="linear-alpha" class="box"></div>
+    <div id="linear-implicit-stops" class="box"></div>
+    <div id="linear-hard-stop" class="box"></div>
+    <div id="radial-default" class="box"></div>
+    <div id="radial-circle" class="box"></div>
+    <div id="radial-ellipse" class="box"></div>
+    <div id="radial-offset-center" class="box"></div>
+    <div id="gradient-over-solid" class="box"></div>
+    <div id="pseudo-gradient" class="box"></div>
+    <div id="unsupported-repeating" class="box"></div>
+    <div id="unsupported-conic" class="box"></div>
+    <div id="approximated-hint" class="box"></div>
+    <div id="unsupported-url" class="box"></div>
+  </div>
+  <div style="margin-top: 16px;">
+    <div id="rectangular-45deg"></div>
+  </div>
+</body>
+</html>

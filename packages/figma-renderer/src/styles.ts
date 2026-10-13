@@ -22,6 +22,7 @@ export function applyVisualStyle(
   localOpacity: number,
   warnings: WarningCollector,
   nodeId: string,
+  bounds: { width: number; height: number } = { width: 100, height: 100 },
 ): void {
   // 1. Local opacity
   node.opacity = Math.max(0, Math.min(1, localOpacity));
@@ -35,7 +36,7 @@ export function applyVisualStyle(
   }
 
   // 2. Fills
-  node.fills = toFigmaFills(style.fills);
+  node.fills = toFigmaFills(style.fills, bounds);
 
   // 3. Borders
   if (style.border && style.border.width > 0 && style.border.style !== "none") {

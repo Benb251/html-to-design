@@ -16,6 +16,45 @@ export const SolidFillSchema = z.strictObject({
 
 export type SolidFill = z.infer<typeof SolidFillSchema>;
 
+export const GradientStopSchema = z.strictObject({
+  position: z.number().min(0).max(1),
+  color: ColorSchema,
+});
+
+export type GradientStop = z.infer<typeof GradientStopSchema>;
+
+export const LinearGradientFillSchema = z.strictObject({
+  type: z.literal("linear-gradient"),
+  angle: z.number().min(0).max(360),
+  stops: z.array(GradientStopSchema).min(2),
+});
+
+export type LinearGradientFill = z.infer<typeof LinearGradientFillSchema>;
+
+export const RadialGradientFillSchema = z.strictObject({
+  type: z.literal("radial-gradient"),
+  center: z.strictObject({
+    x: z.number().min(0).max(1),
+    y: z.number().min(0).max(1),
+  }),
+  radius: z.strictObject({
+    x: z.number().nonnegative(),
+    y: z.number().nonnegative(),
+  }),
+  stops: z.array(GradientStopSchema).min(2),
+  shape: z.enum(["circle", "ellipse"]).optional(),
+});
+
+export type RadialGradientFill = z.infer<typeof RadialGradientFillSchema>;
+
+export const FillSchema = z.discriminatedUnion("type", [
+  SolidFillSchema,
+  LinearGradientFillSchema,
+  RadialGradientFillSchema,
+]);
+
+export type Fill = z.infer<typeof FillSchema>;
+
 export const BorderSchema = z.strictObject({
   width: z.number().nonnegative(),
   style: z.enum(["none", "solid", "dashed", "dotted", "double"]),
@@ -49,14 +88,26 @@ export const BoxShadowSchema = z.strictObject({
 
 export type BoxShadow = z.infer<typeof BoxShadowSchema>;
 
-export const VisualStyleSchema = z.strictObject({
+export const VisualStyleSchemaV01 = z.strictObject({
   fills: z.array(SolidFillSchema).optional(),
   border: BorderSchema.optional(),
   cornerRadius: CornerRadiusSchema.optional(),
   boxShadows: z.array(BoxShadowSchema).optional(),
 });
 
-export type VisualStyle = z.infer<typeof VisualStyleSchema>;
+export type VisualStyleV01 = z.infer<typeof VisualStyleSchemaV01>;
+
+export const VisualStyleSchemaV02 = z.strictObject({
+  fills: z.array(FillSchema).optional(),
+  border: BorderSchema.optional(),
+  cornerRadius: CornerRadiusSchema.optional(),
+  boxShadows: z.array(BoxShadowSchema).optional(),
+});
+
+export type VisualStyleV02 = z.infer<typeof VisualStyleSchemaV02>;
+
+export const VisualStyleSchema = VisualStyleSchemaV02;
+export type VisualStyle = VisualStyleV02;
 
 export const TextStyleSchema = z.strictObject({
   fontFamily: z.string().min(1),
@@ -71,4 +122,3 @@ export const TextStyleSchema = z.strictObject({
 });
 
 export type TextStyle = z.infer<typeof TextStyleSchema>;
-

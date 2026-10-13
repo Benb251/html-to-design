@@ -11,7 +11,8 @@ import type {
 } from "./types.js";
 
 function round4(val: number): number {
-  return Math.round(val * 10000) / 10000;
+  const rounded = Math.round(val * 10000) / 10000;
+  return Object.is(rounded, -0) ? 0 : rounded;
 }
 
 export function normalizeRenderedTree(
@@ -81,6 +82,33 @@ function normalizeNode(
             scaleMode: paint.scaleMode,
             imageHash: paint.imageHash ?? undefined,
           };
+        } else if (paint.type === "GRADIENT_LINEAR" || paint.type === "GRADIENT_RADIAL") {
+          fills.push({
+            type: paint.type,
+            gradientStops: paint.gradientStops?.map((s) => ({
+              position: round4(s.position),
+              color: {
+                r: round4(s.color.r),
+                g: round4(s.color.g),
+                b: round4(s.color.b),
+                a: round4(s.color.a),
+              },
+            })),
+            gradientTransform: paint.gradientTransform
+              ? [
+                  [
+                    round4(paint.gradientTransform[0][0]),
+                    round4(paint.gradientTransform[0][1]),
+                    round4(paint.gradientTransform[0][2]),
+                  ],
+                  [
+                    round4(paint.gradientTransform[1][0]),
+                    round4(paint.gradientTransform[1][1]),
+                    round4(paint.gradientTransform[1][2]),
+                  ],
+                ]
+              : undefined,
+          });
         }
       }
     }

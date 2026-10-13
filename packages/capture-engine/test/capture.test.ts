@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { JSDOM } from "jsdom";
-import { safeParseDesignDocument, type DesignNode, type TextNode } from "@web2design/design-schema";
+import { safeParseDesignDocument, type DesignNode, type SolidFill, type TextNode } from "@web2design/design-schema";
 import { captureDocument, captureFilename, captureId, characters, countNodes, cssColor, cssPixels, documentRect, fontFamilies, renderDecision, serializeCapture, textStyle, visualStyle } from "../src/index.js";
 const at = "2026-10-13T07:00:00.000Z";
 function rendered(body = '<main><h1>Hello</h1><p>World <strong>bold</strong></p><button>Capture</button></main>', scroll = 0) {
@@ -58,10 +58,10 @@ describe("normalization", () => {
     element.style.border = "2px solid rgb(68, 85, 102)";
     element.style.borderTopLeftRadius = element.style.borderTopRightRadius = element.style.borderBottomRightRadius = element.style.borderBottomLeftRadius = "12px";
     const result = visualStyle(window.getComputedStyle(element), vi.fn());
-    expect(result.cornerRadius).toBe(12); expect(result.border?.width).toBe(2); expect(result.fills?.[0]?.color.b).toBe(86 / 255);
+    expect(result.cornerRadius).toBe(12); expect(result.border?.width).toBe(2); expect((result.fills?.[0] as SolidFill)?.color.b).toBe(86 / 255);
   });
-  it("warns and omits nonuniform borders and background images", () => {
-    const { document, window } = rendered('<div style="border-top:1px solid black;background-image:linear-gradient(red,blue)"></div>');
+  it("warns and omits nonuniform borders and non-gradient background images", () => {
+    const { document, window } = rendered('<div style="border-top:1px solid black;background-image:url(https://example.com/bg.png)"></div>');
     const warn = vi.fn(), result = visualStyle(window.getComputedStyle(document.querySelector("div")!), warn);
     expect(result.border).toBeUndefined(); expect(warn).toHaveBeenCalledWith("BORDER_UNSUPPORTED", expect.any(String)); expect(warn).toHaveBeenCalledWith("BACKGROUND_IMAGE_UNSUPPORTED", expect.any(String));
   });
@@ -154,7 +154,7 @@ describe("rendered traversal", () => {
 describe("export", () => {
   it("roundtrips pretty JSON through real validation and node counting", () => {
     const value = captureDocument(rendered().document, { capturedAt: at }), json = serializeCapture(value);
-    expect(json).toContain('\n  "schemaVersion": "0.1"'); expect(safeParseDesignDocument(JSON.parse(json)).success).toBe(true); expect(countNodes(value.root)).toBe(nodes(value.root).length);
+    expect(json).toContain('\n  "schemaVersion": "0.2"'); expect(safeParseDesignDocument(JSON.parse(json)).success).toBe(true); expect(countNodes(value.root)).toBe(nodes(value.root).length);
   });
   it("rejects unknown fields rather than weakening schema validation", () => {
     const value = captureDocument(rendered().document); expect(() => serializeCapture({ ...value, rawDom: {} })).toThrow();

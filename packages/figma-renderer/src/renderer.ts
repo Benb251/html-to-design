@@ -1,8 +1,9 @@
 /// <reference types="@figma/plugin-typings" />
-import type {
-  DesignDocument,
-  DesignNode,
-  FrameNode as SchemaFrameNode,
+import {
+  normalizeDesignDocument,
+  type DesignNode,
+  type FrameNode as SchemaFrameNode,
+  type VersionedDesignDocument,
 } from "@web2design/design-schema";
 import { toFigmaSolidPaint } from "./colors.js";
 import { FontManager } from "./fonts.js";
@@ -46,10 +47,11 @@ function tagPluginData(figmaNode: SceneNode, schemaNode: DesignNode): void {
 }
 
 export async function renderDesignDocument(
-  document: DesignDocument,
+  rawDocument: VersionedDesignDocument,
   host: FigmaRendererHost,
   options?: RenderOptions,
 ): Promise<RenderResult> {
+  const document = normalizeDesignDocument(rawDocument);
   const warnings = new WarningCollector();
   const fontManager = new FontManager(host, options?.defaultFont);
   await fontManager.init();
@@ -76,9 +78,12 @@ export async function renderDesignDocument(
   rootFrame.x = placement.x;
   rootFrame.y = placement.y;
 
-  applyVisualStyle(rootFrame, rootSchema.style, rootSchema.opacity, warnings, rootSchema.id);
+  applyVisualStyle(rootFrame, rootSchema.style, rootSchema.opacity, warnings, rootSchema.id, {
+    width: rootSchema.width,
+    height: rootSchema.height,
+  });
   tagPluginData(rootFrame, rootSchema);
-  rootFrame.setPluginData("web2design:schemaVersion", document.schemaVersion);
+  rootFrame.setPluginData("web2design:schemaVersion", rawDocument.schemaVersion);
 
   createdNodeCount++;
 
@@ -107,6 +112,7 @@ export async function renderDesignDocument(
                 childSchema.opacity,
                 warnings,
                 childSchema.id,
+                { width: childSchema.width, height: childSchema.height },
               );
               tagPluginData(frame, childSchema);
 
@@ -131,6 +137,7 @@ export async function renderDesignDocument(
                 childSchema.opacity,
                 warnings,
                 childSchema.id,
+                { width: childSchema.width, height: childSchema.height },
               );
               tagPluginData(rect, childSchema);
 

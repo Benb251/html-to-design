@@ -1555,6 +1555,57 @@
           },
           "children": [
             {
+              "figmaType": "RECTANGLE",
+              "name": "::before",
+              "x": 9,
+              "y": 9,
+              "width": 20,
+              "height": 20,
+              "absoluteX": 29,
+              "absoluteY": 970,
+              "opacity": 1,
+              "sourceId": "w2d-element-29::before",
+              "sourceType": "rectangle",
+              "sourceTag": "::before",
+              "fills": [
+                {
+                  "type": "GRADIENT_LINEAR",
+                  "gradientStops": [
+                    {
+                      "position": 0,
+                      "color": {
+                        "r": 0.9569,
+                        "g": 0.2471,
+                        "b": 0.3686,
+                        "a": 1
+                      }
+                    },
+                    {
+                      "position": 1,
+                      "color": {
+                        "r": 0.2314,
+                        "g": 0.5098,
+                        "b": 0.9647,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "gradientTransform": [
+                    [
+                      1,
+                      -1,
+                      0
+                    ],
+                    [
+                      1,
+                      1,
+                      0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
               "figmaType": "TEXT",
               "name": "Text",
               "x": 37,

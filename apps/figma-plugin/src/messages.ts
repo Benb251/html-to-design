@@ -1,4 +1,4 @@
-import type { DesignDocument, ValidationIssue } from "@web2design/design-schema";
+import type { ValidationIssue, VersionedDesignDocument } from "@web2design/design-schema";
 import type { RenderResult } from "@web2design/figma-renderer";
 
 export interface DocumentSummary {
@@ -58,7 +58,7 @@ export type PluginToUiMessage =
   | {
       type: "validation-success";
       summary: DocumentSummary;
-      document: DesignDocument;
+      document: VersionedDesignDocument;
     }
   | {
       type: "validation-error";
