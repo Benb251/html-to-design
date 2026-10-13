@@ -1,0 +1,555 @@
+{
+  "siteId": "image-01-picsum",
+  "category": "E — Image-heavy page",
+  "label": "Lorem Picsum Photo Showcase",
+  "url": "https://picsum.photos",
+  "timestamp": "2026-10-13T15:41:01.910Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "Lorem Picsum",
+    "url": "https://picsum.photos",
+    "documentWidth": 1425,
+    "documentHeight": 5705
+  },
+  "metrics": {
+    "totalNodes": 159,
+    "nodeCounts": {
+      "frame": 57,
+      "text": 94,
+      "rectangle": 0,
+      "image": 8,
+      "svg": 0
+    },
+    "assetCount": 8,
+    "captureWarningsCount": 4,
+    "captureDurationMs": 31,
+    "jsonSizeBytes": 65187
+  },
+  "captureWarnings": [
+    {
+      "code": "SHADOW_UNSUPPORTED",
+      "message": "Multiple, inset or malformed box shadows are omitted; only one outer shadow is supported.",
+      "feature": "shadow_unsupported",
+      "nodeId": "w2d-element-1-1-3-1"
+    },
+    {
+      "code": "TEXT_RANGE_APPROXIMATED",
+      "message": "Wrapped/bidirectional text uses one axis-aligned union box per DOM text run; line fragments are not reconstructed.",
+      "feature": "text_range_approximated",
+      "nodeId": "w2d-text-3-1-3-3-0"
+    },
+    {
+      "code": "PAINT_ORDER_UNSUPPORTED",
+      "message": "Explicit z-index/flex order may differ from captured DOM child order; stacking contexts are not reconstructed.",
+      "feature": "paint_order_unsupported",
+      "nodeId": "w2d-element-7-1"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-1-1-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-1-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Work Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-1-1-5-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-1-3-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-3-1-3-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-3-1-3-5-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-3-1-3-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-3-1-3-9-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-1-1-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-1-1-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-1-1-5-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-1-1-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-1-1-7-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-5-1-3-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-7-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-7-1-1-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-7-1-1-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-7-1-1-5-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-7-1-3-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-9-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-9-1-1-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-9-1-1-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-9-1-1-5-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-9-1-3-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-5-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-7-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-7-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-7-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-11-1-1-9-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-11-1-3-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-7-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-9-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-11-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-13-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-13-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-15-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-17-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-17-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-17-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-13-1-1-19-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-13-1-3-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-5-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-9-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-11-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-11-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-13-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-15-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-1-15-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-15-1-3-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-3-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-3-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-5-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-5-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-7-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-7-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-7-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'SFMono-Regular' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-3-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-19-1-1-1-1-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-3-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-5-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-19-1-1-11-0-0"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "Lorem Picsum",
+    "docWidth": 1425,
+    "docHeight": 5705,
+    "elementCount": 182,
+    "grids": 0,
+    "flexes": 10,
+    "fixedSticky": 0,
+    "gradients": 0,
+    "transforms": 0,
+    "clipping": 8,
+    "pseudoIcons": 0,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "C",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 159,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 94,
+    "renderDurationMs": 0,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}

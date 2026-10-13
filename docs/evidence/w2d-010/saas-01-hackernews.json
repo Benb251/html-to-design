@@ -1,0 +1,2505 @@
+{
+  "siteId": "saas-01-hackernews",
+  "category": "C — SaaS / application-style",
+  "label": "Hacker News Dense List",
+  "url": "https://news.ycombinator.com",
+  "timestamp": "2026-10-13T15:40:48.975Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "Hacker News",
+    "url": "https://news.ycombinator.com",
+    "documentWidth": 1425,
+    "documentHeight": 1249
+  },
+  "metrics": {
+    "totalNodes": 489,
+    "nodeCounts": {
+      "frame": 4,
+      "text": 482,
+      "rectangle": 2,
+      "image": 1,
+      "svg": 0
+    },
+    "assetCount": 1,
+    "captureWarningsCount": 5,
+    "captureDurationMs": 67,
+    "jsonSizeBytes": 235466
+  },
+  "captureWarnings": [
+    {
+      "code": "LINE_HEIGHT_APPROXIMATED",
+      "message": "Computed normal/unresolved line height uses 1.2 times font size.",
+      "feature": "line_height_approximated",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "BACKGROUND_IMAGE_UNSUPPORTED",
+      "message": "Background images/gradients are not captured.",
+      "feature": "background_image_unsupported"
+    },
+    {
+      "code": "FORM_VALUE_UNSUPPORTED",
+      "message": "Live form values (including passwords) are not captured.",
+      "feature": "form_value_unsupported",
+      "nodeId": "w2d-element-0-0-0-3-0-7-4-1"
+    },
+    {
+      "code": "BORDER_UNSUPPORTED",
+      "message": "Nonuniform or unsupported borders were omitted.",
+      "feature": "border_unsupported",
+      "nodeId": "w2d-element-0-0-0-3-0-7-4-1"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-0-0-0-0-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-12"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-1-0-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-0-0-0-0-0-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-0-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-0-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-0-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-0-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-1-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-3-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-3-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-3-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-3-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-3-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-4-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-6-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-6-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-6-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-6-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-6-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-7-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-9-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-9-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-9-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-9-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-9-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-10-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-12-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-12-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-12-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-12-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-12-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-13-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-15-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-15-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-15-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-15-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-15-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-16-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-18-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-18-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-18-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-18-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-18-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-19-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-21-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-21-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-21-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-21-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-21-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-22-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-24-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-24-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-24-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-24-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-24-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-25-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-27-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-27-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-27-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-27-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-27-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-28-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-30-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-30-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-30-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-30-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-30-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-31-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-33-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-33-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-33-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-33-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-33-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-34-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-36-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-36-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-36-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-36-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-36-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-37-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-39-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-39-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-39-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-39-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-39-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-40-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-42-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-42-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-42-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-42-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-42-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-43-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-45-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-45-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-45-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-45-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-45-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-46-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-48-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-48-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-48-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-48-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-48-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-49-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-51-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-51-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-51-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-51-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-51-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-52-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-54-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-54-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-54-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-54-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-54-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-55-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-57-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-57-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-57-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-57-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-57-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-58-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-60-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-60-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-60-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-60-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-60-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-61-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-63-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-63-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-63-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-63-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-63-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-64-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-66-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-66-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-66-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-66-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-66-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-67-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-69-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-69-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-69-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-69-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-69-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-70-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-72-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-72-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-72-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-72-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-72-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-73-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-75-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-75-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-75-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-75-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-75-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-76-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-78-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-78-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-78-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-78-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-78-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-79-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-81-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-81-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-81-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-81-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-81-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-82-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-84-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-84-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-84-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-84-2-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-84-2-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-85-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-87-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-87-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-88-1-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-2-0-0-0-91-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-4-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-4-0-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-11"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-13"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-0-14-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Verdana' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-0-0-0-3-0-7-4-0"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "Hacker News",
+    "docWidth": 1425,
+    "docHeight": 1249,
+    "elementCount": 818,
+    "grids": 0,
+    "flexes": 0,
+    "fixedSticky": 0,
+    "gradients": 30,
+    "transforms": 0,
+    "clipping": 64,
+    "pseudoIcons": 0,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "C",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 489,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 483,
+    "renderDurationMs": 2,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}

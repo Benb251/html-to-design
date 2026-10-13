@@ -1,0 +1,3609 @@
+{
+  "siteId": "framework-01-react",
+  "category": "G — Responsive framework page",
+  "label": "React Official Documentation",
+  "url": "https://react.dev",
+  "timestamp": "2026-10-13T15:41:09.077Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "React",
+    "url": "https://react.dev",
+    "documentWidth": 1425,
+    "documentHeight": 8857
+  },
+  "metrics": {
+    "totalNodes": 1136,
+    "nodeCounts": {
+      "frame": 297,
+      "text": 693,
+      "rectangle": 9,
+      "image": 24,
+      "svg": 113
+    },
+    "assetCount": 53,
+    "captureWarningsCount": 11,
+    "captureDurationMs": 238,
+    "jsonSizeBytes": 763932
+  },
+  "captureWarnings": [
+    {
+      "code": "POSITION_CONTEXT_UNSUPPORTED",
+      "message": "Fixed/sticky elements are omitted to avoid scroll-dependent document coordinates.",
+      "feature": "position_context_unsupported"
+    },
+    {
+      "code": "SHADOW_UNSUPPORTED",
+      "message": "Multiple, inset or malformed box shadows are omitted; only one outer shadow is supported.",
+      "feature": "shadow_unsupported",
+      "nodeId": "w2d-element-31-2-1-0-0-0-4-1"
+    },
+    {
+      "code": "BACKGROUND_IMAGE_UNSUPPORTED",
+      "message": "Background images/gradients are not captured.",
+      "feature": "background_image_unsupported"
+    },
+    {
+      "code": "BORDER_UNSUPPORTED",
+      "message": "Nonuniform or unsupported borders were omitted.",
+      "feature": "border_unsupported"
+    },
+    {
+      "code": "TEXT_RANGE_APPROXIMATED",
+      "message": "Wrapped/bidirectional text uses one axis-aligned union box per DOM text run; line fragments are not reconstructed.",
+      "feature": "text_range_approximated",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-0-0"
+    },
+    {
+      "code": "FILTER_UNSUPPORTED",
+      "message": "Filters are not captured.",
+      "feature": "filter_unsupported",
+      "nodeId": "w2d-element-31-2-1-0-0-1-0-1-0-0-0-1-0-0-0-0-0"
+    },
+    {
+      "code": "PAINT_ORDER_UNSUPPORTED",
+      "message": "Explicit z-index/flex order may differ from captured DOM child order; stacking contexts are not reconstructed.",
+      "feature": "paint_order_unsupported",
+      "nodeId": "w2d-element-31-2-1-0-0-3-0-1-0-0-0-1-0-0"
+    },
+    {
+      "code": "FORM_VALUE_UNSUPPORTED",
+      "message": "Live form values (including passwords) are not captured.",
+      "feature": "form_value_unsupported",
+      "nodeId": "w2d-element-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-0-1-1"
+    },
+    {
+      "code": "TEXT_TRANSFORM_UNSUPPORTED",
+      "message": "Text uses original characters; CSS text-transform is not applied.",
+      "feature": "text_transform_unsupported",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-0-0-0-0"
+    },
+    {
+      "code": "TRANSFORM_APPROXIMATED",
+      "message": "Browser-rendered axis-aligned boxes are captured; rotation/skew/scale semantics are not preserved.",
+      "feature": "transform_approximated",
+      "nodeId": "w2d-element-31-2-1-0-0-7-0-0-1-0"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (1.11); scaled to captured dimensions",
+      "nodeId": "w2d-element-31-2-1-0-0-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-0-1-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-2-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-2-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-3-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-4-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-5-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-6-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-7-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-7-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-8-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-9-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-9-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-10-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-10-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-0-2-0-0-0-0-0-11-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-1-0-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-1-0-0-0-1-0-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-1-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-0-1-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-13"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-0-14-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-1-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-2-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-2-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-2-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-2-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-2-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-3-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-4-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-5-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-6-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-7-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-7-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-8-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-8-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-9-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-10-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-11"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-13"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-14-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-16-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-17"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-11-18-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-12-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-12-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-13-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-13-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-13-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-14-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-14-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-14-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-0-2-0-0-0-0-0-15-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-1-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-1-0-0-0-0-1-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-1-0-0-0-0-1-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-1-0-0-0-0-1-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-1-0-0-0-0-1-1-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-1-0-0-0-0-1-2-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-1-0-0-0-1-0-0-0-0-1-2-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-2-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-2-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-3-14-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-4-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-5-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-5-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-5-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-6-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-6-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-7-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-8-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-8-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-8-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-8-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-13"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-9-14-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-10-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-10-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-11-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-11-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-11-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-11-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-11-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-12-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-13-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-13-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-14-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-14-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-14-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-0-2-0-0-0-0-0-15-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-0-0-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-0-0-0-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-0-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (0.94); scaled to captured dimensions",
+      "nodeId": "w2d-element-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-1-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-2-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-2-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-3-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-3-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-4-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-1-0-0-0-1-0-1-0-0-2-0-1-1-4-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-3-0-2-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-0-0-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-0-1-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-0-1-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-0-1-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-1-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-12"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-3-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-14"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-16"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-17-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-18-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-4-19-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-5-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-5-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-5-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-6-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-7-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-11"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-8-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-9-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-9-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-10-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-10-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-10-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-11-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-11-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-12-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-9"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-12"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-14-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-14"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-16"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-17-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-18-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-15-19-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-12"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-14"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-16-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-16-17-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-5"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-11"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-17-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-0-2-0-0-0-0-0-18-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-0-0-1-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-0-0-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-0-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (0.94); scaled to captured dimensions",
+      "nodeId": "w2d-element-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-0-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-1-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-1-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-2-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-2-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-2-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-3-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-3-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-3-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-4-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-4-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-4-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-5-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-5-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-5-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-6-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-6-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-6-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-7-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-7-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-7-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-8-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-8-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-8-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-9-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-9-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-9-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-10-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-10-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-10-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-11-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-11-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-11-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-12-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-12-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-12-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-13-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-13-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-13-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-14-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-14-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-14-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-15-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-15-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-15-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-16-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-16-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-16-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-17-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-17-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-17-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-18-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-18-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-1-0-0-0-1-0-1-0-0-1-0-1-0-1-1-1-18-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-4-0-2-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-0-1-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-0-1-1-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-0-1-1-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-12"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-14"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-1-1-1-0-0-1-1-16"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-2-0-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-5-0-0-2-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-0-2-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-1-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-1-0-0-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-1-1-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-1-1-0-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-1-2-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-1-2-0-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-1-3-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-6-0-0-0-1-1-3-0-0-1-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-7-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-7-0-0-0-0-0-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-7-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-7-0-0-2-0-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (1.11); scaled to captured dimensions",
+      "nodeId": "w2d-element-31-2-1-0-0-7-0-1-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-7-0-1-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Display' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-7-0-1-2-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-0-0-7-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-1-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-1-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-1-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-1-5-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-1-6-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-2-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-2-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-3-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-3-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-3-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-3-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-3-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-4-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-4-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-4-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Optimistic Text' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-31-2-1-1-0-0-0-4-4-0-0"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "React",
+    "docWidth": 1425,
+    "docHeight": 8857,
+    "elementCount": 1846,
+    "grids": 1,
+    "flexes": 346,
+    "fixedSticky": 1,
+    "gradients": 38,
+    "transforms": 87,
+    "clipping": 199,
+    "pseudoIcons": 0,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "C",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 1136,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 697,
+    "renderDurationMs": 14,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}

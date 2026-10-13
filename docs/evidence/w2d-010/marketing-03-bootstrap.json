@@ -1,0 +1,127 @@
+{
+  "siteId": "marketing-03-bootstrap",
+  "category": "A — Simple marketing / landing",
+  "label": "Bootstrap Framework Landing",
+  "url": "https://getbootstrap.com",
+  "timestamp": "2026-10-13T15:40:39.239Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "Bootstrap · The most popular HTML, CSS, and JS library in the world.",
+    "url": "https://getbootstrap.com",
+    "documentWidth": 1425,
+    "documentHeight": 1125
+  },
+  "metrics": {
+    "totalNodes": 79,
+    "nodeCounts": {
+      "frame": 24,
+      "text": 48,
+      "rectangle": 0,
+      "image": 1,
+      "svg": 6
+    },
+    "assetCount": 7,
+    "captureWarningsCount": 8,
+    "captureDurationMs": 36,
+    "jsonSizeBytes": 41678
+  },
+  "captureWarnings": [
+    {
+      "code": "BACKGROUND_COLOR_UNSUPPORTED",
+      "message": "Unsupported background color was omitted.",
+      "feature": "background_color_unsupported",
+      "nodeId": "w2d-element-body"
+    },
+    {
+      "code": "POSITION_CONTEXT_UNSUPPORTED",
+      "message": "Fixed/sticky elements are omitted to avoid scroll-dependent document coordinates.",
+      "feature": "position_context_unsupported"
+    },
+    {
+      "code": "BACKGROUND_IMAGE_UNSUPPORTED",
+      "message": "Background images/gradients are not captured.",
+      "feature": "background_image_unsupported"
+    },
+    {
+      "code": "BORDER_UNSUPPORTED",
+      "message": "Nonuniform or unsupported borders were omitted.",
+      "feature": "border_unsupported",
+      "nodeId": "w2d-element-1-0-0-0"
+    },
+    {
+      "code": "TEXT_COLOR_APPROXIMATED",
+      "message": "Unsupported computed text color uses opaque black.",
+      "feature": "text_color_approximated",
+      "nodeId": "w2d-text-1-0-0-0-0"
+    },
+    {
+      "code": "TEXT_RANGE_APPROXIMATED",
+      "message": "Wrapped/bidirectional text uses one axis-aligned union box per DOM text run; line fragments are not reconstructed.",
+      "feature": "text_range_approximated",
+      "nodeId": "w2d-text-1-0-0-1-0-0"
+    },
+    {
+      "code": "SHADOW_UNSUPPORTED",
+      "message": "Multiple, inset or malformed box shadows are omitted; only one outer shadow is supported.",
+      "feature": "shadow_unsupported",
+      "nodeId": "w2d-element-1-0-0-2-3"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Geist Mono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-0-2-1-0-0-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-0-4-1-0-3-1-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-0-4-1-0-3-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-0-4-1-0-5-0"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "Bootstrap · The most popular HTML, CSS, and JS library in the world.",
+    "docWidth": 1425,
+    "docHeight": 1125,
+    "elementCount": 400,
+    "grids": 1,
+    "flexes": 71,
+    "fixedSticky": 1,
+    "gradients": 3,
+    "transforms": 0,
+    "clipping": 95,
+    "pseudoIcons": 0,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "B",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 79,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 4,
+    "renderDurationMs": 1,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}

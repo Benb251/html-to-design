@@ -1,0 +1,305 @@
+{
+  "siteId": "saas-02-httpbin",
+  "category": "C — SaaS / application-style",
+  "label": "Httpbin API Inspection Dashboard",
+  "url": "https://httpbin.org",
+  "timestamp": "2026-10-13T15:40:52.211Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "httpbin.org",
+    "url": "https://httpbin.org",
+    "documentWidth": 1425,
+    "documentHeight": 1256
+  },
+  "metrics": {
+    "totalNodes": 82,
+    "nodeCounts": {
+      "frame": 26,
+      "text": 43,
+      "rectangle": 1,
+      "image": 0,
+      "svg": 12
+    },
+    "assetCount": 2,
+    "captureWarningsCount": 5,
+    "captureDurationMs": 31,
+    "jsonSizeBytes": 35893
+  },
+  "captureWarnings": [
+    {
+      "code": "LINE_HEIGHT_APPROXIMATED",
+      "message": "Computed normal/unresolved line height uses 1.2 times font size.",
+      "feature": "line_height_approximated",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-0-1"
+    },
+    {
+      "code": "FORM_VALUE_UNSUPPORTED",
+      "message": "Live form values (including passwords) are not captured.",
+      "feature": "form_value_unsupported",
+      "nodeId": "w2d-element-5-0-1-2-0-0-1"
+    },
+    {
+      "code": "BACKGROUND_IMAGE_UNSUPPORTED",
+      "message": "Background images/gradients are not captured.",
+      "feature": "background_image_unsupported",
+      "nodeId": "w2d-element-5-0-1-2-0-0-1"
+    },
+    {
+      "code": "BORDER_UNSUPPORTED",
+      "message": "Nonuniform or unsupported borders were omitted.",
+      "feature": "border_unsupported"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-0-3-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-0-3-0-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-0-3-0-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-1-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-1-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-1-7"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-0-1-10"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-1-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Source Code Pro' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-1-0-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-2-0-0-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-2-0-0-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-1-0-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-2-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-1-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-1-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-2-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-2-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-3-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-3-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-4-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-4-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-5-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-5-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-6-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-6-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-7-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-7-0-1-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-8-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-8-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-9-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-9-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Titillium Web' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-10-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0-1-3-0-0-10-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-7-1-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-7-1-1-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-7-1-1-1-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-1-3-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'Open Sans' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-17-1-1-1-3-1-2"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "httpbin.org",
+    "docWidth": 1425,
+    "docHeight": 1256,
+    "elementCount": 222,
+    "grids": 0,
+    "flexes": 24,
+    "fixedSticky": 0,
+    "gradients": 0,
+    "transforms": 0,
+    "clipping": 29,
+    "pseudoIcons": 0,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "C",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 82,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 43,
+    "renderDurationMs": 0,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}

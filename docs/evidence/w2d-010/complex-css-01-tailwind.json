@@ -1,0 +1,2503 @@
+{
+  "siteId": "complex-css-01-tailwind",
+  "category": "H — Complex CSS page",
+  "label": "Tailwind CSS Modern Showcase",
+  "url": "https://tailwindcss.com",
+  "timestamp": "2026-10-13T15:41:12.501Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.",
+    "url": "https://tailwindcss.com",
+    "documentWidth": 1425,
+    "documentHeight": 10352
+  },
+  "metrics": {
+    "totalNodes": 867,
+    "nodeCounts": {
+      "frame": 239,
+      "text": 532,
+      "rectangle": 21,
+      "image": 19,
+      "svg": 56
+    },
+    "assetCount": 75,
+    "captureWarningsCount": 14,
+    "captureDurationMs": 226,
+    "jsonSizeBytes": 763059
+  },
+  "captureWarnings": [
+    {
+      "code": "POSITION_CONTEXT_UNSUPPORTED",
+      "message": "Fixed/sticky elements are omitted to avoid scroll-dependent document coordinates.",
+      "feature": "position_context_unsupported"
+    },
+    {
+      "code": "BACKGROUND_IMAGE_UNSUPPORTED",
+      "message": "Background images/gradients are not captured.",
+      "feature": "background_image_unsupported"
+    },
+    {
+      "code": "BORDER_UNSUPPORTED",
+      "message": "Nonuniform or unsupported borders were omitted.",
+      "feature": "border_unsupported"
+    },
+    {
+      "code": "TEXT_COLOR_APPROXIMATED",
+      "message": "Unsupported computed text color uses opaque black.",
+      "feature": "text_color_approximated",
+      "nodeId": "w2d-text-1-0-1-1-0-0-3-0"
+    },
+    {
+      "code": "TEXT_RANGE_APPROXIMATED",
+      "message": "Wrapped/bidirectional text uses one axis-aligned union box per DOM text run; line fragments are not reconstructed.",
+      "feature": "text_range_approximated",
+      "nodeId": "w2d-text-1-0-1-1-0-1-0-0"
+    },
+    {
+      "code": "PAINT_ORDER_UNSUPPORTED",
+      "message": "Explicit z-index/flex order may differ from captured DOM child order; stacking contexts are not reconstructed.",
+      "feature": "paint_order_unsupported",
+      "nodeId": "w2d-element-1-0-1-1-0-5-0-0"
+    },
+    {
+      "code": "BACKGROUND_COLOR_UNSUPPORTED",
+      "message": "Unsupported background color was omitted.",
+      "feature": "background_color_unsupported",
+      "nodeId": "w2d-element-1-0-1-1-0-5-0-0"
+    },
+    {
+      "code": "RADIUS_UNSUPPORTED",
+      "message": "Percentage/elliptical corner radii were omitted.",
+      "feature": "radius_unsupported"
+    },
+    {
+      "code": "SHADOW_UNSUPPORTED",
+      "message": "Multiple, inset or malformed box shadows are omitted; only one outer shadow is supported.",
+      "feature": "shadow_unsupported"
+    },
+    {
+      "code": "TEXT_TRANSFORM_UNSUPPORTED",
+      "message": "Text uses original characters; CSS text-transform is not applied.",
+      "feature": "text_transform_unsupported",
+      "nodeId": "w2d-text-1-0-1-1-1-1-0-0"
+    },
+    {
+      "code": "TRANSFORM_APPROXIMATED",
+      "message": "Browser-rendered axis-aligned boxes are captured; rotation/skew/scale semantics are not preserved.",
+      "feature": "transform_approximated"
+    },
+    {
+      "code": "IMAGE_UNAVAILABLE",
+      "message": "Image is unavailable, unloaded or broken; only an empty box placeholder is captured.",
+      "feature": "image_unavailable",
+      "nodeId": "w2d-element-1-0-1-1-4-5-0-0-0-0-1"
+    },
+    {
+      "code": "SHADOW_DOM_UNSUPPORTED",
+      "message": "Shadow-root content is omitted.",
+      "feature": "shadow_dom_unsupported"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-0-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-0-8"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-0-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-2-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-2-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-3-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-3-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-3-0-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-3-0-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-5-4"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-5-6"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-1-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-6-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-9-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-10-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-11-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-12-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-13-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-14-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-2-15-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-3-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-3-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-6-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-4-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-5-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-5-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-5-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-5-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-5-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-5-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-5-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-5-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-6-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-6-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-6-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-6-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-6-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-6-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-6-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-6-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-6-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-7-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-8-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-8-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-8-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-8-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-8-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-8-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-8-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-9-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-9-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-9-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-9-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-9-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-9-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-9-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-10-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-10-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-10-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-10-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-10-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-10-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-10-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-10-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-11-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-11-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-11-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-11-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-12-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-12-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-12-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-12-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-13-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-13-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-0-6-0-0-0-0-1-0-0-0-0-13-2-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-0-6-0-1-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-1-3-2-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-0-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-1-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-2-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-3-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-4-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-5-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-6-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-7-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-8-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-9-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-10-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-11-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-12-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-13-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-14-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-15-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-16-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-17-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-18-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-19-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-20-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-21-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-22-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-23-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-24-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-25-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-26-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-27-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-28-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-29-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-30-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (3.98) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-31-0-0"
+    },
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (1.00) differed from captured box (3.33); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-1-1-1-6-0-1-32-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-3-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-0-2-0-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-0-2-0-0-1-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-0-2-0-0-2-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-0-2-0-0-3-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-0-2-0-0-4-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-1-2-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-1-2-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-1-2-0-0-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-1-2-0-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-1-2-0-0-5-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-1-2-0-0-6-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-1-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-2-0-1-1-3-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-2-2-0-0-2-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-2-2-0-0-2-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-1-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-1-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-1-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-2-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-2-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-2-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-2-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-4-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-4-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-4-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-5-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-5-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-5-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-5-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-5-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-7-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-7-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-7-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-7-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-7-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-8-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-8-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-8-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-8-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-8-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-9-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-9-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-9-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-9-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-9-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-10-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-10-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-10-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-10-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-10-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-10-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-11-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-11-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-11-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-11-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-11-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-11-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-12-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-12-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-12-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-12-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-12-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-12-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-13-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-13-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-13-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-13-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-13-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-13-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-14-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-14-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-14-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-14-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-14-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-14-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-15-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-15-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-15-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-15-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-15-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-15-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-16-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-16-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-16-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-16-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-16-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-16-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-3-2-0-0-0-1-0-0-0-17-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-1-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-2-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-3-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-4-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-5-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-6-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-7-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-8-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-9-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-10-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-11-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-12-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-13-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-14-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-15-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-16-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-17-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-18-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-36-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-54-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-72-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-90-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-108-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-126-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-144-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-162-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-180-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-5-2-0-0-198-1-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-6-2-0-0-0-1-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-6-2-0-0-0-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-6-2-0-0-0-1-2-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-6-2-0-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-7-2-0-0-0-1-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-7-2-0-0-1-1-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-7-2-0-0-2-1-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-7-2-0-0-3-1-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-0-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-2-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-5-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-6-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-8-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-8-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-9-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-10-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-12-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-12-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-12-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-13-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-14-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-16-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-16-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-16-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-17-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-8-2-0-0-0-1-0-0-0-18-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-9-2-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-9-2-0-1-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-9-2-1-0-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-9-2-1-0-1-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-9-2-1-0-2-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-9-2-1-0-3-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-9-2-1-1-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-9-2-1-1-1-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-9-2-1-1-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-0-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-0-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-0-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-0-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-1-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-1-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-1-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-1-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-1-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-3-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-4-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-4-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-4-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-5-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-6-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-6-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-7-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-7-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-8-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-8-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-8-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-8-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-9-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-10-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-10-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-11-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-11-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-11-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-12-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-12-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-12-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-12-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-12-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-13-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-14-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-14-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-15-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-15-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-15-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-16-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-16-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-16-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-16-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-16-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-17-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-18-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-18-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-18-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-19-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-19-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-2-5-0-10-2-0-0-0-1-0-0-0-19-2-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-1-1-2-5-0-12-2-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-3-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-0-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-0-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-0-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-1-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-1-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-1-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-1-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-1-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-2-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-2-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-2-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-3-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-3-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-3-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-3-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-3-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-4-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-5-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-5-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-5-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-5-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-5-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-5-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-5-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-6-8-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-7-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-7-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-7-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-8-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-8-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-8-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-4-2"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-9-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-10-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-10-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-10-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-11-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-11-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-3-5-0-0-0-0-0-1-0-0-1-0-0-11-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-4-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-4-0-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-4-0-3"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-4-1-0-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-4-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'plexMono' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-1-1-4-3-2-0"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.",
+    "docWidth": 1425,
+    "docHeight": 10352,
+    "elementCount": 2434,
+    "grids": 67,
+    "flexes": 155,
+    "fixedSticky": 5,
+    "gradients": 23,
+    "transforms": 40,
+    "clipping": 170,
+    "pseudoIcons": 87,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "C",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 867,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 473,
+    "renderDurationMs": 7,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}

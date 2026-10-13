@@ -1,0 +1,168 @@
+{
+  "siteId": "svg-01-lucide",
+  "category": "F — SVG / icon-heavy page",
+  "label": "Lucide Icons Library",
+  "url": "https://lucide.dev",
+  "timestamp": "2026-10-13T15:41:05.282Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "Lucide",
+    "url": "https://lucide.dev",
+    "documentWidth": 1425,
+    "documentHeight": 2783
+  },
+  "metrics": {
+    "totalNodes": 168,
+    "nodeCounts": {
+      "frame": 78,
+      "text": 51,
+      "rectangle": 12,
+      "image": 16,
+      "svg": 11
+    },
+    "assetCount": 27,
+    "captureWarningsCount": 10,
+    "captureDurationMs": 84,
+    "jsonSizeBytes": 291643
+  },
+  "captureWarnings": [
+    {
+      "code": "PAINT_ORDER_UNSUPPORTED",
+      "message": "Explicit z-index/flex order may differ from captured DOM child order; stacking contexts are not reconstructed.",
+      "feature": "paint_order_unsupported",
+      "nodeId": "w2d-element-1-0-4"
+    },
+    {
+      "code": "SHADOW_UNSUPPORTED",
+      "message": "Multiple, inset or malformed box shadows are omitted; only one outer shadow is supported.",
+      "feature": "shadow_unsupported",
+      "nodeId": "w2d-element-1-0-4"
+    },
+    {
+      "code": "POSITION_CONTEXT_UNSUPPORTED",
+      "message": "Fixed/sticky elements are omitted to avoid scroll-dependent document coordinates.",
+      "feature": "position_context_unsupported"
+    },
+    {
+      "code": "TEXT_RANGE_APPROXIMATED",
+      "message": "Wrapped/bidirectional text uses one axis-aligned union box per DOM text run; line fragments are not reconstructed.",
+      "feature": "text_range_approximated",
+      "nodeId": "w2d-text-1-0-10-0-2-0-0-12-0-0"
+    },
+    {
+      "code": "TRANSFORM_APPROXIMATED",
+      "message": "Browser-rendered axis-aligned boxes are captured; rotation/skew/scale semantics are not preserved.",
+      "feature": "transform_approximated"
+    },
+    {
+      "code": "RADIUS_UNSUPPORTED",
+      "message": "Percentage/elliptical corner radii were omitted.",
+      "feature": "radius_unsupported"
+    },
+    {
+      "code": "FORM_VALUE_UNSUPPORTED",
+      "message": "Live form values (including passwords) are not captured.",
+      "feature": "form_value_unsupported",
+      "nodeId": "w2d-element-1-0-10-0-10-0-2-1-0-2-0-0-1-1-0-0"
+    },
+    {
+      "code": "TEXT_TRANSFORM_UNSUPPORTED",
+      "message": "Text uses original characters; CSS text-transform is not applied.",
+      "feature": "text_transform_unsupported",
+      "nodeId": "w2d-text-1-0-10-0-10-0-3-6-0-1-0-5-0"
+    },
+    {
+      "code": "BORDER_UNSUPPORTED",
+      "message": "Nonuniform or unsupported borders were omitted.",
+      "feature": "border_unsupported",
+      "nodeId": "w2d-element-1-0-11"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "SVG_ASPECT_APPROXIMATED",
+      "message": "SVG aspect ratio (0.50) differed from captured box (1.59); scaled to captured dimensions",
+      "nodeId": "w2d-element-1-0-10-0-2-0-1-0-6-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-10-0-10-0-3-1-1-3-0-1"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-10-0-10-0-3-1-1-4-0-1"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-10-0-10-0-3-1-1-5-0-1"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-10-0-10-0-3-4-1"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-10-0-10-0-3-6-0-1-0-3-1-1"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-10-0-10-0-3-6-0-1-0-3-3-1-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-1-0-10-0-10-0-3-6-0-1-0-5-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-11-0-0-0-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-1-0-11-0-0-1-0"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "Lucide",
+    "docWidth": 1425,
+    "docHeight": 2783,
+    "elementCount": 773,
+    "grids": 2,
+    "flexes": 77,
+    "fixedSticky": 2,
+    "gradients": 0,
+    "transforms": 5,
+    "clipping": 106,
+    "pseudoIcons": 0,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "B",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 168,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 10,
+    "renderDurationMs": 3,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}

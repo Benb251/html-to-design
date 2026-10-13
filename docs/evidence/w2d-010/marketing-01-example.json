@@ -1,0 +1,108 @@
+{
+  "siteId": "marketing-01-example",
+  "category": "A — Simple marketing / landing",
+  "label": "Example Domain",
+  "url": "https://example.com",
+  "timestamp": "2026-10-13T15:40:33.869Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "Example Domain",
+    "url": "https://example.com",
+    "documentWidth": 1440,
+    "documentHeight": 900
+  },
+  "metrics": {
+    "totalNodes": 15,
+    "nodeCounts": {
+      "frame": 7,
+      "text": 7,
+      "rectangle": 0,
+      "image": 0,
+      "svg": 1
+    },
+    "assetCount": 1,
+    "captureWarningsCount": 2,
+    "captureDurationMs": 26,
+    "jsonSizeBytes": 7516
+  },
+  "captureWarnings": [
+    {
+      "code": "TEXT_RANGE_APPROXIMATED",
+      "message": "Wrapped/bidirectional text uses one axis-aligned union box per DOM text run; line fragments are not reconstructed.",
+      "feature": "text_range_approximated",
+      "nodeId": "w2d-text-2-0"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-2-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-3-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-4-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-5-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-6-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-7-0"
+    },
+    {
+      "code": "FONT_FALLBACK",
+      "message": "Font family 'system-ui' unavailable; fell back to 'Inter Regular'",
+      "nodeId": "w2d-text-8-0"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "Example Domain",
+    "docWidth": 1440,
+    "docHeight": 900,
+    "elementCount": 22,
+    "grids": 0,
+    "flexes": 0,
+    "fixedSticky": 0,
+    "gradients": 0,
+    "transforms": 1,
+    "clipping": 1,
+    "pseudoIcons": 0,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "A",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 15,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 7,
+    "renderDurationMs": 2,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}

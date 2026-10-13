@@ -1,0 +1,190 @@
+{
+  "siteId": "ecommerce-01-books",
+  "category": "D — E-commerce / product page",
+  "label": "Books to Scrape Catalog",
+  "url": "https://books.toscrape.com",
+  "timestamp": "2026-10-13T15:40:57.252Z",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "page": {
+    "title": "All products | Books to Scrape - Sandbox",
+    "url": "https://books.toscrape.com",
+    "documentWidth": 1425,
+    "documentHeight": 2549
+  },
+  "metrics": {
+    "totalNodes": 321,
+    "nodeCounts": {
+      "frame": 74,
+      "text": 227,
+      "rectangle": 0,
+      "image": 20,
+      "svg": 0
+    },
+    "assetCount": 20,
+    "captureWarningsCount": 5,
+    "captureDurationMs": 54,
+    "jsonSizeBytes": 146407
+  },
+  "captureWarnings": [
+    {
+      "code": "PAINT_ORDER_UNSUPPORTED",
+      "message": "Explicit z-index/flex order may differ from captured DOM child order; stacking contexts are not reconstructed.",
+      "feature": "paint_order_unsupported",
+      "nodeId": "w2d-element-1"
+    },
+    {
+      "code": "SHADOW_UNSUPPORTED",
+      "message": "Multiple, inset or malformed box shadows are omitted; only one outer shadow is supported.",
+      "feature": "shadow_unsupported",
+      "nodeId": "w2d-element-3-1-3-1-3"
+    },
+    {
+      "code": "BORDER_UNSUPPORTED",
+      "message": "Nonuniform or unsupported borders were omitted.",
+      "feature": "border_unsupported"
+    },
+    {
+      "code": "TEXT_RANGE_APPROXIMATED",
+      "message": "Wrapped/bidirectional text uses one axis-aligned union box per DOM text run; line fragments are not reconstructed.",
+      "feature": "text_range_approximated",
+      "nodeId": "w2d-text-3-1-3-3-9-3-1-21-1-5-0-0"
+    },
+    {
+      "code": "CAPTURE_SCOPE",
+      "message": "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.",
+      "feature": "capture_scope"
+    }
+  ],
+  "rendererWarnings": [
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-1-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-3-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-5-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-7-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-9-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-11-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-13-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-15-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-17-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-19-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-21-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-23-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-25-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-27-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-29-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-31-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-33-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-35-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-37-1-1-1-0"
+    },
+    {
+      "code": "OBJECT_FIT_APPROXIMATED",
+      "message": "CSS 'object-fit: fill' approximated with Figma 'FILL' scale mode",
+      "nodeId": "w2d-element-3-1-3-3-9-3-1-39-1-1-1-0"
+    }
+  ],
+  "browserDiagnostics": {
+    "title": "All products | Books to Scrape - Sandbox",
+    "docWidth": 1425,
+    "docHeight": 2549,
+    "elementCount": 542,
+    "grids": 0,
+    "flexes": 0,
+    "fixedSticky": 0,
+    "gradients": 0,
+    "transforms": 0,
+    "clipping": 60,
+    "pseudoIcons": 185,
+    "iframes": 0,
+    "videos": 0,
+    "canvases": 0
+  },
+  "overallGrade": "C",
+  "status": "SUCCESS",
+  "schemaValid": true,
+  "rendererMetrics": {
+    "createdNodeCount": 321,
+    "skippedNodeCount": 0,
+    "rendererWarningsCount": 20,
+    "renderDurationMs": 1,
+    "rootNodesCreated": 1
+  },
+  "rendererSuccess": true
+}
