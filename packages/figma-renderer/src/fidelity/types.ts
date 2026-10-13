@@ -30,6 +30,11 @@ export interface NormalizedFill {
 export interface NormalizedStroke {
   color: { r: number; g: number; b: number; a: number };
   width: number;
+  topWidth?: number | undefined;
+  rightWidth?: number | undefined;
+  bottomWidth?: number | undefined;
+  leftWidth?: number | undefined;
+  dashPattern?: readonly number[] | undefined;
 }
 
 export interface NormalizedRadius {
@@ -41,7 +46,7 @@ export interface NormalizedRadius {
 }
 
 export interface NormalizedShadow {
-  type: "DROP_SHADOW";
+  type: "DROP_SHADOW" | "INNER_SHADOW";
   offsetX: number;
   offsetY: number;
   blurRadius: number;

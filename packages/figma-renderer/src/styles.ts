@@ -1,5 +1,4 @@
-/// <reference types="@figma/plugin-typings" />
-import type { VisualStyle } from "@web2design/design-schema";
+import type { BorderSide, VisualStyle } from "@web2design/design-schema";
 import { toFigmaFills, toFigmaRgba, toFigmaSolidPaint } from "./colors.js";
 import type { WarningCollector } from "./warnings.js";
 
@@ -8,6 +7,11 @@ export interface StyleableNode {
   fills: readonly Paint[] | PluginAPI["mixed"];
   strokes: readonly Paint[];
   strokeWeight: number | PluginAPI["mixed"];
+  strokeTopWeight?: number | undefined;
+  strokeRightWeight?: number | undefined;
+  strokeBottomWeight?: number | undefined;
+  strokeLeftWeight?: number | undefined;
+  dashPattern?: readonly number[] | undefined;
   cornerRadius?: number | PluginAPI["mixed"] | undefined;
   topLeftRadius?: number | undefined;
   topRightRadius?: number | undefined;
@@ -31,6 +35,11 @@ export function applyVisualStyle(
     node.fills = [];
     node.strokes = [];
     node.strokeWeight = 0;
+    node.strokeTopWeight = 0;
+    node.strokeRightWeight = 0;
+    node.strokeBottomWeight = 0;
+    node.strokeLeftWeight = 0;
+    node.dashPattern = [];
     node.effects = [];
     return;
   }
@@ -39,20 +48,118 @@ export function applyVisualStyle(
   node.fills = toFigmaFills(style.fills, bounds);
 
   // 3. Borders
-  if (style.border && style.border.width > 0 && style.border.style !== "none") {
-    node.strokes = [toFigmaSolidPaint(style.border.color)];
-    node.strokeWeight = style.border.width;
+  if (style.border) {
+    const rawBorder = style.border as unknown as Record<string, unknown>;
+    const b = "top" in rawBorder
+      ? (style.border as unknown as { top: BorderSide; right: BorderSide; bottom: BorderSide; left: BorderSide })
+      : {
+          top: rawBorder as unknown as BorderSide,
+          right: rawBorder as unknown as BorderSide,
+          bottom: rawBorder as unknown as BorderSide,
+          left: rawBorder as unknown as BorderSide,
+        };
 
-    if (style.border.style !== "solid") {
-      warnings.warn(
-        "BORDER_STYLE_APPROXIMATED",
-        `Border style '${style.border.style}' rendered as solid stroke`,
-        nodeId,
+    const sides = [b.top, b.right, b.bottom, b.left];
+    const visibleSides = sides.filter(
+      (s) => s && typeof s.width === "number" && s.width > 0 && s.style !== "none" && s.style !== "hidden",
+    );
+
+    if (visibleSides.length > 0) {
+      const primary = visibleSides[0]!;
+      const isUniformWidth =
+        b.top.width === b.right.width &&
+        b.right.width === b.bottom.width &&
+        b.bottom.width === b.left.width;
+
+      const hasMixedColors = visibleSides.some(
+        (s) =>
+          s.color.r !== primary.color.r ||
+          s.color.g !== primary.color.g ||
+          s.color.b !== primary.color.b ||
+          s.color.a !== primary.color.a,
       );
+
+      if (hasMixedColors) {
+        warnings.warn(
+          "BORDER_COLOR_APPROXIMATED",
+          "Mixed border colors rendered using primary border color in single stroke paint",
+          nodeId,
+        );
+      }
+
+      const hasMixedStyles = visibleSides.some((s) => s.style !== primary.style);
+      if (hasMixedStyles) {
+        warnings.warn(
+          "BORDER_STYLE_APPROXIMATED",
+          `Mixed border styles approximated using primary style '${primary.style}'`,
+          nodeId,
+        );
+      }
+
+      if (primary.style === "dashed") {
+        node.dashPattern = [Math.max(1, primary.width * 2), Math.max(1, primary.width * 2)];
+        warnings.warn(
+          "BORDER_STYLE_APPROXIMATED",
+          "Border style 'dashed' approximated using dash pattern",
+          nodeId,
+        );
+      } else if (primary.style === "dotted") {
+        node.dashPattern = [1, Math.max(2, primary.width * 2)];
+        warnings.warn(
+          "BORDER_STYLE_APPROXIMATED",
+          "Border style 'dotted' approximated using dash pattern",
+          nodeId,
+        );
+      } else if (primary.style !== "solid") {
+        node.dashPattern = [];
+        warnings.warn(
+          "BORDER_STYLE_APPROXIMATED",
+          `Border style '${primary.style}' rendered as solid stroke`,
+          nodeId,
+        );
+      } else {
+        node.dashPattern = [];
+      }
+
+      if ((!isUniformWidth || hasMixedColors) && style.cornerRadius !== undefined) {
+        warnings.warn(
+          "BORDER_CORNER_APPROXIMATED",
+          "Non-uniform border with corner radius may differ from browser corner rendering",
+          nodeId,
+        );
+      }
+
+      node.strokes = [toFigmaSolidPaint(primary.color)];
+      if (isUniformWidth) {
+        node.strokeWeight = b.top.width;
+        node.strokeTopWeight = b.top.width;
+        node.strokeRightWeight = b.right.width;
+        node.strokeBottomWeight = b.bottom.width;
+        node.strokeLeftWeight = b.left.width;
+      } else {
+        node.strokeWeight = 0;
+        node.strokeTopWeight = b.top.width;
+        node.strokeRightWeight = b.right.width;
+        node.strokeBottomWeight = b.bottom.width;
+        node.strokeLeftWeight = b.left.width;
+      }
+    } else {
+      node.strokes = [];
+      node.strokeWeight = 0;
+      node.strokeTopWeight = 0;
+      node.strokeRightWeight = 0;
+      node.strokeBottomWeight = 0;
+      node.strokeLeftWeight = 0;
+      node.dashPattern = [];
     }
   } else {
     node.strokes = [];
     node.strokeWeight = 0;
+    node.strokeTopWeight = 0;
+    node.strokeRightWeight = 0;
+    node.strokeBottomWeight = 0;
+    node.strokeLeftWeight = 0;
+    node.dashPattern = [];
   }
 
   // 4. Corner radius
@@ -72,36 +179,35 @@ export function applyVisualStyle(
     }
   }
 
-  // 5. Box shadow (single outer shadow in V0.1)
+  // 5. Box shadows (ordered drop + inner shadows)
   if (style.boxShadows && style.boxShadows.length > 0) {
-    const firstShadow = style.boxShadows[0]!;
-    if (firstShadow.inset) {
-      warnings.warn(
-        "BOX_SHADOW_INSET_UNSUPPORTED",
-        "Inset box shadow is not supported in V0.1 and was omitted",
-        nodeId,
-      );
-      node.effects = [];
-    } else {
-      const dropShadow: DropShadowEffect = {
-        type: "DROP_SHADOW",
-        color: toFigmaRgba(firstShadow.color),
-        offset: { x: firstShadow.offsetX, y: firstShadow.offsetY },
-        radius: firstShadow.blurRadius,
-        spread: firstShadow.spreadRadius,
-        visible: true,
-        blendMode: "NORMAL",
-      };
-      node.effects = [dropShadow];
-
-      if (style.boxShadows.length > 1) {
-        warnings.warn(
-          "MULTIPLE_BOX_SHADOWS_APPROXIMATED",
-          `Only the first of ${style.boxShadows.length} box shadows was rendered in V0.1`,
-          nodeId,
-        );
+    const effects: Effect[] = [];
+    for (const shadow of style.boxShadows) {
+      if (shadow.inset) {
+        const innerShadow: InnerShadowEffect = {
+          type: "INNER_SHADOW",
+          color: toFigmaRgba(shadow.color),
+          offset: { x: shadow.offsetX, y: shadow.offsetY },
+          radius: Math.max(0, shadow.blurRadius),
+          spread: shadow.spreadRadius,
+          visible: true,
+          blendMode: "NORMAL",
+        };
+        effects.push(innerShadow);
+      } else {
+        const dropShadow: DropShadowEffect = {
+          type: "DROP_SHADOW",
+          color: toFigmaRgba(shadow.color),
+          offset: { x: shadow.offsetX, y: shadow.offsetY },
+          radius: Math.max(0, shadow.blurRadius),
+          spread: shadow.spreadRadius,
+          visible: true,
+          blendMode: "NORMAL",
+        };
+        effects.push(dropShadow);
       }
     }
+    node.effects = effects;
   } else {
     node.effects = [];
   }

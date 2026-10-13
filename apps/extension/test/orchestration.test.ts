@@ -11,7 +11,7 @@ describe("orchestration", () => {
   it("injects isolated content script only into the user-active tab and validates response", async () => {
     const query = vi.fn().mockResolvedValue([{ id: 7, url: "https://example.com" }]), inject = vi.fn().mockResolvedValue([]), send = vi.fn().mockResolvedValue({ ok: true, document: simpleTextFixture });
     vi.stubGlobal("chrome", { tabs: { query, sendMessage: send }, scripting: { executeScript: inject } });
-    expect(await captureActivePage()).toMatchObject({ schemaVersion: "0.2" });
+    expect(await captureActivePage()).toMatchObject({ schemaVersion: "0.3" });
     expect(query).toHaveBeenCalledWith({ active: true, currentWindow: true });
     expect(inject).toHaveBeenCalledWith({ target: { tabId: 7 }, files: ["content.js"], world: "ISOLATED" });
     expect(send).toHaveBeenCalledWith(7, { type: "web2design.capture.v1" });

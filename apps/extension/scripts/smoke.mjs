@@ -11,7 +11,7 @@ const candidates = [process.env.CHROME_PATH, "C:/Program Files/Google/Chrome/App
 let executable;
 for (const candidate of candidates) { try { await fs.access(candidate); executable = candidate; break; } catch { /* Try next configured path. */ } }
 if (!executable) throw new Error("Chrome was not found. Set CHROME_PATH. Manual extension loading is a separate check.");
-const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients"];
+const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows"];
 const fixtures = new Map(await Promise.all(names.map(async name => ["/" + name + ".html", await fs.readFile(new URL("../fixtures/" + name + ".html", import.meta.url))])));
 const dotPng = await fs.readFile(new URL("../fixtures/dot.png", import.meta.url));
 const content = await fs.readFile(new URL("../dist/content.js", import.meta.url), "utf8");
@@ -97,7 +97,7 @@ try {
   assert.ok(texts.some(node => node.characters.includes("Try capture")));
   assert.ok(texts.every(node => node.width > 0 && node.height > 0));
   assert.ok(!JSON.stringify(first.document).includes("Do not capture me"));
-  assert.ok(flatten(first.document.root).some(node => node.style?.border?.width === 2));
+  assert.ok(flatten(first.document.root).some(node => node.style?.border?.top?.width === 2));
   assert.ok(flatten(first.document.root).some(node => node.style?.cornerRadius === 16));
   const faded = flatten(first.document.root).find(node => node.opacity === 0.5);
   assert.ok(faded && faded.children.every(node => node.opacity === 1));
@@ -167,14 +167,14 @@ try {
     if (name === "fidelity-styles") {
       check("body canvas fill propagates once across margins", () => { color(doc.root.style.fills[0].color, { r: 200 / 255, g: 220 / 255, b: 240 / 255, a: .25 }); assert.equal(byId.get("w2d-element-body").style.fills, undefined); });
       check("solid fill alpha separate from node opacity", () => { color(element("solid").style.fills[0].color, { r: 18 / 255, g: 52 / 255, b: 86 / 255, a: .25 }); assert.equal(element("solid").opacity, .5); assert.equal(element("transparent").style.fills, undefined); });
-      check("uniform border width style color", () => { const border = element("border").style.border; assert.equal(border.width, 2); assert.equal(border.style, "solid"); color(border.color, { r: 18 / 255, g: 52 / 255, b: 86 / 255, a: .5 }); for (const style of ["dashed", "dotted", "double"]) assert.equal(element(style).style.border.style, style); });
+      check("uniform border width style color", () => { const border = element("border").style.border; assert.equal(border.top.width, 2); assert.equal(border.top.style, "solid"); color(border.top.color, { r: 18 / 255, g: 52 / 255, b: 86 / 255, a: .5 }); for (const style of ["dashed", "dotted", "double"]) assert.equal(element(style).style.border.top.style, style); });
       check("uniform and per-corner radius", () => { assert.equal(element("radius").style.cornerRadius, 12.5); assert.deepEqual(element("corners").style.cornerRadius, { topLeft: 1.25, topRight: 2.5, bottomRight: 3.75, bottomLeft: 5 }); near(element("clamped").style.cornerRadius, 20.125, "used overlapping radius"); });
       check("single outer shadow and shadow-only grouping", () => { const shadow = element("shadow"); assert.equal(shadow.type, "frame"); assert.ok(shadow.children.some(node => node.type === "text")); assert.deepEqual(shadow.style.boxShadows[0], { offsetX: 0, offsetY: 4, blurRadius: 12, spreadRadius: 2.5, color: { r: 0, g: 0, b: 0, a: .15 }, inset: false }); });
       check("nested local opacity semantics", () => { assert.equal(element("outer").opacity, .5); assert.equal(element("inner").opacity, .5); assert.equal(element("inner").children[0].opacity, 1); });
       check("modern computed srgb fill", () => color(element("srgb").style.fills[0].color, { r: .2, g: .4, b: .6, a: .5 }));
     }
     if (name === "fidelity-limits") {
-      check("unsupported features omitted with bounded deterministic warnings", () => { for (const code of ["SHADOW_UNSUPPORTED", "BACKGROUND_IMAGE_UNSUPPORTED", "BORDER_UNSUPPORTED", "RADIUS_UNSUPPORTED", "TRANSFORM_APPROXIMATED", "PAINT_ORDER_UNSUPPORTED", "POSITION_CONTEXT_UNSUPPORTED"]) assert.equal(doc.warnings.filter(w => w.code === code).length, 1, code); for (const id of ["multiple", "inset"]) assert.equal(element(id).style.boxShadows, undefined); assert.equal(element("complex-border").style.border, undefined); assert.equal(element("ellipse").style.cornerRadius, undefined); assert.equal(element("bg-image").style.fills[0].color.a, 1); });
+      check("unsupported features omitted with bounded deterministic warnings", () => { for (const code of ["BACKGROUND_IMAGE_UNSUPPORTED", "RADIUS_UNSUPPORTED", "TRANSFORM_APPROXIMATED", "PAINT_ORDER_UNSUPPORTED", "POSITION_CONTEXT_UNSUPPORTED"]) assert.equal(doc.warnings.filter(w => w.code === code).length, 1, code); assert.equal(element("multiple").style.boxShadows.length, 2); assert.equal(element("inset").style.boxShadows.length, 1); assert.equal(element("complex-border").style.border.top.width, 2); assert.equal(element("complex-border").style.border.left.width, 4); assert.equal(element("ellipse").style.cornerRadius, undefined); assert.equal(element("bg-image").style.fills[0].color.a, 1); });
       check("transform browser box and DOM order", () => { boxesMatch(element("transform"), oracle.elements["transform"].box); const strings = all.filter(node => node.type === "text").map(node => node.characters); assert.ok(strings.indexOf("Transformed") < strings.indexOf("Stacked")); });
       check("hidden subtrees and fixed/sticky excluded", () => { for (const id of ["hidden", "zero", "invisible", "fixed", "sticky"]) assert.equal(element(id), undefined); assert.ok(!JSON.stringify(doc).includes("Hidden omitted")); assert.ok(all.some(node => node.type === "text" && node.characters === "Visible override")); });
       check("safe wrapper pruning", () => { assert.equal(element("contents"), undefined); assert.equal(element("pruned"), undefined); assert.ok(all.some(node => node.type === "text" && node.characters === "Display contents")); assert.ok(all.some(node => node.type === "text" && node.characters === "Plain wrapper")); });
@@ -295,8 +295,8 @@ try {
         near(box.width, 24, "box width");
         near(box.height, 24, "box height");
         assert.equal(box.style.cornerRadius, 4);
-        assert.equal(box.style.border.width, 2);
-        assert.equal(box.style.border.style, "solid");
+        assert.equal(box.style.border.top.width, 2);
+        assert.equal(box.style.border.top.style, "solid");
       });
       check("pseudo with text and background decomposed into frame and child text", () => {
         const frame = pseudo("text-and-background", "::before");
@@ -348,8 +348,8 @@ try {
       });
     }
     if (name === "fidelity-gradients") {
-      check("fidelity-gradients document valid V0.2 schema", () => {
-        assert.equal(doc.schemaVersion, "0.2");
+      check("fidelity-gradients document valid V0.3 schema", () => {
+        assert.equal(doc.schemaVersion, "0.3");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("linear gradient default direction (to bottom = 180deg)", () => {
@@ -444,6 +444,157 @@ try {
         assert.ok(doc.warnings.some(w => w.code === "GRADIENT_TYPE_UNSUPPORTED"));
         assert.ok(doc.warnings.some(w => w.code === "GRADIENT_COLOR_HINT_APPROXIMATED"));
         assert.ok(doc.warnings.some(w => w.code === "BACKGROUND_IMAGE_UNSUPPORTED"));
+      });
+    }
+    if (name === "fidelity-borders-shadows") {
+      check("fidelity-borders-shadows document valid V0.3 schema", () => {
+        assert.equal(doc.schemaVersion, "0.3");
+        assert.equal(safeParseDesignDocument(doc).success, true);
+      });
+      check("1. uniform solid border regression", () => {
+        const b = element("uniform-solid").style.border;
+        assert.equal(b.top.width, 2);
+        assert.equal(b.right.width, 2);
+        assert.equal(b.bottom.width, 2);
+        assert.equal(b.left.width, 2);
+        assert.equal(b.top.style, "solid");
+        color(b.top.color, { r: 37 / 255, g: 99 / 255, b: 235 / 255, a: 1 });
+      });
+      check("2. top-only border", () => {
+        const b = element("top-only").style.border;
+        assert.equal(b.top.width, 3);
+        assert.equal(b.right.width, 0);
+        assert.equal(b.bottom.width, 0);
+        assert.equal(b.left.width, 0);
+        assert.equal(b.top.style, "solid");
+      });
+      check("3. bottom-only border", () => {
+        const b = element("bottom-only").style.border;
+        assert.equal(b.top.width, 0);
+        assert.equal(b.bottom.width, 4);
+        assert.equal(b.bottom.style, "solid");
+      });
+      check("4. four different widths same color", () => {
+        const b = element("four-widths").style.border;
+        assert.equal(b.top.width, 1);
+        assert.equal(b.right.width, 2);
+        assert.equal(b.bottom.width, 3);
+        assert.equal(b.left.width, 4);
+      });
+      check("5. same color different widths", () => {
+        const b = element("same-color-diff-widths").style.border;
+        assert.equal(b.top.width, 2);
+        assert.equal(b.right.width, 4);
+        assert.equal(b.bottom.width, 6);
+        assert.equal(b.left.width, 8);
+      });
+      check("6. different side colors", () => {
+        const b = element("diff-colors").style.border;
+        assert.equal(b.top.width, 2);
+        assert.equal(b.right.width, 3);
+        assert.equal(b.bottom.width, 4);
+        assert.equal(b.left.width, 5);
+        color(b.top.color, { r: 239 / 255, g: 68 / 255, b: 68 / 255, a: 1 });
+        color(b.right.color, { r: 59 / 255, g: 130 / 255, b: 246 / 255, a: 1 });
+        color(b.bottom.color, { r: 16 / 255, g: 185 / 255, b: 129 / 255, a: 1 });
+        color(b.left.color, { r: 245 / 255, g: 158 / 255, b: 11 / 255, a: 1 });
+      });
+      check("7. dashed border", () => {
+        const b = element("dashed-border").style.border;
+        assert.equal(b.top.style, "dashed");
+        assert.equal(b.top.width, 2);
+      });
+      check("8. dotted border", () => {
+        const b = element("dotted-border").style.border;
+        assert.equal(b.top.style, "dotted");
+        assert.equal(b.top.width, 2);
+      });
+      check("9. double border captured in schema", () => {
+        const b = element("double-border").style.border;
+        assert.equal(b.top.style, "double");
+        assert.equal(b.top.width, 3);
+      });
+      check("10. rounded non-uniform border preserves radius and widths", () => {
+        const el = element("rounded-non-uniform");
+        assert.equal(el.style.cornerRadius, 8);
+        assert.equal(el.style.border.top.width, 1);
+        assert.equal(el.style.border.right.width, 3);
+        assert.equal(el.style.border.bottom.width, 2);
+        assert.equal(el.style.border.left.width, 4);
+      });
+      check("11. single drop-shadow regression", () => {
+        const shadows = element("single-shadow").style.boxShadows;
+        assert.equal(shadows.length, 1);
+        assert.equal(shadows[0].inset, false);
+        assert.equal(shadows[0].offsetX, 0);
+        assert.equal(shadows[0].offsetY, 4);
+        assert.equal(shadows[0].blurRadius, 6);
+        assert.equal(shadows[0].spreadRadius, -1);
+      });
+      check("12. two drop shadows in order", () => {
+        const shadows = element("two-shadows").style.boxShadows;
+        assert.equal(shadows.length, 2);
+        assert.equal(shadows[0].blurRadius, 6);
+        assert.equal(shadows[1].blurRadius, 4);
+      });
+      check("13. three drop shadows in order", () => {
+        const shadows = element("three-shadows").style.boxShadows;
+        assert.equal(shadows.length, 3);
+        assert.equal(shadows[0].blurRadius, 15);
+        assert.equal(shadows[1].blurRadius, 6);
+        assert.equal(shadows[2].blurRadius, 2);
+      });
+      check("14. inset shadow", () => {
+        const shadows = element("inset-shadow").style.boxShadows;
+        assert.equal(shadows.length, 1);
+        assert.equal(shadows[0].inset, true);
+        assert.equal(shadows[0].offsetY, 2);
+        assert.equal(shadows[0].blurRadius, 4);
+      });
+      check("15. drop + inset combination", () => {
+        const shadows = element("drop-inset-combo").style.boxShadows;
+        assert.equal(shadows.length, 2);
+        assert.equal(shadows[0].inset, false);
+        assert.equal(shadows[1].inset, true);
+      });
+      check("16. positive spread", () => {
+        const shadows = element("positive-spread").style.boxShadows;
+        assert.equal(shadows[0].spreadRadius, 3);
+      });
+      check("17. negative spread", () => {
+        const shadows = element("negative-spread").style.boxShadows;
+        assert.equal(shadows[0].spreadRadius, -3);
+      });
+      check("18. alpha shadow", () => {
+        const shadows = element("alpha-shadow").style.boxShadows;
+        near(shadows[0].color.a, 0.25, "shadow alpha");
+      });
+      check("19. fractional shadow values", () => {
+        const shadows = element("fractional-shadow").style.boxShadows;
+        near(shadows[0].offsetX, 0.5, "shadow offsetX");
+        near(shadows[0].offsetY, 1.5, "shadow offsetY");
+        near(shadows[0].blurRadius, 3.5, "shadow blurRadius");
+        near(shadows[0].spreadRadius, 0.5, "shadow spreadRadius");
+      });
+      check("20. pseudo-element non-uniform border", () => {
+        const pseudoNode = byId.get(oracle.elements["pseudo-non-uniform"].id + "::before");
+        assert.ok(pseudoNode, "pseudo-element ::before must exist");
+        assert.equal(pseudoNode.style.border.top.width, 2);
+        assert.equal(pseudoNode.style.border.bottom.width, 4);
+      });
+      check("21. pseudo-element inset shadow", () => {
+        const pseudoNode = byId.get(oracle.elements["pseudo-inset"].id + "::after");
+        assert.ok(pseudoNode, "pseudo-element ::after must exist");
+        assert.equal(pseudoNode.style.boxShadows[0].inset, true);
+      });
+      check("22. gradient + border + multi-shadow combined", () => {
+        const el = element("gradient-border-multi-shadow");
+        assert.equal(el.style.fills[0].type, "linear-gradient");
+        assert.equal(el.style.border.top.width, 1);
+        assert.equal(el.style.border.left.width, 4);
+        assert.equal(el.style.boxShadows.length, 2);
+        assert.equal(el.style.boxShadows[0].inset, false);
+        assert.equal(el.style.boxShadows[1].inset, true);
       });
     }
     await fs.writeFile(new URL(name + ".json", evidence), JSON.stringify(doc, null, 2));

@@ -47,9 +47,10 @@ describe("figma-renderer - styles", () => {
     const warnings = new WarningCollector();
     const style = {
       border: {
-        width: 2,
-        style: "solid" as const,
-        color: { r: 0, g: 0, b: 0, a: 1 },
+        top: { width: 2, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+        right: { width: 2, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+        bottom: { width: 2, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+        left: { width: 2, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
       },
     };
 
@@ -66,9 +67,10 @@ describe("figma-renderer - styles", () => {
     const warnings = new WarningCollector();
     const style = {
       border: {
-        width: 1,
-        style: "dashed" as const,
-        color: { r: 0.5, g: 0.5, b: 0.5, a: 1 },
+        top: { width: 1, style: "dashed" as const, color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
+        right: { width: 1, style: "dashed" as const, color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
+        bottom: { width: 1, style: "dashed" as const, color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
+        left: { width: 1, style: "dashed" as const, color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
       },
     };
 
@@ -152,7 +154,7 @@ describe("figma-renderer - styles", () => {
     expect(effect.color).toEqual({ r: 0, g: 0, b: 0, a: 0.15 });
   });
 
-  it("warns and omits inset box shadows", () => {
+  it("applies inset box shadows as INNER_SHADOW effects", () => {
     const node = createMockNode();
     const warnings = new WarningCollector();
     const style = {
@@ -170,11 +172,12 @@ describe("figma-renderer - styles", () => {
 
     applyVisualStyle(node, style, 1, warnings, "test-node");
 
-    expect(node.effects.length).toBe(0);
-    expect(warnings.getWarnings().some((w) => w.code === "BOX_SHADOW_INSET_UNSUPPORTED")).toBe(true);
+    expect(node.effects.length).toBe(1);
+    expect(node.effects[0]!.type).toBe("INNER_SHADOW");
+    expect(warnings.getWarnings().length).toBe(0);
   });
 
-  it("warns when multiple box shadows are present and renders only the first", () => {
+  it("applies multiple box shadows in order without omission", () => {
     const node = createMockNode();
     const warnings = new WarningCollector();
     const style = {
@@ -200,7 +203,48 @@ describe("figma-renderer - styles", () => {
 
     applyVisualStyle(node, style, 1, warnings, "test-node");
 
-    expect(node.effects.length).toBe(1);
-    expect(warnings.getWarnings().some((w) => w.code === "MULTIPLE_BOX_SHADOWS_APPROXIMATED")).toBe(true);
+    expect(node.effects.length).toBe(2);
+    expect(node.effects[0]!.type).toBe("DROP_SHADOW");
+    expect(node.effects[1]!.type).toBe("DROP_SHADOW");
+    expect(warnings.getWarnings().length).toBe(0);
+  });
+
+  it("applies non-uniform border side weights natively", () => {
+    const node = createMockNode();
+    const warnings = new WarningCollector();
+    const style = {
+      border: {
+        top: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+        right: { width: 2, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+        bottom: { width: 3, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+        left: { width: 4, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+      },
+    };
+
+    applyVisualStyle(node, style, 1, warnings, "test-node");
+
+    expect(node.strokeTopWeight).toBe(1);
+    expect(node.strokeRightWeight).toBe(2);
+    expect(node.strokeBottomWeight).toBe(3);
+    expect(node.strokeLeftWeight).toBe(4);
+    expect(warnings.getWarnings().length).toBe(0);
+  });
+
+  it("warns when border colors are mixed and uses primary color", () => {
+    const node = createMockNode();
+    const warnings = new WarningCollector();
+    const style = {
+      border: {
+        top: { width: 1, style: "solid" as const, color: { r: 1, g: 0, b: 0, a: 1 } },
+        right: { width: 1, style: "solid" as const, color: { r: 0, g: 1, b: 0, a: 1 } },
+        bottom: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 1, a: 1 } },
+        left: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+      },
+    };
+
+    applyVisualStyle(node, style, 1, warnings, "test-node");
+
+    expect(node.strokes.length).toBe(1);
+    expect(warnings.getWarnings().some((w) => w.code === "BORDER_COLOR_APPROXIMATED")).toBe(true);
   });
 });

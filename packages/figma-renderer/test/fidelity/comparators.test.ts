@@ -95,7 +95,12 @@ describe("W2D-008 - Fidelity Comparators", () => {
       const schema: DesignNode = {
         ...dummySchemaNode,
         style: {
-          border: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+          border: {
+            top: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+            right: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+            bottom: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+            left: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+          },
         },
       };
       const rendered: NormalizedRenderedNode = {
@@ -110,7 +115,12 @@ describe("W2D-008 - Fidelity Comparators", () => {
       const schema: DesignNode = {
         ...dummySchemaNode,
         style: {
-          border: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+          border: {
+            top: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+            right: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+            bottom: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+            left: { width: 2, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+          },
         },
       };
       const rendered: NormalizedRenderedNode = {

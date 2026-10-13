@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TextStyleSchema, VisualStyleSchemaV01, VisualStyleSchemaV02 } from "./style.js";
+import { TextStyleSchema, VisualStyleSchemaV01, VisualStyleSchemaV02, VisualStyleSchemaV03 } from "./style.js";
 import type { TextStyle, VisualStyle } from "./style.js";
 
 interface BaseNode {
@@ -140,9 +140,15 @@ export const DesignNodeSchemaV01 = v01Schemas.designNodeSchema;
 
 const v02Schemas = createNodeSchemas(VisualStyleSchemaV02);
 export const FrameNodeSchemaV02: z.ZodType<FrameNode> = v02Schemas.frameNodeSchema;
-export const TextNodeSchema: z.ZodType<TextNode> = v02Schemas.textNodeSchema;
-export const RectangleNodeSchema: z.ZodType<RectangleNode> = v02Schemas.rectangleNodeSchema;
-export const ImageNodeSchema: z.ZodType<ImageNode> = v02Schemas.imageNodeSchema;
-export const SvgNodeSchema: z.ZodType<SvgNode> = v02Schemas.svgNodeSchema;
-export const FrameNodeSchema: z.ZodType<FrameNode> = FrameNodeSchemaV02;
-export const DesignNodeSchema: z.ZodType<DesignNode> = v02Schemas.designNodeSchema;
+export const DesignNodeSchemaV02: z.ZodType<DesignNode> = v02Schemas.designNodeSchema;
+
+const v03Schemas = createNodeSchemas(VisualStyleSchemaV03);
+export const FrameNodeSchemaV03: z.ZodType<FrameNode> = v03Schemas.frameNodeSchema;
+export const DesignNodeSchemaV03: z.ZodType<DesignNode> = v03Schemas.designNodeSchema;
+
+export const TextNodeSchema: z.ZodType<TextNode> = v03Schemas.textNodeSchema;
+export const RectangleNodeSchema: z.ZodType<RectangleNode> = v03Schemas.rectangleNodeSchema;
+export const ImageNodeSchema: z.ZodType<ImageNode> = v03Schemas.imageNodeSchema;
+export const SvgNodeSchema: z.ZodType<SvgNode> = v03Schemas.svgNodeSchema;
+export const FrameNodeSchema: z.ZodType<FrameNode> = FrameNodeSchemaV03;
+export const DesignNodeSchema: z.ZodType<DesignNode> = v03Schemas.designNodeSchema;

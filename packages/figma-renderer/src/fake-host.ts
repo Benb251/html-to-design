@@ -41,6 +41,11 @@ export class FakeStyleableNode extends FakeLayoutNode {
   fills: readonly Paint[] = [];
   strokes: readonly Paint[] = [];
   strokeWeight: number = 0;
+  strokeTopWeight: number = 0;
+  strokeRightWeight: number = 0;
+  strokeBottomWeight: number = 0;
+  strokeLeftWeight: number = 0;
+  dashPattern: readonly number[] = [];
   cornerRadius?: number | PluginAPI["mixed"];
   topLeftRadius?: number;
   topRightRadius?: number;

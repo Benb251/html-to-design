@@ -142,4 +142,20 @@ export const FIXTURE_MANIFEST: FixtureManifestEntry[] = [
     expectedCategories: ["GEOMETRY", "HIERARCHY", "FILL", "TEXT"],
     expectedWarnings: [],
   },
+  {
+    id: "chrome-borders-shadows",
+    name: "Borders & Shadows Fidelity Capture",
+    kind: "chrome-capture",
+    sourcePath: "apps/extension/.smoke/fidelity-borders-shadows.json",
+    description: "Browser capture testing non-uniform border widths, mixed border colors, border styles, corner radius interaction, multiple drop shadows, inset shadows, spread, and combinations",
+    expectedCategories: ["GEOMETRY", "HIERARCHY", "FILL", "BORDER", "RADIUS", "SHADOW"],
+    expectedWarnings: [
+      { code: "BORDER_COLOR_APPROXIMATED", nodeId: "w2d-element-11" },
+      { code: "BORDER_STYLE_APPROXIMATED", nodeId: "w2d-element-13" },
+      { code: "BORDER_STYLE_APPROXIMATED", nodeId: "w2d-element-15" },
+      { code: "BORDER_STYLE_APPROXIMATED", nodeId: "w2d-element-17" },
+      { code: "BORDER_CORNER_APPROXIMATED", nodeId: "w2d-element-19" },
+    ],
+  },
 ];
+

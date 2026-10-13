@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { JSDOM } from "jsdom";
 import { safeParseDesignDocument, type DesignNode, type SolidFill } from "@web2design/design-schema";
-import { boxShadow, captureDocument, characters, cssColor, textStyle, visualStyle } from "../src/index.js";
+import { boxShadow, captureDocument, characters, cssColor, parseBoxShadows, textStyle, visualStyle } from "../src/index.js";
 
 const flatten = (node: DesignNode): DesignNode[] => [node, ...node.children.flatMap(flatten)];
 const at = "2026-10-13T07:00:00.000Z";
@@ -39,23 +39,41 @@ describe("W2D-004 computed styles", () => {
   it("captures the common three-length outer shadow with zero spread", () => {
     expect(boxShadow("0px 4px 12px rgba(0,0,0,.15)", vi.fn())).toMatchObject({ offsetX: 0, offsetY: 4, blurRadius: 12, spreadRadius: 0, color: { a: .15 } });
   });
-  for (const property of ["borderLeftWidth", "borderLeftStyle", "borderLeftColor"] as const) it("omits borders with different per-side " + property, () => {
+  for (const property of ["borderLeftWidth", "borderLeftStyle", "borderLeftColor"] as const) it("captures borders with different per-side " + property, () => {
     const { document, window } = fixture('<div></div>');
     const element = document.querySelector("div")!; element.style.border = "2px solid rgb(18,52,86)";
     element.style[property] = property === "borderLeftWidth" ? "4px" : property === "borderLeftStyle" ? "dashed" : "rgb(0,0,0)";
-    const warn = vi.fn(); expect(visualStyle(window.getComputedStyle(element), warn).border).toBeUndefined(); expect(warn).toHaveBeenCalledWith("BORDER_UNSUPPORTED", expect.any(String));
+    const warn = vi.fn();
+    const border = visualStyle(window.getComputedStyle(element), warn).border;
+    expect(border).toBeDefined();
+    if (property === "borderLeftWidth") {
+      expect(border?.left.width).toBe(4);
+      expect(border?.top.width).toBe(2);
+    } else if (property === "borderLeftStyle") {
+      expect(border?.left.style).toBe("dashed");
+      expect(border?.top.style).toBe("solid");
+    } else {
+      expect(border?.left.color).toEqual({ r: 0, g: 0, b: 0, a: 1 });
+    }
   });
   it("supports color-last shadows, zero blur and negative spread", () => {
     expect(boxShadow("-1.25px 4px 0 -2px rgb(18 52 86 / 50%)", vi.fn())).toMatchObject({ offsetX: -1.25, offsetY: 4, blurRadius: 0, spreadRadius: -2, color: { a: .5 } });
   });
   it("does not warn for none", () => { const warn = vi.fn(); expect(boxShadow("none", warn)).toBeUndefined(); expect(warn).not.toHaveBeenCalled(); });
-  for (const value of ["0px 4px 12px black, 0px 1px 2px black", "inset 0px 4px 12px rgba(0,0,0,.15)", "rgb(0,0,0) 0px 4px -12px", "0px 4px", "rgba(0,0,0,.1) 0px bad", "rgb(0,0,0 0px 4px"]) {
+  it("captures multiple shadows and inset shadows", () => {
+    const multi = parseBoxShadows("0px 4px 12px black, inset 0px 1px 2px rgba(255,255,255,.5)", vi.fn());
+    expect(multi).toHaveLength(2);
+    expect(multi[0]?.inset).toBe(false);
+    expect(multi[1]?.inset).toBe(true);
+  });
+  for (const value of ["rgb(0,0,0) 0px 4px -12px", "0px 4px", "rgba(0,0,0,.1) 0px bad", "rgb(0,0,0 0px 4px"]) {
     it("warns and omits unsupported shadow " + value, () => { const warn = vi.fn(); expect(boxShadow(value, warn)).toBeUndefined(); expect(warn).toHaveBeenCalledWith("SHADOW_UNSUPPORTED", expect.any(String)); });
   }
   for (const borderStyle of ["solid", "dashed", "dotted", "double"]) it("preserves uniform schema-supported " + borderStyle + " borders", () => {
     const { document, window } = fixture('<div></div>');
     const element = document.querySelector("div")!; element.style.border = "1.5px " + borderStyle + " rgba(18,52,86,.5)";
-    expect(visualStyle(window.getComputedStyle(element), vi.fn()).border).toMatchObject({ width: 1.5, style: borderStyle, color: { a: .5 } });
+    expect(visualStyle(window.getComputedStyle(element), vi.fn()).border?.top).toMatchObject({ width: 1.5, style: borderStyle, color: { a: .5 } });
+    expect(visualStyle(window.getComputedStyle(element), vi.fn()).border?.left).toMatchObject({ width: 1.5, style: borderStyle, color: { a: .5 } });
   });
   it("omits transparent fill and preserves fill alpha independently", () => {
     expect(visualStyle(css({ backgroundColor: "transparent" }), vi.fn()).fills).toBeUndefined();

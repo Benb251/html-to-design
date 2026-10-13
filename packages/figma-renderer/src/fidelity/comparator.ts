@@ -1,4 +1,5 @@
 import type {
+  BorderSide,
   Color,
   DesignNode,
   ImageNode,
@@ -338,8 +339,24 @@ export function compareStroke(
 ): FidelityFailure[] {
   const failures: FidelityFailure[] = [];
 
-  const border = schemaNode.style?.border;
-  if (border && border.width > 0 && border.style !== "none") {
+  const rawBorder = schemaNode.style?.border as unknown as Record<string, unknown> | undefined;
+  if (!rawBorder) return failures;
+
+  const b = "top" in rawBorder
+    ? (schemaNode.style?.border as unknown as { top: BorderSide; right: BorderSide; bottom: BorderSide; left: BorderSide })
+    : {
+        top: rawBorder as unknown as BorderSide,
+        right: rawBorder as unknown as BorderSide,
+        bottom: rawBorder as unknown as BorderSide,
+        left: rawBorder as unknown as BorderSide,
+      };
+
+  const sides = [b.top, b.right, b.bottom, b.left];
+  const visibleSides = sides.filter(
+    (s) => s && typeof s.width === "number" && s.width > 0 && s.style !== "none" && s.style !== "hidden",
+  );
+
+  if (visibleSides.length > 0) {
     const renderedStrokes = rendered.strokes ?? [];
     if (renderedStrokes.length === 0) {
       failures.push({
@@ -350,26 +367,59 @@ export function compareStroke(
         property: "strokes",
         expected: "stroke present",
         actual: "none",
-        message: `Node '${schemaNode.id}' expected stroke width ${border.width}, got none`,
+        message: `Node '${schemaNode.id}' expected stroke width ${visibleSides[0]!.width}, got none`,
       });
     } else {
       const stroke = renderedStrokes[0]!;
-      const diffW = numDiff(stroke.width, border.width, tol);
-      if (diffW !== null) {
-        failures.push({
-          fixtureId,
-          sourceId: schemaNode.id,
-          nodeType: schemaNode.type,
-          category: "BORDER",
-          property: "strokeWeight",
-          expected: border.width,
-          actual: stroke.width,
-          difference: diffW,
-          tolerance: tol,
-          message: `Node '${schemaNode.id}' stroke weight expected ${border.width}, got ${stroke.width}`,
-        });
+      const primary = visibleSides[0]!;
+      const isUniform =
+        b.top.width === b.right.width &&
+        b.right.width === b.bottom.width &&
+        b.bottom.width === b.left.width;
+
+      if (isUniform) {
+        const diffW = numDiff(stroke.width, b.top.width, tol);
+        if (diffW !== null) {
+          failures.push({
+            fixtureId,
+            sourceId: schemaNode.id,
+            nodeType: schemaNode.type,
+            category: "BORDER",
+            property: "strokeWeight",
+            expected: b.top.width,
+            actual: stroke.width,
+            difference: diffW,
+            tolerance: tol,
+            message: `Node '${schemaNode.id}' stroke weight expected ${b.top.width}, got ${stroke.width}`,
+          });
+        }
+      } else {
+        const checkSide = (sideName: "top" | "right" | "bottom" | "left", prop: "topWidth" | "rightWidth" | "bottomWidth" | "leftWidth") => {
+          const exp = b[sideName].width;
+          const act = stroke[prop] ?? stroke.width;
+          const diffW = numDiff(act, exp, tol);
+          if (diffW !== null) {
+            failures.push({
+              fixtureId,
+              sourceId: schemaNode.id,
+              nodeType: schemaNode.type,
+              category: "BORDER",
+              property: `stroke.${sideName}`,
+              expected: exp,
+              actual: act,
+              difference: diffW,
+              tolerance: tol,
+              message: `Node '${schemaNode.id}' ${sideName} stroke weight expected ${exp}, got ${act}`,
+            });
+          }
+        };
+        checkSide("top", "topWidth");
+        checkSide("right", "rightWidth");
+        checkSide("bottom", "bottomWidth");
+        checkSide("left", "leftWidth");
       }
-      const diffC = colorDiff(stroke.color, border.color, colorTol);
+
+      const diffC = colorDiff(stroke.color, primary.color, colorTol);
       if (diffC) {
         failures.push({
           fixtureId,
@@ -377,7 +427,7 @@ export function compareStroke(
           nodeType: schemaNode.type,
           category: "BORDER",
           property: "strokeColor",
-          expected: border.color,
+          expected: primary.color,
           actual: stroke.color,
           difference: diffC,
           tolerance: colorTol,
@@ -456,60 +506,91 @@ export function compareShadow(
 ): FidelityFailure[] {
   const failures: FidelityFailure[] = [];
   const shadows = schemaNode.style?.boxShadows ?? [];
+  const renderedEffects = rendered.effects ?? [];
 
-  if (shadows.length > 0 && !shadows[0]!.inset) {
-    const expected = shadows[0]!;
-    const renderedEffects = rendered.effects ?? [];
-    const dropShadow = renderedEffects.find((e) => e.type === "DROP_SHADOW");
-
-    if (!dropShadow) {
+  if (shadows.length > 0) {
+    if (renderedEffects.length === 0) {
       failures.push({
         fixtureId,
         sourceId: schemaNode.id,
         nodeType: schemaNode.type,
         category: "SHADOW",
         property: "effects",
-        expected: "DROP_SHADOW present",
+        expected: `${shadows.length} shadow effect(s) present`,
         actual: "none",
-        message: `Node '${schemaNode.id}' expected DROP_SHADOW effect, got none`,
+        message: `Node '${schemaNode.id}' expected ${shadows.length} shadow effect(s), got none`,
       });
-    } else {
-      const checkNum = (prop: "offsetX" | "offsetY" | "blurRadius" | "spreadRadius", actual: number, exp: number) => {
-        const diff = numDiff(actual, exp, tol);
+      return failures;
+    }
+
+    if (renderedEffects.length !== shadows.length) {
+      failures.push({
+        fixtureId,
+        sourceId: schemaNode.id,
+        nodeType: schemaNode.type,
+        category: "SHADOW",
+        property: "effects.length",
+        expected: shadows.length,
+        actual: renderedEffects.length,
+        message: `Node '${schemaNode.id}' shadow count mismatch: expected ${shadows.length}, got ${renderedEffects.length}`,
+      });
+    }
+
+    for (let i = 0; i < shadows.length; i++) {
+      const expected = shadows[i]!;
+      const actual = renderedEffects[i];
+      if (!actual) continue;
+
+      const expType = expected.inset ? "INNER_SHADOW" : "DROP_SHADOW";
+      if (actual.type !== expType) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "SHADOW",
+          property: `effects[${i}].type`,
+          expected: expType,
+          actual: actual.type,
+          message: `Node '${schemaNode.id}' shadow[${i}] type mismatch: expected ${expType}, got ${actual.type}`,
+        });
+      }
+
+      const checkNum = (prop: "offsetX" | "offsetY" | "blurRadius" | "spreadRadius", actVal: number, expVal: number) => {
+        const diff = numDiff(actVal, expVal, tol);
         if (diff !== null) {
           failures.push({
             fixtureId,
             sourceId: schemaNode.id,
             nodeType: schemaNode.type,
             category: "SHADOW",
-            property: prop,
-            expected: exp,
-            actual,
+            property: `effects[${i}].${prop}`,
+            expected: expVal,
+            actual: actVal,
             difference: diff,
             tolerance: tol,
-            message: `Node '${schemaNode.id}' shadow ${prop} expected ${exp}, got ${actual}`,
+            message: `Node '${schemaNode.id}' shadow[${i}] ${prop} expected ${expVal}, got ${actVal}`,
           });
         }
       };
 
-      checkNum("offsetX", dropShadow.offsetX, expected.offsetX);
-      checkNum("offsetY", dropShadow.offsetY, expected.offsetY);
-      checkNum("blurRadius", dropShadow.blurRadius, expected.blurRadius);
-      checkNum("spreadRadius", dropShadow.spreadRadius, expected.spreadRadius);
+      checkNum("offsetX", actual.offsetX, expected.offsetX);
+      checkNum("offsetY", actual.offsetY, expected.offsetY);
+      checkNum("blurRadius", actual.blurRadius, expected.blurRadius);
+      checkNum("spreadRadius", actual.spreadRadius, expected.spreadRadius);
 
-      const diffC = colorDiff(dropShadow.color, expected.color, colorTol);
+      const diffC = colorDiff(actual.color, expected.color, colorTol);
       if (diffC) {
         failures.push({
           fixtureId,
           sourceId: schemaNode.id,
           nodeType: schemaNode.type,
           category: "SHADOW",
-          property: "color",
+          property: `effects[${i}].color`,
           expected: expected.color,
-          actual: dropShadow.color,
+          actual: actual.color,
           difference: diffC,
           tolerance: colorTol,
-          message: `Node '${schemaNode.id}' shadow color mismatch: ${diffC}`,
+          message: `Node '${schemaNode.id}' shadow[${i}] color mismatch: ${diffC}`,
         });
       }
     }

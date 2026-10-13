@@ -12,6 +12,7 @@ export {
   DesignDocumentSchema,
   DesignDocumentV01Schema,
   DesignDocumentV02Schema,
+  DesignDocumentV03Schema,
   normalizeDesignDocument,
   upgradeDesignDocumentToLatest,
 } from "./document.js";
@@ -20,6 +21,7 @@ export type {
   DesignDocument,
   DesignDocumentV01,
   DesignDocumentV02,
+  DesignDocumentV03,
   DesignWarning,
   LatestDesignDocument,
   VersionedDesignDocument,
@@ -27,7 +29,13 @@ export type {
 } from "./document.js";
 export {
   DesignNodeSchema,
+  DesignNodeSchemaV01,
+  DesignNodeSchemaV02,
+  DesignNodeSchemaV03,
   FrameNodeSchema,
+  FrameNodeSchemaV01,
+  FrameNodeSchemaV02,
+  FrameNodeSchemaV03,
   ImageNodeSchema,
   RectangleNodeSchema,
   SvgNodeSchema,
@@ -43,6 +51,10 @@ export type {
 } from "./nodes.js";
 export {
   BorderSchema,
+  BorderSchemaV01,
+  BorderSideSchema,
+  BorderStyleSchema,
+  BordersSchema,
   BoxShadowSchema,
   ColorSchema,
   CornerRadiusSchema,
@@ -55,9 +67,14 @@ export {
   VisualStyleSchema,
   VisualStyleSchemaV01,
   VisualStyleSchemaV02,
+  VisualStyleSchemaV03,
 } from "./style.js";
 export type {
   Border,
+  BorderSide,
+  BorderStyle,
+  BorderV01,
+  Borders,
   BoxShadow,
   Color,
   CornerRadius,
@@ -70,11 +87,13 @@ export type {
   VisualStyle,
   VisualStyleV01,
   VisualStyleV02,
+  VisualStyleV03,
 } from "./style.js";
 export {
   DESIGN_SCHEMA_VERSION,
   DESIGN_SCHEMA_VERSION_V01,
   DESIGN_SCHEMA_VERSION_V02,
+  DESIGN_SCHEMA_VERSION_V03,
   SUPPORTED_SCHEMA_VERSIONS,
   isSupportedSchemaVersion,
 } from "./version.js";

@@ -35,6 +35,7 @@ describe("figma-renderer - representative fixtures & real smoke capture", () => 
       "fidelity-limits.json",
       "fidelity-pseudo.json",
       "fidelity-gradients.json",
+      "fidelity-borders-shadows.json",
       "capture.json",
     ];
 

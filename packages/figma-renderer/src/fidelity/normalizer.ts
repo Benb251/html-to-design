@@ -117,16 +117,30 @@ function normalizeNode(
   // Strokes
   let strokes: NormalizedStroke[] | undefined;
   if ("strokes" in node && Array.isArray((node as MinimalStrokesMixin).strokes)) {
+interface NodeWithStrokeProperties {
+  strokeTopWeight?: number;
+  strokeRightWeight?: number;
+  strokeBottomWeight?: number;
+  strokeLeftWeight?: number;
+  dashPattern?: readonly number[];
+}
+
     const rawStrokes = (node as MinimalStrokesMixin).strokes as readonly Paint[];
     const weight = ("strokeWeight" in node && typeof (node as GeometryMixin).strokeWeight === "number")
       ? (node as GeometryMixin).strokeWeight as number
       : 0;
+    const sw = node as unknown as NodeWithStrokeProperties;
+    const topW = typeof sw.strokeTopWeight === "number" ? sw.strokeTopWeight : weight;
+    const rightW = typeof sw.strokeRightWeight === "number" ? sw.strokeRightWeight : weight;
+    const bottomW = typeof sw.strokeBottomWeight === "number" ? sw.strokeBottomWeight : weight;
+    const leftW = typeof sw.strokeLeftWeight === "number" ? sw.strokeLeftWeight : weight;
+    const hasAnyStroke = weight > 0 || topW > 0 || rightW > 0 || bottomW > 0 || leftW > 0;
 
-    if (rawStrokes.length > 0 && weight > 0) {
+    if (rawStrokes.length > 0 && hasAnyStroke) {
       strokes = [];
       for (const paint of rawStrokes) {
         if (paint.type === "SOLID") {
-          strokes.push({
+          const sObj: NormalizedStroke = {
             color: {
               r: round4(paint.color.r),
               g: round4(paint.color.g),
@@ -134,7 +148,17 @@ function normalizeNode(
               a: round4(paint.opacity ?? 1),
             },
             width: round4(weight),
-          });
+          };
+          if (topW !== weight || rightW !== weight || bottomW !== weight || leftW !== weight) {
+            sObj.topWidth = round4(topW);
+            sObj.rightWidth = round4(rightW);
+            sObj.bottomWidth = round4(bottomW);
+            sObj.leftWidth = round4(leftW);
+            if (Array.isArray(sw.dashPattern) && sw.dashPattern.length > 0) {
+              sObj.dashPattern = sw.dashPattern.map((p: number) => round4(p));
+            }
+          }
+          strokes.push(sObj);
         }
       }
     }
@@ -166,10 +190,10 @@ function normalizeNode(
   if ("effects" in node && Array.isArray((node as BlendMixin).effects)) {
     const rawEffects = (node as BlendMixin).effects as readonly Effect[];
     for (const eff of rawEffects) {
-      if (eff.type === "DROP_SHADOW") {
+      if (eff.type === "DROP_SHADOW" || eff.type === "INNER_SHADOW") {
         if (!effects) effects = [];
         effects.push({
-          type: "DROP_SHADOW",
+          type: eff.type,
           offsetX: round4(eff.offset.x),
           offsetY: round4(eff.offset.y),
           blurRadius: round4(eff.radius),

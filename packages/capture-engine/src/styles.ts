@@ -1,5 +1,5 @@
-import type { BoxShadow, Color, Fill, TextStyle, VisualStyle } from "@web2design/design-schema";
-import { parseBackgroundGradientLayers } from "./gradients.js";
+import type { BorderSide, BorderStyle, BoxShadow, Color, Fill, TextStyle, VisualStyle } from "@web2design/design-schema";
+import { parseBackgroundGradientLayers, splitBackgroundLayers } from "./gradients.js";
 export type Warn = (code: string, message: string, nodeId?: string) => void;
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const NAMED_COLORS: Record<string, Color> = {
@@ -71,7 +71,7 @@ export function textStyle(style: CSSStyleDeclaration, warn: Warn): TextStyle {
     lineHeight: line !== undefined && line > 0 ? line : size * 1.2, letterSpacing: spacing ?? 0, textAlign: align,
     color: color ?? { r: 0, g: 0, b: 0, a: 1 } };
 }
-// Tokenize only at depth zero so rgba commas and modern color spaces remain intact.
+// Tokenize a single shadow layer only at depth zero so rgba commas remain intact.
 function shadowTokens(value: string): string[] | undefined {
   const tokens: string[] = [];
   let start = 0, depth = 0;
@@ -79,8 +79,7 @@ function shadowTokens(value: string): string[] | undefined {
     const char = value[index];
     if (char === "(") depth++;
     if (char === ")" && --depth < 0) return undefined;
-    if (depth === 0 && char === ",") return undefined;
-    if (index === value.length || depth === 0 && /\s/.test(char ?? "")) {
+    if (index === value.length || (depth === 0 && /\s/.test(char ?? ""))) {
       const token = value.slice(start, index).trim();
       if (token) tokens.push(token);
       start = index + 1;
@@ -88,29 +87,72 @@ function shadowTokens(value: string): string[] | undefined {
   }
   return depth === 0 ? tokens : undefined;
 }
-export function boxShadow(value: string, warn: Warn): BoxShadow | undefined {
-  if (!value || value.trim() === "none") return undefined;
-  const tokens = shadowTokens(value.trim());
-  if (!tokens || tokens.includes("inset")) {
-    warn("SHADOW_UNSUPPORTED", "Multiple, inset or malformed box shadows are omitted; only one outer shadow is supported.");
+
+function parseSingleShadow(layer: string, warn: Warn): BoxShadow | undefined {
+  const tokens = shadowTokens(layer.trim());
+  if (!tokens || tokens.length === 0) {
+    warn("SHADOW_UNSUPPORTED", `Malformed box-shadow layer was omitted: ${layer}`);
     return undefined;
   }
-  const lengths: number[] = [];
-  let color: Color | undefined;
+  let inset = false;
+  const filteredTokens: string[] = [];
   for (const token of tokens) {
-    const length = token === "0" ? 0 : cssPixels(token);
-    if (length !== undefined) lengths.push(length);
-    else {
-      const parsed = cssColor(token);
-      if (!parsed || color) { warn("SHADOW_UNSUPPORTED", "Unsupported box-shadow syntax/color was omitted."); return undefined; }
-      color = parsed;
+    if (token.toLowerCase() === "inset") {
+      inset = true;
+    } else {
+      filteredTokens.push(token);
     }
   }
-  if (!color || lengths.length < 2 || lengths.length > 4 || (lengths[2] ?? 0) < 0) {
-    warn("SHADOW_UNSUPPORTED", "Unresolved box-shadow lengths/color were omitted."); return undefined;
+
+  const lengths: number[] = [];
+  let color: Color | undefined;
+
+  for (const token of filteredTokens) {
+    const length = token === "0" ? 0 : cssPixels(token);
+    if (length !== undefined) {
+      lengths.push(length);
+    } else {
+      const parsed = cssColor(token);
+      if (parsed && !color) {
+        color = parsed;
+      } else {
+        warn("SHADOW_UNSUPPORTED", `Unsupported box-shadow token was omitted: ${token}`);
+        return undefined;
+      }
+    }
   }
-  return { offsetX: lengths[0]!, offsetY: lengths[1]!, blurRadius: lengths[2] ?? 0, spreadRadius: lengths[3] ?? 0, color, inset: false };
+
+  if (!color || lengths.length < 2 || lengths.length > 4 || (lengths[2] ?? 0) < 0) {
+    warn("SHADOW_UNSUPPORTED", "Unresolved box-shadow lengths or color were omitted.");
+    return undefined;
+  }
+
+  return {
+    offsetX: lengths[0]!,
+    offsetY: lengths[1]!,
+    blurRadius: lengths[2] ?? 0,
+    spreadRadius: lengths[3] ?? 0,
+    color,
+    inset,
+  };
 }
+
+export function parseBoxShadows(value: string, warn: Warn): BoxShadow[] {
+  if (!value || value.trim() === "none") return [];
+  const layers = splitBackgroundLayers(value.trim());
+  const shadows: BoxShadow[] = [];
+  for (const layer of layers) {
+    const shadow = parseSingleShadow(layer, warn);
+    if (shadow) shadows.push(shadow);
+  }
+  return shadows;
+}
+
+export function boxShadow(value: string, warn: Warn): BoxShadow | undefined {
+  const shadows = parseBoxShadows(value, warn);
+  return shadows[0];
+}
+
 export function visualStyle(style: CSSStyleDeclaration, warn: Warn, box?: { width: number; height: number }): VisualStyle {
   const result: VisualStyle = {};
   const fills: Fill[] = [];
@@ -133,17 +175,44 @@ export function visualStyle(style: CSSStyleDeclaration, warn: Warn, box?: { widt
   if (background && background.a > 0) fills.push({ type: "solid", color: background });
   else if (style.backgroundColor && !background) warn("BACKGROUND_COLOR_UNSUPPORTED", "Unsupported background color was omitted.");
   if (fills.length > 0) result.fills = fills;
-  const widths = [style.borderTopWidth, style.borderRightWidth, style.borderBottomWidth, style.borderLeftWidth].map(cssPixels);
-  const borderStyles = [style.borderTopStyle, style.borderRightStyle, style.borderBottomStyle, style.borderLeftStyle];
-  const colors = [style.borderTopColor, style.borderRightColor, style.borderBottomColor, style.borderLeftColor].map(cssColor);
-  const width = widths[0];
-  if (widths.some(value => (value ?? 0) > 0)) {
-    const borderStyle = borderStyles[0], color = colors[0];
-    if (widths.every(value => value === width) && borderStyles.every(value => value === borderStyle) && colors.every(value => value && color && value.r === color.r && value.g === color.g && value.b === color.b && value.a === color.a)
-      && width !== undefined && width >= 0 && color && ["solid", "dashed", "dotted", "double"].includes(borderStyle ?? "")) {
-      result.border = { width, style: borderStyle as "solid" | "dashed" | "dotted" | "double", color };
-    } else warn("BORDER_UNSUPPORTED", "Nonuniform or unsupported borders were omitted.");
+
+  // Capture per-side borders
+  const parseSide = (rawWidth: string, rawStyle: string, rawColor: string): BorderSide => {
+    let width = cssPixels(rawWidth) ?? 0;
+    let s = (rawStyle ?? "none").trim().toLowerCase();
+    if (width <= 0 || s === "none" || s === "hidden") {
+      width = 0;
+      s = "none";
+    }
+    const recognizedStyles = [
+      "none",
+      "hidden",
+      "solid",
+      "dashed",
+      "dotted",
+      "double",
+      "groove",
+      "ridge",
+      "inset",
+      "outset",
+    ] as const;
+    const validStyle: BorderStyle = recognizedStyles.includes(s as (typeof recognizedStyles)[number])
+      ? (s as BorderStyle)
+      : "solid";
+    const color = cssColor(rawColor) ?? { r: 0, g: 0, b: 0, a: 1 };
+    return { width, style: validStyle, color };
+  };
+
+  const top = parseSide(style.borderTopWidth, style.borderTopStyle, style.borderTopColor);
+  const right = parseSide(style.borderRightWidth, style.borderRightStyle, style.borderRightColor);
+  const bottom = parseSide(style.borderBottomWidth, style.borderBottomStyle, style.borderBottomColor);
+  const left = parseSide(style.borderLeftWidth, style.borderLeftStyle, style.borderLeftColor);
+
+  const hasVisibleBorder = top.width > 0 || right.width > 0 || bottom.width > 0 || left.width > 0;
+  if (hasVisibleBorder) {
+    result.border = { top, right, bottom, left };
   }
+
   const radii = [style.borderTopLeftRadius, style.borderTopRightRadius, style.borderBottomRightRadius, style.borderBottomLeftRadius].map(value => {
     const parts = (value || style.borderRadius || "0px").trim().split(/\s+/).map(cssPixels);
     return parts.length <= 2 && parts.every(part => part === parts[0]) ? parts[0] : undefined;
@@ -160,8 +229,8 @@ export function visualStyle(style: CSSStyleDeclaration, warn: Warn, box?: { widt
   } else if ([style.borderTopLeftRadius, style.borderTopRightRadius, style.borderBottomRightRadius, style.borderBottomLeftRadius].some(value => value && value !== "0px")) {
     warn("RADIUS_UNSUPPORTED", "Percentage/elliptical corner radii were omitted.");
   }
-  const shadow = boxShadow(style.boxShadow, warn);
-  if (shadow) result.boxShadows = [shadow];
+  const shadows = parseBoxShadows(style.boxShadow, warn);
+  if (shadows.length > 0) result.boxShadows = shadows;
   return result;
 }
 export function characters(value: string, whiteSpace: string): string {

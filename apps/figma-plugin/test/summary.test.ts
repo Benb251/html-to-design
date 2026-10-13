@@ -5,7 +5,9 @@ import { imageFixture, inlineSvgFixture, nestedFramesFixture, simpleTextFixture 
 describe("Figma plugin - computeDocumentSummary", () => {
   it("computes accurate summary for simple text document", () => {
     const summary = computeDocumentSummary(simpleTextFixture);
-    expect(summary.schemaVersion).toBe("0.2");
+    expect(summary.schemaVersion).toBe("0.3");
+    const summaryV02 = computeDocumentSummary({ ...simpleTextFixture, schemaVersion: "0.2" });
+    expect(summaryV02.schemaVersion).toBe("0.2");
     const summaryV01 = computeDocumentSummary({ ...simpleTextFixture, schemaVersion: "0.1" });
     expect(summaryV01.schemaVersion).toBe("0.1");
     expect(summary.totalNodes).toBe(2); // root (frame) + text-1

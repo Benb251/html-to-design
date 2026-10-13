@@ -278,7 +278,7 @@ describe("Design Schema V0.1", () => {
   });
 
   it("rejects an invalid schema version", () => {
-    const document = { ...createBaseDocument(), schemaVersion: "0.3" };
+    const document = { ...createBaseDocument(), schemaVersion: "0.4" };
     expect(safeParseDesignDocument(document).success).toBe(false);
   });
 
@@ -467,7 +467,8 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
   it("identifies supported versions correctly", () => {
     expect(isSupportedSchemaVersion("0.1")).toBe(true);
     expect(isSupportedSchemaVersion("0.2")).toBe(true);
-    expect(isSupportedSchemaVersion("0.3")).toBe(false);
+    expect(isSupportedSchemaVersion("0.3")).toBe(true);
+    expect(isSupportedSchemaVersion("0.4")).toBe(false);
     expect(isSupportedSchemaVersion("1.0")).toBe(false);
     expect(isSupportedSchemaVersion(null)).toBe(false);
   });
@@ -479,11 +480,11 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
     expect(parsed.root.style?.fills?.[0]?.type).toBe("solid");
   });
 
-  it("upgrades/normalizes V0.1 documents to V0.2 with identical semantics", () => {
+  it("upgrades/normalizes V0.1 documents to V0.3 with identical semantics", () => {
     const v01Doc = createV01Document();
     const parsed = parseDesignDocument(v01Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.2");
+    expect(upgraded.schemaVersion).toBe("0.3");
     expect(upgraded.root.id).toBe(v01Doc.root.id);
     expect(upgraded.root.style?.fills).toEqual(v01Doc.root.style.fills);
     expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
@@ -693,6 +694,246 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
                   { position: 0, color: { r: 1, g: 0, b: 0, a: 1 } },
                   { position: 1, color: { r: 0, g: 0, b: 1, a: 1 } },
                 ],
+              },
+            ],
+          },
+        },
+      }).success,
+    ).toBe(false);
+  });
+});
+
+describe("Design Schema V0.3 & Border/Shadow Support", () => {
+  function createV02Document() {
+    return {
+      ...createBaseDocument(),
+      schemaVersion: "0.2" as const,
+      root: {
+        ...createBaseDocument().root,
+        style: {
+          fills: [
+            {
+              type: "linear-gradient" as const,
+              angle: 90,
+              stops: [
+                { position: 0, color: { r: 1, g: 0, b: 0, a: 1 } },
+                { position: 1, color: { r: 0, g: 0, b: 1, a: 1 } },
+              ],
+            },
+          ],
+          border: {
+            width: 2,
+            style: "solid" as const,
+            color: { r: 0.5, g: 0.5, b: 0.5, a: 1 },
+          },
+        },
+      },
+    };
+  }
+
+  it("parses valid V0.3 documents with per-side borders", () => {
+    const v03Doc = {
+      ...createBaseDocument(),
+      schemaVersion: "0.3" as const,
+      root: {
+        ...createBaseDocument().root,
+        style: {
+          fills: [{ type: "solid" as const, color: { r: 1, g: 1, b: 1, a: 1 } }],
+          border: {
+            top: { width: 1, style: "solid" as const, color: { r: 1, g: 0, b: 0, a: 1 } },
+            right: { width: 2, style: "dashed" as const, color: { r: 0, g: 1, b: 0, a: 1 } },
+            bottom: { width: 3, style: "dotted" as const, color: { r: 0, g: 0, b: 1, a: 1 } },
+            left: { width: 4, style: "double" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+          },
+        },
+      },
+    };
+    const parsed = parseDesignDocument(v03Doc);
+    expect(parsed.schemaVersion).toBe("0.3");
+    expect(parsed.root.style?.border?.top.width).toBe(1);
+    expect(parsed.root.style?.border?.right.style).toBe("dashed");
+    expect(parsed.root.style?.border?.bottom.color.b).toBe(1);
+    expect(parsed.root.style?.border?.left.width).toBe(4);
+  });
+
+  it("parses valid V0.3 documents with multiple drop shadows and inset shadows", () => {
+    const v03Doc = {
+      ...createBaseDocument(),
+      schemaVersion: "0.3" as const,
+      root: {
+        ...createBaseDocument().root,
+        style: {
+          boxShadows: [
+            {
+              offsetX: 0,
+              offsetY: 2,
+              blurRadius: 4,
+              spreadRadius: 0,
+              color: { r: 0, g: 0, b: 0, a: 0.2 },
+              inset: false,
+            },
+            {
+              offsetX: 0,
+              offsetY: 1,
+              blurRadius: 2,
+              spreadRadius: 0,
+              color: { r: 1, g: 1, b: 1, a: 0.3 },
+              inset: true,
+            },
+            {
+              offsetX: 0,
+              offsetY: 8,
+              blurRadius: 16,
+              spreadRadius: -2,
+              color: { r: 0, g: 0, b: 0, a: 0.1 },
+              inset: false,
+            },
+          ],
+        },
+      },
+    };
+    const parsed = parseDesignDocument(v03Doc);
+    expect(parsed.schemaVersion).toBe("0.3");
+    expect(parsed.root.style?.boxShadows?.length).toBe(3);
+    expect(parsed.root.style?.boxShadows?.[0]?.inset).toBe(false);
+    expect(parsed.root.style?.boxShadows?.[1]?.inset).toBe(true);
+    expect(parsed.root.style?.boxShadows?.[2]?.spreadRadius).toBe(-2);
+  });
+
+  it("strictly rejects per-side borders in V0.1 documents", () => {
+    const docWithV03Border = {
+      ...createBaseDocument(),
+      schemaVersion: "0.1" as const,
+      root: {
+        ...createBaseDocument().root,
+        style: {
+          border: {
+            top: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+            right: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+            bottom: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+            left: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+          },
+        },
+      },
+    };
+    expect(safeParseDesignDocument(docWithV03Border).success).toBe(false);
+  });
+
+  it("strictly rejects per-side borders in V0.2 documents", () => {
+    const docWithV03Border = {
+      ...createV02Document(),
+      root: {
+        ...createV02Document().root,
+        style: {
+          border: {
+            top: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+            right: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+            bottom: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+            left: { width: 1, style: "solid" as const, color: { r: 0, g: 0, b: 0, a: 1 } },
+          },
+        },
+      },
+    };
+    expect(safeParseDesignDocument(docWithV03Border).success).toBe(false);
+  });
+
+  it("upgrades/normalizes V0.1 documents with uniform borders to V0.3", () => {
+    const v01Doc = {
+      ...createBaseDocument(),
+      schemaVersion: "0.1" as const,
+      root: {
+        ...createBaseDocument().root,
+        style: {
+          border: { width: 2, style: "solid" as const, color: { r: 0.5, g: 0.5, b: 0.5, a: 1 } },
+        },
+      },
+    };
+    const parsed = parseDesignDocument(v01Doc);
+    const upgraded = normalizeDesignDocument(parsed);
+    expect(upgraded.schemaVersion).toBe("0.3");
+    expect(upgraded.root.style?.border?.top).toEqual({
+      width: 2,
+      style: "solid",
+      color: { r: 0.5, g: 0.5, b: 0.5, a: 1 },
+    });
+    expect(upgraded.root.style?.border?.right).toEqual(upgraded.root.style?.border?.top);
+    expect(upgraded.root.style?.border?.bottom).toEqual(upgraded.root.style?.border?.top);
+    expect(upgraded.root.style?.border?.left).toEqual(upgraded.root.style?.border?.top);
+  });
+
+  it("upgrades/normalizes V0.2 gradient documents to V0.3 preserving gradients and borders", () => {
+    const v02Doc = createV02Document();
+    const parsed = parseDesignDocument(v02Doc);
+    const upgraded = normalizeDesignDocument(parsed);
+    expect(upgraded.schemaVersion).toBe("0.3");
+    expect(upgraded.root.style?.fills?.[0]?.type).toBe("linear-gradient");
+    expect(upgraded.root.style?.border?.top.width).toBe(2);
+    expect(upgraded.root.style?.border?.right.width).toBe(2);
+    expect(upgraded.root.style?.border?.bottom.width).toBe(2);
+    expect(upgraded.root.style?.border?.left.width).toBe(2);
+  });
+
+  it("strictly rejects negative border width or invalid border style in V0.3", () => {
+    const base = {
+      ...createBaseDocument(),
+      schemaVersion: "0.3" as const,
+    };
+
+    expect(
+      safeParseDesignDocument({
+        ...base,
+        root: {
+          ...base.root,
+          style: {
+            border: {
+              top: { width: -1, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+              right: { width: 1, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+              bottom: { width: 1, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+              left: { width: 1, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+            },
+          },
+        },
+      }).success,
+    ).toBe(false);
+
+    expect(
+      safeParseDesignDocument({
+        ...base,
+        root: {
+          ...base.root,
+          style: {
+            border: {
+              top: { width: 1, style: "invalid_style", color: { r: 0, g: 0, b: 0, a: 1 } },
+              right: { width: 1, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+              bottom: { width: 1, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+              left: { width: 1, style: "solid", color: { r: 0, g: 0, b: 0, a: 1 } },
+            },
+          },
+        },
+      }).success,
+    ).toBe(false);
+  });
+
+  it("strictly rejects negative blur radius or malformed shadow in V0.3", () => {
+    const base = {
+      ...createBaseDocument(),
+      schemaVersion: "0.3" as const,
+    };
+
+    expect(
+      safeParseDesignDocument({
+        ...base,
+        root: {
+          ...base.root,
+          style: {
+            boxShadows: [
+              {
+                offsetX: 0,
+                offsetY: 2,
+                blurRadius: -5,
+                spreadRadius: 0,
+                color: { r: 0, g: 0, b: 0, a: 1 },
+                inset: false,
               },
             ],
           },

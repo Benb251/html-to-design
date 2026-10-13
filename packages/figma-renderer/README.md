@@ -1,4 +1,4 @@
-# @web2design/figma-renderer — W2D-012
+# @web2design/figma-renderer — W2D-013
 
 Pure TypeScript rendering engine that translates validated Web2Design Design Schema documents into editable Figma node hierarchies.
 
@@ -11,9 +11,9 @@ The renderer converts absolute document-origin CSS pixel coordinates into Figma 
 ## Architecture
 
 ```text
-Versioned DesignDocument (V0.1 or V0.2)
+Versioned DesignDocument (V0.1, V0.2, or V0.3)
         ↓
-normalizeDesignDocument(doc)  [V0.1 normalized to V0.2]
+normalizeDesignDocument(doc)  [Upgraded to latest V0.3]
         ↓
 renderDesignDocument(doc, host, options)
         ↓
@@ -22,11 +22,13 @@ FigmaRendererHost (minimal adapter boundary)
 Native SceneNode Hierarchy:
   Web2Design — <Page Title> (FrameNode)
    ├── FrameNode (nested frames with parent-local offsets)
-   ├── RectangleNode (fills, strokes, cornerRadius, dropShadow)
+   ├── RectangleNode (fills, strokes, cornerRadius, drop/inner shadows)
    ├── TextNode (editable text, font cache, deterministic fallback)
    ├── RectangleNode + ImagePaint (embedded base64 / remote URL)
    ├── FrameNode / Vector (native SVG via createNodeFromSvg)
-   └── Gradient Fills (native GRADIENT_LINEAR & GRADIENT_RADIAL paints)
+   ├── Gradient Fills (native GRADIENT_LINEAR & GRADIENT_RADIAL paints)
+   ├── Non-Uniform Strokes (native individual strokeTopWeight / strokeRightWeight...)
+   └── Shadow Effects (native DROP_SHADOW & INNER_SHADOW effect stacks)
 ```
 
 ## Supported Node & Style Mappings
@@ -34,31 +36,19 @@ Native SceneNode Hierarchy:
 | Schema Entity | Figma Target | Implementation Notes |
 |---|---|---|
 | `frame` | `FrameNode` | Fixed dimensions, `layoutMode = "NONE"`, default fills cleared, parent-local coordinates. |
-| `rectangle` | `RectangleNode` | Solid fills, linear/radial gradient fills, strokes, uniform/per-corner radius, single outer drop shadow. |
+| `rectangle` | `RectangleNode` | Solid fills, linear/radial gradient fills, strokes, uniform/per-corner radius, multiple drop/inner shadows. |
 | `text` | `TextNode` | Editable characters, font resolver & cache, deterministic fallback, font size, line height, letter spacing, horizontal alignment, local opacity. |
 | `image` | `RectangleNode` (Image fill) | Data URLs, embedded base64, and remote image URLs. `cover` → `FILL`, `contain` → `FIT`. Placeholders created on network or decode failures. |
 | `svg` | `FrameNode` / vectors | Native SVG import via `host.createNodeFromSvg()`. Scaled to captured dimensions. Fallback placeholder on syntax failure. |
 | `solid` fill | `SolidPaint` (`SOLID`) | RGB color + paint opacity. |
 | `linear-gradient` fill | `GradientPaint` (`GRADIENT_LINEAR`) | Affine 2x3 matrix mapping CSS angle and non-square aspect ratio to Figma unit coordinate space; normalized color stops. |
 | `radial-gradient` fill | `GradientPaint` (`GRADIENT_RADIAL`) | Affine 2x3 matrix mapping normalized center and ellipse radii to Figma unit coordinate space; normalized color stops. |
-
-## Gradient Fill Mapping (W2D-012)
-
-### Linear Gradient Transform Math
-Figma linear gradient paints use a 2x3 affine matrix `[[a, b, tx], [c, d, ty]]` in unit coordinate space:
-- Direction vector for CSS angle $\alpha$ (0deg = up): $D = (\sin\alpha, -\cos\alpha)$
-- Gradient line length in pixels: $L = |W\sin\alpha| + |H\cos\alpha|$
-- Start handle in normalized coordinates: $(sx, sy) = (0.5 - \frac{L\sin\alpha}{2W}, 0.5 + \frac{L\cos\alpha}{2H})$
-- Affine transform components: $a = \frac{L\sin\alpha}{W}, b = -\frac{L\cos\alpha}{H}, c = -b, d = a, tx = sx, ty = sy$
-- Correctly handles landscape, portrait, square, cardinal, diagonal, and arbitrary angles.
-
-### Radial Gradient Transform Math
-Figma radial gradient paints use an affine matrix mapping center $(cx, cy)$ and normalized radii $(rx, ry)$:
-- Matrix: `[[rx, 0, cx], [0, ry, cy]]`
-- Supports circles, ellipses, and off-center radial gradients.
-
-### Layer Ordering
-In CSS, gradients are painted over solid background colors. In Figma Plugin API, `fills[0]` is drawn first (bottommost) and `fills[length - 1]` is on top. The renderer reverses top-to-bottom schema fills to Figma's bottom-to-top paint array, guaranteeing solid colors stay beneath gradients.
+| Uniform borders | `strokes` + `strokeWeight` | Single shared solid paint and scalar stroke weight. |
+| Non-uniform border widths | Native individual stroke weights | Compatible solid borders map directly to `strokeTopWeight`, `strokeRightWeight`, `strokeBottomWeight`, `strokeLeftWeight`. |
+| Mixed border colors | Primary color paint + diagnostic | Figma exposes a single strokes paint array per node; uses primary side color and emits `BORDER_COLOR_APPROXIMATED`. |
+| Border styles (`dashed`, `dotted`) | Native `dashPattern` | Approximated using native dash patterns; emits `BORDER_STYLE_APPROXIMATED`. |
+| Multiple drop shadows | Native `DROP_SHADOW` effects | Preserves original CSS top-to-bottom stack order. |
+| Inset box shadows | Native `INNER_SHADOW` effects | Preserves offset, blur, spread, and independent alpha. |
 
 ## Host Boundary (`FigmaRendererHost`)
 
@@ -72,6 +62,6 @@ In tests, `FakeFigmaHost` provides in-memory node structures. In production, `cr
 
 ## Fidelity Regression Suite
 
-Run with `npm run fidelity` (or `npm run fidelity:update`):
-- 15 fixtures (7 canonical schema fixtures + 8 Chrome browser captures including `fidelity-gradients`).
-- Evaluates geometry, hierarchy, text, fills (solid and native linear/radial gradients), borders, radii, shadows, images, SVGs, and assets.
+Run with `npm run fidelity`:
+- 16 fixtures (7 canonical schema fixtures + 9 Chrome browser captures including `fidelity-borders-shadows`).
+- Evaluates geometry, hierarchy, text, fills, non-uniform strokes, radii, drop and inner shadows, images, SVGs, and assets.

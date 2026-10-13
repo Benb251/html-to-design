@@ -179,11 +179,15 @@ async function main() {
   });
 
   const evaluationResults = [];
+  const targetFilter = process.argv[2];
+  const sitesToRun = targetFilter
+    ? SITES.filter((s) => s.id.includes(targetFilter) || s.url.includes(targetFilter))
+    : SITES;
 
-  for (let i = 0; i < SITES.length; i++) {
-    const site = SITES[i];
+  for (let i = 0; i < sitesToRun.length; i++) {
+    const site = sitesToRun[i];
     console.log(
-      `\n[${i + 1}/${SITES.length}] Evaluating ${site.id} (${site.url})...`
+      `\n[${i + 1}/${sitesToRun.length}] Evaluating ${site.id} (${site.url})...`
     );
 
     const siteEvidence = {

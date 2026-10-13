@@ -7,9 +7,9 @@ The core pipeline is:
 ```text
 Rendered page
   -> Capture source (Chrome Extension, future Playwright/server capture, ...)
-  -> Versioned Design Schema (V0.2 latest, V0.1 read-compatible)
+  -> Versioned Design Schema (V0.3 latest, V0.1 & V0.2 read-compatible)
   -> Figma Renderer
-  -> Editable Figma document (native frames, text, shapes, images, SVGs, gradient paints)
+  -> Editable Figma document (native frames, text, shapes, images, SVGs, gradient paints, individual strokes, shadow stacks)
 ```
 
 ## Core Philosophy
@@ -27,8 +27,8 @@ apps/
   extension/        # Manifest V3 popup + capture pipeline
   figma-plugin/     # Figma plugin UI, message protocol & renderer integration
 packages/
-  capture-engine/   # Rendered DOM to validated schema V0.2
-  design-schema/    # Multi-version Design Schema (V0.1 + V0.2)
+  capture-engine/   # Rendered DOM to validated schema V0.3
+  design-schema/    # Multi-version Design Schema (V0.1, V0.2, V0.3)
   figma-renderer/   # Schema to native editable Figma node tree renderer
   test-fixtures/    # Deterministic example documents
 ```
@@ -47,13 +47,13 @@ npm run smoke -w @web2design/extension
 npm run fidelity
 ```
 
-## Current Scope (W2D-012)
+## Current Scope (W2D-013)
 
-W2D-001 through W2D-012 are implemented.
-- **Design Schema V0.2**: Current wire version emits `"0.2"`. Full backward read/import compatibility for V0.1 documents via explicit normalization.
-- **CSS Gradient Fills**: First-class deterministic support for `linear-gradient(...)` and `radial-gradient(...)`, including cardinal and diagonal directions, arbitrary angles, rectangular aspect ratios, normalized stops, implicit stop distribution, alpha preservation, hard stops, and radial center/radii geometry.
-- **Pseudo-Element Gradients**: Synthetic `::before` and `::after` pseudo-elements transparently support gradient fills.
-- **Native Figma Paints**: Figma renderer converts normalized schema gradients into native editable `GRADIENT_LINEAR` and `GRADIENT_RADIAL` paints with mathematically exact 2x3 affine transforms.
-- **Fill Ordering**: Respects CSS background layering by mapping top-to-bottom schema fills to Figma's bottom-to-top paint order.
-- **Fidelity Regression Suite**: 15 fixtures (7 canonical schema fixtures + 8 Chrome browser captures) locked with golden snapshot baselines and explicit numeric tolerances.
+W2D-001 through W2D-013 are implemented.
+- **Design Schema V0.3**: Current wire version emits `"0.3"`. Full backward read/import compatibility for V0.1 and V0.2 documents via explicit normalization.
+- **Non-Uniform Borders**: First-class support for per-side border widths, styles, and colors (`top`, `right`, `bottom`, `left`). Compatible solid borders map to native Figma individual stroke weights (`strokeTopWeight`, `strokeRightWeight`, `strokeBottomWeight`, `strokeLeftWeight`).
+- **Border Style Recognition**: Recognizes CSS border styles (`solid`, `dashed`, `dotted`, `double`, `groove`, `ridge`, `inset`, `outset`). Dashed and dotted styles map to native Figma stroke dash patterns with explicit approximation warnings (`BORDER_STYLE_APPROXIMATED`).
+- **Multiple & Inset Box Shadows**: Ordered arrays of box shadows preserved in schema without deduplication or merging. Mapped directly to native Figma `DROP_SHADOW` and `INNER_SHADOW` effect arrays preserving stack order.
+- **Approximation Diagnostics**: Deterministic structured warnings for mixed side colors (`BORDER_COLOR_APPROXIMATED`), approximated styles (`BORDER_STYLE_APPROXIMATED`), and rounded non-uniform corner interactions (`BORDER_CORNER_APPROXIMATED`).
+- **Fidelity Regression Suite**: 16 fixtures (7 canonical schema fixtures + 9 Chrome browser captures including `fidelity-borders-shadows`) locked with golden snapshot baselines and explicit tolerances.
 - **W2D-009 Status**: Interactive Figma Desktop GUI validation remains pending (independent manual gate).
