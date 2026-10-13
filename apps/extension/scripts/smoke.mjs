@@ -11,7 +11,7 @@ const candidates = [process.env.CHROME_PATH, "C:/Program Files/Google/Chrome/App
 let executable;
 for (const candidate of candidates) { try { await fs.access(candidate); executable = candidate; break; } catch { /* Try next configured path. */ } }
 if (!executable) throw new Error("Chrome was not found. Set CHROME_PATH. Manual extension loading is a separate check.");
-const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets"];
+const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo"];
 const fixtures = new Map(await Promise.all(names.map(async name => ["/" + name + ".html", await fs.readFile(new URL("../fixtures/" + name + ".html", import.meta.url))])));
 const dotPng = await fs.readFile(new URL("../fixtures/dot.png", import.meta.url));
 const content = await fs.readFile(new URL("../dist/content.js", import.meta.url), "utf8");
@@ -244,6 +244,101 @@ try {
         assert.equal(video.type, "rectangle");
         assert.ok(doc.warnings.some(w => w.code === "CANVAS_UNSUPPORTED" && w.nodeId === canvas.id));
         assert.ok(doc.warnings.some(w => w.code === "MEDIA_UNSUPPORTED" && w.nodeId === video.id));
+      });
+    }
+    if (name === "fidelity-pseudo") {
+      const pseudo = (parentId, kind) => byId.get(oracle.elements[parentId].id + kind);
+      check("plain text ::before and ::after capture", () => {
+        const beforeNode = pseudo("before-text", "::before");
+        assert.ok(beforeNode, "::before text node must exist");
+        assert.equal(beforeNode.type, "text");
+        assert.equal(beforeNode.sourceTag, "::before");
+        assert.equal(beforeNode.characters, "Start: ");
+        assert.equal(beforeNode.textStyle.fontWeight, 700);
+
+        const afterNode = pseudo("after-text", "::after");
+        assert.ok(afterNode, "::after text node must exist");
+        assert.equal(afterNode.type, "text");
+        assert.equal(afterNode.sourceTag, "::after");
+        assert.equal(afterNode.characters, " :End");
+        assert.equal(afterNode.textStyle.fontWeight, 700);
+      });
+      check("unicode glyph generated content", () => {
+        const iconNode = pseudo("unicode-glyph", "::before");
+        assert.ok(iconNode);
+        assert.equal(iconNode.type, "text");
+        assert.equal(iconNode.characters, "★");
+        color(iconNode.textStyle.color, { r: 245 / 255, g: 158 / 255, b: 11 / 255, a: 1 });
+      });
+      check("decorative empty-content visual rectangle", () => {
+        const box = pseudo("decorative-box", "::before");
+        assert.ok(box);
+        assert.equal(box.type, "rectangle");
+        assert.equal(box.sourceTag, "::before");
+        near(box.width, 16, "decorative width");
+        near(box.height, 16, "decorative height");
+        color(box.style.fills[0].color, { r: 16 / 255, g: 185 / 255, b: 129 / 255, a: 1 });
+      });
+      check("circular badge with border-radius", () => {
+        const badge = pseudo("circular-badge", "::after");
+        assert.ok(badge);
+        assert.equal(badge.type, "rectangle");
+        near(badge.width, 12, "badge width");
+        near(badge.height, 12, "badge height");
+        near(badge.style.cornerRadius, 6, "badge radius");
+        color(badge.style.fills[0].color, { r: 239 / 255, g: 68 / 255, b: 68 / 255, a: 1 });
+      });
+      check("box with border and radius", () => {
+        const box = pseudo("box-border-radius", "::before");
+        assert.ok(box);
+        assert.equal(box.type, "rectangle");
+        near(box.width, 24, "box width");
+        near(box.height, 24, "box height");
+        assert.equal(box.style.cornerRadius, 4);
+        assert.equal(box.style.border.width, 2);
+        assert.equal(box.style.border.style, "solid");
+      });
+      check("pseudo with text and background decomposed into frame and child text", () => {
+        const frame = pseudo("text-and-background", "::before");
+        assert.ok(frame);
+        assert.equal(frame.type, "frame");
+        assert.equal(frame.sourceTag, "::before");
+        near(frame.width, 44, "frame width");
+        near(frame.height, 20, "frame height");
+        color(frame.style.fills[0].color, { r: 239 / 255, g: 68 / 255, b: 68 / 255, a: 1 });
+        assert.equal(frame.children.length, 1);
+        const childText = frame.children[0];
+        assert.equal(childText.id, frame.id + ":text");
+        assert.equal(childText.type, "text");
+        assert.equal(childText.characters, "NEW");
+        color(childText.textStyle.color, { r: 1, g: 1, b: 1, a: 1 });
+      });
+      check("deterministic child order: ::before, real content, ::after", () => {
+        const parent = element("both-before-after");
+        assert.ok(parent);
+        const children = parent.children;
+        assert.ok(children.length >= 3, "expected at least 3 children in both-before-after container");
+        assert.ok(children[0].id.endsWith("::before"));
+        assert.ok(children[children.length - 1].id.endsWith("::after"));
+      });
+      check("nested element pseudo and local opacity", () => {
+        const nested = pseudo("nested-child", "::before");
+        assert.ok(nested);
+        assert.equal(nested.characters, "• ");
+
+        const ghost = pseudo("local-opacity", "::before");
+        assert.ok(ghost);
+        assert.equal(ghost.opacity, 0.5);
+      });
+      check("hidden and none pseudo-elements are omitted", () => {
+        assert.equal(pseudo("hidden-pseudo", "::before"), undefined);
+        assert.equal(pseudo("none-content", "::before"), undefined);
+      });
+      check("unsupported content, gradient, and transform warnings", () => {
+        assert.equal(pseudo("unsupported-content", "::before"), undefined);
+        assert.ok(doc.warnings.some(w => w.code === "PSEUDO_CONTENT_UNSUPPORTED"));
+        assert.ok(doc.warnings.some(w => w.code === "BACKGROUND_IMAGE_UNSUPPORTED"));
+        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_APPROXIMATED" && w.nodeId?.includes(oracle.elements["transformed-pseudo"].id)));
       });
     }
     await fs.writeFile(new URL(name + ".json", evidence), JSON.stringify(doc, null, 2));

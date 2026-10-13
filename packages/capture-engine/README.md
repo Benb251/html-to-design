@@ -7,14 +7,32 @@ Public API: `captureDocument(document, options?)`, `documentRect`, `captureId`, 
 ## Supported
 
 - Light-DOM traversal of currently rendered normal-flow content, including offscreen elements with positive rendered geometry.
+- Synthetic pseudo-element capture (`::before` / `::after`) into deterministic standard V0.1 `text`, `rectangle`, or `frame` nodes with stable IDs (`<parentId>::before`, `<parentId>::after`, `<parentId>::before:text`).
 - Standard HTML `<img>` elements captured as `type: "image"` nodes referencing validated `AssetRecord` entries in `document.assets`.
 - Inline `<svg>` elements captured as `type: "svg"` nodes with deterministic, sanitized serialized markup in `inlineSvg` and an associated asset entry in `document.assets`.
 - Meaningful container frames: semantic groups, visual boxes, multi-child divs and local-opacity groups. Plain inline/text wrappers are flattened.
-- Editable text from individual DOM text nodes using Range geometry and the parent element's computed typography.
+- Editable text from individual DOM text nodes and generated pseudo text using parent/pseudo computed typography.
 - CSS-pixel absolute document-origin coordinates from bounding rectangles plus captured scroll offsets.
 - Solid backgrounds, uniform borders, circular pixel radii, and single outer box shadows.
 - Group opacity applied once, not copied multiplicatively into descendants.
 - Safe omission of live form values, including password/textarea/select content.
+
+## Pseudo-Element Support Matrix (W2D-011)
+
+| Pseudo Scenario | Status | Behavior |
+| --- | --- | --- |
+| `::before` / `::after` plain text | Supported | Captured as editable `TextNode` with `sourceTag: "::before" | "::after"` |
+| Unicode / CSS-escaped glyph (`\2605`) | Supported | Decoded to Unicode character glyphs; typography preserved |
+| Empty-content decorative box (`content: ""`) | Supported | Captured as `RectangleNode` with fill, border, radius, shadow |
+| Absolute positioned pseudo | Supported (High confidence) | Bounding box calculated from containing block insets and dimensions |
+| In-flow / auto-sized pseudo geometry | Approximated / warning | Measured with temporary offscreen cleanup or font metric heuristics; emits `PSEUDO_GEOMETRY_APPROXIMATED` |
+| Pseudo with both visual box & text | Supported | Decomposed into `FrameNode` container + child `TextNode` (`<id>:text`) |
+| Ordering | Supported | Deterministic child ordering: `::before` nodes → real DOM children → `::after` nodes |
+| `display: none` / `content: none` | Omitted | Non-rendered pseudo-elements produce 0 nodes |
+| `content: url(...)` | Unsupported / warning | Omitted with explicit `PSEUDO_CONTENT_UNSUPPORTED` warning |
+| `counter(...)` / quotes | Unsupported / warning | Omitted with explicit `PSEUDO_CONTENT_UNSUPPORTED` warning |
+| Pseudo gradient | Deferred | Solid/box info captured; gradient deferred with `BACKGROUND_IMAGE_UNSUPPORTED` (W2D-012) |
+| Pseudo transform | Approximated | Axis-aligned box captured; emits `TRANSFORM_APPROXIMATED` (W2D-015) |
 
 ## Asset Support Matrix
 

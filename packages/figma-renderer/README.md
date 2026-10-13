@@ -36,6 +36,8 @@ Native SceneNode Hierarchy:
 | `image` | `RectangleNode` (Image fill) | Data URLs, embedded base64, and remote image URLs. `cover` → `FILL`, `contain` → `FIT`. Placeholders created on network or decode failures. |
 | `svg` | `FrameNode` / vectors | Native SVG import via `host.createNodeFromSvg()`. Scaled to captured dimensions. Fallback placeholder on syntax failure. |
 
+Synthetic pseudo-elements (`::before` / `::after`) captured in W2D-011 require **zero renderer specialization**: they map directly onto existing `frame`, `rectangle`, and `text` nodes, with parent-relative coordinates and standard styles applied transparently.
+
 ## Host Boundary (`FigmaRendererHost`)
 
 The renderer interacts with Figma strictly through a lightweight host adapter interface rather than global mocks:

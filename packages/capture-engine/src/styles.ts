@@ -29,8 +29,8 @@ export function cssPixels(value: string): number | undefined {
   const number = Number(value.trim().slice(0, -2));
   return Number.isFinite(number) ? number : undefined;
 }
-export function fontFamilies(value: string): string[] {
-  return (value.match(/"[^"]*"|'[^']*'|[^,]+/g) ?? []).map(family => family.trim().replace(/^(['"])(.*)\1$/, "$2")).filter(Boolean);
+export function fontFamilies(value?: string): string[] {
+  return ((value ?? "").match(/"[^"]*"|'[^']*'|[^,]+/g) ?? []).map(family => family.trim().replace(/^(['"])(.*)\1$/, "$2")).filter(Boolean);
 }
 export function textStyle(style: CSSStyleDeclaration, warn: Warn): TextStyle {
   const families = fontFamilies(style.fontFamily);
@@ -45,10 +45,11 @@ export function textStyle(style: CSSStyleDeclaration, warn: Warn): TextStyle {
   if (spacing === undefined) warn("LETTER_SPACING_APPROXIMATED", "Unresolved letter spacing uses 0 CSS pixels.");
   const color = cssColor(style.color);
   if (!color) warn("TEXT_COLOR_APPROXIMATED", "Unsupported computed text color uses opaque black.");
-  const align = ["left", "center", "right", "justify", "start", "end"].includes(style.textAlign) ? style.textAlign as TextStyle["textAlign"] : "start";
+  const align = ["left", "center", "right", "justify", "start", "end"].includes(style.textAlign ?? "") ? style.textAlign as TextStyle["textAlign"] : "start";
+  const fontStyleVal = style.fontStyle ?? "normal";
   return { fontFamily: families[0] ?? "sans-serif", ...(families.length > 1 ? { fontFallbacks: families.slice(1) } : {}),
     fontSize: size, fontWeight: Number.isFinite(weight) && weight > 0 ? Math.min(1000, Math.max(1, Math.round(weight))) : 400,
-    fontStyle: style.fontStyle.startsWith("oblique") ? "oblique" : style.fontStyle === "italic" ? "italic" : "normal",
+    fontStyle: fontStyleVal.startsWith("oblique") ? "oblique" : fontStyleVal === "italic" ? "italic" : "normal",
     lineHeight: line !== undefined && line > 0 ? line : size * 1.2, letterSpacing: spacing ?? 0, textAlign: align,
     color: color ?? { r: 0, g: 0, b: 0, a: 1 } };
 }

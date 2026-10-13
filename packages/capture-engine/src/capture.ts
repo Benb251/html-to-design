@@ -3,6 +3,7 @@ import { captureId, documentRect, renderDecision } from "./geometry.js";
 import { cssColor, textStyle, visualStyle, type Warn } from "./styles.js";
 import { renderedText } from "./text.js";
 import { createAssetRegistry, inferUrlMimeType, parseDataUrlMimeType, materializeBlobImage, serializeAndSanitizeSvg } from "./assets.js";
+import { capturePseudoElement } from "./pseudo.js";
 
 const ignored = new Set(["script", "style", "head", "meta", "link", "noscript", "template"]);
 const unsupportedMedia = new Set(["canvas", "video", "audio", "iframe", "object", "embed"]);
@@ -147,11 +148,24 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     const contentChildren = Array.from(element.childNodes).filter(child =>
       child.nodeType === 1 || child.nodeType === 3 && (/[^\t\r\n\f ]/.test(child.textContent ?? "") || ["pre", "pre-wrap", "break-spaces"].includes(style.whiteSpace) && (child.textContent ?? "").length > 0),
     );
-    const isFrame = decision === "capture" && contentChildren.length > 0 &&
-      (groups.has(tag) || styled || base.opacity < 1 || tag === "div" && contentChildren.length > 1);
+
+    const beforeNodes = capturePseudoElement({
+      element,
+      pseudoKind: "::before",
+      parentId: id,
+      parentRect: rect,
+      parentStyle: style,
+      view: view!,
+      scrollX: viewport.scrollX,
+      scrollY: viewport.scrollY,
+      warn,
+    }).flatMap(emit);
+
+    const isFrame = decision === "capture" && (contentChildren.length > 0 || beforeNodes.length > 0) &&
+      (groups.has(tag) || styled || base.opacity < 1 || tag === "div" && (contentChildren.length > 1 || beforeNodes.length > 0) || (beforeNodes.length > 0 && styled));
     // Reserve ancestors before descending so truncation preserves grouping and local opacity.
     if (isFrame) count++;
-    const children: DesignNode[] = [];
+    const children: DesignNode[] = [...beforeNodes];
     for (let index = 0; index < element.childNodes.length; index++) {
       if (count >= maxNodes || visited >= 20000) {
         warn("CAPTURE_TRUNCATED", "Node/depth/traversal bound reached; output is partial.");
@@ -160,14 +174,36 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
       const child = element.childNodes[index];
       if (child) children.push(...visit(child, [...path, index], depth + 1, style));
     }
-    if (isFrame) return [{ ...base, type: "frame", children }];
+
+    const afterNodes = capturePseudoElement({
+      element,
+      pseudoKind: "::after",
+      parentId: id,
+      parentRect: rect,
+      parentStyle: style,
+      view: view!,
+      scrollX: viewport.scrollX,
+      scrollY: viewport.scrollY,
+      warn,
+    }).flatMap(emit);
+
+    children.push(...afterNodes);
+
+    if (isFrame || (children.length > 0 && decision === "capture" && (groups.has(tag) || styled || base.opacity < 1 || (tag === "div" && children.length > 1)))) {
+      return [{ ...base, type: "frame", children }];
+    }
     if (decision !== "capture") {
       if (children.length && base.opacity < 1 && style.display !== "contents") {
         warn("UNBOXED_OPACITY_APPROXIMATED", "Opacity on an omitted hidden/zero-size wrapper is not reconstructed.");
       }
       return children;
     }
-    if (styled || base.opacity < 1) return emit({ ...base, type: "rectangle", children: [] });
+    if (styled || base.opacity < 1) {
+      if (children.length > 0) {
+        return [{ ...base, type: "frame", children }];
+      }
+      return emit({ ...base, type: "rectangle", children: [] });
+    }
     return children;
   }
   if (htmlStyle.transform && htmlStyle.transform !== "none") warn("TRANSFORM_APPROXIMATED", "The document element is transformed; captured axis-aligned boxes do not preserve transform semantics.", "root");
@@ -188,7 +224,7 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
   const collect = (node: DesignNode) => { emittedIds.add(node.id); node.children.forEach(collect); };
   collect(root);
   for (const warning of warnings) if (warning.nodeId && !emittedIds.has(warning.nodeId)) delete warning.nodeId;
-  warn("CAPTURE_SCOPE", "W2D-005: rendered light-DOM boxes, editable text, basic styles, images and inline SVG. Pseudo-elements, clipping, full paint order, media and advanced layout/style semantics are not reconstructed.");
+  warn("CAPTURE_SCOPE", "W2D-011: rendered light-DOM boxes, synthetic pseudo-elements, editable text, basic styles, images and inline SVG. Clipping, full paint order, media and advanced layout/style semantics are not reconstructed.");
   return parseDesignDocument({ schemaVersion: DESIGN_SCHEMA_VERSION, capture: { capturedAt: options.capturedAt ?? new Date().toISOString(),
     source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" }, page: { url: document.URL, title: document.title } },
     viewport, root, assets: assetRegistry.getAssets(), warnings });

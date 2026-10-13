@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web2Design pseudo-element fidelity</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 20px;
+    font: 16px/24px Arial, sans-serif;
+    background: #ffffff;
+    color: #111827;
+  }
+  .test-row {
+    position: relative;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    width: 320px;
+  }
+
+  /* 1. ::before plain text */
+  #before-text::before {
+    content: "Start: ";
+    color: #1d4ed8;
+    font-weight: bold;
+  }
+
+  /* 2. ::after plain text */
+  #after-text::after {
+    content: " :End";
+    color: #b91c1c;
+    font-weight: bold;
+  }
+
+  /* 3. Unicode / CSS-escaped glyph */
+  #unicode-glyph::before {
+    content: "\2605 ";
+    color: #f59e0b;
+    font-size: 18px;
+  }
+
+  /* 4. Decorative empty visual rectangle */
+  #decorative-box::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #10b981;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  /* 5. Circular pseudo badge */
+  #circular-badge {
+    position: relative;
+  }
+  #circular-badge::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 12px;
+    height: 12px;
+    background: #ef4444;
+    border-radius: 6px;
+  }
+
+  /* 6. Background + uniform border + radius */
+  #box-border-radius {
+    position: relative;
+    padding-left: 40px;
+  }
+  #box-border-radius::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 24px;
+    height: 24px;
+    background: #e0e7ff;
+    border: 2px solid #4338ca;
+    border-radius: 4px;
+  }
+
+  /* 7. Pseudo with text + background (Frame + Text child) */
+  #text-and-background {
+    position: relative;
+    padding-top: 28px;
+  }
+  #text-and-background::before {
+    content: "NEW";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 44px;
+    height: 20px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 3px;
+  }
+
+  /* 8. Absolute positioned pseudo */
+  #absolute-positioned {
+    position: relative;
+  }
+  #absolute-positioned::before {
+    content: "★";
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    color: #d97706;
+  }
+
+  /* 9. Both before and after on same parent */
+  #both-before-after::before {
+    content: "[Prefix] ";
+    color: #2563eb;
+  }
+  #both-before-after::after {
+    content: " [Suffix]";
+    color: #7c3aed;
+  }
+
+  /* 10. Nested element with pseudo */
+  #nested-child::before {
+    content: "• ";
+    color: #059669;
+  }
+
+  /* 11. Local opacity */
+  #local-opacity::before {
+    content: "Ghost ";
+    opacity: 0.5;
+    color: #000000;
+  }
+
+  /* 12. Hidden pseudo (display: none) */
+  #hidden-pseudo::before {
+    content: "Hidden Content";
+    display: none;
+  }
+
+  /* 13. content: none */
+  #none-content::before {
+    content: none;
+  }
+
+  /* 14. Unsupported generated content (url) */
+  #unsupported-content::before {
+    content: url("dot.png");
+  }
+
+  /* 15. Gradient pseudo (remains unsupported background-image) */
+  #gradient-pseudo {
+    position: relative;
+    padding-left: 36px;
+  }
+  #gradient-pseudo::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #f43f5e, #3b82f6);
+  }
+
+  /* 16. Transformed pseudo retaining approximation warning */
+  #transformed-pseudo::before {
+    content: "Rotated ";
+    display: inline-block;
+    transform: rotate(15deg);
+    color: #4b5563;
+  }
+</style>
+</head>
+<body>
+  <div id="before-text" class="test-row">Content</div>
+  <div id="after-text" class="test-row">Content</div>
+  <div id="unicode-glyph" class="test-row">Icon text</div>
+  <div id="decorative-box" class="test-row">Decorative box</div>
+  <div id="circular-badge" class="test-row">Circular badge item</div>
+  <div id="box-border-radius" class="test-row">Border and radius box</div>
+  <div id="text-and-background" class="test-row">Text badge item</div>
+  <div id="absolute-positioned" class="test-row">Absolute position item</div>
+  <div id="both-before-after" class="test-row">Main content</div>
+  <div id="nested-parent" class="test-row"><span id="nested-child">Nested target</span></div>
+  <div id="local-opacity" class="test-row">Local opacity item</div>
+  <div id="hidden-pseudo" class="test-row">Hidden pseudo item</div>
+  <div id="none-content" class="test-row">None content item</div>
+  <div id="unsupported-content" class="test-row">Unsupported content item</div>
+  <div id="gradient-pseudo" class="test-row">Gradient item</div>
+  <div id="transformed-pseudo" class="test-row">Transformed item</div>
+</body>
+</html>

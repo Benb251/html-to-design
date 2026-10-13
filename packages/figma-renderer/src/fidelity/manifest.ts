@@ -124,4 +124,13 @@ export const FIXTURE_MANIFEST: FixtureManifestEntry[] = [
     expectedCategories: ["GEOMETRY", "HIERARCHY"],
     expectedWarnings: [],
   },
+  {
+    id: "chrome-pseudo",
+    name: "Pseudo-Element Fidelity Capture",
+    kind: "chrome-capture",
+    sourcePath: "apps/extension/.smoke/fidelity-pseudo.json",
+    description: "Browser capture testing synthetic ::before and ::after text, icons, decorative visual boxes, badges, borders, ordering, and unsupported warnings",
+    expectedCategories: ["GEOMETRY", "HIERARCHY", "TEXT", "FILL", "BORDER", "RADIUS"],
+    expectedWarnings: [],
+  },
 ];

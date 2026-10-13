@@ -1,0 +1,54 @@
+[
+  {
+    "siteId": "ecommerce-01-books",
+    "url": "https://books.toscrape.com",
+    "title": "Books to Scrape",
+    "domObservedPseudos": 185,
+    "meaningfulPseudos": 185,
+    "synthesizedPseudoNodes": 185,
+    "breakdown": {
+      "text": 185,
+      "rectangle": 0,
+      "frame": 0
+    },
+    "schemaValid": true,
+    "rendererSuccess": true,
+    "w2d010Nodes": 321,
+    "w2d011Nodes": 510,
+    "nodeDelta": 189,
+    "pseudoWarnings": [
+      {
+        "code": "PSEUDO_GEOMETRY_APPROXIMATED",
+        "message": "In-flow or auto-sized pseudo-element geometry is approximated."
+      }
+    ]
+  },
+  {
+    "siteId": "docs-02-wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Figma",
+    "title": "Wikipedia (Figma)",
+    "domObservedPseudos": 186,
+    "meaningfulPseudos": 186,
+    "synthesizedPseudoNodes": 113,
+    "breakdown": {
+      "text": 109,
+      "rectangle": 4,
+      "frame": 0
+    },
+    "schemaValid": true,
+    "rendererSuccess": true,
+    "w2d010Nodes": 1810,
+    "w2d011Nodes": 1932,
+    "nodeDelta": 122,
+    "pseudoWarnings": [
+      {
+        "code": "PSEUDO_GEOMETRY_APPROXIMATED",
+        "message": "In-flow or auto-sized pseudo-element geometry is approximated."
+      },
+      {
+        "code": "PSEUDO_CONTENT_UNSUPPORTED",
+        "message": "Unsupported CSS generated-content format (counter_content) was omitted."
+      }
+    ]
+  }
+]
