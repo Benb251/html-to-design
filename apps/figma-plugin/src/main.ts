@@ -1,13 +1,27 @@
-import { safeParseDesignDocument } from "@web2design/design-schema";
+import { safeParseDesignDocument, type DesignDocument } from "@web2design/design-schema";
+import { renderDesignDocument, type FigmaRendererHost } from "@web2design/figma-renderer";
+import { createFigmaHost } from "./host.js";
 import type { PluginToUiMessage, UiToPluginMessage } from "./messages.js";
 import { computeDocumentSummary } from "./summary.js";
 
-export function handleUiMessage(
+export interface SessionState {
+  currentValidatedDoc: DesignDocument | null;
+  isImporting: boolean;
+}
+
+const defaultSessionState: SessionState = {
+  currentValidatedDoc: null,
+  isImporting: false,
+};
+
+export async function handleUiMessage(
   msg: unknown,
   postMessage: (message: PluginToUiMessage) => void,
   notify: (text: string, options?: { error?: boolean }) => void,
   closePlugin?: () => void,
-): void {
+  host?: FigmaRendererHost | null,
+  state: SessionState = defaultSessionState,
+): Promise<void> {
   if (!msg || typeof msg !== "object" || !("type" in msg)) {
     postMessage({
       type: "validation-error",
@@ -47,6 +61,7 @@ export function handleUiMessage(
       try {
         payload = JSON.parse(payload);
       } catch (err) {
+        state.currentValidatedDoc = null;
         postMessage({
           type: "validation-error",
           error: {
@@ -67,6 +82,7 @@ export function handleUiMessage(
 
     const result = safeParseDesignDocument(payload);
     if (!result.success) {
+      state.currentValidatedDoc = null;
       postMessage({
         type: "validation-error",
         error: {
@@ -78,6 +94,7 @@ export function handleUiMessage(
       return;
     }
 
+    state.currentValidatedDoc = result.data;
     const summary = computeDocumentSummary(result.data);
     postMessage({
       type: "validation-success",
@@ -85,19 +102,89 @@ export function handleUiMessage(
       document: result.data,
     });
     notify("Web2Design document validated");
+    return;
+  }
+
+  if (message.type === "import-document") {
+    if (state.isImporting) {
+      notify("Import already in progress");
+      return;
+    }
+
+    if (!state.currentValidatedDoc) {
+      postMessage({
+        type: "import-error",
+        error: {
+          message: "No validated Web2Design document available for import",
+          issues: [],
+        },
+      });
+      notify("Please validate a document before importing", { error: true });
+      return;
+    }
+
+    if (!host) {
+      postMessage({
+        type: "import-error",
+        error: {
+          message: "Figma renderer host is unavailable",
+          issues: [],
+        },
+      });
+      notify("Figma runtime host unavailable", { error: true });
+      return;
+    }
+
+    state.isImporting = true;
+    postMessage({ type: "import-started" });
+
+    try {
+      const renderResult = await renderDesignDocument(state.currentValidatedDoc, host);
+      state.isImporting = false;
+      postMessage({
+        type: "import-success",
+        result: renderResult,
+      });
+      notify(`Web2Design import complete (${renderResult.createdNodeCount} layers created)`);
+    } catch (err) {
+      state.isImporting = false;
+      const errMsg = err instanceof Error ? err.message : String(err);
+      postMessage({
+        type: "import-error",
+        error: {
+          message: `Import failed: ${errMsg}`,
+          issues: [],
+        },
+      });
+      notify(`Import failed: ${errMsg}`, { error: true });
+    }
   }
 }
 
 // Runtime entry point inside Figma plugin sandbox
 if (typeof figma !== "undefined") {
-  figma.showUI(__html__, { width: 440, height: 620, title: "Web2Design Importer" });
+  figma.showUI(__html__, { width: 440, height: 640, title: "Web2Design Importer" });
+
+  const host = createFigmaHost();
+  const sessionState: SessionState = {
+    currentValidatedDoc: null,
+    isImporting: false,
+  };
 
   figma.ui.onmessage = (msg: unknown) => {
-    handleUiMessage(
+    void handleUiMessage(
       msg,
       (response) => figma.ui.postMessage(response),
-      (text, options) => figma.notify(text, options),
+      (text, options) => {
+        if (options?.error !== undefined) {
+          figma.notify(text, { error: options.error });
+        } else {
+          figma.notify(text);
+        }
+      },
       () => figma.closePlugin(),
+      host,
+      sessionState,
     );
   };
 }

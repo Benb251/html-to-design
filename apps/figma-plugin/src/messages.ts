@@ -1,4 +1,5 @@
 import type { DesignDocument, ValidationIssue } from "@web2design/design-schema";
+import type { RenderResult } from "@web2design/figma-renderer";
 
 export interface DocumentSummary {
   schemaVersion: string;
@@ -42,6 +43,9 @@ export type UiToPluginMessage =
       raw: unknown;
     }
   | {
+      type: "import-document";
+    }
+  | {
       type: "close-plugin";
     }
   | {
@@ -58,5 +62,16 @@ export type PluginToUiMessage =
     }
   | {
       type: "validation-error";
+      error: SerializableValidationError;
+    }
+  | {
+      type: "import-started";
+    }
+  | {
+      type: "import-success";
+      result: RenderResult;
+    }
+  | {
+      type: "import-error";
       error: SerializableValidationError;
     };

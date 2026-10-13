@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { handleUiMessage } from "../src/main.js";
+import { handleUiMessage, type SessionState } from "../src/main.js";
 import type { PluginToUiMessage } from "../src/messages.js";
 import { imageFixture, simpleTextFixture } from "@web2design/test-fixtures";
+import type { FigmaRendererHost } from "@web2design/figma-renderer";
 
 function createHarness() {
   const messages: PluginToUiMessage[] = [];
@@ -32,11 +33,72 @@ function createHarness() {
   };
 }
 
+class FakeNode {
+  id = "test-node-1";
+  name = "";
+  x = 0;
+  y = 0;
+  width = 100;
+  height = 100;
+  visible = true;
+  opacity = 1;
+  fills = [];
+  strokes = [];
+  strokeWeight = 0;
+  effects = [];
+  layoutMode = "NONE";
+  children: unknown[] = [];
+  pluginData = new Map<string, string>();
+  setPluginData(k: string, v: string) {
+    this.pluginData.set(k, v);
+  }
+  getPluginData(k: string) {
+    return this.pluginData.get(k) ?? "";
+  }
+  resize(w: number, h: number) {
+    this.width = w;
+    this.height = h;
+  }
+  appendChild(child: unknown) {
+    this.children.push(child);
+  }
+}
+
+function createFakeHost(): FigmaRendererHost {
+  const roots: FrameNode[] = [];
+  return {
+    createFrame: () => new FakeNode() as unknown as FrameNode,
+    createRectangle: () => new FakeNode() as unknown as RectangleNode,
+    createText: () =>
+      Object.assign(new FakeNode(), {
+        characters: "",
+        fontName: { family: "Inter", style: "Regular" },
+        fontSize: 16,
+        lineHeight: { unit: "AUTO" },
+        letterSpacing: { value: 0, unit: "PIXELS" },
+        textAlignHorizontal: "LEFT",
+        textAutoResize: "NONE",
+      }) as unknown as TextNode,
+    createNodeFromSvg: () => new FakeNode() as unknown as FrameNode,
+    createImage: () => ({ hash: "fake-hash" } as unknown as Image),
+    createImageAsync: async () => ({ hash: "fake-url-hash" } as unknown as Image),
+    base64Decode: (d: string) => Buffer.from(d, "base64"),
+    loadFontAsync: async () => {},
+    listAvailableFontsAsync: async () => [{ fontName: { family: "Inter", style: "Regular" } } as unknown as Font],
+    appendRoot: (root: FrameNode) => {
+      roots.push(root);
+    },
+    setSelection: () => {},
+    scrollAndZoomIntoView: () => {},
+    getViewportCenter: () => ({ x: 0, y: 0 }),
+  };
+}
+
 describe("Figma plugin - message handling protocol", () => {
-  it("processes a valid document object and returns validation-success", () => {
+  it("processes a valid document object and returns validation-success", async () => {
     const harness = createHarness();
 
-    handleUiMessage({ type: "validate-document", raw: simpleTextFixture }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: simpleTextFixture }, harness.postMessage, harness.notify);
 
     expect(harness.messages.length).toBe(1);
     const response = harness.messages[0]!;
@@ -52,11 +114,11 @@ describe("Figma plugin - message handling protocol", () => {
     });
   });
 
-  it("parses and validates a raw JSON string document", () => {
+  it("parses and validates a raw JSON string document", async () => {
     const harness = createHarness();
     const jsonString = JSON.stringify(imageFixture);
 
-    handleUiMessage({ type: "validate-document", raw: jsonString }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: jsonString }, harness.postMessage, harness.notify);
 
     expect(harness.messages.length).toBe(1);
     const response = harness.messages[0]!;
@@ -67,10 +129,10 @@ describe("Figma plugin - message handling protocol", () => {
     }
   });
 
-  it("handles malformed JSON syntax string with a serializable error and notification", () => {
+  it("handles malformed JSON syntax string with a serializable error and notification", async () => {
     const harness = createHarness();
 
-    handleUiMessage({ type: "validate-document", raw: '{"broken": json...}' }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: '{"broken": json...}' }, harness.postMessage, harness.notify);
 
     expect(harness.messages.length).toBe(1);
     const response = harness.messages[0]!;
@@ -85,11 +147,11 @@ describe("Figma plugin - message handling protocol", () => {
     });
   });
 
-  it("rejects invalid schema version with validation issues", () => {
+  it("rejects invalid schema version with validation issues", async () => {
     const harness = createHarness();
     const invalidDoc = { ...simpleTextFixture, schemaVersion: "0.2" };
 
-    handleUiMessage({ type: "validate-document", raw: invalidDoc }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: invalidDoc }, harness.postMessage, harness.notify);
 
     expect(harness.messages.length).toBe(1);
     const response = harness.messages[0]!;
@@ -103,14 +165,14 @@ describe("Figma plugin - message handling protocol", () => {
     });
   });
 
-  it("rejects image node with missing asset reference", () => {
+  it("rejects image node with missing asset reference", async () => {
     const harness = createHarness();
     const brokenAssetDoc = {
       ...imageFixture,
       assets: [], // missing asset referenced by image-1
     };
 
-    handleUiMessage({ type: "validate-document", raw: brokenAssetDoc }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: brokenAssetDoc }, harness.postMessage, harness.notify);
 
     expect(harness.messages.length).toBe(1);
     const response = harness.messages[0]!;
@@ -120,11 +182,11 @@ describe("Figma plugin - message handling protocol", () => {
     }
   });
 
-  it("rejects unknown schema fields under strict schema validation", () => {
+  it("rejects unknown schema fields under strict schema validation", async () => {
     const harness = createHarness();
     const docWithUnknownField = { ...simpleTextFixture, customFigmaField: 123 };
 
-    handleUiMessage({ type: "validate-document", raw: docWithUnknownField }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: docWithUnknownField }, harness.postMessage, harness.notify);
 
     expect(harness.messages.length).toBe(1);
     const response = harness.messages[0]!;
@@ -134,12 +196,12 @@ describe("Figma plugin - message handling protocol", () => {
     }
   });
 
-  it("handles malformed message object missing 'type'", () => {
+  it("handles malformed message object missing 'type'", async () => {
     const harness = createHarness();
 
-    handleUiMessage(null, harness.postMessage, harness.notify);
-    handleUiMessage("not an object", harness.postMessage, harness.notify);
-    handleUiMessage({ invalid: true }, harness.postMessage, harness.notify);
+    await handleUiMessage(null, harness.postMessage, harness.notify);
+    await handleUiMessage("not an object", harness.postMessage, harness.notify);
+    await handleUiMessage({ invalid: true }, harness.postMessage, harness.notify);
 
     expect(harness.messages.length).toBe(3);
     for (const msg of harness.messages) {
@@ -147,36 +209,89 @@ describe("Figma plugin - message handling protocol", () => {
     }
   });
 
-  it("handles close-plugin and notify messages", () => {
+  it("handles close-plugin and notify messages", async () => {
     const harness = createHarness();
 
-    handleUiMessage({ type: "close-plugin" }, harness.postMessage, harness.notify, harness.close);
+    await handleUiMessage({ type: "close-plugin" }, harness.postMessage, harness.notify, harness.close);
     expect(harness.isClosed).toBe(true);
 
-    handleUiMessage({ type: "notify", message: "Hello", error: true }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "notify", message: "Hello", error: true }, harness.postMessage, harness.notify);
     expect(harness.notifications[0]).toEqual({
       message: "Hello",
       options: { error: true },
     });
   });
 
-  it("ensures state isolation across consecutive validation attempts", () => {
+  it("handles import-document flow after successful validation", async () => {
+    const harness = createHarness();
+    const host = createFakeHost();
+    const sessionState: SessionState = { currentValidatedDoc: null, isImporting: false };
+
+    // 1. Validate
+    await handleUiMessage(
+      { type: "validate-document", raw: simpleTextFixture },
+      harness.postMessage,
+      harness.notify,
+      harness.close,
+      host,
+      sessionState,
+    );
+    expect(harness.messages[0]?.type).toBe("validation-success");
+
+    // 2. Import
+    await handleUiMessage(
+      { type: "import-document" },
+      harness.postMessage,
+      harness.notify,
+      harness.close,
+      host,
+      sessionState,
+    );
+
+    expect(harness.messages.length).toBe(3); // validation-success, import-started, import-success
+    expect(harness.messages[1]?.type).toBe("import-started");
+    expect(harness.messages[2]?.type).toBe("import-success");
+    if (harness.messages[2]?.type === "import-success") {
+      expect(harness.messages[2].result.createdNodeCount).toBe(2);
+    }
+  });
+
+  it("rejects import-document if no document was validated yet", async () => {
+    const harness = createHarness();
+    const host = createFakeHost();
+    const sessionState: SessionState = { currentValidatedDoc: null, isImporting: false };
+
+    await handleUiMessage(
+      { type: "import-document" },
+      harness.postMessage,
+      harness.notify,
+      harness.close,
+      host,
+      sessionState,
+    );
+
+    expect(harness.messages.length).toBe(1);
+    expect(harness.messages[0]?.type).toBe("import-error");
+    expect(harness.notifications[0]?.message).toContain("Please validate a document before importing");
+  });
+
+  it("ensures state isolation across consecutive validation attempts", async () => {
     const harness = createHarness();
 
     // 1. Fail with bad JSON
-    handleUiMessage({ type: "validate-document", raw: "invalid json string" }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: "invalid json string" }, harness.postMessage, harness.notify);
     expect(harness.messages[0]?.type).toBe("validation-error");
 
     // 2. Succeed with valid document
-    handleUiMessage({ type: "validate-document", raw: simpleTextFixture }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: simpleTextFixture }, harness.postMessage, harness.notify);
     expect(harness.messages[1]?.type).toBe("validation-success");
 
     // 3. Fail with missing asset
-    handleUiMessage({ type: "validate-document", raw: { ...imageFixture, assets: [] } }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: { ...imageFixture, assets: [] } }, harness.postMessage, harness.notify);
     expect(harness.messages[2]?.type).toBe("validation-error");
 
     // 4. Succeed again
-    handleUiMessage({ type: "validate-document", raw: imageFixture }, harness.postMessage, harness.notify);
+    await handleUiMessage({ type: "validate-document", raw: imageFixture }, harness.postMessage, harness.notify);
     expect(harness.messages[3]?.type).toBe("validation-success");
   });
 });

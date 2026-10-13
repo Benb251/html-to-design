@@ -1,6 +1,6 @@
 # Web2Design Figma Plugin
 
-Figma plugin application shell for Web2Design. The plugin receives Web2Design V0.1 JSON documents (from clipboard paste, sample loader, or file picker), validates them authoritatively in the plugin main runtime via `@web2design/design-schema`, and presents a structured document summary in the plugin UI.
+Figma plugin for Web2Design. The plugin receives Web2Design V0.1 JSON documents (from clipboard paste, sample loader, or file picker), validates them authoritatively in the plugin main runtime via `@web2design/design-schema`, and renders them into an editable hierarchy of native Figma nodes via `@web2design/figma-renderer`.
 
 ## Architecture & Runtime Separation
 
@@ -13,7 +13,8 @@ The plugin enforces Figma's two-environment security boundary:
 │  - Load Sample Document                      │
 │  - File picker (local .json file)            │
 │  - Status banner & Document Summary metrics  │
-│  - Serializable error presentation           │
+│  - "Import to Figma" trigger button          │
+│  - Import results & warnings visualization   │
 └──────────────────────┬───────────────────────┘
                        │
                        │ postMessage (Typed Message Protocol)
@@ -22,11 +23,11 @@ The plugin enforces Figma's two-environment security boundary:
 ┌──────────────────────────────────────────────┐
 │  Plugin Main Runtime (JS sandbox)            │
 │  - Authoritative validation boundary         │
-│  - Safe JSON parser                          │
-│  - @web2design/design-schema V0.1 validation │
-│  - Reusable AST tree traversal / metrics     │
-│  - Zero canvas mutation during W2D-006       │
+│  - Session state & duplicate import guard    │
+│  - Invokes @web2design/figma-renderer        │
+│  - FigmaRendererHost production adapter      │
 │  - figma.notify() diagnostic status          │
+│  - Selection & viewport camera alignment     │
 └──────────────────────────────────────────────┘
 ```
 
@@ -34,22 +35,23 @@ The plugin enforces Figma's two-environment security boundary:
 
 ```text
 apps/figma-plugin/
-  manifest.json             # Source Figma plugin manifest
+  manifest.json             # Source Figma plugin manifest (with image domain permissions)
   package.json              # Package metadata and dependencies
   tsconfig.json            # Strict TypeScript configuration
   src/
-    main.ts                 # Plugin main runtime & message dispatcher
+    main.ts                 # Plugin main runtime, session controller & message dispatcher
+    host.ts                 # Production FigmaRendererHost adapter
     ui.ts                   # Plugin UI controller & event listeners
     messages.ts             # Strongly-typed discriminated message protocol
     summary.ts              # Deterministic document tree traversal & summary
   public/
-    ui.html                 # Plugin UI markup structure
-    ui.css                  # Modern UI stylesheet
+    ui.html                 # Plugin UI markup structure with import actions
+    ui.css                  # Modern UI stylesheet with status/result styles
   scripts/
     build.mjs               # Esbuild bundler & inliner for Figma sandbox
   test/
     fixtures.test.ts        # Validation tests across all fixtures & real captures
-    messages.test.ts        # Message protocol & error handling tests
+    messages.test.ts        # Message protocol, error handling & import flow tests
     summary.test.ts         # Tree traversal & summary calculation tests
   dist/                     # Build artifacts loaded into Figma
     manifest.json           # Development manifest pointing to bundled files
@@ -57,6 +59,19 @@ apps/figma-plugin/
     ui.html                 # Self-contained bundled UI with inlined CSS & JS
     sample-w2d-document.json# Canonical sample document derived from fixtures
 ```
+
+## Network Access & Permissions
+
+In W2D-007, the manifest requests network access for arbitrary user-captured image assets:
+
+```json
+"networkAccess": {
+  "allowedDomains": ["*"],
+  "reasoning": "Web2Design imports image assets referenced by user-selected website capture documents."
+}
+```
+
+**Security Policy**: The plugin requests only image URLs that exist as validated asset records within the explicit user-supplied document during an active import operation. No analytics, tracking, telemetry, or third-party cloud APIs are used.
 
 ## Building the Plugin
 
@@ -78,6 +93,9 @@ npm run build
 2. Go to **Plugins** → **Development** → **Import plugin from manifest...**.
 3. Select `apps/figma-plugin/dist/manifest.json`.
 4. Run **Web2Design** from the Development plugins menu.
+5. Paste a Web2Design document (or click **Load Sample**).
+6. Click **Validate & Prepare**.
+7. Once validated, click **Import to Figma**.
 
 ## Testing
 

@@ -304,18 +304,121 @@ body {
 .ready-banner {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 8px;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
-  border-radius: 4px;
+  border-radius: 6px;
   color: #065f46;
-  font-size: 10px;
-  font-weight: 500;
+  font-size: 11px;
+}
+
+.ready-text-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .ready-icon {
   font-weight: 700;
+  color: #059669;
+}
+
+.btn-success {
+  background: #059669;
+  color: #ffffff;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.btn-success:hover {
+  background: #047857;
+}
+
+.btn-success:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-importing {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.status-importing .status-indicator {
+  background: #3b82f6;
+  animation: pulse 1s infinite alternate;
+}
+
+.result-card {
+  border: 1px solid #a7f3d0;
+  border-radius: 6px;
+  padding: 12px;
+  background: #f0fdf4;
+}
+
+.result-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.result-icon {
+  font-weight: 700;
+  color: #059669;
+}
+
+.result-card-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #065f46;
+}
+
+.result-message {
+  font-size: 11px;
+  color: #047857;
+  margin-bottom: 8px;
+}
+
+.warnings-box {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #bbf7d0;
+}
+
+.warnings-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: #b45309;
+  margin-bottom: 4px;
+}
+
+.warnings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.warning-item {
+  font-size: 10px;
+  line-height: 14px;
+  padding: 4px 6px;
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 4px;
+  color: #92400e;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .error-card {

@@ -12,7 +12,7 @@
         <h1 class="app-title">Web2Design Importer</h1>
         <span class="schema-badge">V0.1</span>
       </div>
-      <p class="app-subtitle">Validate and prepare captured web designs for Figma</p>
+      <p class="app-subtitle">Validate and render captured web designs into editable Figma nodes</p>
     </header>
 
     <main class="app-body">
@@ -108,8 +108,25 @@
           </div>
 
           <div class="ready-banner">
-            <span class="ready-icon">✓</span>
-            <span class="ready-text">Document valid. Ready for W2D-007 Figma canvas rendering.</span>
+            <div class="ready-text-wrap">
+              <span class="ready-icon">✓</span>
+              <span class="ready-text">Document validated. Ready to render.</span>
+            </div>
+            <button id="import-btn" class="btn btn-success" type="button">Import to Figma</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="result-section" class="result-section hidden">
+        <div class="result-card">
+          <div class="result-card-header">
+            <span class="result-icon">✓</span>
+            <h2 class="result-card-title" id="result-title">Import Complete</h2>
+          </div>
+          <p class="result-message" id="result-message"></p>
+          <div id="renderer-warnings-container" class="warnings-box hidden">
+            <h3 class="warnings-title">Renderer Warnings (<span id="renderer-warnings-count">0</span>)</h3>
+            <div class="warnings-list" id="renderer-warnings-list"></div>
           </div>
         </div>
       </section>

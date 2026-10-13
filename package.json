@@ -11,10 +11,10 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build -w @web2design/design-schema && npm run build -w @web2design/test-fixtures && npm run build -w @web2design/capture-engine && npm run build -w @web2design/extension && npm run build -w @web2design/figma-plugin",
-    "typecheck": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run typecheck --workspaces --if-present",
+    "build": "npm run build -w @web2design/design-schema && npm run build -w @web2design/test-fixtures && npm run build -w @web2design/capture-engine && npm run build -w @web2design/figma-renderer && npm run build -w @web2design/extension && npm run build -w @web2design/figma-plugin",
+    "typecheck": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run build -w @web2design/figma-renderer && npm run typecheck --workspaces --if-present",
     "lint": "eslint .",
-    "test": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run test --workspaces --if-present"
+    "test": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run build -w @web2design/figma-renderer && npm run test --workspaces --if-present"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

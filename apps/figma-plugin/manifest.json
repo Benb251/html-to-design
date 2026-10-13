@@ -9,7 +9,8 @@
   ],
   "networkAccess": {
     "allowedDomains": [
-      "none"
-    ]
+      "*"
+    ],
+    "reasoning": "Web2Design imports image assets referenced by user-selected website capture documents."
   }
 }

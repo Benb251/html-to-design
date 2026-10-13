@@ -3,7 +3,7 @@ import type { ValidationIssue } from "@web2design/design-schema";
 
 function elem<T extends HTMLElement>(id: string): T {
   const el = document.getElementById(id);
-  if (!el) throw new Error("Missing UI element: " + id);
+  if (!el) throw new Error(`Missing UI element: ${id}`);
   return el as T;
 }
 
@@ -134,29 +134,46 @@ export function initUi(): void {
   const validateBtn = elem<HTMLButtonElement>("validate-btn");
   const sampleBtn = elem<HTMLButtonElement>("sample-btn");
   const clearBtn = elem<HTMLButtonElement>("clear-btn");
+  const importBtn = elem<HTMLButtonElement>("import-btn");
   const statusBar = elem<HTMLElement>("status-bar");
   const statusText = elem<HTMLElement>("status-text");
   const summarySection = elem<HTMLElement>("summary-section");
+  const resultSection = elem<HTMLElement>("result-section");
+  const resultMessage = elem<HTMLElement>("result-message");
+  const warningsContainer = elem<HTMLElement>("renderer-warnings-container");
+  const warningsCount = elem<HTMLElement>("renderer-warnings-count");
+  const warningsList = elem<HTMLElement>("renderer-warnings-list");
   const errorSection = elem<HTMLElement>("error-section");
   const errorMessage = elem<HTMLElement>("error-message");
   const issuesList = elem<HTMLElement>("issues-list");
 
-  function setStatus(status: "waiting" | "validating" | "ready" | "error", text: string): void {
+  function setStatus(status: "waiting" | "validating" | "importing" | "ready" | "error", text: string): void {
     statusBar.className = `status-bar status-${status}`;
     statusText.textContent = text;
+  }
+
+  function setButtonsDisabled(disabled: boolean): void {
+    validateBtn.disabled = disabled;
+    sampleBtn.disabled = disabled;
+    clearBtn.disabled = disabled;
+    importBtn.disabled = disabled;
   }
 
   function clearState(): void {
     jsonInput.value = "";
     if (fileInput) fileInput.value = "";
     summarySection.classList.add("hidden");
+    resultSection.classList.add("hidden");
     errorSection.classList.add("hidden");
+    setButtonsDisabled(false);
     setStatus("waiting", "Waiting for document input");
   }
 
   function renderSummary(summary: DocumentSummary): void {
     errorSection.classList.add("hidden");
+    resultSection.classList.add("hidden");
     summarySection.classList.remove("hidden");
+    setButtonsDisabled(false);
     setStatus("ready", `Ready for import (${summary.totalNodes} nodes, ${summary.assetCount} assets)`);
 
     elem("summary-schema-version").textContent = `Schema ${summary.schemaVersion}`;
@@ -177,7 +194,9 @@ export function initUi(): void {
 
   function renderError(message: string, issues: ValidationIssue[]): void {
     summarySection.classList.add("hidden");
+    resultSection.classList.add("hidden");
     errorSection.classList.remove("hidden");
+    setButtonsDisabled(false);
     setStatus("error", message);
 
     errorMessage.textContent = message;
@@ -197,12 +216,20 @@ export function initUi(): void {
       renderError("Input is empty. Paste a Web2Design JSON document.", []);
       return;
     }
-    setStatus("validating", "Sending to plugin main for validation...");
+    setButtonsDisabled(true);
+    setStatus("validating", "Validating document schema...");
     postToPlugin({ type: "validate-document", raw: rawText });
+  }
+
+  function handleImport(): void {
+    setButtonsDisabled(true);
+    setStatus("importing", "Rendering nodes into Figma canvas...");
+    postToPlugin({ type: "import-document" });
   }
 
   validateBtn.addEventListener("click", handleValidate);
   clearBtn.addEventListener("click", clearState);
+  importBtn.addEventListener("click", handleImport);
 
   sampleBtn.addEventListener("click", () => {
     jsonInput.value = JSON.stringify(SAMPLE_DOCUMENT, null, 2);
@@ -233,6 +260,32 @@ export function initUi(): void {
     if (msg.type === "validation-success") {
       renderSummary(msg.summary);
     } else if (msg.type === "validation-error") {
+      renderError(msg.error.message, msg.error.issues);
+    } else if (msg.type === "import-started") {
+      setButtonsDisabled(true);
+      setStatus("importing", "Importing into Figma canvas...");
+    } else if (msg.type === "import-success") {
+      setButtonsDisabled(false);
+      setStatus("ready", `Import complete (${msg.result.createdNodeCount} layers created)`);
+
+      resultSection.classList.remove("hidden");
+      resultMessage.textContent = `Successfully created ${msg.result.createdNodeCount} Figma layers (${msg.result.skippedNodeCount} skipped).`;
+
+      if (msg.result.warnings.length > 0) {
+        warningsContainer.classList.remove("hidden");
+        warningsCount.textContent = String(msg.result.warnings.length);
+        warningsList.innerHTML = "";
+        for (const warn of msg.result.warnings) {
+          const item = document.createElement("div");
+          item.className = "warning-item";
+          const nodeStr = warn.nodeId ? `[${warn.nodeId}] ` : "";
+          item.textContent = `${nodeStr}${warn.code}: ${warn.message}`;
+          warningsList.appendChild(item);
+        }
+      } else {
+        warningsContainer.classList.add("hidden");
+      }
+    } else if (msg.type === "import-error") {
       renderError(msg.error.message, msg.error.issues);
     }
   });

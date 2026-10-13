@@ -9,7 +9,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@web2design/design-schema": "0.1.0"
+    "@web2design/design-schema": "0.1.0",
+    "@web2design/figma-renderer": "0.1.0"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.141.0",
