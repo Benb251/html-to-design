@@ -1,0 +1,39 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Fixture",
+  "x": 100,
+  "y": 200,
+  "width": 800,
+  "height": 600,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "children": [
+    {
+      "figmaType": "RECTANGLE",
+      "name": "Image",
+      "x": 24,
+      "y": 24,
+      "width": 320,
+      "height": 180,
+      "absoluteX": 24,
+      "absoluteY": 24,
+      "opacity": 1,
+      "sourceId": "image-1",
+      "sourceType": "image",
+      "fills": [
+        {
+          "type": "IMAGE",
+          "scaleMode": "FILL",
+          "imageHash": "url-hash-_image.png"
+        }
+      ],
+      "image": {
+        "scaleMode": "FILL",
+        "imageHash": "url-hash-_image.png"
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Fixture",
+  "x": 100,
+  "y": 200,
+  "width": 800,
+  "height": 600,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "children": [
+    {
+      "figmaType": "TEXT",
+      "name": "Text — \"Hello Web2Design\"",
+      "x": 24,
+      "y": 24,
+      "width": 240,
+      "height": 24,
+      "absoluteX": 24,
+      "absoluteY": 24,
+      "opacity": 1,
+      "sourceId": "text-1",
+      "sourceType": "text",
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 1
+          }
+        }
+      ],
+      "text": {
+        "characters": "Hello Web2Design",
+        "fontFamily": "Inter",
+        "fontStyle": "Regular",
+        "fontSize": 16,
+        "lineHeight": 24,
+        "letterSpacing": 0,
+        "textAlignHorizontal": "LEFT"
+      }
+    }
+  ]
+}

@@ -14,7 +14,9 @@
     "build": "npm run build -w @web2design/design-schema && npm run build -w @web2design/test-fixtures && npm run build -w @web2design/capture-engine && npm run build -w @web2design/figma-renderer && npm run build -w @web2design/extension && npm run build -w @web2design/figma-plugin",
     "typecheck": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run build -w @web2design/figma-renderer && npm run typecheck --workspaces --if-present",
     "lint": "eslint .",
-    "test": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run build -w @web2design/figma-renderer && npm run test --workspaces --if-present"
+    "test": "npm run build -w @web2design/design-schema && npm run build -w @web2design/capture-engine && npm run build -w @web2design/figma-renderer && npm run test --workspaces --if-present",
+    "fidelity": "npm run build -w @web2design/figma-renderer && node scripts/fidelity.mjs",
+    "fidelity:update": "npm run build -w @web2design/figma-renderer && node scripts/fidelity.mjs --update"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

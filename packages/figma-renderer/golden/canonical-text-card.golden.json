@@ -1,0 +1,110 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Fixture",
+  "x": 100,
+  "y": 200,
+  "width": 800,
+  "height": 600,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "children": [
+    {
+      "figmaType": "FRAME",
+      "name": "Frame",
+      "x": 24,
+      "y": 24,
+      "width": 360,
+      "height": 160,
+      "absoluteX": 24,
+      "absoluteY": 24,
+      "opacity": 1,
+      "sourceId": "card",
+      "sourceType": "frame",
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          }
+        }
+      ],
+      "radius": {
+        "uniform": 16
+      },
+      "children": [
+        {
+          "figmaType": "TEXT",
+          "name": "Text — \"Card title\"",
+          "x": 24,
+          "y": 24,
+          "width": 240,
+          "height": 24,
+          "absoluteX": 48,
+          "absoluteY": 48,
+          "opacity": 1,
+          "sourceId": "card-title",
+          "sourceType": "text",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "text": {
+            "characters": "Card title",
+            "fontFamily": "Inter",
+            "fontStyle": "Regular",
+            "fontSize": 16,
+            "lineHeight": 24,
+            "letterSpacing": 0,
+            "textAlignHorizontal": "LEFT"
+          }
+        },
+        {
+          "figmaType": "TEXT",
+          "name": "Text — \"Card body copy\"",
+          "x": 24,
+          "y": 64,
+          "width": 240,
+          "height": 24,
+          "absoluteX": 48,
+          "absoluteY": 88,
+          "opacity": 1,
+          "sourceId": "card-body",
+          "sourceType": "text",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 1
+              }
+            }
+          ],
+          "text": {
+            "characters": "Card body copy",
+            "fontFamily": "Inter",
+            "fontStyle": "Regular",
+            "fontSize": 16,
+            "lineHeight": 24,
+            "letterSpacing": 0,
+            "textAlignHorizontal": "LEFT"
+          }
+        }
+      ]
+    }
+  ]
+}

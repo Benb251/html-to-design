@@ -1,0 +1,641 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Fidelity Assets",
+  "x": 100,
+  "y": 200,
+  "width": 800,
+  "height": 600,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "sourceTag": "html",
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": {
+        "r": 1,
+        "g": 1,
+        "b": 1,
+        "a": 1
+      }
+    }
+  ],
+  "children": [
+    {
+      "figmaType": "FRAME",
+      "name": "body",
+      "x": 0,
+      "y": 0,
+      "width": 800,
+      "height": 355,
+      "absoluteX": 0,
+      "absoluteY": 0,
+      "opacity": 1,
+      "sourceId": "w2d-element-body",
+      "sourceType": "frame",
+      "sourceTag": "body",
+      "children": [
+        {
+          "figmaType": "TEXT",
+          "name": "Text",
+          "x": 24,
+          "y": 24,
+          "width": 332.5313,
+          "height": 36,
+          "absoluteX": 24,
+          "absoluteY": 24,
+          "opacity": 1,
+          "sourceId": "w2d-text-1-0",
+          "sourceType": "text",
+          "sourceTag": "h1",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0.0667,
+                "g": 0.0941,
+                "b": 0.1529,
+                "a": 1
+              }
+            }
+          ],
+          "text": {
+            "characters": "Asset Capture Fixture",
+            "fontFamily": "Inter",
+            "fontStyle": "Regular",
+            "fontSize": 32,
+            "lineHeight": 38.4,
+            "letterSpacing": 0,
+            "textAlignHorizontal": "LEFT"
+          }
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 24,
+          "y": 61,
+          "width": 752,
+          "height": 246,
+          "absoluteX": 24,
+          "absoluteY": 61,
+          "opacity": 1,
+          "sourceId": "w2d-element-3",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "children": [
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 0,
+              "y": 0,
+              "width": 140,
+              "height": 74,
+              "absoluteX": 24,
+              "absoluteY": 61,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-3",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "img",
+                  "x": 13,
+                  "y": 13,
+                  "width": 48,
+                  "height": 48,
+                  "absoluteX": 37,
+                  "absoluteY": 74,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-3-1",
+                  "sourceType": "image",
+                  "sourceTag": "img",
+                  "fills": [
+                    {
+                      "type": "IMAGE",
+                      "scaleMode": "FILL",
+                      "imageHash": "url-hash-_dot.png"
+                    }
+                  ],
+                  "image": {
+                    "scaleMode": "FILL",
+                    "imageHash": "url-hash-_dot.png"
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 156,
+              "y": 0,
+              "width": 140,
+              "height": 74,
+              "absoluteX": 180,
+              "absoluteY": 61,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-7",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "img",
+                  "x": 13,
+                  "y": 13,
+                  "width": 48,
+                  "height": 48,
+                  "absoluteX": 193,
+                  "absoluteY": 74,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-7-1",
+                  "sourceType": "image",
+                  "sourceTag": "img",
+                  "fills": [
+                    {
+                      "type": "IMAGE",
+                      "scaleMode": "FILL",
+                      "imageHash": "url-hash-_dot.png"
+                    }
+                  ],
+                  "image": {
+                    "scaleMode": "FILL",
+                    "imageHash": "url-hash-_dot.png"
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 312,
+              "y": 0,
+              "width": 140,
+              "height": 74,
+              "absoluteX": 336,
+              "absoluteY": 61,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-11",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "img",
+                  "x": 13,
+                  "y": 13,
+                  "width": 48,
+                  "height": 48,
+                  "absoluteX": 349,
+                  "absoluteY": 74,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-11-1",
+                  "sourceType": "image",
+                  "sourceTag": "img",
+                  "fills": [
+                    {
+                      "type": "IMAGE",
+                      "scaleMode": "FILL",
+                      "imageHash": "url-hash-_dot.png"
+                    }
+                  ],
+                  "image": {
+                    "scaleMode": "FILL",
+                    "imageHash": "url-hash-_dot.png"
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 468,
+              "y": 0,
+              "width": 140,
+              "height": 74,
+              "absoluteX": 492,
+              "absoluteY": 61,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-15",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "img",
+                  "x": 13,
+                  "y": 13,
+                  "width": 32,
+                  "height": 32,
+                  "absoluteX": 505,
+                  "absoluteY": 74,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-15-1",
+                  "sourceType": "image",
+                  "sourceTag": "img",
+                  "fills": [
+                    {
+                      "type": "IMAGE",
+                      "scaleMode": "FILL",
+                      "imageHash": "hash-70-137"
+                    }
+                  ],
+                  "image": {
+                    "scaleMode": "FILL",
+                    "imageHash": "hash-70-137"
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 0,
+              "y": 90,
+              "width": 140,
+              "height": 74,
+              "absoluteX": 24,
+              "absoluteY": 151,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-19",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "img",
+                  "x": 13,
+                  "y": 13,
+                  "width": 48,
+                  "height": 48,
+                  "absoluteX": 37,
+                  "absoluteY": 164,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-19-1",
+                  "sourceType": "image",
+                  "sourceTag": "img",
+                  "fills": [
+                    {
+                      "type": "IMAGE",
+                      "scaleMode": "FILL",
+                      "imageHash": "url-hash-_dot.png"
+                    }
+                  ],
+                  "image": {
+                    "scaleMode": "FILL",
+                    "imageHash": "url-hash-_dot.png"
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 156,
+              "y": 90,
+              "width": 140,
+              "height": 74,
+              "absoluteX": 180,
+              "absoluteY": 151,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-23",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "FRAME",
+                  "name": "svg",
+                  "x": 13,
+                  "y": 13,
+                  "width": 24,
+                  "height": 24,
+                  "absoluteX": 193,
+                  "absoluteY": 164,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-23-1",
+                  "sourceType": "svg",
+                  "sourceTag": "svg",
+                  "svg": {
+                    "isVectorContainer": true
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 312,
+              "y": 90,
+              "width": 140,
+              "height": 74,
+              "absoluteX": 336,
+              "absoluteY": 151,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-27",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "FRAME",
+                  "name": "svg",
+                  "x": 13,
+                  "y": 13,
+                  "width": 24,
+                  "height": 24,
+                  "absoluteX": 349,
+                  "absoluteY": 164,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-27-1",
+                  "sourceType": "svg",
+                  "sourceTag": "svg",
+                  "svg": {
+                    "isVectorContainer": true
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 468,
+              "y": 90,
+              "width": 140,
+              "height": 74,
+              "absoluteX": 492,
+              "absoluteY": 151,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-31",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "FRAME",
+                  "name": "svg",
+                  "x": 13,
+                  "y": 13,
+                  "width": 40,
+                  "height": 40,
+                  "absoluteX": 505,
+                  "absoluteY": 164,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-31-1",
+                  "sourceType": "svg",
+                  "sourceTag": "svg",
+                  "svg": {
+                    "isVectorContainer": true
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 0,
+              "y": 180,
+              "width": 140,
+              "height": 66,
+              "absoluteX": 24,
+              "absoluteY": 241,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-35",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "img",
+                  "x": 13,
+                  "y": 13,
+                  "width": 40,
+                  "height": 40,
+                  "absoluteX": 37,
+                  "absoluteY": 254,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-35-1",
+                  "sourceType": "rectangle",
+                  "sourceTag": "img"
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 156,
+              "y": 180,
+              "width": 140,
+              "height": 66,
+              "absoluteX": 180,
+              "absoluteY": 241,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-39",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "canvas",
+                  "x": 13,
+                  "y": 13,
+                  "width": 60,
+                  "height": 40,
+                  "absoluteX": 193,
+                  "absoluteY": 254,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-39-1",
+                  "sourceType": "rectangle",
+                  "sourceTag": "canvas"
+                }
+              ]
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 312,
+              "y": 180,
+              "width": 140,
+              "height": 66,
+              "absoluteX": 336,
+              "absoluteY": 241,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-41",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.898,
+                    "g": 0.9059,
+                    "b": 0.9216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 8
+              },
+              "children": [
+                {
+                  "figmaType": "RECTANGLE",
+                  "name": "video",
+                  "x": 13,
+                  "y": 13,
+                  "width": 60,
+                  "height": 40,
+                  "absoluteX": 349,
+                  "absoluteY": 254,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-3-41-1",
+                  "sourceType": "rectangle",
+                  "sourceTag": "video"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

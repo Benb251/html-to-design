@@ -22,3 +22,14 @@ export { FontManager } from "./fonts.js";
 export { createFigmaImageFill, resolveImageScaleMode } from "./images.js";
 export { renderSvgNode } from "./svg.js";
 export { WarningCollector } from "./warnings.js";
+export {
+  FakeBaseNode,
+  FakeLayoutNode,
+  FakeStyleableNode,
+  FakeFrameNode,
+  FakeRectangleNode,
+  FakeTextNode,
+  FakeFigmaHost,
+} from "./fake-host.js";
+export * as fidelity from "./fidelity/index.js";
+export * from "./fidelity/index.js";

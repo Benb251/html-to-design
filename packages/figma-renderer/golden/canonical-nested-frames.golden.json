@@ -1,0 +1,78 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Fixture",
+  "x": 100,
+  "y": 200,
+  "width": 800,
+  "height": 600,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "children": [
+    {
+      "figmaType": "FRAME",
+      "name": "Frame",
+      "x": 40,
+      "y": 40,
+      "width": 400,
+      "height": 300,
+      "absoluteX": 40,
+      "absoluteY": 40,
+      "opacity": 1,
+      "sourceId": "outer-frame",
+      "sourceType": "frame",
+      "children": [
+        {
+          "figmaType": "FRAME",
+          "name": "Frame",
+          "x": 40,
+          "y": 40,
+          "width": 200,
+          "height": 120,
+          "absoluteX": 80,
+          "absoluteY": 80,
+          "opacity": 1,
+          "sourceId": "inner-frame",
+          "sourceType": "frame",
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "Text — \"Nested\"",
+              "x": 16,
+              "y": 16,
+              "width": 240,
+              "height": 24,
+              "absoluteX": 96,
+              "absoluteY": 96,
+              "opacity": 1,
+              "sourceId": "nested-text",
+              "sourceType": "text",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Nested",
+                "fontFamily": "Inter",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

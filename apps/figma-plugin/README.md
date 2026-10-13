@@ -97,9 +97,9 @@ npm run build
 6. Click **Validate & Prepare**.
 7. Once validated, click **Import to Figma**.
 
-## Testing
+## Testing & Fidelity Regression
 
-Run automated tests:
+Run automated tests (including W2D-008 plugin integration regression):
 
 ```bash
 npm test -w @web2design/figma-plugin
@@ -110,3 +110,12 @@ Run TypeScript type check:
 ```bash
 npm run typecheck -w @web2design/figma-plugin
 ```
+
+### Integration Guarantees (W2D-008)
+- **Lifecycle Protocol**: Tests complete `validate-document` → `import-document` → `import-started` → `import-success` pipeline.
+- **Error Handling**: Renderer failure emits structured `import-error` and resets `isImporting` state.
+- **In-Flight Guard**: Rejects concurrent / double-click import requests while an import is in-flight.
+- **Transactional Rollback**: Fatal errors trigger root frame removal via `rootFrame.remove()` with zero canvas orphan nodes, while non-fatal recoverable child warnings do not trigger rollback.
+- **Manifest Lock**: Protects `networkAccess.allowedDomains: ["*"]` from accidental regression to `none`.
+- **Artifact Verification**: Verifies presence of bundled `manifest.json`, `main.js`, `ui.html`, and `sample-w2d-document.json`.
+

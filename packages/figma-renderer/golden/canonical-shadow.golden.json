@@ -1,0 +1,57 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Fixture",
+  "x": 100,
+  "y": 200,
+  "width": 800,
+  "height": 600,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "children": [
+    {
+      "figmaType": "RECTANGLE",
+      "name": "Rectangle",
+      "x": 24,
+      "y": 24,
+      "width": 240,
+      "height": 120,
+      "absoluteX": 24,
+      "absoluteY": 24,
+      "opacity": 1,
+      "sourceId": "shadow-card",
+      "sourceType": "rectangle",
+      "fills": [
+        {
+          "type": "SOLID",
+          "color": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          }
+        }
+      ],
+      "radius": {
+        "uniform": 8
+      },
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "offsetX": 0,
+          "offsetY": 4,
+          "blurRadius": 12,
+          "spreadRadius": 0,
+          "color": {
+            "r": 0,
+            "g": 0,
+            "b": 0,
+            "a": 0.18
+          }
+        }
+      ]
+    }
+  ]
+}

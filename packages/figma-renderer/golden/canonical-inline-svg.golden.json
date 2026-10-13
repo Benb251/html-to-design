@@ -1,0 +1,31 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Fixture",
+  "x": 100,
+  "y": 200,
+  "width": 800,
+  "height": 600,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "children": [
+    {
+      "figmaType": "FRAME",
+      "name": "SVG",
+      "x": 24,
+      "y": 24,
+      "width": 24,
+      "height": 24,
+      "absoluteX": 24,
+      "absoluteY": 24,
+      "opacity": 1,
+      "sourceId": "svg-1",
+      "sourceType": "svg",
+      "svg": {
+        "isVectorContainer": true
+      }
+    }
+  ]
+}

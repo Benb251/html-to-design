@@ -1,0 +1,255 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Web2Design geometry fidelity",
+  "x": -200,
+  "y": -1008,
+  "width": 1400,
+  "height": 3017,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "sourceTag": "html",
+  "children": [
+    {
+      "figmaType": "FRAME",
+      "name": "body",
+      "x": 0,
+      "y": 17.25,
+      "width": 785,
+      "height": 2999.25,
+      "absoluteX": 0,
+      "absoluteY": 17.25,
+      "opacity": 1,
+      "sourceId": "w2d-element-body",
+      "sourceType": "frame",
+      "sourceTag": "body",
+      "children": [
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 17.25,
+          "y": 0,
+          "width": 405.5,
+          "height": 182,
+          "absoluteX": 17.25,
+          "absoluteY": 17.25,
+          "opacity": 1,
+          "sourceId": "w2d-element-1",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0.9333,
+                "g": 0.9333,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.0706,
+                "g": 0.2039,
+                "b": 0.3373,
+                "a": 1
+              },
+              "width": 2
+            }
+          ],
+          "children": [
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 30,
+              "y": 30,
+              "width": 144.5,
+              "height": 57.25,
+              "absoluteX": 47.25,
+              "absoluteY": 47.25,
+              "opacity": 1,
+              "sourceId": "w2d-element-1-0",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.6667,
+                    "g": 0.7333,
+                    "b": 0.8,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.0706,
+                    "g": 0.2039,
+                    "b": 0.3373,
+                    "a": 1
+                  },
+                  "width": 2
+                }
+              ]
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 30,
+              "y": 94.75,
+              "width": 120.5,
+              "height": 57.25,
+              "absoluteX": 47.25,
+              "absoluteY": 112,
+              "opacity": 1,
+              "sourceId": "w2d-element-1-1",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.6667,
+                    "g": 0.7333,
+                    "b": 0.8,
+                    "a": 1
+                  }
+                }
+              ],
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.0706,
+                    "g": 0.2039,
+                    "b": 0.3373,
+                    "a": 1
+                  },
+                  "width": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 300.5,
+          "y": 203,
+          "width": 64.8281,
+          "height": 50.25,
+          "absoluteX": 300.5,
+          "absoluteY": 220.25,
+          "opacity": 1,
+          "sourceId": "w2d-element-3",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0.8667,
+                "g": 0.9333,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.0706,
+                "g": 0.2039,
+                "b": 0.3373,
+                "a": 1
+              },
+              "width": 2
+            }
+          ],
+          "children": [
+            {
+              "figmaType": "RECTANGLE",
+              "name": "div",
+              "x": 15.75,
+              "y": 15.75,
+              "width": 33.3281,
+              "height": 18.75,
+              "absoluteX": 316.25,
+              "absoluteY": 236,
+              "opacity": 1,
+              "sourceId": "w2d-element-3-0",
+              "sourceType": "rectangle",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0706,
+                    "g": 0.2039,
+                    "b": 0.3373,
+                    "a": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "figmaType": "RECTANGLE",
+          "name": "div",
+          "x": -18.75,
+          "y": 103.25,
+          "width": 40.5,
+          "height": 18.75,
+          "absoluteX": -18.75,
+          "absoluteY": 120.5,
+          "opacity": 1,
+          "sourceId": "w2d-element-5",
+          "sourceType": "rectangle",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0.6667,
+                "g": 0.7333,
+                "b": 0.8,
+                "a": 1
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "RECTANGLE",
+          "name": "div",
+          "x": 1100.5,
+          "y": 2383,
+          "width": 120.5,
+          "height": 33.25,
+          "absoluteX": 1100.5,
+          "absoluteY": 2400.25,
+          "opacity": 1,
+          "sourceId": "w2d-element-6",
+          "sourceType": "rectangle",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0.6667,
+                "g": 0.7333,
+                "b": 0.8,
+                "a": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
