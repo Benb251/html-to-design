@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   DESIGN_SCHEMA_VERSION,
+  SUPPORTED_SCHEMA_VERSIONS,
   DesignDocumentValidationError,
   isSupportedSchemaVersion,
   normalizeDesignDocument,
@@ -278,7 +279,7 @@ describe("Design Schema V0.1", () => {
   });
 
   it("rejects an invalid schema version", () => {
-    const document = { ...createBaseDocument(), schemaVersion: "0.5" };
+    const document = { ...createBaseDocument(), schemaVersion: "0.6" };
     expect(safeParseDesignDocument(document).success).toBe(false);
   });
 
@@ -469,7 +470,8 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
     expect(isSupportedSchemaVersion("0.2")).toBe(true);
     expect(isSupportedSchemaVersion("0.3")).toBe(true);
     expect(isSupportedSchemaVersion("0.4")).toBe(true);
-    expect(isSupportedSchemaVersion("0.5")).toBe(false);
+    expect(isSupportedSchemaVersion("0.5")).toBe(true);
+    expect(isSupportedSchemaVersion("0.6")).toBe(false);
     expect(isSupportedSchemaVersion("1.0")).toBe(false);
     expect(isSupportedSchemaVersion(null)).toBe(false);
   });
@@ -481,11 +483,11 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
     expect(parsed.root.style?.fills?.[0]?.type).toBe("solid");
   });
 
-  it("upgrades/normalizes V0.1 documents to V0.4 with identical semantics", () => {
+  it("upgrades/normalizes V0.1 documents to V0.5 with identical semantics", () => {
     const v01Doc = createV01Document();
     const parsed = parseDesignDocument(v01Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.4");
+    expect(upgraded.schemaVersion).toBe("0.5");
     expect(upgraded.root.id).toBe(v01Doc.root.id);
     expect(upgraded.root.style?.fills).toEqual(v01Doc.root.style.fills);
     expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
@@ -851,7 +853,7 @@ describe("Design Schema V0.3 & Border/Shadow Support", () => {
     };
     const parsed = parseDesignDocument(v01Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.4");
+    expect(upgraded.schemaVersion).toBe("0.5");
     expect(upgraded.root.style?.border?.top).toEqual({
       width: 2,
       style: "solid",
@@ -862,11 +864,11 @@ describe("Design Schema V0.3 & Border/Shadow Support", () => {
     expect(upgraded.root.style?.border?.left).toEqual(upgraded.root.style?.border?.top);
   });
 
-  it("upgrades/normalizes V0.2 gradient documents to V0.4 preserving gradients and borders", () => {
+  it("upgrades/normalizes V0.2 gradient documents to V0.5 preserving gradients and borders", () => {
     const v02Doc = createV02Document();
     const parsed = parseDesignDocument(v02Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.4");
+    expect(upgraded.schemaVersion).toBe("0.5");
     expect(upgraded.root.style?.fills?.[0]?.type).toBe("linear-gradient");
     expect(upgraded.root.style?.border?.top.width).toBe(2);
     expect(upgraded.root.style?.border?.right.width).toBe(2);
@@ -1124,15 +1126,172 @@ describe("Design Schema V0.4 & Clipping Support", () => {
     expect(safeParseDesignDocument(v01WithClip).success).toBe(false);
   });
 
-  it("upgrades/normalizes V0.3 documents to V0.4 preserving all semantics and without phantom clip", () => {
+  it("upgrades/normalizes V0.3 documents to V0.5 preserving all semantics and without phantom clip/transform", () => {
     const v03Doc = createV03Document();
     const parsed = parseDesignDocument(v03Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.4");
+    expect(upgraded.schemaVersion).toBe("0.5");
     expect(upgraded.root.clip).toBeUndefined();
+    expect(upgraded.root.transform).toBeUndefined();
     expect(upgraded.root.style?.border?.top.width).toBe(2);
     expect(upgraded.root.style?.boxShadows?.length).toBe(1);
     expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
+  });
+});
+
+describe("Design Schema V0.5 — CSS Transforms + Rotation", () => {
+  function createV05Document(transform?: unknown): Record<string, unknown> {
+    return {
+      schemaVersion: "0.5",
+      capture: {
+        capturedAt: "2026-10-14T00:00:00.000Z",
+        source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" },
+        page: { url: "https://example.com/transforms", title: "Transform Test" },
+      },
+      viewport: {
+        width: 1440,
+        height: 900,
+        devicePixelRatio: 1,
+        scrollX: 0,
+        scrollY: 0,
+      },
+      root: {
+        id: "root",
+        sourceTag: "html",
+        name: "Page",
+        x: 0,
+        y: 0,
+        width: 1440,
+        height: 900,
+        visible: true,
+        opacity: 1,
+        type: "frame",
+        clip: { x: true, y: true },
+        children: [
+          {
+            id: "rect-1",
+            sourceTag: "div",
+            name: "Transformed Box",
+            x: 90,
+            y: 90,
+            width: 120,
+            height: 120,
+            visible: true,
+            opacity: 1,
+            type: "rectangle",
+            children: [],
+            ...(transform ? { transform } : {}),
+          },
+          {
+            id: "text-1",
+            sourceTag: "span",
+            name: "Rotated Text",
+            x: 200,
+            y: 200,
+            width: 80,
+            height: 24,
+            visible: true,
+            opacity: 1,
+            type: "text",
+            characters: "Hello",
+            textStyle: {
+              fontFamily: "Inter",
+              fontSize: 16,
+              fontWeight: 400,
+              fontStyle: "normal",
+              lineHeight: 24,
+              letterSpacing: 0,
+              textAlign: "left",
+              color: { r: 0, g: 0, b: 0, a: 1 },
+            },
+            children: [],
+            ...(transform ? { transform } : {}),
+          },
+        ],
+      },
+      assets: [],
+    };
+  }
+
+  const sampleTransform = {
+    matrix: { a: 0.866, b: 0.5, c: -0.5, d: 0.866, e: 10, f: 20 },
+    origin: { x: 50, y: 50 },
+    baseBounds: { x: 100, y: 100, width: 100, height: 100 },
+  };
+
+  it("exposes current producer version as 0.5 and supports 0.1, 0.2, 0.3, 0.4, 0.5", () => {
+    expect(DESIGN_SCHEMA_VERSION).toBe("0.5");
+    expect(SUPPORTED_SCHEMA_VERSIONS).toEqual(["0.1", "0.2", "0.3", "0.4", "0.5"]);
+    expect(isSupportedSchemaVersion("0.1")).toBe(true);
+    expect(isSupportedSchemaVersion("0.2")).toBe(true);
+    expect(isSupportedSchemaVersion("0.3")).toBe(true);
+    expect(isSupportedSchemaVersion("0.4")).toBe(true);
+    expect(isSupportedSchemaVersion("0.5")).toBe(true);
+    expect(isSupportedSchemaVersion("0.6")).toBe(false);
+    expect(isSupportedSchemaVersion("1.0")).toBe(false);
+  });
+
+  it("parses valid V0.5 documents with 2D transform", () => {
+    const doc = createV05Document(sampleTransform);
+    const parsed = parseDesignDocument(doc);
+    expect(parsed.schemaVersion).toBe("0.5");
+    expect(parsed.root.children[0]?.transform).toEqual(sampleTransform);
+    expect(parsed.root.children[1]?.transform).toEqual(sampleTransform);
+  });
+
+  it("strictly rejects NaN and Infinity in transform values", () => {
+    const docNaN = createV05Document({
+      ...sampleTransform,
+      matrix: { ...sampleTransform.matrix, a: NaN },
+    });
+    expect(safeParseDesignDocument(docNaN).success).toBe(false);
+
+    const docInf = createV05Document({
+      ...sampleTransform,
+      origin: { x: Infinity, y: 50 },
+    });
+    expect(safeParseDesignDocument(docInf).success).toBe(false);
+  });
+
+  it("strictly rejects negative base width or height", () => {
+    const docNegW = createV05Document({
+      ...sampleTransform,
+      baseBounds: { x: 10, y: 10, width: -50, height: 50 },
+    });
+    expect(safeParseDesignDocument(docNegW).success).toBe(false);
+
+    const docNegH = createV05Document({
+      ...sampleTransform,
+      baseBounds: { x: 10, y: 10, width: 50, height: -50 },
+    });
+    expect(safeParseDesignDocument(docNegH).success).toBe(false);
+  });
+
+  it("strictly rejects unknown fields inside transform", () => {
+    const docExtra = createV05Document({
+      ...sampleTransform,
+      matrix: { ...sampleTransform.matrix, extra: 123 },
+    });
+    expect(safeParseDesignDocument(docExtra).success).toBe(false);
+  });
+
+  it("strictly rejects transform on historical V0.1, V0.2, V0.3, V0.4 documents", () => {
+    for (const ver of ["0.1", "0.2", "0.3", "0.4"]) {
+      const doc = createV05Document(sampleTransform);
+      doc.schemaVersion = ver;
+      expect(safeParseDesignDocument(doc).success).toBe(false);
+    }
+  });
+
+  it("upgrades/normalizes V0.4 documents to V0.5 preserving clip and without phantom transform", () => {
+    const v04Doc = createV05Document();
+    v04Doc.schemaVersion = "0.4";
+    const parsed = parseDesignDocument(v04Doc);
+    const upgraded = normalizeDesignDocument(parsed);
+    expect(upgraded.schemaVersion).toBe("0.5");
+    expect(upgraded.root.clip).toEqual({ x: true, y: true });
+    expect(upgraded.root.transform).toBeUndefined();
+    expect(upgraded.root.children[0]?.transform).toBeUndefined();
   });
 });
 

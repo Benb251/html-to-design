@@ -31,7 +31,7 @@ describe("figma-renderer - renderDesignDocument", () => {
     // Traceability metadata
     expect(root.getPluginData("web2design:id")).toBe("root");
     expect(root.getPluginData("web2design:type")).toBe("frame");
-    expect(root.getPluginData("web2design:schemaVersion")).toBe("0.4");
+    expect(root.getPluginData("web2design:schemaVersion")).toBe("0.5");
 
     // Children
     expect(root.children.length).toBe(1);

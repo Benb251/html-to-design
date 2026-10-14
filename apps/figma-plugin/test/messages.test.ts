@@ -105,7 +105,7 @@ describe("Figma plugin - message handling protocol", () => {
     expect(response.type).toBe("validation-success");
     if (response.type === "validation-success") {
       expect(response.summary.totalNodes).toBe(2);
-      expect(response.summary.schemaVersion).toBe("0.4");
+      expect(response.summary.schemaVersion).toBe("0.5");
       expect(response.document).toEqual(simpleTextFixture);
     }
     expect(harness.notifications[0]).toEqual({
@@ -191,7 +191,7 @@ describe("Figma plugin - message handling protocol", () => {
 
   it("rejects invalid schema version with validation issues", async () => {
     const harness = createHarness();
-    const invalidDoc = { ...simpleTextFixture, schemaVersion: "0.5" };
+    const invalidDoc = { ...simpleTextFixture, schemaVersion: "0.6" };
 
     await handleUiMessage({ type: "validate-document", raw: invalidDoc }, harness.postMessage, harness.notify);
 

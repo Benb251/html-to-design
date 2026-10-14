@@ -2133,16 +2133,35 @@
             {
               "figmaType": "RECTANGLE",
               "name": "div",
-              "x": 89.3901,
+              "x": 92.8781,
               "y": 8.0257,
-              "width": 73.2198,
-              "height": 45.9487,
-              "absoluteX": 269.8432,
+              "width": 70,
+              "height": 40,
+              "absoluteX": 273.3312,
               "absoluteY": 478.0257,
               "opacity": 1,
               "sourceId": "w2d-element-43-0",
               "sourceType": "rectangle",
               "sourceTag": "div",
+              "rotation": -5.0025,
+              "relativeTransform": [
+                [
+                  0.9962,
+                  -0.0872,
+                  92.8781
+                ],
+                [
+                  0.0872,
+                  0.9962,
+                  8.0257
+                ]
+              ],
+              "visualAabb": {
+                "x": 269.8432,
+                "y": 478.0257,
+                "width": 73.222,
+                "height": 45.952
+              },
               "fills": [
                 {
                   "type": "SOLID",

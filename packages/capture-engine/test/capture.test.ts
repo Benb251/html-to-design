@@ -154,7 +154,7 @@ describe("rendered traversal", () => {
 describe("export", () => {
   it("roundtrips pretty JSON through real validation and node counting", () => {
     const value = captureDocument(rendered().document, { capturedAt: at }), json = serializeCapture(value);
-    expect(json).toContain('\n  "schemaVersion": "0.4"'); expect(safeParseDesignDocument(JSON.parse(json)).success).toBe(true); expect(countNodes(value.root)).toBe(nodes(value.root).length);
+    expect(json).toContain('\n  "schemaVersion": "0.5"'); expect(safeParseDesignDocument(JSON.parse(json)).success).toBe(true); expect(countNodes(value.root)).toBe(nodes(value.root).length);
   });
   it("rejects unknown fields rather than weakening schema validation", () => {
     const value = captureDocument(rendered().document); expect(() => serializeCapture({ ...value, rawDom: {} })).toThrow();

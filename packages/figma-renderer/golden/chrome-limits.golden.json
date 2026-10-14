@@ -212,16 +212,35 @@
         {
           "figmaType": "FRAME",
           "name": "div",
-          "x": 5.4386,
+          "x": 12.3826,
           "y": 233.8849,
-          "width": 125.1229,
-          "height": 60.2301,
-          "absoluteX": 13.4386,
+          "width": 120,
+          "height": 40,
+          "absoluteX": 20.3826,
           "absoluteY": 241.8849,
           "opacity": 1,
           "sourceId": "w2d-element-8",
           "sourceType": "frame",
           "sourceTag": "div",
+          "rotation": -9.9974,
+          "relativeTransform": [
+            [
+              0.9848,
+              -0.1736,
+              12.3826
+            ],
+            [
+              0.1736,
+              0.9848,
+              233.8849
+            ]
+          ],
+          "visualAabb": {
+            "x": 13.4386,
+            "y": 241.8849,
+            "width": 125.12,
+            "height": 60.224
+          },
           "fills": [
             {
               "type": "SOLID",
@@ -237,16 +256,22 @@
             {
               "figmaType": "TEXT",
               "name": "Text",
-              "x": 3.473,
-              "y": 2.9544,
-              "width": 91.6924,
-              "height": 32.3891,
-              "absoluteX": 16.9116,
-              "absoluteY": 244.8393,
+              "x": 0.0018,
+              "y": 2.9998,
+              "width": 90.1101,
+              "height": 17.0044,
+              "absoluteX": 20.3844,
+              "absoluteY": 244.8847,
               "opacity": 1,
               "sourceId": "w2d-text-8-0",
               "sourceType": "text",
               "sourceTag": "div",
+              "visualAabb": {
+                "x": 16.9116,
+                "y": 244.8394,
+                "width": 91.6924,
+                "height": 32.389
+              },
               "fills": [
                 {
                   "type": "SOLID",

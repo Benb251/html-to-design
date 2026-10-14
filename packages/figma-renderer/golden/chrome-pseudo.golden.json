@@ -1683,16 +1683,35 @@
             {
               "figmaType": "TEXT",
               "name": "::before",
-              "x": 13,
-              "y": 13,
+              "x": 17.0612,
+              "y": 6.1567,
               "width": 56.0469,
               "height": 24,
-              "absoluteX": 33,
-              "absoluteY": 1040,
+              "absoluteX": 37.0612,
+              "absoluteY": 1033.1567,
               "opacity": 1,
               "sourceId": "w2d-element-31::before",
               "sourceType": "text",
               "sourceTag": "::before",
+              "rotation": -14.9993,
+              "relativeTransform": [
+                [
+                  0.9659,
+                  -0.2588,
+                  17.0612
+                ],
+                [
+                  0.2588,
+                  0.9659,
+                  6.1567
+                ]
+              ],
+              "visualAabb": {
+                "x": 30.85,
+                "y": 1033.1567,
+                "width": 60.3469,
+                "height": 37.6865
+              },
               "fills": [
                 {
                   "type": "SOLID",

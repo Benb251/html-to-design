@@ -1,6 +1,7 @@
-import { DESIGN_SCHEMA_VERSION, parseDesignDocument, type DesignDocument, type DesignNode, type DesignWarning, type FrameNode, type ImageNode } from "@web2design/design-schema";
+import { DESIGN_SCHEMA_VERSION, parseDesignDocument, type DesignDocument, type DesignNode, type DesignWarning, type FrameNode, type ImageNode, type TextNode } from "@web2design/design-schema";
 import { captureId, documentRect, renderDecision } from "./geometry.js";
-import { cssColor, textStyle, visualStyle, type Warn } from "./styles.js";
+import { cssColor, cssPixels, textStyle, visualStyle, type Warn } from "./styles.js";
+import { processElementTransform } from "./transform.js";
 import { renderedText } from "./text.js";
 import { createAssetRegistry, inferUrlMimeType, parseDataUrlMimeType, materializeBlobImage, serializeAndSanitizeSvg } from "./assets.js";
 import { capturePseudoElement } from "./pseudo.js";
@@ -52,7 +53,49 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     if (style.position === "fixed" || style.position === "sticky") {
       warn("POSITION_CONTEXT_UNSUPPORTED", "Fixed/sticky elements are omitted to avoid scroll-dependent document coordinates."); return [];
     }
-    if (style.transform && style.transform !== "none") warnElement("TRANSFORM_APPROXIMATED", "Browser-rendered axis-aligned boxes are captured; rotation/skew/scale semantics are not preserved.");
+
+    const geometry = documentRect(rect, viewport.scrollX, viewport.scrollY);
+    const offW = (element as HTMLElement).offsetWidth;
+    const offH = (element as HTMLElement).offsetHeight;
+    const cssW = cssPixels(style.width);
+    const cssH = cssPixels(style.height);
+
+    let baseW = offW && offW > 0 ? offW : (cssW && cssW > 0 ? cssW : rect.width);
+    let baseH = offH && offH > 0 ? offH : (cssH && cssH > 0 ? cssH : rect.height);
+
+    // If offset dimensions are rounded integers of computed subpixel CSS dimensions, retain subpixel precision:
+    if (cssW !== undefined && offW && Math.abs(offW - cssW) < 1) {
+      baseW = cssW;
+    }
+    if (cssH !== undefined && offH && Math.abs(offH - cssH) < 1) {
+      baseH = cssH;
+    }
+
+    const { transform, warnings: transformWarnings } = processElementTransform(
+      style,
+      geometry,
+      baseW,
+      baseH,
+      view,
+    );
+    for (const tw of transformWarnings) {
+      warnElement(tw.code, tw.message);
+    }
+
+    const hasDynamicTransform =
+      Boolean(transform) &&
+      ((style.animationName && style.animationName !== "none" && style.animationPlayState !== "paused") ||
+        (style.transitionProperty &&
+          (style.transitionProperty === "all" || style.transitionProperty.includes("transform")) &&
+          style.transitionDuration !== "0s" &&
+          style.transitionDuration !== ""));
+    if (hasDynamicTransform) {
+      warnElement(
+        "DYNAMIC_TRANSFORM_SNAPSHOT",
+        "Element transform was captured as a snapshot of current rendered animation/transition state.",
+      );
+    }
+
     if (style.zIndex && style.zIndex !== "auto" || style.order && style.order !== "0" || /reverse$/.test(style.flexDirection)) warnElement("PAINT_ORDER_UNSUPPORTED", "Explicit z-index/flex order may differ from captured DOM child order; stacking contexts are not reconstructed.");
     if (style.filter && style.filter !== "none") warnElement("FILTER_UNSUPPORTED", "Filters are not captured.");
     if (element.shadowRoot) warnElement("SHADOW_DOM_UNSUPPORTED", "Shadow-root content is omitted.");
@@ -76,11 +119,11 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
       warnElement("CLIP_PATH_UNSUPPORTED", "CSS clip-path is not supported; shape clipping is not reconstructed.");
     }
 
-    const geometry = documentRect(rect, viewport.scrollX, viewport.scrollY);
-    const visuals = decision === "capture" ? visualStyle(style, warnElement, style.transform && style.transform !== "none" ? undefined : rect) : {};
+    const visuals = decision === "capture" ? visualStyle(style, warnElement, transform ? transform.baseBounds : (style.transform && style.transform !== "none" ? undefined : rect)) : {};
     if (element === document.body && canvasFromBody) delete visuals.fills;
     const base = { id, sourceTag: tag, name: tag, ...geometry, visible: true,
-      opacity: Math.min(1, Math.max(0, Number.isFinite(Number(style.opacity)) && style.opacity !== "" ? Number(style.opacity) : 1)), style: visuals };
+      opacity: Math.min(1, Math.max(0, Number.isFinite(Number(style.opacity)) && style.opacity !== "" ? Number(style.opacity) : 1)), style: visuals,
+      ...(transform ? { transform } : {}) };
     if (unsupportedMedia.has(tag)) {
       if (tag === "iframe") {
         warnElement("IFRAME_UNSUPPORTED", "Iframe content is not captured; only an empty box placeholder is present.");
@@ -181,8 +224,9 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     }).flatMap(emit);
 
     const hasMeaningfulClip = hasClip && (contentChildren.length > 0 || beforeNodes.length > 0);
+    const hasTransform = Boolean(transform);
     const isFrame = decision === "capture" && (contentChildren.length > 0 || beforeNodes.length > 0) &&
-      (groups.has(tag) || styled || base.opacity < 1 || hasMeaningfulClip || tag === "div" && (contentChildren.length > 1 || beforeNodes.length > 0) || (beforeNodes.length > 0 && styled));
+      (groups.has(tag) || styled || base.opacity < 1 || hasMeaningfulClip || hasTransform || tag === "div" && (contentChildren.length > 1 || beforeNodes.length > 0) || (beforeNodes.length > 0 && styled));
     // Reserve ancestors before descending so truncation preserves grouping and local opacity.
     if (isFrame) count++;
     const children: DesignNode[] = [...beforeNodes];
@@ -211,7 +255,25 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
 
     const activeClip = hasClip && children.length > 0 ? { x: clipX, y: clipY } : undefined;
 
-    if (isFrame || (children.length > 0 && decision === "capture" && (groups.has(tag) || styled || base.opacity < 1 || hasClip || (tag === "div" && children.length > 1)))) {
+    if (!styled && !hasClip && children.length === 1 && children[0]!.type === "text" && transform) {
+      const childText = children[0] as TextNode;
+      if (isFrame) count--;
+      return [{
+        id,
+        sourceTag: tag,
+        name: tag,
+        type: "text",
+        ...geometry,
+        visible: true,
+        opacity: base.opacity,
+        characters: childText.characters,
+        textStyle: childText.textStyle,
+        children: [],
+        transform,
+      }];
+    }
+
+    if (isFrame || (children.length > 0 && decision === "capture" && (groups.has(tag) || styled || base.opacity < 1 || hasClip || hasTransform || (tag === "div" && children.length > 1)))) {
       return [{ ...base, type: "frame", ...(activeClip ? { clip: activeClip } : {}), children }];
     }
     if (decision !== "capture") {
@@ -228,14 +290,26 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     }
     return children;
   }
-  if (htmlStyle.transform && htmlStyle.transform !== "none") warn("TRANSFORM_APPROXIMATED", "The document element is transformed; captured axis-aligned boxes do not preserve transform semantics.", "root");
+  const html = document.documentElement, body = document.body;
+  const htmlBox = documentRect(html.getBoundingClientRect(), viewport.scrollX, viewport.scrollY);
+  const bodyBox = documentRect(body.getBoundingClientRect(), viewport.scrollX, viewport.scrollY);
+  let rootTransformResult: ReturnType<typeof processElementTransform> | undefined;
+  if (htmlStyle.transform && htmlStyle.transform !== "none") {
+    rootTransformResult = processElementTransform(
+      htmlStyle,
+      htmlBox,
+      html.offsetWidth || viewport.width,
+      html.offsetHeight || viewport.height,
+      view,
+    );
+    for (const tw of rootTransformResult.warnings) {
+      warn(tw.code, tw.message, "root");
+    }
+  }
   if (htmlStyle.filter && htmlStyle.filter !== "none") warn("FILTER_UNSUPPORTED", "Filters on the document element are not captured.", "root");
   if (htmlStyle.zIndex && htmlStyle.zIndex !== "auto") warn("PAINT_ORDER_UNSUPPORTED", "Explicit document stacking is not reconstructed; children preserve DOM order.", "root");
   const children = htmlStyle.display === "none" || htmlStyle.contentVisibility === "hidden" ||
     htmlStyle.opacity !== "" && Number(htmlStyle.opacity) === 0 ? [] : visit(document.body, [], 0);
-  const html = document.documentElement, body = document.body;
-  const htmlBox = documentRect(html.getBoundingClientRect(), viewport.scrollX, viewport.scrollY);
-  const bodyBox = documentRect(body.getBoundingClientRect(), viewport.scrollX, viewport.scrollY);
   const rootStyle = visualStyle(htmlStyle, (code, message) => warn(code, message, "root"));
   const canvasColor = canvasFromBody && bodyStyle.display !== "none" ? cssColor(bodyStyle.backgroundColor) : undefined;
   if (canvasColor && canvasColor.a > 0) rootStyle.fills = [{ type: "solid", color: canvasColor }];
@@ -246,12 +320,13 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     width: Math.max(viewport.width, html.scrollWidth, body.scrollWidth, htmlBox.x + htmlBox.width, bodyBox.x + bodyBox.width), height: Math.max(viewport.height, html.scrollHeight, body.scrollHeight, htmlBox.y + htmlBox.height, bodyBox.y + bodyBox.height),
     visible: true, opacity: htmlStyle.opacity === "" ? 1 : Math.min(1, Math.max(0, Number(htmlStyle.opacity))), style: rootStyle,
     ...(rootClip ? { clip: rootClip } : {}),
+    ...(rootTransformResult?.transform ? { transform: rootTransformResult.transform } : {}),
     children };
   const emittedIds = new Set<string>();
   const collect = (node: DesignNode) => { emittedIds.add(node.id); node.children.forEach(collect); };
   collect(root);
   for (const warning of warnings) if (warning.nodeId && !emittedIds.has(warning.nodeId)) delete warning.nodeId;
-  warn("CAPTURE_SCOPE", "W2D-014: rendered light-DOM boxes, synthetic pseudo-elements, editable text, basic styles, gradient fills, per-side borders, multi/inset shadows, container clipping, images and inline SVG. Full paint order, media and advanced layout/style semantics are not reconstructed.");
+  warn("CAPTURE_SCOPE", "W2D-015: rendered light-DOM boxes, synthetic pseudo-elements, editable text, basic styles, gradient fills, per-side borders, multi/inset shadows, container clipping, CSS 2D transforms and rotation, images and inline SVG. Full paint order, media and advanced layout/style semantics are not reconstructed.");
   return parseDesignDocument({ schemaVersion: DESIGN_SCHEMA_VERSION, capture: { capturedAt: options.capturedAt ?? new Date().toISOString(),
     source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" }, page: { url: document.URL, title: document.title } },
     viewport, root, assets: assetRegistry.getAssets(), warnings }) as DesignDocument;

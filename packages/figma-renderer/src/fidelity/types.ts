@@ -12,7 +12,8 @@ export type FidelityCategory =
   | "SVG"
   | "WARNING"
   | "ASSET"
-  | "CLIPPING";
+  | "CLIPPING"
+  | "TRANSFORM";
 
 export interface NormalizedGradientStop {
   position: number;
@@ -95,6 +96,10 @@ export interface NormalizedRenderedNode {
 
   clipsContent?: boolean | undefined;
 
+  rotation?: number | undefined;
+  relativeTransform?: [[number, number, number], [number, number, number]] | undefined;
+  visualAabb?: { x: number; y: number; width: number; height: number } | undefined;
+
   fills?: NormalizedFill[] | undefined;
   strokes?: NormalizedStroke[] | undefined;
   radius?: NormalizedRadius | undefined;
@@ -139,6 +144,7 @@ export interface FidelityReport {
   fixtures: number;
   nodesCompared: number;
   geometryChecks: number;
+  transformChecks: number;
   styleChecks: number;
   textChecks: number;
   assetChecks: number;

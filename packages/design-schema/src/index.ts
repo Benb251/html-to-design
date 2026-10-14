@@ -14,6 +14,7 @@ export {
   DesignDocumentV02Schema,
   DesignDocumentV03Schema,
   DesignDocumentV04Schema,
+  DesignDocumentV05Schema,
   normalizeDesignDocument,
   upgradeDesignDocumentToLatest,
 } from "./document.js";
@@ -24,29 +25,37 @@ export type {
   DesignDocumentV02,
   DesignDocumentV03,
   DesignDocumentV04,
+  DesignDocumentV05,
   DesignWarning,
   LatestDesignDocument,
   VersionedDesignDocument,
   ViewportMetadata,
 } from "./document.js";
 export {
+  BaseBoundsSchema,
   ClipBehaviorSchema,
   DesignNodeSchema,
   DesignNodeSchemaV01,
   DesignNodeSchemaV02,
   DesignNodeSchemaV03,
   DesignNodeSchemaV04,
+  DesignNodeSchemaV05,
   FrameNodeSchema,
   FrameNodeSchemaV01,
   FrameNodeSchemaV02,
   FrameNodeSchemaV03,
   FrameNodeSchemaV04,
+  FrameNodeSchemaV05,
   ImageNodeSchema,
   RectangleNodeSchema,
   SvgNodeSchema,
   TextNodeSchema,
+  Transform2DSchema,
+  TransformMatrix2DSchema,
+  TransformOriginSchema,
 } from "./nodes.js";
 export type {
+  BaseBounds,
   ClipBehavior,
   DesignNode,
   FrameNode,
@@ -54,6 +63,9 @@ export type {
   RectangleNode,
   SvgNode,
   TextNode,
+  Transform2D,
+  TransformMatrix2D,
+  TransformOrigin,
 } from "./nodes.js";
 export {
   BorderSchema,
@@ -103,6 +115,7 @@ export {
   DESIGN_SCHEMA_VERSION_V02,
   DESIGN_SCHEMA_VERSION_V03,
   DESIGN_SCHEMA_VERSION_V04,
+  DESIGN_SCHEMA_VERSION_V05,
   SUPPORTED_SCHEMA_VERSIONS,
   isSupportedSchemaVersion,
 } from "./version.js";
@@ -110,4 +123,3 @@ export type {
   DesignSchemaVersion,
   SupportedSchemaVersion,
 } from "./version.js";
-

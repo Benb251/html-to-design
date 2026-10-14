@@ -161,16 +161,16 @@ describe("W2D-004 text and hierarchy", () => {
   });
   it("warns once per unsupported feature with valid node references", () => {
     const { document, capture } = fixture('<div>first</div>'.repeat(10));
-    document.querySelectorAll("div").forEach(element => { element.style.backgroundColor = "rgb(0,0,0)"; element.style.transform = "translateX(2px)"; element.style.zIndex = "2"; });
+    document.querySelectorAll("div").forEach(element => { element.style.backgroundColor = "rgb(0,0,0)"; element.style.transform = "skewX(10deg)"; element.style.zIndex = "2"; });
     const result = capture();
-    expect(result.warnings?.filter(warning => warning.code === "TRANSFORM_APPROXIMATED")).toHaveLength(1);
+    expect(result.warnings?.filter(warning => warning.code === "TRANSFORM_SKEW_APPROXIMATED")).toHaveLength(1);
     expect(result.warnings?.filter(warning => warning.code === "PAINT_ORDER_UNSUPPORTED")).toHaveLength(1);
-    expect(result.warnings?.find(warning => warning.code === "TRANSFORM_APPROXIMATED")?.nodeId).toBe("w2d-element-0");
+    expect(result.warnings?.find(warning => warning.code === "TRANSFORM_SKEW_APPROXIMATED")?.nodeId).toBe("w2d-element-0");
     expect(safeParseDesignDocument(result).success).toBe(true);
   });
   it("never references pruned nodes in warnings and respects DOM text order", () => {
-    const result = fixture('<span style="transform:translateX(2px)">first</span><span>second</span>').capture();
-    expect(result.warnings?.find(warning => warning.code === "TRANSFORM_APPROXIMATED")?.nodeId).toBeUndefined();
+    const result = fixture('<span style="filter:blur(2px)">first</span><span>second</span>').capture();
+    expect(result.warnings?.find(warning => warning.code === "FILTER_UNSUPPORTED")?.nodeId).toBeUndefined();
     expect(flatten(result.root).filter(node => node.type === "text").map(node => node.characters)).toEqual(["first", "second"]);
     expect(safeParseDesignDocument(result).success).toBe(true);
   });

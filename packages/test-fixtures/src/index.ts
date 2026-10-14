@@ -712,4 +712,210 @@ export const roundedClipFrameFixture = documentWith([
   },
 ]);
 
+export const historicalV04ClippingFixture = {
+  schemaVersion: "0.4" as const,
+  capture: {
+    capturedAt: "2026-10-13T07:00:00.000Z",
+    source: { kind: "fixture", name: "Web2Design fixtures", version: "0.1.0" },
+    page: { url: "https://example.com/fixture", title: "Fixture" },
+  },
+  viewport: {
+    width: 800,
+    height: 600,
+    devicePixelRatio: 1,
+    scrollX: 0,
+    scrollY: 0,
+  },
+  root: {
+    id: "root",
+    type: "frame" as const,
+    name: "Page",
+    x: 0,
+    y: 0,
+    width: 800,
+    height: 600,
+    visible: true,
+    opacity: 1,
+    clip: { x: true, y: true },
+    children: [
+      {
+        id: "rect-v04",
+        type: "rectangle" as const,
+        x: 24,
+        y: 24,
+        width: 320,
+        height: 180,
+        visible: true,
+        opacity: 1,
+        children: [] as [],
+        style: {
+          fills: [{ type: "solid" as const, color: { r: 1, g: 1, b: 1, a: 1 } }],
+          border: {
+            top: { width: 1, style: "solid" as const, color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+            right: { width: 1, style: "solid" as const, color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+            bottom: { width: 1, style: "solid" as const, color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+            left: { width: 1, style: "solid" as const, color: { r: 0.8, g: 0.8, b: 0.8, a: 1 } },
+          },
+        },
+      },
+    ],
+  },
+  assets: [],
+};
+
+export const rotationFixture = documentWith([
+  {
+    id: "rotated-card",
+    type: "rectangle",
+    x: 100,
+    y: 100,
+    width: 141.4214,
+    height: 141.4214,
+    visible: true,
+    opacity: 1,
+    children: [],
+    style: {
+      fills: [{ type: "solid", color: { r: 0.2, g: 0.5, b: 0.9, a: 1 } }],
+      cornerRadius: 8,
+    },
+    transform: {
+      matrix: { a: 0.7071, b: 0.7071, c: -0.7071, d: 0.7071, e: 0, f: 0 },
+      origin: { x: 50, y: 50 },
+      baseBounds: { x: 100, y: 100, width: 100, height: 100 },
+    },
+  },
+]);
+
+export const translationFixture = documentWith([
+  {
+    id: "translated-box",
+    type: "rectangle",
+    x: 150,
+    y: 130,
+    width: 120,
+    height: 80,
+    visible: true,
+    opacity: 1,
+    children: [],
+    style: {
+      fills: [{ type: "solid", color: { r: 0.9, g: 0.4, b: 0.2, a: 1 } }],
+    },
+    transform: {
+      matrix: { a: 1, b: 0, c: 0, d: 1, e: 50, f: 30 },
+      origin: { x: 60, y: 40 },
+      baseBounds: { x: 100, y: 100, width: 120, height: 80 },
+    },
+  },
+]);
+
+export const customOriginRotationFixture = documentWith([
+  {
+    id: "custom-origin-card",
+    type: "rectangle",
+    x: 100,
+    y: 100,
+    width: 100,
+    height: 100,
+    visible: true,
+    opacity: 1,
+    children: [],
+    style: {
+      fills: [{ type: "solid", color: { r: 0.1, g: 0.8, b: 0.4, a: 1 } }],
+    },
+    transform: {
+      matrix: { a: 0, b: 1, c: -1, d: 0, e: 0, f: 0 },
+      origin: { x: 0, y: 0 },
+      baseBounds: { x: 100, y: 100, width: 100, height: 100 },
+    },
+  },
+]);
+
+export const uniformScaleFixture = documentWith([
+  {
+    id: "scaled-uniform-card",
+    type: "rectangle",
+    x: 75,
+    y: 75,
+    width: 150,
+    height: 150,
+    visible: true,
+    opacity: 1,
+    children: [],
+    style: {
+      fills: [{ type: "solid", color: { r: 0.7, g: 0.2, b: 0.7, a: 1 } }],
+      cornerRadius: 12,
+    },
+    transform: {
+      matrix: { a: 1.5, b: 0, c: 0, d: 1.5, e: 0, f: 0 },
+      origin: { x: 50, y: 50 },
+      baseBounds: { x: 100, y: 100, width: 100, height: 100 },
+    },
+  },
+]);
+
+export const nonUniformScaleFixture = documentWith([
+  {
+    id: "scaled-nonuniform-card",
+    type: "rectangle",
+    x: 100,
+    y: 100,
+    width: 200,
+    height: 50,
+    visible: true,
+    opacity: 1,
+    children: [],
+    style: {
+      fills: [{ type: "solid", color: { r: 0.3, g: 0.7, b: 0.3, a: 1 } }],
+    },
+    transform: {
+      matrix: { a: 2, b: 0, c: 0, d: 0.5, e: 0, f: 0 },
+      origin: { x: 50, y: 50 },
+      baseBounds: { x: 100, y: 100, width: 100, height: 100 },
+    },
+  },
+]);
+
+export const nestedTransformFixture = documentWith([
+  {
+    id: "parent-rotated-frame",
+    type: "frame",
+    x: 100,
+    y: 100,
+    width: 250,
+    height: 250,
+    visible: true,
+    opacity: 1,
+    style: {
+      fills: [{ type: "solid", color: { r: 0.95, g: 0.95, b: 0.95, a: 1 } }],
+    },
+    transform: {
+      matrix: { a: 0.866, b: 0.5, c: -0.5, d: 0.866, e: 0, f: 0 },
+      origin: { x: 125, y: 125 },
+      baseBounds: { x: 100, y: 100, width: 250, height: 250 },
+    },
+    children: [
+      {
+        id: "child-rotated-box",
+        type: "rectangle",
+        x: 130,
+        y: 130,
+        width: 80,
+        height: 80,
+        visible: true,
+        opacity: 1,
+        children: [],
+        style: {
+          fills: [{ type: "solid", color: { r: 0.8, g: 0.1, b: 0.2, a: 1 } }],
+        },
+        transform: {
+          matrix: { a: 0.7071, b: 0.7071, c: -0.7071, d: 0.7071, e: 0, f: 0 },
+          origin: { x: 40, y: 40 },
+          baseBounds: { x: 130, y: 130, width: 80, height: 80 },
+        },
+      },
+    ],
+  },
+]);
+
+
 

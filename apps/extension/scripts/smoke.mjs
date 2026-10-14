@@ -11,7 +11,7 @@ const candidates = [process.env.CHROME_PATH, "C:/Program Files/Google/Chrome/App
 let executable;
 for (const candidate of candidates) { try { await fs.access(candidate); executable = candidate; break; } catch { /* Try next configured path. */ } }
 if (!executable) throw new Error("Chrome was not found. Set CHROME_PATH. Manual extension loading is a separate check.");
-const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows", "fidelity-clipping"];
+const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows", "fidelity-clipping", "fidelity-transforms"];
 const fixtures = new Map(await Promise.all(names.map(async name => ["/" + name + ".html", await fs.readFile(new URL("../fixtures/" + name + ".html", import.meta.url))])));
 const dotPng = await fs.readFile(new URL("../fixtures/dot.png", import.meta.url));
 const content = await fs.readFile(new URL("../dist/content.js", import.meta.url), "utf8");
@@ -174,7 +174,7 @@ try {
       check("modern computed srgb fill", () => color(element("srgb").style.fills[0].color, { r: .2, g: .4, b: .6, a: .5 }));
     }
     if (name === "fidelity-limits") {
-      check("unsupported features omitted with bounded deterministic warnings", () => { for (const code of ["BACKGROUND_IMAGE_UNSUPPORTED", "RADIUS_UNSUPPORTED", "TRANSFORM_APPROXIMATED", "PAINT_ORDER_UNSUPPORTED", "POSITION_CONTEXT_UNSUPPORTED"]) assert.equal(doc.warnings.filter(w => w.code === code).length, 1, code); assert.equal(element("multiple").style.boxShadows.length, 2); assert.equal(element("inset").style.boxShadows.length, 1); assert.equal(element("complex-border").style.border.top.width, 2); assert.equal(element("complex-border").style.border.left.width, 4); assert.equal(element("ellipse").style.cornerRadius, undefined); assert.equal(element("bg-image").style.fills[0].color.a, 1); });
+      check("unsupported features omitted with bounded deterministic warnings", () => { for (const code of ["BACKGROUND_IMAGE_UNSUPPORTED", "RADIUS_UNSUPPORTED", "PAINT_ORDER_UNSUPPORTED", "POSITION_CONTEXT_UNSUPPORTED"]) assert.equal(doc.warnings.filter(w => w.code === code).length, 1, code); assert.ok(element("transform").transform, "transform must be captured"); assert.equal(element("multiple").style.boxShadows.length, 2); assert.equal(element("inset").style.boxShadows.length, 1); assert.equal(element("complex-border").style.border.top.width, 2); assert.equal(element("complex-border").style.border.left.width, 4); assert.equal(element("ellipse").style.cornerRadius, undefined); assert.equal(element("bg-image").style.fills[0].color.a, 1); });
       check("transform browser box and DOM order", () => { boxesMatch(element("transform"), oracle.elements["transform"].box); const strings = all.filter(node => node.type === "text").map(node => node.characters); assert.ok(strings.indexOf("Transformed") < strings.indexOf("Stacked")); });
       check("hidden subtrees and fixed/sticky excluded", () => { for (const id of ["hidden", "zero", "invisible", "fixed", "sticky"]) assert.equal(element(id), undefined); assert.ok(!JSON.stringify(doc).includes("Hidden omitted")); assert.ok(all.some(node => node.type === "text" && node.characters === "Visible override")); });
       check("safe wrapper pruning", () => { assert.equal(element("contents"), undefined); assert.equal(element("pruned"), undefined); assert.ok(all.some(node => node.type === "text" && node.characters === "Display contents")); assert.ok(all.some(node => node.type === "text" && node.characters === "Plain wrapper")); });
@@ -341,15 +341,17 @@ try {
         assert.equal(gradPseudo.style?.fills?.[0]?.type, "linear-gradient");
         assert.equal(gradPseudo.style?.fills?.[0]?.angle, 135);
       });
-      check("unsupported pseudo content and transform warnings", () => {
+      check("unsupported pseudo content and transform support", () => {
         assert.equal(pseudo("unsupported-content", "::before"), undefined);
         assert.ok(doc.warnings.some(w => w.code === "PSEUDO_CONTENT_UNSUPPORTED"));
-        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_APPROXIMATED" && w.nodeId?.includes(oracle.elements["transformed-pseudo"].id)));
+        const transformedPseudo = pseudo("transformed-pseudo", "::before");
+        assert.ok(transformedPseudo);
+        assert.ok(transformedPseudo.transform, "pseudo must capture transform");
       });
     }
     if (name === "fidelity-gradients") {
-      check("fidelity-gradients document valid V0.4 schema", () => {
-        assert.equal(doc.schemaVersion, "0.4");
+      check("fidelity-gradients document valid V0.5 schema", () => {
+        assert.equal(doc.schemaVersion, "0.5");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("linear gradient default direction (to bottom = 180deg)", () => {
@@ -447,8 +449,8 @@ try {
       });
     }
     if (name === "fidelity-borders-shadows") {
-      check("fidelity-borders-shadows document valid V0.4 schema", () => {
-        assert.equal(doc.schemaVersion, "0.4");
+      check("fidelity-borders-shadows document valid V0.5 schema", () => {
+        assert.equal(doc.schemaVersion, "0.5");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("1. uniform solid border regression", () => {
@@ -598,8 +600,8 @@ try {
       });
     }
     if (name === "fidelity-clipping") {
-      check("fidelity-clipping document valid V0.4 schema", () => {
-        assert.equal(doc.schemaVersion, "0.4");
+      check("fidelity-clipping document valid V0.5 schema", () => {
+        assert.equal(doc.schemaVersion, "0.5");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("1. overflow:hidden both axes", () => {
@@ -733,11 +735,252 @@ try {
         const el = element("clip-with-margin");
         assert.ok(doc.warnings.some(w => w.code === "OVERFLOW_CLIP_MARGIN_UNSUPPORTED" && w.nodeId === el.id));
       });
-      check("22. transformed overflowing child retains warning", () => {
+      check("22. transformed overflowing child retains transform", () => {
         const el = element("transformed-child-container");
         assert.deepEqual(el.clip, { x: true, y: true });
         const child = el.children[0];
-        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_APPROXIMATED" && w.nodeId === child.id));
+        assert.ok(child.transform, "child must have transform captured");
+        assert.ok(Math.abs(child.transform.matrix.b) > 0, "child matrix must capture rotation");
+      });
+    }
+    if (name === "fidelity-transforms") {
+      function computeTransformedAABB(baseBounds, matrix, origin) {
+        const corners = [
+          { x: baseBounds.x, y: baseBounds.y },
+          { x: baseBounds.x + baseBounds.width, y: baseBounds.y },
+          { x: baseBounds.x + baseBounds.width, y: baseBounds.y + baseBounds.height },
+          { x: baseBounds.x, y: baseBounds.y + baseBounds.height },
+        ];
+        const ox = baseBounds.x + origin.x;
+        const oy = baseBounds.y + origin.y;
+        const transformed = corners.map(p => {
+          const rx = p.x - ox;
+          const ry = p.y - oy;
+          return {
+            x: ox + matrix.a * rx + matrix.c * ry + matrix.e,
+            y: oy + matrix.b * rx + matrix.d * ry + matrix.f,
+          };
+        });
+        const xs = transformed.map(p => p.x);
+        const ys = transformed.map(p => p.y);
+        const minX = Math.min(...xs);
+        const maxX = Math.max(...xs);
+        const minY = Math.min(...ys);
+        const maxY = Math.max(...ys);
+        return {
+          x: minX,
+          y: minY,
+          width: maxX - minX,
+          height: maxY - minY,
+        };
+      }
+
+      function assertTransformedGeometry(nodeId, expectedAngleDeg, tolerance = 2) {
+        const node = byId.get(nodeId) || element(nodeId);
+        assert.ok(node.transform, `Node '${nodeId}' must have transform`);
+        const { baseBounds, matrix, origin } = node.transform;
+        const calc = computeTransformedAABB(baseBounds, matrix, origin);
+        assert.ok(Math.abs(calc.x - node.x) <= tolerance, `Calculated x (${calc.x}) must match visual x (${node.x}) for ${nodeId}`);
+        assert.ok(Math.abs(calc.y - node.y) <= tolerance, `Calculated y (${calc.y}) must match visual y (${node.y}) for ${nodeId}`);
+        assert.ok(Math.abs(calc.width - node.width) <= tolerance, `Calculated width (${calc.width}) must match visual width (${node.width}) for ${nodeId}`);
+        assert.ok(Math.abs(calc.height - node.height) <= tolerance, `Calculated height (${calc.height}) must match visual height (${node.height}) for ${nodeId}`);
+        if (expectedAngleDeg !== undefined) {
+          const rad = (expectedAngleDeg * Math.PI) / 180;
+          const expectedA = Math.cos(rad);
+          const expectedB = Math.sin(rad);
+          assert.ok(Math.abs(matrix.a - expectedA) < 0.05, `matrix.a (${matrix.a}) must match expected cos (${expectedA}) for ${nodeId}`);
+          assert.ok(Math.abs(matrix.b - expectedB) < 0.05, `matrix.b (${matrix.b}) must match expected sin (${expectedB}) for ${nodeId}`);
+        }
+      }
+
+      check("1. schemaVersion is 0.5", () => {
+        assert.equal(doc.schemaVersion, "0.5");
+      });
+      check("2. rotate 15deg exact matrix and AABB geometry", () => {
+        assertTransformedGeometry("test-rotate-15", 15);
+      });
+      check("3. rotate -30deg exact matrix and AABB geometry", () => {
+        assertTransformedGeometry("test-rotate-neg30", -30);
+      });
+      check("4. rotate 90deg exact matrix and AABB geometry", () => {
+        assertTransformedGeometry("test-rotate-90", 90);
+      });
+      check("5. center origin resolution (50% 50%)", () => {
+        const node = element("test-origin-center");
+        assert.ok(node.transform);
+        near(node.transform.origin.x, 50, "center origin x");
+        near(node.transform.origin.y, 50, "center origin y");
+        assertTransformedGeometry("test-origin-center", 45);
+      });
+      check("6. top-left origin resolution (0 0)", () => {
+        const node = element("test-origin-top-left");
+        assert.ok(node.transform);
+        near(node.transform.origin.x, 0, "top-left origin x");
+        near(node.transform.origin.y, 0, "top-left origin y");
+        assertTransformedGeometry("test-origin-top-left", 45);
+      });
+      check("7. custom percentage origin resolution (25% 75%)", () => {
+        const node = element("test-origin-custom");
+        assert.ok(node.transform);
+        near(node.transform.origin.x, 25, "custom origin x 25%");
+        near(node.transform.origin.y, 75, "custom origin y 75%");
+        assertTransformedGeometry("test-origin-custom", 45);
+      });
+      check("8. translateX captures translation matrix", () => {
+        const node = element("test-translate-x");
+        assert.ok(node.transform);
+        near(node.transform.matrix.e, 30, "matrix.e translation x");
+        near(node.transform.matrix.f, 0, "matrix.f translation y");
+        assertTransformedGeometry("test-translate-x", 0);
+      });
+      check("9. translateY captures translation matrix", () => {
+        const node = element("test-translate-y");
+        assert.ok(node.transform);
+        near(node.transform.matrix.e, 0, "matrix.e translation x");
+        near(node.transform.matrix.f, 20, "matrix.f translation y");
+        assertTransformedGeometry("test-translate-y", 0);
+      });
+      check("10. translate(x,y) captures dual translation", () => {
+        const node = element("test-translate-xy");
+        assert.ok(node.transform);
+        near(node.transform.matrix.e, 40, "matrix.e translation x");
+        near(node.transform.matrix.f, 25, "matrix.f translation y");
+        assertTransformedGeometry("test-translate-xy", 0);
+      });
+      check("11. rotate + translate combined transform", () => {
+        const node = element("test-rotate-translate");
+        assert.ok(node.transform);
+        assertTransformedGeometry("test-rotate-translate");
+      });
+      check("12. uniform scale transform", () => {
+        const node = element("test-scale-uniform");
+        assert.ok(node.transform);
+        near(node.transform.matrix.a, 1.5, "scale uniform x");
+        near(node.transform.matrix.d, 1.5, "scale uniform y");
+        assertTransformedGeometry("test-scale-uniform");
+      });
+      check("13. scale down (< 1) transform", () => {
+        const node = element("test-scale-down");
+        assert.ok(node.transform);
+        near(node.transform.matrix.a, 0.6, "scale down x");
+        near(node.transform.matrix.d, 0.6, "scale down y");
+        assertTransformedGeometry("test-scale-down");
+      });
+      check("14. non-uniform scale emits TRANSFORM_SCALE_APPROXIMATED", () => {
+        const node = element("test-scale-nonuniform");
+        assert.ok(node.transform);
+        near(node.transform.matrix.a, 1.5, "scale x");
+        near(node.transform.matrix.d, 0.8, "scale y");
+        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_SCALE_APPROXIMATED" && w.nodeId === node.id));
+      });
+      check("15. reflection scaleX(-1) emits TRANSFORM_REFLECTION_UNSUPPORTED", () => {
+        const node = element("test-reflection");
+        assert.ok(node.transform);
+        assert.ok(node.transform.matrix.a < 0, "matrix.a negative for reflection");
+        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_REFLECTION_UNSUPPORTED" && w.nodeId === node.id));
+      });
+      check("16. skewX captures skew matrix and warning", () => {
+        const node = element("test-skew-x");
+        assert.ok(node.transform);
+        assert.ok(Math.abs(node.transform.matrix.c) > 0.2, "matrix.c for skewX");
+        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_SKEW_APPROXIMATED" && w.nodeId === node.id));
+      });
+      check("17. skewY captures skew matrix and warning", () => {
+        const node = element("test-skew-y");
+        assert.ok(node.transform);
+        assert.ok(Math.abs(node.transform.matrix.b) > 0.2, "matrix.b for skewY");
+        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_SKEW_APPROXIMATED"));
+      });
+      check("18. matrix(...) 2D affine normalized", () => {
+        const node = element("test-matrix-2d");
+        assert.ok(node.transform);
+        near(node.transform.matrix.a, 1, "matrix a");
+        near(node.transform.matrix.b, 0.2, "matrix b");
+        near(node.transform.matrix.e, 10, "matrix e");
+        near(node.transform.matrix.f, 20, "matrix f");
+      });
+      check("19. reducible 2D matrix3d collapsed to 2D", () => {
+        const node = element("test-matrix3d-reducible");
+        assert.ok(node.transform);
+        near(node.transform.matrix.e, 15, "matrix e");
+        near(node.transform.matrix.f, 25, "matrix f");
+      });
+      check("20. true 3D transform unsupported warning", () => {
+        const node = element("test-true-3d");
+        assert.ok(doc.warnings.some(w => w.code === "TRANSFORM_3D_UNSUPPORTED" && w.nodeId === node.id));
+      });
+      check("21. rotated text remains editable TextNode", () => {
+        const node = element("test-rotated-text");
+        assert.equal(node.type, "text");
+        assert.equal(node.characters, "Rotated Editable Heading");
+        assert.ok(node.transform);
+        assertTransformedGeometry("test-rotated-text", 10);
+      });
+      check("22. rotated image remains ImageNode with transform", () => {
+        const node = element("test-rotated-image");
+        assert.equal(node.type, "image");
+        assert.ok(node.transform);
+        assertTransformedGeometry("test-rotated-image", 20);
+      });
+      check("23. rotated SVG logical node", () => {
+        const node = element("test-rotated-svg");
+        assert.equal(node.type, "svg");
+        assert.ok(node.transform);
+        assertTransformedGeometry("test-rotated-svg", -15);
+      });
+      check("24. rotated frame with preserved children", () => {
+        const node = element("test-rotated-frame");
+        assert.equal(node.type, "frame");
+        assert.ok(node.transform);
+        assert.equal(node.children.length, 1);
+        assert.equal(node.children[0].type, "frame");
+      });
+      check("25. nested rotated parent + child hierarchy", () => {
+        const parent = element("test-nested-parent");
+        assert.equal(parent.type, "frame");
+        assert.ok(parent.transform);
+        const child = element("test-nested-child");
+        assert.ok(child.transform);
+      });
+      check("26. clipping container with rotated child", () => {
+        const clipFrame = element("test-clip-rotated");
+        assert.deepEqual(clipFrame.clip, { x: true, y: true });
+        const child = element("test-clip-rotated-child");
+        assert.ok(child.transform);
+        assertTransformedGeometry("test-clip-rotated-child", 45);
+      });
+      check("27. gradient fill + rotation regression", () => {
+        const node = element("test-gradient-rotation");
+        assert.equal(node.style?.fills?.[0]?.type, "linear-gradient");
+        assert.ok(node.transform);
+        assertTransformedGeometry("test-gradient-rotation", 25);
+      });
+      check("28. border + rotation regression", () => {
+        const node = element("test-border-rotation");
+        assert.equal(node.style?.border?.top?.width, 2);
+        assert.equal(node.style?.border?.right?.width, 4);
+        assert.equal(node.style?.border?.bottom?.width, 6);
+        assert.equal(node.style?.border?.left?.width, 8);
+        assert.ok(node.transform);
+        assertTransformedGeometry("test-border-rotation", -20);
+      });
+      check("29. multi-shadow + rotation regression", () => {
+        const node = element("test-shadow-rotation");
+        assert.equal(node.style?.boxShadows?.length, 2);
+        assert.ok(node.transform);
+        assertTransformedGeometry("test-shadow-rotation", 15);
+      });
+      check("30. pseudo-element rotation captured", () => {
+        const pseudo = byId.get(oracle.elements["test-pseudo-rotation"].id + "::before");
+        assert.ok(pseudo, "::before must exist");
+        assert.ok(pseudo.transform, "pseudo must have transform");
+        assertTransformedGeometry(pseudo.id, 30);
+      });
+      check("31. fractional geometry preserved", () => {
+        const node = element("test-fractional-geom");
+        assert.ok(node.transform);
+        near(node.transform.baseBounds.width, 100.5, "fractional width");
+        near(node.transform.baseBounds.height, 60.25, "fractional height");
       });
     }
     await fs.writeFile(new URL(name + ".json", evidence), JSON.stringify(doc, null, 2));

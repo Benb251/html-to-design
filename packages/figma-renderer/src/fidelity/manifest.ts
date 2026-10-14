@@ -172,6 +172,28 @@ export const FIXTURE_MANIFEST: FixtureManifestEntry[] = [
       { code: "AXIS_CLIP_APPROXIMATED", nodeId: "w2d-element-35" },
     ],
   },
+  {
+    id: "chrome-transforms",
+    name: "CSS Transforms Fidelity Capture",
+    kind: "chrome-capture",
+    sourcePath: "apps/extension/.smoke/fidelity-transforms.json",
+    description: "Browser capture testing 2D rotation, origin compensation, translation, uniform scale, non-uniform scale approximation, skew approximation, matrix/matrix3d, nested transforms, clipping/gradient/border/shadow/pseudo interactions",
+    expectedCategories: ["GEOMETRY", "HIERARCHY", "TRANSFORM", "FILL", "BORDER", "RADIUS", "SHADOW", "CLIPPING"],
+    expectedWarnings: [
+      { code: "TRANSFORM_SCALE_APPROXIMATED", nodeId: "w2d-element-27" },
+      { code: "TRANSFORM_REFLECTION_UNSUPPORTED", nodeId: "w2d-element-29" },
+      { code: "TRANSFORM_SKEW_APPROXIMATED", nodeId: "w2d-element-31" },
+      { code: "TRANSFORM_SKEW_APPROXIMATED", nodeId: "w2d-element-33" },
+      { code: "TRANSFORM_SKEW_APPROXIMATED", nodeId: "w2d-element-35" },
+      { code: "TRANSFORM_SCALE_APPROXIMATED", nodeId: "w2d-element-39" },
+      { code: "OBJECT_FIT_APPROXIMATED", nodeId: "w2d-element-43" },
+      { code: "TRANSFORM_NESTED_APPROXIMATED", nodeId: "w2d-element-47-1" },
+      { code: "BORDER_STYLE_APPROXIMATED", nodeId: "w2d-element-49" },
+      { code: "TRANSFORM_NESTED_APPROXIMATED", nodeId: "w2d-element-49-1" },
+      { code: "TRANSFORM_NESTED_APPROXIMATED", nodeId: "w2d-text-49-1-0" },
+      { code: "BORDER_COLOR_APPROXIMATED", nodeId: "w2d-element-55" },
+    ],
+  },
 ];
 
 

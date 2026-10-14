@@ -42,6 +42,7 @@ async function runFidelity() {
 
   let totalNodesCompared = 0;
   let totalGeometryChecks = 0;
+  let totalTransformChecks = 0;
   let totalStyleChecks = 0;
   let totalTextChecks = 0;
   let totalAssetChecks = 0;
@@ -132,6 +133,7 @@ async function runFidelity() {
     fixturesProcessed++;
     totalNodesCompared += stats.nodesCompared;
     totalGeometryChecks += stats.geometryChecks;
+    totalTransformChecks += stats.transformChecks ?? 0;
     totalStyleChecks += stats.styleChecks;
     totalTextChecks += stats.textChecks;
     totalAssetChecks += stats.assetChecks;
@@ -144,7 +146,7 @@ async function runFidelity() {
     } else {
       console.log(
         `  [PASS] ${entry.id.padEnd(28)} | ${String(stats.nodesCompared).padStart(3)} nodes | ` +
-          `${String(stats.geometryChecks).padStart(3)} geom | ${String(stats.styleChecks).padStart(3)} style | ` +
+          `${String(stats.geometryChecks).padStart(3)} geom | ${String(stats.transformChecks ?? 0).padStart(2)} xform | ${String(stats.styleChecks).padStart(3)} style | ` +
           `${String(stats.textChecks).padStart(2)} text | ${String(stats.assetChecks).padStart(2)} asset | ` +
           `${String(stats.warningsExpected).padStart(2)} warn`,
       );
@@ -155,6 +157,7 @@ async function runFidelity() {
     fixtures: fixturesProcessed,
     nodesCompared: totalNodesCompared,
     geometryChecks: totalGeometryChecks,
+    transformChecks: totalTransformChecks,
     styleChecks: totalStyleChecks,
     textChecks: totalTextChecks,
     assetChecks: totalAssetChecks,
@@ -175,6 +178,7 @@ async function runFidelity() {
   console.log(`   Fixtures evaluated:     ${fixturesProcessed}`);
   console.log(`   Nodes compared:         ${totalNodesCompared}`);
   console.log(`   Geometry assertions:    ${totalGeometryChecks}`);
+  console.log(`   Transform assertions:   ${totalTransformChecks}`);
   console.log(`   Style assertions:       ${totalStyleChecks}`);
   console.log(`   Text assertions:        ${totalTextChecks}`);
   console.log(`   Asset assertions:       ${totalAssetChecks}`);

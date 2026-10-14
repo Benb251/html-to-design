@@ -26,14 +26,83 @@ export class FakeBaseNode {
 }
 
 export class FakeLayoutNode extends FakeBaseNode {
-  x: number = 0;
-  y: number = 0;
-  width: number = 100;
-  height: number = 100;
+  protected _x: number = 0;
+  protected _y: number = 0;
+  protected _width: number = 100;
+  protected _height: number = 100;
+  protected _rotation: number = 0;
+  protected _relativeTransform: Transform = [
+    [1, 0, 0],
+    [0, 1, 0],
+  ];
+
+  get x(): number {
+    return this._x;
+  }
+  set x(val: number) {
+    this._x = val;
+    this._relativeTransform[0][2] = val;
+  }
+
+  get y(): number {
+    return this._y;
+  }
+  set y(val: number) {
+    this._y = val;
+    this._relativeTransform[1][2] = val;
+  }
+
+  get width(): number {
+    return this._width;
+  }
+  set width(val: number) {
+    this._width = val;
+  }
+
+  get height(): number {
+    return this._height;
+  }
+  set height(val: number) {
+    this._height = val;
+  }
+
+  get rotation(): number {
+    return this._rotation;
+  }
+  set rotation(deg: number) {
+    this._rotation = deg;
+    const rad = (-deg * Math.PI) / 180;
+    const cos = Math.cos(rad);
+    const sin = Math.sin(rad);
+    this._relativeTransform = [
+      [cos, -sin, this._x],
+      [sin, cos, this._y],
+    ];
+  }
+
+  get relativeTransform(): Transform {
+    return this._relativeTransform;
+  }
+  set relativeTransform(matrix: Transform) {
+    this._relativeTransform = [
+      [matrix[0][0], matrix[0][1], matrix[0][2]],
+      [matrix[1][0], matrix[1][1], matrix[1][2]],
+    ];
+    this._x = matrix[0][2];
+    this._y = matrix[1][2];
+    this._rotation = Math.atan2(-matrix[1][0], matrix[0][0]) * (180 / Math.PI);
+  }
 
   resize(w: number, h: number): void {
-    this.width = w;
-    this.height = h;
+    this._width = w;
+    this._height = h;
+  }
+
+  rescale(scale: number): void {
+    if (scale >= 0.01) {
+      this._width *= scale;
+      this._height *= scale;
+    }
   }
 }
 

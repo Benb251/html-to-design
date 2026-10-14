@@ -4,6 +4,7 @@
 import type { DesignNode, FrameNode, RectangleNode, TextNode, VisualStyle } from "@web2design/design-schema";
 import { documentRect, type Rect } from "./geometry.js";
 import { cssPixels, textStyle, visualStyle, type Warn } from "./styles.js";
+import { processElementTransform } from "./transform.js";
 
 export interface ParsedGeneratedContent {
   kind: "text" | "empty" | "unsupported" | "none";
@@ -162,11 +163,8 @@ export function capturePseudoElement(options: CapturePseudoOptions): DesignNode[
   const pseudoId = `${parentId}${pseudoKind}`;
   const pseudoWarn: Warn = (code, message) => warn(code, message, pseudoId);
 
-  if (pseudoStyle.transform && pseudoStyle.transform !== "none") {
-    pseudoWarn("TRANSFORM_APPROXIMATED", "Browser-rendered axis-aligned boxes are captured; rotation/skew/scale semantics are not preserved.");
-  }
-
   // Content parsing
+
   const content = parseGeneratedContent(pseudoStyle.content);
   if (content.kind === "none") return [];
   if (content.kind === "unsupported") {
@@ -308,6 +306,23 @@ export function capturePseudoElement(options: CapturePseudoOptions): DesignNode[
   );
 
   const geo = documentRect(rect, scrollX, scrollY);
+  const {
+    transform: pseudoTransform,
+    visualAabb: pseudoVisualAabb,
+    warnings: pseudoTransformWarnings,
+  } = processElementTransform(
+    pseudoStyle,
+    geo,
+    rect.width,
+    rect.height,
+    view,
+    true, // isLayoutBaseRect = true
+  );
+  for (const tw of pseudoTransformWarnings) {
+    pseudoWarn(tw.code, tw.message);
+  }
+
+  const activeGeo = pseudoVisualAabb ?? geo;
 
   // Decomposition 1: Pure text pseudo-element (no visual box styling)
   if (hasText && !hasVisualBox) {
@@ -316,15 +331,16 @@ export function capturePseudoElement(options: CapturePseudoOptions): DesignNode[
       type: "text",
       sourceTag: pseudoKind,
       name: pseudoKind,
-      x: geo.x,
-      y: geo.y,
-      width: geo.width,
-      height: geo.height,
+      x: activeGeo.x,
+      y: activeGeo.y,
+      width: activeGeo.width,
+      height: activeGeo.height,
       visible: true,
       opacity: pseudoOpacity,
       children: [],
       characters: content.value!,
       textStyle: textStyle(pseudoStyle, pseudoWarn),
+      ...(pseudoTransform ? { transform: pseudoTransform } : {}),
     };
     return [textNode];
   }
@@ -336,14 +352,15 @@ export function capturePseudoElement(options: CapturePseudoOptions): DesignNode[
       type: "rectangle",
       sourceTag: pseudoKind,
       name: pseudoKind,
-      x: geo.x,
-      y: geo.y,
-      width: geo.width,
-      height: geo.height,
+      x: activeGeo.x,
+      y: activeGeo.y,
+      width: activeGeo.width,
+      height: activeGeo.height,
       visible: true,
       opacity: pseudoOpacity,
       children: [],
       style: visuals,
+      ...(pseudoTransform ? { transform: pseudoTransform } : {}),
     };
     return [rectNode];
   }
@@ -381,14 +398,15 @@ export function capturePseudoElement(options: CapturePseudoOptions): DesignNode[
     type: "frame",
     sourceTag: pseudoKind,
     name: pseudoKind,
-    x: geo.x,
-    y: geo.y,
-    width: geo.width,
-    height: geo.height,
+    x: activeGeo.x,
+    y: activeGeo.y,
+    width: activeGeo.width,
+    height: activeGeo.height,
     visible: true,
     opacity: pseudoOpacity,
     children: [childTextNode],
     style: visuals,
+    ...(pseudoTransform ? { transform: pseudoTransform } : {}),
   };
 
   return [containerFrame];

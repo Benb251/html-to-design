@@ -2,6 +2,38 @@ import { z } from "zod";
 import { TextStyleSchema, VisualStyleSchemaV01, VisualStyleSchemaV02, VisualStyleSchemaV03 } from "./style.js";
 import type { TextStyle, VisualStyle } from "./style.js";
 
+export const TransformMatrix2DSchema = z.strictObject({
+  a: z.number().finite(),
+  b: z.number().finite(),
+  c: z.number().finite(),
+  d: z.number().finite(),
+  e: z.number().finite(),
+  f: z.number().finite(),
+});
+
+export const TransformOriginSchema = z.strictObject({
+  x: z.number().finite(),
+  y: z.number().finite(),
+});
+
+export const BaseBoundsSchema = z.strictObject({
+  x: z.number().finite(),
+  y: z.number().finite(),
+  width: z.number().finite().nonnegative(),
+  height: z.number().finite().nonnegative(),
+});
+
+export const Transform2DSchema = z.strictObject({
+  matrix: TransformMatrix2DSchema,
+  origin: TransformOriginSchema,
+  baseBounds: BaseBoundsSchema,
+});
+
+export type TransformMatrix2D = z.infer<typeof TransformMatrix2DSchema>;
+export type TransformOrigin = z.infer<typeof TransformOriginSchema>;
+export type BaseBounds = z.infer<typeof BaseBoundsSchema>;
+export type Transform2D = z.infer<typeof Transform2DSchema>;
+
 interface BaseNode {
   id: string;
   sourceTag?: string | undefined;
@@ -13,6 +45,7 @@ interface BaseNode {
   visible: boolean;
   opacity: number;
   style?: VisualStyle | undefined;
+  transform?: Transform2D | undefined;
 }
 
 export const ClipBehaviorSchema = z.strictObject({
@@ -59,7 +92,7 @@ export type SvgNode = SvgNodeBase & (
 
 export type DesignNode = FrameNode | TextNode | RectangleNode | ImageNode | SvgNode;
 
-function createBaseNodeShape<S extends z.ZodTypeAny>(styleSchema: S) {
+function createBaseNodeShape<S extends z.ZodTypeAny>(styleSchema: S, allowTransform: boolean = false) {
   return {
     id: z.string().min(1),
     sourceTag: z.string().min(1).optional(),
@@ -71,11 +104,16 @@ function createBaseNodeShape<S extends z.ZodTypeAny>(styleSchema: S) {
     visible: z.boolean(),
     opacity: z.number().min(0).max(1),
     style: styleSchema.optional(),
+    ...(allowTransform ? { transform: Transform2DSchema.optional() } : {}),
   };
 }
 
-export function createNodeSchemas<S extends z.ZodTypeAny>(styleSchema: S, allowClip: boolean = false) {
-  const baseShape = createBaseNodeShape(styleSchema);
+export function createNodeSchemas<S extends z.ZodTypeAny>(
+  styleSchema: S,
+  allowClip: boolean = false,
+  allowTransform: boolean = false,
+) {
+  const baseShape = createBaseNodeShape(styleSchema, allowTransform);
 
   const textNodeSchema = z.strictObject({
     ...baseShape,
@@ -151,26 +189,29 @@ export function createNodeSchemas<S extends z.ZodTypeAny>(styleSchema: S, allowC
   };
 }
 
-const v01Schemas = createNodeSchemas(VisualStyleSchemaV01, false);
+const v01Schemas = createNodeSchemas(VisualStyleSchemaV01, false, false);
 export const FrameNodeSchemaV01 = v01Schemas.frameNodeSchema;
 export const DesignNodeSchemaV01 = v01Schemas.designNodeSchema;
 
-const v02Schemas = createNodeSchemas(VisualStyleSchemaV02, false);
+const v02Schemas = createNodeSchemas(VisualStyleSchemaV02, false, false);
 export const FrameNodeSchemaV02: z.ZodType<FrameNode> = v02Schemas.frameNodeSchema;
 export const DesignNodeSchemaV02: z.ZodType<DesignNode> = v02Schemas.designNodeSchema;
 
-const v03Schemas = createNodeSchemas(VisualStyleSchemaV03, false);
+const v03Schemas = createNodeSchemas(VisualStyleSchemaV03, false, false);
 export const FrameNodeSchemaV03: z.ZodType<FrameNode> = v03Schemas.frameNodeSchema;
 export const DesignNodeSchemaV03: z.ZodType<DesignNode> = v03Schemas.designNodeSchema;
 
-const v04Schemas = createNodeSchemas(VisualStyleSchemaV03, true);
+const v04Schemas = createNodeSchemas(VisualStyleSchemaV03, true, false);
 export const FrameNodeSchemaV04: z.ZodType<FrameNode> = v04Schemas.frameNodeSchema;
 export const DesignNodeSchemaV04: z.ZodType<DesignNode> = v04Schemas.designNodeSchema;
 
-export const TextNodeSchema: z.ZodType<TextNode> = v04Schemas.textNodeSchema;
-export const RectangleNodeSchema: z.ZodType<RectangleNode> = v04Schemas.rectangleNodeSchema;
-export const ImageNodeSchema: z.ZodType<ImageNode> = v04Schemas.imageNodeSchema;
-export const SvgNodeSchema: z.ZodType<SvgNode> = v04Schemas.svgNodeSchema;
-export const FrameNodeSchema: z.ZodType<FrameNode> = FrameNodeSchemaV04;
-export const DesignNodeSchema: z.ZodType<DesignNode> = v04Schemas.designNodeSchema;
+const v05Schemas = createNodeSchemas(VisualStyleSchemaV03, true, true);
+export const FrameNodeSchemaV05: z.ZodType<FrameNode> = v05Schemas.frameNodeSchema;
+export const DesignNodeSchemaV05: z.ZodType<DesignNode> = v05Schemas.designNodeSchema;
 
+export const TextNodeSchema: z.ZodType<TextNode> = v05Schemas.textNodeSchema as unknown as z.ZodType<TextNode>;
+export const RectangleNodeSchema: z.ZodType<RectangleNode> = v05Schemas.rectangleNodeSchema as unknown as z.ZodType<RectangleNode>;
+export const ImageNodeSchema: z.ZodType<ImageNode> = v05Schemas.imageNodeSchema as unknown as z.ZodType<ImageNode>;
+export const SvgNodeSchema: z.ZodType<SvgNode> = v05Schemas.svgNodeSchema as unknown as z.ZodType<SvgNode>;
+export const FrameNodeSchema: z.ZodType<FrameNode> = FrameNodeSchemaV05;
+export const DesignNodeSchema: z.ZodType<DesignNode> = v05Schemas.designNodeSchema;

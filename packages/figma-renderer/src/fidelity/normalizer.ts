@@ -15,6 +15,24 @@ function round4(val: number): number {
   return Object.is(rounded, -0) ? 0 : rounded;
 }
 
+function multiply2DTransform(
+  P: [[number, number, number], [number, number, number]],
+  C: [[number, number, number], [number, number, number]],
+): [[number, number, number], [number, number, number]] {
+  return [
+    [
+      P[0][0] * C[0][0] + P[0][1] * C[1][0],
+      P[0][0] * C[0][1] + P[0][1] * C[1][1],
+      P[0][0] * C[0][2] + P[0][1] * C[1][2] + P[0][2],
+    ],
+    [
+      P[1][0] * C[0][0] + P[1][1] * C[1][0],
+      P[1][0] * C[0][1] + P[1][1] * C[1][1],
+      P[1][0] * C[0][2] + P[1][1] * C[1][2] + P[1][2],
+    ],
+  ];
+}
+
 export function normalizeRenderedTree(
   root: FrameNode,
   rootDocX: number = 0,
@@ -30,6 +48,7 @@ function normalizeNode(
   isRoot: boolean,
   rootDocX: number,
   rootDocY: number,
+  parentWorldTransform?: [[number, number, number], [number, number, number]],
 ): NormalizedRenderedNode {
   const getPluginData = (k: string): string => {
     if ("getPluginData" in node && typeof node.getPluginData === "function") {
@@ -51,7 +70,78 @@ function normalizeNode(
   const absoluteX = isRoot ? rootDocX : round4(parentAbsoluteX + localX);
   const absoluteY = isRoot ? rootDocY : round4(parentAbsoluteY + localY);
 
+  const pwt: [[number, number, number], [number, number, number]] =
+    parentWorldTransform ?? [[1, 0, parentAbsoluteX], [0, 1, parentAbsoluteY]];
+
+  const nodeRt: [[number, number, number], [number, number, number]] =
+    "relativeTransform" in node &&
+    Array.isArray((node as LayoutMixin & { relativeTransform?: Transform }).relativeTransform)
+      ? (node as LayoutMixin & { relativeTransform: Transform }).relativeTransform
+      : [[1, 0, localX], [0, 1, localY]];
+
+  const nodeWorldTransform = isRoot
+    ? [[1, 0, rootDocX], [0, 1, rootDocY]] as [[number, number, number], [number, number, number]]
+    : multiply2DTransform(pwt, nodeRt);
+
+  const isTransformed =
+    Math.abs(nodeWorldTransform[0][0] - 1) > 1e-4 ||
+    Math.abs(nodeWorldTransform[0][1]) > 1e-4 ||
+    Math.abs(nodeWorldTransform[1][0]) > 1e-4 ||
+    Math.abs(nodeWorldTransform[1][1] - 1) > 1e-4;
+
+  let visualAabb: { x: number; y: number; width: number; height: number } | undefined;
+  if (isTransformed) {
+    const c0x = nodeWorldTransform[0][2];
+    const c0y = nodeWorldTransform[1][2];
+    const c1x = nodeWorldTransform[0][0] * width + nodeWorldTransform[0][2];
+    const c1y = nodeWorldTransform[1][0] * width + nodeWorldTransform[1][2];
+    const c2x = nodeWorldTransform[0][0] * width + nodeWorldTransform[0][1] * height + nodeWorldTransform[0][2];
+    const c2y = nodeWorldTransform[1][0] * width + nodeWorldTransform[1][1] * height + nodeWorldTransform[1][2];
+    const c3x = nodeWorldTransform[0][1] * height + nodeWorldTransform[0][2];
+    const c3y = nodeWorldTransform[1][1] * height + nodeWorldTransform[1][2];
+
+    const minX = Math.min(c0x, c1x, c2x, c3x);
+    const minY = Math.min(c0y, c1y, c2y, c3y);
+    const maxX = Math.max(c0x, c1x, c2x, c3x);
+    const maxY = Math.max(c0y, c1y, c2y, c3y);
+
+    visualAabb = {
+      x: round4(minX),
+      y: round4(minY),
+      width: round4(maxX - minX),
+      height: round4(maxY - minY),
+    };
+  }
+
   const opacity = "opacity" in node ? round4((node as MinimalFillsMixin & { opacity?: number }).opacity ?? 1) : 1;
+
+  // Transform / Rotation
+  let rotation: number | undefined;
+  if ("rotation" in node && typeof (node as LayoutMixin & { rotation?: number }).rotation === "number") {
+    const rot = round4((node as LayoutMixin & { rotation?: number }).rotation!);
+    if (Math.abs(rot) > 1e-4) {
+      rotation = Object.is(rot, -0) ? 0 : rot;
+    }
+  }
+
+  let relativeTransform: [[number, number, number], [number, number, number]] | undefined;
+  if (
+    "relativeTransform" in node &&
+    Array.isArray((node as LayoutMixin & { relativeTransform?: Transform }).relativeTransform)
+  ) {
+    const rt = (node as LayoutMixin & { relativeTransform: Transform }).relativeTransform;
+    const isNonIdentity =
+      Math.abs(rt[0][0] - 1) > 1e-4 ||
+      Math.abs(rt[0][1]) > 1e-4 ||
+      Math.abs(rt[1][0]) > 1e-4 ||
+      Math.abs(rt[1][1] - 1) > 1e-4;
+    if (isNonIdentity) {
+      relativeTransform = [
+        [round4(rt[0][0]), round4(rt[0][1]), round4(rt[0][2])],
+        [round4(rt[1][0]), round4(rt[1][1]), round4(rt[1][2])],
+      ];
+    }
+  }
 
   // Fills
   let fills: NormalizedFill[] | undefined;
@@ -243,7 +333,7 @@ interface NodeWithStrokeProperties {
     const rawChildren = (node as ChildrenMixin).children;
     if (rawChildren.length > 0) {
       children = rawChildren.map((child) =>
-        normalizeNode(child, absoluteX, absoluteY, false, rootDocX, rootDocY),
+        normalizeNode(child, absoluteX, absoluteY, false, rootDocX, rootDocY, nodeWorldTransform),
       );
     }
   }
@@ -264,6 +354,9 @@ interface NodeWithStrokeProperties {
   if (sourceType) result.sourceType = sourceType;
   if (sourceTag) result.sourceTag = sourceTag;
   if ("clipsContent" in node && (node as { clipsContent?: boolean }).clipsContent) result.clipsContent = true;
+  if (rotation !== undefined) result.rotation = rotation;
+  if (relativeTransform) result.relativeTransform = relativeTransform;
+  if (visualAabb) result.visualAabb = visualAabb;
   if (fills && fills.length > 0) result.fills = fills;
   if (strokes && strokes.length > 0) result.strokes = strokes;
   if (radius) result.radius = radius;

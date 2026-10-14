@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web2Design CSS transforms fidelity</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 20px;
+    font: 16px/24px Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+  }
+  .test-box {
+    display: inline-block;
+    width: 100px;
+    height: 80px;
+    margin: 20px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    vertical-align: top;
+    position: relative;
+  }
+
+  /* 1. rotate 15deg */
+  #test-rotate-15 {
+    width: 100px;
+    height: 100px;
+    transform: rotate(15deg);
+    background: #e0f2fe;
+  }
+
+  /* 2. rotate -30deg */
+  #test-rotate-neg30 {
+    width: 100px;
+    height: 100px;
+    transform: rotate(-30deg);
+    background: #fef08a;
+  }
+
+  /* 3. rotate 90deg */
+  #test-rotate-90 {
+    width: 100px;
+    height: 100px;
+    transform: rotate(90deg);
+    background: #fbcfe8;
+  }
+
+  /* 4. rotate around center */
+  #test-origin-center {
+    width: 100px;
+    height: 100px;
+    transform-origin: 50% 50%;
+    transform: rotate(45deg);
+    background: #bbf7d0;
+  }
+
+  /* 5. rotate around top-left */
+  #test-origin-top-left {
+    width: 100px;
+    height: 100px;
+    transform-origin: 0 0;
+    transform: rotate(45deg);
+    background: #fed7aa;
+  }
+
+  /* 6. rotate around custom percentage origin */
+  #test-origin-custom {
+    width: 100px;
+    height: 100px;
+    transform-origin: 25% 75%;
+    transform: rotate(45deg);
+    background: #ddd6fe;
+  }
+
+  /* 7. translateX */
+  #test-translate-x {
+    width: 100px;
+    height: 60px;
+    transform: translateX(30px);
+    background: #bae6fd;
+  }
+
+  /* 8. translateY */
+  #test-translate-y {
+    width: 100px;
+    height: 60px;
+    transform: translateY(20px);
+    background: #c7d2fe;
+  }
+
+  /* 9. translate(x,y) */
+  #test-translate-xy {
+    width: 100px;
+    height: 60px;
+    transform: translate(40px, 25px);
+    background: #a7f3d0;
+  }
+
+  /* 10. rotate + translate */
+  #test-rotate-translate {
+    width: 100px;
+    height: 60px;
+    transform: rotate(30deg) translate(20px, 10px);
+    background: #fde68a;
+  }
+
+  /* 11. uniform scale */
+  #test-scale-uniform {
+    width: 80px;
+    height: 80px;
+    transform: scale(1.5);
+    background: #fecdd3;
+  }
+
+  /* 12. scale < 1 */
+  #test-scale-down {
+    width: 100px;
+    height: 100px;
+    transform: scale(0.6);
+    background: #e9d5ff;
+  }
+
+  /* 13. non-uniform scale */
+  #test-scale-nonuniform {
+    width: 100px;
+    height: 80px;
+    transform: scale(1.5, 0.8);
+    background: #fed7aa;
+  }
+
+  /* 14. scaleX(-1) / reflection */
+  #test-reflection {
+    width: 80px;
+    height: 80px;
+    transform: scaleX(-1);
+    background: #ccfbf1;
+  }
+
+  /* 15. skewX */
+  #test-skew-x {
+    width: 80px;
+    height: 80px;
+    transform: skewX(15deg);
+    background: #fef3c7;
+  }
+
+  /* 16. skewY */
+  #test-skew-y {
+    width: 80px;
+    height: 80px;
+    transform: skewY(15deg);
+    background: #e0e7ff;
+  }
+
+  /* 17. matrix(...) */
+  #test-matrix-2d {
+    width: 100px;
+    height: 60px;
+    transform: matrix(1, 0.2, 0, 1, 10, 20);
+    background: #f3e8ff;
+  }
+
+  /* 18. reducible 2D matrix3d */
+  #test-matrix3d-reducible {
+    width: 100px;
+    height: 60px;
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 15, 25, 0, 1);
+    background: #dbeafe;
+  }
+
+  /* 19. true 3D transform unsupported */
+  #test-true-3d {
+    width: 100px;
+    height: 60px;
+    transform: rotateX(45deg);
+    background: #fee2e2;
+  }
+
+  /* 20. rotated text */
+  #test-rotated-text {
+    display: inline-block;
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    transform: rotate(10deg);
+    color: #1e293b;
+  }
+
+  /* 21. rotated image */
+  #test-rotated-image {
+    width: 60px;
+    height: 60px;
+    margin: 20px;
+    transform: rotate(20deg);
+    vertical-align: top;
+  }
+
+  /* 22. rotated SVG logical node */
+  #test-rotated-svg {
+    margin: 20px;
+    transform: rotate(-15deg);
+    vertical-align: top;
+  }
+
+  /* 23. rotated frame with children */
+  #test-rotated-frame {
+    width: 120px;
+    height: 80px;
+    transform: rotate(15deg);
+    background: #f1f5f9;
+    padding: 10px;
+  }
+  #test-rotated-frame .frame-child {
+    width: 60px;
+    height: 30px;
+    background: #3b82f6;
+    color: #ffffff;
+    font-size: 12px;
+  }
+
+  /* 24. nested rotated parent + child */
+  #test-nested-parent {
+    width: 160px;
+    height: 120px;
+    transform: rotate(20deg);
+    background: #f8fafc;
+    border: 1px dashed #94a3b8;
+    padding: 15px;
+  }
+  #test-nested-child {
+    width: 60px;
+    height: 40px;
+    transform: rotate(15deg);
+    background: #ec4899;
+  }
+
+  /* 25. clipping + rotated child */
+  #test-clip-rotated {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+  }
+  #test-clip-rotated-child {
+    width: 120px;
+    height: 120px;
+    transform: rotate(45deg);
+    background: #f59e0b;
+    margin: -10px 0 0 -10px;
+  }
+
+  /* 26. gradient + rotation */
+  #test-gradient-rotation {
+    width: 100px;
+    height: 60px;
+    background: linear-gradient(90deg, #ef4444, #3b82f6);
+    transform: rotate(25deg);
+  }
+
+  /* 27. border + rotation */
+  #test-border-rotation {
+    width: 100px;
+    height: 60px;
+    border-top: 2px solid #ef4444;
+    border-right: 4px solid #10b981;
+    border-bottom: 6px solid #3b82f6;
+    border-left: 8px solid #0f172a;
+    transform: rotate(-20deg);
+  }
+
+  /* 28. multi-shadow + rotation */
+  #test-shadow-rotation {
+    width: 100px;
+    height: 60px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 3px rgba(255, 255, 255, 0.5);
+    transform: rotate(15deg);
+    background: #ffffff;
+  }
+
+  /* 29. pseudo-element rotation */
+  #test-pseudo-rotation {
+    width: 80px;
+    height: 80px;
+    background: #e2e8f0;
+    position: relative;
+  }
+  #test-pseudo-rotation::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    transform: rotate(30deg);
+    background: #8b5cf6;
+  }
+
+  /* 30. transformed node with fractional geometry */
+  #test-fractional-geom {
+    width: 100.5px;
+    height: 60.25px;
+    transform: rotate(12.5deg) translate(10.25px, 5.75px);
+    background: #cffafe;
+  }
+</style>
+</head>
+<body>
+  <h1>Web2Design CSS transforms fidelity</h1>
+
+  <div class="test-box" id="test-rotate-15"></div>
+  <div class="test-box" id="test-rotate-neg30"></div>
+  <div class="test-box" id="test-rotate-90"></div>
+  <div class="test-box" id="test-origin-center"></div>
+  <div class="test-box" id="test-origin-top-left"></div>
+  <div class="test-box" id="test-origin-custom"></div>
+  <div class="test-box" id="test-translate-x"></div>
+  <div class="test-box" id="test-translate-y"></div>
+  <div class="test-box" id="test-translate-xy"></div>
+  <div class="test-box" id="test-rotate-translate"></div>
+  <div class="test-box" id="test-scale-uniform"></div>
+  <div class="test-box" id="test-scale-down"></div>
+  <div class="test-box" id="test-scale-nonuniform"></div>
+  <div class="test-box" id="test-reflection"></div>
+  <div class="test-box" id="test-skew-x"></div>
+  <div class="test-box" id="test-skew-y"></div>
+  <div class="test-box" id="test-matrix-2d"></div>
+  <div class="test-box" id="test-matrix3d-reducible"></div>
+  <div class="test-box" id="test-true-3d"></div>
+
+  <h2 id="test-rotated-text">Rotated Editable Heading</h2>
+
+  <img id="test-rotated-image" src="dot.png" alt="dot">
+
+  <svg id="test-rotated-svg" width="60" height="60" viewBox="0 0 60 60">
+    <circle cx="30" cy="30" r="25" fill="#3b82f6"/>
+  </svg>
+
+  <div class="test-box" id="test-rotated-frame">
+    <div class="frame-child">Child</div>
+  </div>
+
+  <div class="test-box" id="test-nested-parent">
+    <div id="test-nested-child">Nested</div>
+  </div>
+
+  <div class="test-box" id="test-clip-rotated">
+    <div id="test-clip-rotated-child"></div>
+  </div>
+
+  <div class="test-box" id="test-gradient-rotation"></div>
+  <div class="test-box" id="test-border-rotation"></div>
+  <div class="test-box" id="test-shadow-rotation"></div>
+  <div class="test-box" id="test-pseudo-rotation"></div>
+  <div class="test-box" id="test-fractional-geom"></div>
+</body>
+</html>

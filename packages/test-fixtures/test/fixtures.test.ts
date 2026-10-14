@@ -51,7 +51,7 @@ describe("representative Design Schema fixtures", () => {
   it("parses and validates V0.4 per-side widths fixture", async () => {
     const { perSideWidthsFixture } = await import("../src/index.js");
     const doc = parseDesignDocument(perSideWidthsFixture);
-    expect(doc.schemaVersion).toBe("0.4");
+    expect(doc.schemaVersion).toBe("0.5");
     const rect = doc.root.children[0];
     expect(rect?.style?.border?.top.width).toBe(1);
     expect(rect?.style?.border?.right.width).toBe(2);
@@ -71,38 +71,40 @@ describe("representative Design Schema fixtures", () => {
     expect(mixedDoc.root.children[0]?.style?.boxShadows?.[1]?.inset).toBe(true);
   });
 
-  it("upgrades and normalizes historical V0.1 fixture to V0.4", async () => {
+  it("upgrades and normalizes historical V0.1 fixture to V0.5", async () => {
     const { historicalV01Fixture } = await import("../src/index.js");
     const { normalizeDesignDocument } = await import("@web2design/design-schema");
     const parsed = parseDesignDocument(historicalV01Fixture);
     expect(parsed.schemaVersion).toBe("0.1");
     const doc = normalizeDesignDocument(parsed);
-    expect(doc.schemaVersion).toBe("0.4");
+    expect(doc.schemaVersion).toBe("0.5");
     const rect = doc.root.children[0];
     expect(rect?.style?.border?.top.width).toBe(1);
     expect(rect?.style?.border?.right.width).toBe(1);
     expect(rect?.style?.boxShadows?.[0]?.blurRadius).toBe(12);
+    expect(rect?.transform).toBeUndefined();
   });
 
-  it("upgrades and normalizes historical V0.2 gradient fixture to V0.4", async () => {
+  it("upgrades and normalizes historical V0.2 gradient fixture to V0.5", async () => {
     const { historicalV02GradientFixture } = await import("../src/index.js");
     const { normalizeDesignDocument } = await import("@web2design/design-schema");
     const parsed = parseDesignDocument(historicalV02GradientFixture);
     expect(parsed.schemaVersion).toBe("0.2");
     const doc = normalizeDesignDocument(parsed);
-    expect(doc.schemaVersion).toBe("0.4");
+    expect(doc.schemaVersion).toBe("0.5");
     const rect = doc.root.children[0];
     expect(rect?.style?.fills?.[0]?.type).toBe("linear-gradient");
     expect(rect?.style?.border?.top.width).toBe(2);
+    expect(rect?.transform).toBeUndefined();
   });
 
-  it("upgrades and normalizes historical V0.3 border/shadow fixture to V0.4", async () => {
+  it("upgrades and normalizes historical V0.3 border/shadow fixture to V0.5", async () => {
     const { historicalV03BorderShadowFixture } = await import("../src/index.js");
     const { normalizeDesignDocument } = await import("@web2design/design-schema");
     const parsed = parseDesignDocument(historicalV03BorderShadowFixture);
     expect(parsed.schemaVersion).toBe("0.3");
     const doc = normalizeDesignDocument(parsed);
-    expect(doc.schemaVersion).toBe("0.4");
+    expect(doc.schemaVersion).toBe("0.5");
     const rect = doc.root.children[0];
     expect(rect?.style?.border?.top.width).toBe(1);
     expect(rect?.style?.border?.right.width).toBe(2);
@@ -111,9 +113,10 @@ describe("representative Design Schema fixtures", () => {
     expect(rect?.style?.boxShadows).toHaveLength(2);
     expect(rect?.style?.boxShadows?.[0]?.inset).toBe(false);
     expect(rect?.style?.boxShadows?.[1]?.inset).toBe(true);
+    expect(rect?.transform).toBeUndefined();
   });
 
-  it("parses and validates canonical V0.4 clipping fixtures", async () => {
+  it("parses and validates canonical clipping fixtures", async () => {
     const {
       bothAxisClipFixture,
       xOnlyClipFixture,
@@ -123,7 +126,7 @@ describe("representative Design Schema fixtures", () => {
     } = await import("../src/index.js");
 
     const bothDoc = parseDesignDocument(bothAxisClipFixture);
-    expect(bothDoc.schemaVersion).toBe("0.4");
+    expect(bothDoc.schemaVersion).toBe("0.5");
     expect((bothDoc.root.children[0] as { clip?: unknown }).clip).toEqual({ x: true, y: true });
 
     const xDoc = parseDesignDocument(xOnlyClipFixture);
@@ -141,6 +144,54 @@ describe("representative Design Schema fixtures", () => {
     const rounded = roundedDoc.root.children[0] as { clip?: unknown; style?: { cornerRadius?: number } };
     expect(rounded.clip).toEqual({ x: true, y: true });
     expect(rounded.style?.cornerRadius).toBe(24);
+  });
+
+  it("upgrades and normalizes historical V0.4 clipping fixture to V0.5", async () => {
+    const { historicalV04ClippingFixture } = await import("../src/index.js");
+    const { normalizeDesignDocument } = await import("@web2design/design-schema");
+    const parsed = parseDesignDocument(historicalV04ClippingFixture);
+    expect(parsed.schemaVersion).toBe("0.4");
+    const doc = normalizeDesignDocument(parsed);
+    expect(doc.schemaVersion).toBe("0.5");
+    expect(doc.root.clip).toEqual({ x: true, y: true });
+    expect(doc.root.transform).toBeUndefined();
+  });
+
+  it("parses and validates canonical V0.5 transform fixtures", async () => {
+    const {
+      rotationFixture,
+      translationFixture,
+      customOriginRotationFixture,
+      uniformScaleFixture,
+      nonUniformScaleFixture,
+      nestedTransformFixture,
+    } = await import("../src/index.js");
+
+    const rotDoc = parseDesignDocument(rotationFixture);
+    expect(rotDoc.schemaVersion).toBe("0.5");
+    expect(rotDoc.root.children[0]?.transform?.matrix.a).toBe(0.7071);
+
+    const transDoc = parseDesignDocument(translationFixture);
+    expect(transDoc.schemaVersion).toBe("0.5");
+    expect(transDoc.root.children[0]?.transform?.matrix.e).toBe(50);
+
+    const customDoc = parseDesignDocument(customOriginRotationFixture);
+    expect(customDoc.schemaVersion).toBe("0.5");
+    expect(customDoc.root.children[0]?.transform?.origin).toEqual({ x: 0, y: 0 });
+
+    const scaleDoc = parseDesignDocument(uniformScaleFixture);
+    expect(scaleDoc.schemaVersion).toBe("0.5");
+    expect(scaleDoc.root.children[0]?.transform?.matrix.a).toBe(1.5);
+
+    const nonUniformDoc = parseDesignDocument(nonUniformScaleFixture);
+    expect(nonUniformDoc.schemaVersion).toBe("0.5");
+    expect(nonUniformDoc.root.children[0]?.transform?.matrix.a).toBe(2);
+
+    const nestedDoc = parseDesignDocument(nestedTransformFixture);
+    expect(nestedDoc.schemaVersion).toBe("0.5");
+    const parent = nestedDoc.root.children[0];
+    expect(parent?.transform?.matrix.a).toBe(0.866);
+    expect(parent?.children[0]?.transform?.matrix.a).toBe(0.7071);
   });
 });
 

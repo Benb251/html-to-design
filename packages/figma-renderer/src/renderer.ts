@@ -3,11 +3,16 @@ import {
   normalizeDesignDocument,
   type DesignNode,
   type FrameNode as SchemaFrameNode,
+  type Transform2D,
   type VersionedDesignDocument,
 } from "@web2design/design-schema";
 import { toFigmaSolidPaint } from "./colors.js";
 import { FontManager } from "./fonts.js";
-import { calculateLocalCoordinates, calculateRootPlacement } from "./geometry.js";
+import {
+  calculateNodePlacement,
+  calculateRootPlacement,
+  type CalculatedPlacement,
+} from "./geometry.js";
 import { createFigmaImageFill, resolveImageScaleMode } from "./images.js";
 import { applyVisualStyle } from "./styles.js";
 import { renderSvgNode } from "./svg.js";
@@ -71,6 +76,88 @@ function applyFrameClipping(
   );
 }
 
+function applyPlacementToNode(
+  node: SceneNode & {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    rotation?: number;
+    relativeTransform?: Transform;
+    rescale?(scale: number): void;
+    resize(w: number, h: number): void;
+  },
+  placement: CalculatedPlacement,
+  warnings: WarningCollector,
+  nodeId: string,
+): void {
+  // 1. Initial size based on base layout bounds
+  node.resize(Math.max(0.01, placement.width), Math.max(0.01, placement.height));
+
+  // 2. Position and transform
+  if (placement.relativeTransform) {
+    node.relativeTransform = placement.relativeTransform;
+  } else {
+    node.x = placement.x;
+    node.y = placement.y;
+    if (placement.rotation !== undefined && "rotation" in node) {
+      node.rotation = placement.rotation;
+    }
+  }
+
+  // 3. Scaling
+  if (placement.scale) {
+    const isUniform = Math.abs(placement.scale.x - placement.scale.y) < 1e-4;
+    const isNegative =
+      placement.isReflection ||
+      placement.scale.x < 0 ||
+      placement.scale.y < 0;
+
+    if (isNegative) {
+      warnings.warn(
+        "TRANSFORM_REFLECTION_UNSUPPORTED",
+        `CSS transform negative scale (reflection/mirror) on node '${nodeId}' is unsupported in Figma scene nodes.`,
+        nodeId,
+      );
+    } else if (placement.isSkew) {
+      warnings.warn(
+        "TRANSFORM_SKEW_APPROXIMATED",
+        `CSS skew transform on node '${nodeId}' is approximated; non-orthogonal axes are not natively representable in Figma relativeTransform.`,
+        nodeId,
+      );
+    } else if (Math.abs(placement.scale.x - 1) > 1e-4 || Math.abs(placement.scale.y - 1) > 1e-4) {
+      if (isUniform) {
+        if (typeof node.rescale === "function") {
+          node.rescale(placement.scale.x);
+        } else {
+          node.resize(
+            Math.max(0.01, node.width * placement.scale.x),
+            Math.max(0.01, node.height * placement.scale.y),
+          );
+        }
+      } else {
+        node.resize(
+          Math.max(0.01, node.width * placement.scale.x),
+          Math.max(0.01, node.height * placement.scale.y),
+        );
+        warnings.warn(
+          "TRANSFORM_SCALE_APPROXIMATED",
+          `Non-uniform CSS scale (scaleX=${placement.scale.x}, scaleY=${placement.scale.y}) on node '${nodeId}' was approximated by resizing node dimensions.`,
+          nodeId,
+        );
+      }
+    }
+  }
+
+  if (placement.isNestedApproximated) {
+    warnings.warn(
+      "TRANSFORM_NESTED_APPROXIMATED",
+      `Nested transform hierarchy on node '${nodeId}' inside transformed parent was approximated.`,
+      nodeId,
+    );
+  }
+}
+
 export async function renderDesignDocument(
   rawDocument: VersionedDesignDocument,
   host: FigmaRendererHost,
@@ -104,6 +191,14 @@ export async function renderDesignDocument(
   rootFrame.x = placement.x;
   rootFrame.y = placement.y;
 
+  if (rootSchema.transform?.matrix) {
+    const { a, b } = rootSchema.transform.matrix;
+    const rot = Math.atan2(-b, a) * (180 / Math.PI);
+    if (Math.abs(rot) > 1e-3 && "rotation" in rootFrame) {
+      (rootFrame as unknown as { rotation?: number }).rotation = rot;
+    }
+  }
+
   applyVisualStyle(rootFrame, rootSchema.style, rootSchema.opacity, warnings, rootSchema.id, {
     width: rootSchema.width,
     height: rootSchema.height,
@@ -115,23 +210,41 @@ export async function renderDesignDocument(
 
   try {
     // 2. Render children recursively
+    interface TransformContext {
+      transform: Transform2D;
+      offsetX: number;
+      offsetY: number;
+    }
+
     async function renderChildren(
       parentSchema: SchemaFrameNode,
       parentFigma: FrameNode,
+      context?: TransformContext,
     ): Promise<void> {
       for (const childSchema of parentSchema.children) {
         try {
-          const localCoords = calculateLocalCoordinates(childSchema, parentSchema);
+          const activeTransform = context?.transform ?? parentSchema.transform;
+          const activeOffset = context ? { x: context.offsetX, y: context.offsetY } : undefined;
+          const childPlacement = calculateNodePlacement(
+            childSchema,
+            parentSchema,
+            childSchema.transform,
+            activeTransform,
+            activeOffset,
+          );
 
           switch (childSchema.type) {
             case "frame": {
               const frame = host.createFrame();
               frame.name = deriveNodeName(childSchema);
-              frame.x = localCoords.x;
-              frame.y = localCoords.y;
-              frame.resize(Math.max(0.01, childSchema.width), Math.max(0.01, childSchema.height));
               frame.layoutMode = "NONE";
               applyFrameClipping(frame, childSchema, warnings);
+              applyPlacementToNode(
+                frame as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childPlacement,
+                warnings,
+                childSchema.id,
+              );
 
               applyVisualStyle(
                 frame,
@@ -139,24 +252,45 @@ export async function renderDesignDocument(
                 childSchema.opacity,
                 warnings,
                 childSchema.id,
-                { width: childSchema.width, height: childSchema.height },
+                { width: childPlacement.width, height: childPlacement.height },
               );
               tagPluginData(frame, childSchema);
 
               createdNodeCount++;
               parentFigma.appendChild(frame);
 
-              // Recurse descendants
-              await renderChildren(childSchema, frame);
+              // Recurse descendants with updated transform context
+              let nextContext: TransformContext | undefined;
+              if (childSchema.transform) {
+                nextContext = {
+                  transform: childSchema.transform,
+                  offsetX: 0,
+                  offsetY: 0,
+                };
+              } else if (context || parentSchema.transform) {
+                const baseTrans = context?.transform ?? parentSchema.transform!;
+                const baseOffX = (context?.offsetX ?? 0) + childPlacement.x;
+                const baseOffY = (context?.offsetY ?? 0) + childPlacement.y;
+                nextContext = {
+                  transform: baseTrans,
+                  offsetX: baseOffX,
+                  offsetY: baseOffY,
+                };
+              }
+
+              await renderChildren(childSchema, frame, nextContext);
               break;
             }
 
             case "rectangle": {
               const rect = host.createRectangle();
               rect.name = deriveNodeName(childSchema);
-              rect.x = localCoords.x;
-              rect.y = localCoords.y;
-              rect.resize(Math.max(0.01, childSchema.width), Math.max(0.01, childSchema.height));
+              applyPlacementToNode(
+                rect as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childPlacement,
+                warnings,
+                childSchema.id,
+              );
 
               applyVisualStyle(
                 rect,
@@ -164,7 +298,7 @@ export async function renderDesignDocument(
                 childSchema.opacity,
                 warnings,
                 childSchema.id,
-                { width: childSchema.width, height: childSchema.height },
+                { width: childPlacement.width, height: childPlacement.height },
               );
               tagPluginData(rect, childSchema);
 
@@ -215,12 +349,15 @@ export async function renderDesignDocument(
               textNode.fills = [toFigmaSolidPaint(childSchema.textStyle.color)];
               textNode.opacity = Math.max(0, Math.min(1, childSchema.opacity));
 
-              textNode.x = localCoords.x;
-              textNode.y = localCoords.y;
+              applyPlacementToNode(
+                textNode as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childPlacement,
+                warnings,
+                childSchema.id,
+              );
 
-              if (childSchema.width > 0 && childSchema.height > 0) {
+              if (childPlacement.width > 0 && childPlacement.height > 0) {
                 textNode.textAutoResize = "NONE";
-                textNode.resize(childSchema.width, childSchema.height);
               } else {
                 textNode.textAutoResize = "WIDTH_AND_HEIGHT";
               }
@@ -235,11 +372,11 @@ export async function renderDesignDocument(
             case "image": {
               const imageRect = host.createRectangle();
               imageRect.name = deriveNodeName(childSchema);
-              imageRect.x = localCoords.x;
-              imageRect.y = localCoords.y;
-              imageRect.resize(
-                Math.max(0.01, childSchema.width),
-                Math.max(0.01, childSchema.height),
+              applyPlacementToNode(
+                imageRect as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childPlacement,
+                warnings,
+                childSchema.id,
               );
 
               applyVisualStyle(
@@ -321,11 +458,11 @@ export async function renderDesignDocument(
                 // Create rectangle placeholder
                 const placeholder = host.createRectangle();
                 placeholder.name = deriveNodeName(childSchema);
-                placeholder.x = localCoords.x;
-                placeholder.y = localCoords.y;
-                placeholder.resize(
-                  Math.max(0.01, childSchema.width),
-                  Math.max(0.01, childSchema.height),
+                applyPlacementToNode(
+                  placeholder as unknown as Parameters<typeof applyPlacementToNode>[0],
+                  childPlacement,
+                  warnings,
+                  childSchema.id,
                 );
                 placeholder.fills = [
                   {
@@ -342,8 +479,12 @@ export async function renderDesignDocument(
 
               const svgSceneNode = renderSvgNode(childSchema, svgMarkup, host, warnings);
               svgSceneNode.name = deriveNodeName(childSchema);
-              svgSceneNode.x = localCoords.x;
-              svgSceneNode.y = localCoords.y;
+              applyPlacementToNode(
+                svgSceneNode as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childPlacement,
+                warnings,
+                childSchema.id,
+              );
               svgSceneNode.opacity = Math.max(0, Math.min(1, childSchema.opacity));
 
               tagPluginData(svgSceneNode, childSchema);

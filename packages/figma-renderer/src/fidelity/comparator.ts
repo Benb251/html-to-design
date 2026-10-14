@@ -68,10 +68,119 @@ export function compareGeometry(
     }
   };
 
-  check("width", rendered.width, schemaNode.width);
-  check("height", rendered.height, schemaNode.height);
-  check("absoluteX", rendered.absoluteX, schemaNode.x);
-  check("absoluteY", rendered.absoluteY, schemaNode.y);
+  if (!schemaNode.transform) {
+    if (rendered.visualAabb) {
+      check("width", rendered.visualAabb.width, schemaNode.width);
+      check("height", rendered.visualAabb.height, schemaNode.height);
+      check("absoluteX", rendered.visualAabb.x, schemaNode.x);
+      check("absoluteY", rendered.visualAabb.y, schemaNode.y);
+    } else {
+      check("width", rendered.width, schemaNode.width);
+      check("height", rendered.height, schemaNode.height);
+      check("absoluteX", rendered.absoluteX, schemaNode.x);
+      check("absoluteY", rendered.absoluteY, schemaNode.y);
+    }
+  } else {
+    // For transformed nodes, rendered node width and height match baseBounds * scale
+    const m = schemaNode.transform.matrix;
+    const sx = Math.hypot(m.a, m.b);
+    const sy = Math.hypot(m.c, m.d);
+    const dot = m.a * m.c + m.b * m.d;
+    const isSkew = Math.abs(dot) > 1e-4;
+    const isReflection = (m.a * m.d - m.b * m.c) < 0;
+
+    let expectedWidth = schemaNode.transform.baseBounds.width;
+    let expectedHeight = schemaNode.transform.baseBounds.height;
+    if (!isSkew && !isReflection) {
+      if (Math.abs(sx - 1) > 1e-4) expectedWidth *= sx;
+      if (Math.abs(sy - 1) > 1e-4) expectedHeight *= sy;
+    }
+    check("renderedWidth", rendered.width, expectedWidth);
+    check("renderedHeight", rendered.height, expectedHeight);
+  }
+
+  return failures;
+}
+
+export function compareTransform(
+  schemaNode: DesignNode,
+  rendered: NormalizedRenderedNode,
+  fixtureId: string,
+  tol: number = DEFAULT_GEOMETRY_EPSILON,
+): FidelityFailure[] {
+  const failures: FidelityFailure[] = [];
+  const transform = schemaNode.transform;
+  if (!transform) return failures;
+
+  // 1. Rotation check
+  const { a, b } = transform.matrix;
+  const expectedRotation = Math.round(Math.atan2(-b, a) * (180 / Math.PI) * 10000) / 10000;
+  const expRotNorm = Object.is(expectedRotation, -0) ? 0 : expectedRotation;
+
+  if (Math.abs(expRotNorm) > 1e-3) {
+    const actRot = rendered.rotation ?? 0;
+    const diff = Math.abs(actRot - expRotNorm);
+    if (diff > 0.5 && Math.abs(diff - 360) > 0.5) {
+      failures.push({
+        fixtureId,
+        sourceId: schemaNode.id,
+        nodeType: schemaNode.type,
+        category: "TRANSFORM",
+        property: "rotation",
+        expected: expRotNorm,
+        actual: actRot,
+        difference: diff,
+        tolerance: 0.5,
+        message: `fixture: ${fixtureId} node: ${schemaNode.id} expected angle: ${expRotNorm} actual: ${actRot}`,
+      });
+    }
+  }
+
+  // 2. Base dimensions and scale result check
+  const m = transform.matrix;
+  const sx = Math.hypot(m.a, m.b);
+  const sy = Math.hypot(m.c, m.d);
+  const dot = m.a * m.c + m.b * m.d;
+  const isSkew = Math.abs(dot) > 1e-4;
+  const isReflection = (m.a * m.d - m.b * m.c) < 0;
+
+  let expectedWidth = transform.baseBounds.width;
+  let expectedHeight = transform.baseBounds.height;
+  if (!isSkew && !isReflection) {
+    if (Math.abs(sx - 1) > 1e-4) expectedWidth *= sx;
+    if (Math.abs(sy - 1) > 1e-4) expectedHeight *= sy;
+  }
+
+  const diffW = numDiff(rendered.width, expectedWidth, tol);
+  const diffH = numDiff(rendered.height, expectedHeight, tol);
+  if (diffW !== null) {
+    failures.push({
+      fixtureId,
+      sourceId: schemaNode.id,
+      nodeType: schemaNode.type,
+      category: "TRANSFORM",
+      property: "renderedWidth",
+      expected: expectedWidth,
+      actual: rendered.width,
+      difference: diffW,
+      tolerance: tol,
+      message: `fixture: ${fixtureId} node: ${schemaNode.id} expected rendered width: ${expectedWidth} actual: ${rendered.width}`,
+    });
+  }
+  if (diffH !== null) {
+    failures.push({
+      fixtureId,
+      sourceId: schemaNode.id,
+      nodeType: schemaNode.type,
+      category: "TRANSFORM",
+      property: "renderedHeight",
+      expected: expectedHeight,
+      actual: rendered.height,
+      difference: diffH,
+      tolerance: tol,
+      message: `fixture: ${fixtureId} node: ${schemaNode.id} expected rendered height: ${expectedHeight} actual: ${rendered.height}`,
+    });
+  }
 
   return failures;
 }
@@ -873,6 +982,7 @@ export function runDocumentFidelity(
   stats: {
     nodesCompared: number;
     geometryChecks: number;
+    transformChecks: number;
     styleChecks: number;
     textChecks: number;
     assetChecks: number;
@@ -902,6 +1012,7 @@ export function runDocumentFidelity(
   let styleChecks = 0;
   let textChecks = 0;
   let assetChecks = 0;
+  let transformChecks = 0;
 
   const cats = new Set(manifestEntry.expectedCategories);
 
@@ -926,7 +1037,17 @@ export function runDocumentFidelity(
     // 1. Geometry
     if (cats.has("GEOMETRY")) {
       geometryChecks += 4;
-      failures.push(...compareGeometry(schemaNode, rendered, manifestEntry.id));
+      const isNestedApproximated =
+        manifestEntry.expectedWarnings?.some(
+          (w) => w.code === "TRANSFORM_NESTED_APPROXIMATED" && w.nodeId === schemaNode.id,
+        ) ||
+        actualWarnings.some(
+          (w) => w.code === "TRANSFORM_NESTED_APPROXIMATED" && w.nodeId === schemaNode.id,
+        );
+
+      if (!isNestedApproximated) {
+        failures.push(...compareGeometry(schemaNode, rendered, manifestEntry.id));
+      }
     }
 
     // 2. Hierarchy
@@ -982,6 +1103,12 @@ export function runDocumentFidelity(
       failures.push(...compareClipping(schemaNode, rendered, manifestEntry.id));
     }
 
+    // 11. Transform
+    if (cats.has("TRANSFORM") && schemaNode.transform) {
+      transformChecks++;
+      failures.push(...compareTransform(schemaNode, rendered, manifestEntry.id));
+    }
+
     // Recurse children for frames
     if (schemaNode.type === "frame" && schemaNode.children) {
       for (const child of schemaNode.children) {
@@ -1006,6 +1133,7 @@ export function runDocumentFidelity(
     stats: {
       nodesCompared,
       geometryChecks,
+      transformChecks,
       styleChecks,
       textChecks,
       assetChecks,
