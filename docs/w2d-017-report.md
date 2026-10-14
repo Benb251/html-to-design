@@ -179,36 +179,43 @@ All 35 scenarios were verified through Chrome extension smoke capture and Figma 
 
 ---
 
-## 6. Real-Site Spot Check Results
+## 6. Real-Site Spot Check & Coverage Accounting Reconciliation
 
-Automated headless Chrome capture and Figma renderer execution across 4 representative production sites (`scripts/spot-check-auto-layout.mjs`):
+Automated headless Chrome capture and Figma renderer execution across 4 representative production sites (`scripts/spot-check-auto-layout.mjs` and `scripts/diagnose-flex-accounting.mjs`):
 
-| Metric | React Docs (`react.dev`) | Vite Portal (`vite.dev`) | Tailwind CSS (`tailwindcss.com`) | Wikipedia (`en.wikipedia.org`) |
-|---|---|---|---|---|
-| **DOM Flex Containers** | 346 | 192 | 155 | 142 |
-| **DOM Grid Containers** | 1 | 6 | 67 | 2 |
-| **Total Captured Nodes** | 1,023 | 557 | 1,185 | 609 |
-| **Total Captured Frames** | 525 | 210 | 428 | 385 |
-| **Inferred Auto Layout Frames** | **131** | **103** | **66** | **17** |
-| — Horizontal Rows | 103 | 82 | 48 | 16 |
-| — Vertical Columns | 28 | 21 | 18 | 1 |
-| **Native Figma AL Frames Created** | **131** | **103** | **66** | **17** |
-| **Absolute Fallback Frames** | 394 | 107 | 362 | 368 |
-| **Total Rejected Candidates** | 3 | 2 | 2 | 3 |
-| — Wrap Deferred | 1 | 0 | 0 | 1 |
-| — Margin Deferred | 1 | 1 | 1 | 1 |
-| — Geometry Mismatch | 1 | 1 | 1 | 1 |
-| **Grid Deferred** | 1 | 1 | 1 | 1 |
-| **Schema Valid (V0.7)** | `true` | `true` | `true` | `true` |
-| **Skipped Nodes** | 0 | 0 | 0 | 0 |
-| **Capture Duration** | 538ms | 243ms | 528ms | 419ms |
+### 6.1 Reconciled Multi-Stage Funnel
 
-**Spot Check Totals**:
-- **835** DOM Flex containers evaluated.
-- **317** high-confidence Auto Layout frames successfully inferred and rendered into native Figma Auto Layout.
-- **10** candidates safely rejected with structured warnings and rendered with absolute layout fallback.
-- **0** schema validation errors.
-- **0** skipped nodes.
+To avoid conflating raw DOM elements with eligible layout containers, the flex container population was reconciled across all 8 stages:
+
+| Stage | React Docs (`react.dev`) | Vite Portal (`vite.dev`) | Tailwind CSS (`tailwindcss.com`) | Wikipedia (`en.wikipedia.org`) | Total |
+|---|---|---|---|---|---|
+| **1. DOM Flex Elements Observed** | 346 | 192 | 155 | 142 | **835** |
+| **2. Unrendered / Hidden / Zero-size** | 18 | 42 | 2 | 93 | **155** |
+| **3. Fixed / Sticky (Omitted from Flow)** | 0 | 0 | 3 | 0 | **3** |
+| **4. Leaf / Empty (0 element children)** | 15 | 5 | 1 | 2 | **23** |
+| **5. Container Frame Candidates** | **313** | **145** | **149** | **47** | **654** |
+| **6. Explicitly Deferred by Flex Rules** | 87 | 5 | 5 | 7 | **104** |
+| — Non-zero item margins (`margin > 0`) | 82 | 5 | 5 | 4 | 96 |
+| — Flex wrap (`wrap | wrap-reverse`) | 1 | 0 | 0 | 3 | 4 |
+| — Multi-item grow ratios (`flex-grow > 1`) | 4 | 0 | 0 | 0 | 4 |
+| **7. Eligible Candidates for Guard Check** | **226** | **140** | **144** | **40** | **550** |
+| **8. High-Confidence Inferred Frames** | **131** | **103** | **66** | **17** | **317** |
+| — Horizontal Rows | 103 | 82 | 48 | 16 | 249 |
+| — Vertical Columns | 28 | 21 | 18 | 1 | 68 |
+| **9. Geometry Guard Rejected ($> 0.5\text{px}$)** | 95 | 37 | 78 | 23 | **233** |
+
+### 6.2 Key Inference Metrics
+- **Inference rate among eligible candidates evaluated**: **57.6%** (317 / 550)
+- **Inference rate among container frame candidates**: **48.5%** (317 / 654)
+- **Raw ratio against unpruned DOM elements**: 38.0% (317 / 835) — *Note: 835 includes 155 hidden/unrendered elements (such as collapsed Wikipedia drawer/mobile menus), 3 fixed navigation bars, and 23 leaf elements.*
+- **Document Warning Deduplication**: In Web2Design's capture engine, diagnostic warnings are deduplicated to at most one entry per code per document by design (`warned.has(code)` in `capture.ts`), preventing megabytes of repetitive warning payloads on large production pages.
+
+### 6.3 Real-Site Renderer Execution Summary
+- **Native Figma Auto Layout Frames Created**: **317**
+- **Absolute Fallback Frames**: **1,231**
+- **Schema Validity (V0.7)**: **100% (4/4 PASS)**
+- **Skipped Nodes**: **0**
+- **Average Capture Duration**: **432ms**
 
 Evidence artifacts are saved in `docs/evidence/w2d-017/`.
 

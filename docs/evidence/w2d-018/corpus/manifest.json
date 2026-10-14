@@ -1,0 +1,127 @@
+[
+  {
+    "scenario": "A",
+    "id": "scenario-A-canonical-sample",
+    "name": "Canonical Sample Document",
+    "file": "scenario-A-canonical-sample.json",
+    "schemaVersion": "0.7",
+    "totalNodes": 2,
+    "description": "Bundled canonical sample document verifying root frame creation, viewport centering, image asset record, and traceability plugin data.",
+    "features": [
+      "Root frame creation",
+      "Viewport centering",
+      "Basic image asset",
+      "Traceability metadata"
+    ]
+  },
+  {
+    "scenario": "B",
+    "id": "scenario-B-style-text-hierarchy",
+    "name": "Normal Style & Typography Hierarchy",
+    "file": "scenario-B-style-text-hierarchy.json",
+    "schemaVersion": "0.7",
+    "totalNodes": 20,
+    "description": "Full landing page capture verifying cards, nested container frames, headings, paragraphs, typography styles, and scroll-stable coordinates.",
+    "features": [
+      "Nested frames",
+      "Card hierarchy",
+      "Typography line-height",
+      "Solid fills",
+      "Rounded corners"
+    ]
+  },
+  {
+    "scenario": "C",
+    "id": "scenario-C-images-svg",
+    "name": "Images & Inline SVG Vectors",
+    "file": "scenario-C-images-svg.json",
+    "schemaVersion": "0.7",
+    "totalNodes": 26,
+    "description": "Asset document verifying standard <img> elements as ImagePaint rectangles and inline <svg> elements as native vector node subtrees.",
+    "features": [
+      "ImagePaint fills",
+      "object-fit cover/contain",
+      "Native SVG vector containers",
+      "Asset registry"
+    ]
+  },
+  {
+    "scenario": "D",
+    "id": "scenario-D-gradients-borders-shadows",
+    "name": "Gradients, Non-Uniform Borders & Shadows",
+    "file": "scenario-D-gradients-borders-shadows.json",
+    "schemaVersion": "0.7",
+    "totalNodes": 42,
+    "description": "Visual styling document verifying linear/radial gradients, independent per-side border weights, multiple drop shadows, and inset shadows.",
+    "features": [
+      "GRADIENT_LINEAR",
+      "GRADIENT_RADIAL",
+      "Per-side stroke weights",
+      "DROP_SHADOW stacks",
+      "INNER_SHADOW"
+    ]
+  },
+  {
+    "scenario": "E",
+    "id": "scenario-E-clipping-transforms",
+    "name": "Container Clipping & CSS 2D Transforms",
+    "file": "scenario-E-clipping-transforms.json",
+    "schemaVersion": "0.7",
+    "totalNodes": 62,
+    "description": "Geometry stress document verifying frame container clipping (overflow: hidden), CSS 2D rotation, relativeTransform, and origin compensation.",
+    "features": [
+      "clipsContent = true",
+      "CSS 2D rotation",
+      "relativeTransform translation",
+      "Origin compensation"
+    ]
+  },
+  {
+    "scenario": "F",
+    "id": "scenario-F-rich-text-ranges",
+    "name": "Single-TextNode Rich Text Paragraph Spans",
+    "file": "scenario-F-rich-text-ranges.json",
+    "schemaVersion": "0.7",
+    "totalNodes": 77,
+    "description": "Rich text document verifying continuous inline text flows collapsed into a single Figma TextNode with native ranged bold/italic/color/size and hyperlinks.",
+    "features": [
+      "Single TextNode",
+      "Ranged bold/italic/weight",
+      "Ranged colors/sizes",
+      "Hyperlink URL ranges",
+      "Font fallback"
+    ]
+  },
+  {
+    "scenario": "G",
+    "id": "scenario-G-auto-layout",
+    "name": "Native Semantic Auto Layout (V0.7)",
+    "file": "scenario-G-auto-layout.json",
+    "schemaVersion": "0.7",
+    "totalNodes": 212,
+    "description": "High-confidence Auto Layout document verifying horizontal/vertical frames, padding, gap, alignment, grow, stretch, absolute overlays, and fallback frames.",
+    "features": [
+      "layoutMode HORIZONTAL/VERTICAL",
+      "itemSpacing & padding",
+      "primary/counter alignments",
+      "layoutGrow & layoutAlign",
+      "layoutPositioning ABSOLUTE"
+    ]
+  },
+  {
+    "scenario": "H",
+    "id": "scenario-H-real-chrome-capture",
+    "name": "Actual Real-World Chrome Capture (react.dev)",
+    "file": "scenario-H-real-chrome-capture.json",
+    "schemaVersion": "0.7",
+    "totalNodes": 793,
+    "description": "Live production capture of react.dev produced by unpacked extension, verifying real-world large DOM scale, 131 Auto Layout frames, and 0 skipped nodes.",
+    "features": [
+      "1,023 nodes",
+      "131 Auto Layout frames",
+      "Complex real-world layouts",
+      "Unpacked extension capture",
+      "Zero skipped nodes"
+    ]
+  }
+]
