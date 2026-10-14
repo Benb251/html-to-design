@@ -1,5 +1,5 @@
 /// <reference types="@figma/plugin-typings" />
-import type { TextStyle } from "@web2design/design-schema";
+import type { TextStyle, TextRun } from "@web2design/design-schema";
 import type { FigmaRendererHost } from "./types.js";
 import type { WarningCollector } from "./warnings.js";
 
@@ -44,6 +44,11 @@ function weightToStyleNames(weight: number, isItalic: boolean): string[] {
   return baseWeights;
 }
 
+export interface ResolvedTextFonts {
+  baseFont: FontName;
+  runFonts: FontName[];
+}
+
 export class FontManager {
   private readonly loadedFonts = new Set<string>();
   private availableFonts: Font[] | null = null;
@@ -82,19 +87,19 @@ export class FontManager {
     }
   }
 
-  async resolveAndLoadFont(
-    textStyle: TextStyle,
-    warnings: WarningCollector,
-    nodeId: string,
-  ): Promise<FontName> {
+  resolveFont(
+    fontFamily: string,
+    fontFallbacks: string[] | undefined,
+    fontWeight: number,
+    fontStyle: string,
+  ): FontName | null {
     const candidates: string[] = [
-      cleanFamilyName(textStyle.fontFamily),
-      ...(textStyle.fontFallbacks?.map(cleanFamilyName) ?? []),
+      cleanFamilyName(fontFamily),
+      ...(fontFallbacks?.map(cleanFamilyName) ?? []),
     ];
 
-    const isItalic = textStyle.fontStyle === "italic" || textStyle.fontStyle === "oblique";
-    const preferredStyles = weightToStyleNames(textStyle.fontWeight, isItalic);
-
+    const isItalic = fontStyle === "italic" || fontStyle === "oblique";
+    const preferredStyles = weightToStyleNames(fontWeight, isItalic);
     const available = this.availableFonts ?? [];
 
     for (const familyCandidate of candidates) {
@@ -124,10 +129,29 @@ export class FontManager {
       }
 
       if (matchedFontName) {
-        const loaded = await this.loadFontSafely(matchedFontName);
-        if (loaded) {
-          return matchedFontName;
-        }
+        return matchedFontName;
+      }
+    }
+
+    return null;
+  }
+
+  async resolveAndLoadFont(
+    textStyle: TextStyle,
+    warnings: WarningCollector,
+    nodeId: string,
+  ): Promise<FontName> {
+    const matched = this.resolveFont(
+      textStyle.fontFamily,
+      textStyle.fontFallbacks,
+      textStyle.fontWeight,
+      textStyle.fontStyle,
+    );
+
+    if (matched) {
+      const loaded = await this.loadFontSafely(matched);
+      if (loaded) {
+        return matched;
       }
     }
 
@@ -138,5 +162,79 @@ export class FontManager {
     );
     await this.loadFontSafely(this.defaultFont);
     return this.defaultFont;
+  }
+
+  async resolveAndLoadTextAndRunFonts(
+    nodeStyle: TextStyle,
+    runs: TextRun[] | undefined,
+    warnings: WarningCollector,
+    nodeId: string,
+  ): Promise<ResolvedTextFonts> {
+    let baseFont = this.resolveFont(
+      nodeStyle.fontFamily,
+      nodeStyle.fontFallbacks,
+      nodeStyle.fontWeight,
+      nodeStyle.fontStyle,
+    );
+
+    if (!baseFont) {
+      warnings.warn(
+        "FONT_FALLBACK",
+        `Font family '${nodeStyle.fontFamily}' unavailable; fell back to '${this.defaultFont.family} ${this.defaultFont.style}'`,
+        nodeId,
+      );
+      baseFont = this.defaultFont;
+    }
+
+    const runFonts: FontName[] = [];
+    const warnedRunFamilies = new Set<string>();
+
+    if (runs && runs.length > 0) {
+      for (const run of runs) {
+        const reqFamily = run.style.fontFamily ?? nodeStyle.fontFamily;
+        const reqFallbacks = run.style.fontFallbacks ?? nodeStyle.fontFallbacks;
+        const reqWeight = run.style.fontWeight ?? nodeStyle.fontWeight;
+        const reqStyle = run.style.fontStyle ?? nodeStyle.fontStyle;
+
+        let matched = this.resolveFont(reqFamily, reqFallbacks, reqWeight, reqStyle);
+        if (!matched) {
+          const warnKey = reqFamily.toLowerCase();
+          if (!warnedRunFamilies.has(warnKey)) {
+            warnedRunFamilies.add(warnKey);
+            warnings.warn(
+              "FONT_FALLBACK",
+              `Font family '${reqFamily}' for range [${run.start}, ${run.end}) on node '${nodeId}' unavailable; fell back to '${this.defaultFont.family} ${this.defaultFont.style}'`,
+              nodeId,
+              `${run.start}-${run.end}`,
+            );
+          }
+          matched = this.defaultFont;
+        }
+        runFonts.push(matched);
+      }
+    }
+
+    const uniqueFonts = new Map<string, FontName>();
+    uniqueFonts.set(this.fontKey(baseFont), baseFont);
+    uniqueFonts.set(this.fontKey(this.defaultFont), this.defaultFont);
+    for (const rf of runFonts) {
+      uniqueFonts.set(this.fontKey(rf), rf);
+    }
+
+    for (const [key, font] of uniqueFonts) {
+      const loaded = await this.loadFontSafely(font);
+      if (!loaded && key !== this.fontKey(this.defaultFont)) {
+        if (this.fontKey(baseFont) === key) {
+          baseFont = this.defaultFont;
+        }
+        for (let i = 0; i < runFonts.length; i++) {
+          if (this.fontKey(runFonts[i]!) === key) {
+            runFonts[i] = this.defaultFont;
+          }
+        }
+      }
+    }
+
+    return { baseFont, runFonts };
   }
 }

@@ -153,7 +153,7 @@
                   "text": {
                     "characters": "Capture a rendered landing page",
                     "fontFamily": "Arial",
-                    "fontStyle": "Regular",
+                    "fontStyle": "Bold",
                     "fontSize": 36,
                     "lineHeight": 44,
                     "letterSpacing": -0.5,
@@ -162,15 +162,15 @@
                 },
                 {
                   "figmaType": "TEXT",
-                  "name": "Text",
+                  "name": "p",
                   "x": 0,
                   "y": 71.1094,
-                  "width": 374.4063,
+                  "width": 575.375,
                   "height": 17,
                   "absoluteX": 16,
                   "absoluteY": 215.2188,
                   "opacity": 1,
-                  "sourceId": "w2d-text-1-0-1-0",
+                  "sourceId": "w2d-element-1-0-1",
                   "sourceType": "text",
                   "sourceTag": "p",
                   "fills": [
@@ -185,47 +185,47 @@
                     }
                   ],
                   "text": {
-                    "characters": "Editable text, document geometry and simple styles. ",
+                    "characters": "Editable text, document geometry and simple styles. Nested text stays editable.",
                     "fontFamily": "Arial",
                     "fontStyle": "Regular",
                     "fontSize": 16,
                     "lineHeight": 24,
                     "letterSpacing": 0,
-                    "textAlignHorizontal": "LEFT"
-                  }
-                },
-                {
-                  "figmaType": "TEXT",
-                  "name": "Text",
-                  "x": 374.4063,
-                  "y": 71.1094,
-                  "width": 200.9688,
-                  "height": 17,
-                  "absoluteX": 390.4063,
-                  "absoluteY": 215.2188,
-                  "opacity": 1,
-                  "sourceId": "w2d-text-1-0-1-1-0",
-                  "sourceType": "text",
-                  "sourceTag": "strong",
-                  "fills": [
-                    {
-                      "type": "SOLID",
-                      "color": {
-                        "r": 0.0863,
-                        "g": 0.1412,
-                        "b": 0.2275,
-                        "a": 1
+                    "textAlignHorizontal": "LEFT",
+                    "ranges": [
+                      {
+                        "start": 0,
+                        "end": 52,
+                        "characters": "Editable text, document geometry and simple styles. ",
+                        "fontFamily": "Arial",
+                        "fontStyle": "Regular",
+                        "fontSize": 16,
+                        "fill": {
+                          "r": 0.0863,
+                          "g": 0.1412,
+                          "b": 0.2275,
+                          "a": 1
+                        },
+                        "lineHeight": 24,
+                        "letterSpacing": 0
+                      },
+                      {
+                        "start": 52,
+                        "end": 79,
+                        "characters": "Nested text stays editable.",
+                        "fontFamily": "Arial",
+                        "fontStyle": "Bold",
+                        "fontSize": 16,
+                        "fill": {
+                          "r": 0.0863,
+                          "g": 0.1412,
+                          "b": 0.2275,
+                          "a": 1
+                        },
+                        "lineHeight": 24,
+                        "letterSpacing": 0
                       }
-                    }
-                  ],
-                  "text": {
-                    "characters": "Nested text stays editable.",
-                    "fontFamily": "Arial",
-                    "fontStyle": "Regular",
-                    "fontSize": 16,
-                    "lineHeight": 24,
-                    "letterSpacing": 0,
-                    "textAlignHorizontal": "LEFT"
+                    ]
                   }
                 },
                 {
@@ -294,7 +294,7 @@
                       "text": {
                         "characters": "Try capture",
                         "fontFamily": "Arial",
-                        "fontStyle": "Regular",
+                        "fontStyle": "Bold",
                         "fontSize": 16,
                         "lineHeight": 24,
                         "letterSpacing": 0,
@@ -371,7 +371,7 @@
                   "text": {
                     "characters": "Colored card",
                     "fontFamily": "Arial",
-                    "fontStyle": "Regular",
+                    "fontStyle": "Bold",
                     "fontSize": 24,
                     "lineHeight": 24,
                     "letterSpacing": 0,

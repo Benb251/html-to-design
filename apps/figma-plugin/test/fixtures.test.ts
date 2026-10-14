@@ -37,10 +37,20 @@ describe("W2D-006 Section 17 - Representative and Real Document Validation", () 
       const res = runValidation(simpleTextFixture);
       expect(res.type).toBe("validation-success");
       if (res.type === "validation-success") {
-        expect(res.summary.schemaVersion).toBe("0.5");
+        expect(res.summary.schemaVersion).toBe("0.7");
         expect(res.summary.totalNodes).toBe(2);
         expect(res.summary.nodeCounts.text).toBe(1);
         expect(res.summary.assetCount).toBe(0);
+      }
+      const resV06 = runValidation({ ...simpleTextFixture, schemaVersion: "0.6" });
+      expect(resV06.type).toBe("validation-success");
+      if (resV06.type === "validation-success") {
+        expect(resV06.summary.schemaVersion).toBe("0.6");
+      }
+      const resV05 = runValidation({ ...simpleTextFixture, schemaVersion: "0.5" });
+      expect(resV05.type).toBe("validation-success");
+      if (resV05.type === "validation-success") {
+        expect(resV05.summary.schemaVersion).toBe("0.5");
       }
       const resV04 = runValidation({ ...simpleTextFixture, schemaVersion: "0.4" });
       expect(resV04.type).toBe("validation-success");
@@ -134,7 +144,7 @@ describe("W2D-006 Section 17 - Representative and Real Document Validation", () 
     });
 
     it("handles 7. invalid schema version", () => {
-      const res = runValidation({ ...simpleTextFixture, schemaVersion: "0.6" });
+      const res = runValidation({ ...simpleTextFixture, schemaVersion: "0.8" });
       expect(res.type).toBe("validation-error");
       if (res.type === "validation-error") {
         expect(res.error.issues.some((i) => i.path.includes("schemaVersion"))).toBe(true);
@@ -172,6 +182,8 @@ describe("W2D-006 Section 17 - Representative and Real Document Validation", () 
       "fidelity-borders-shadows.json",
       "fidelity-clipping.json",
       "fidelity-transforms.json",
+      "fidelity-rich-text.json",
+      "fidelity-auto-layout.json",
       "capture.json",
     ];
 
@@ -188,7 +200,7 @@ describe("W2D-006 Section 17 - Representative and Real Document Validation", () 
 
         expect(res.type, `Smoke capture "${filename}" should validate successfully`).toBe("validation-success");
         if (res.type === "validation-success") {
-          expect(["0.1", "0.2", "0.3", "0.4", "0.5"]).toContain(res.summary.schemaVersion);
+          expect(["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7"]).toContain(res.summary.schemaVersion);
           expect(res.summary.totalNodes).toBeGreaterThan(0);
           expect(res.summary.viewport.width).toBeGreaterThan(0);
           expect(res.summary.viewport.height).toBeGreaterThan(0);

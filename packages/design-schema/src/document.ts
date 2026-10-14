@@ -6,6 +6,8 @@ import {
   FrameNodeSchemaV03,
   FrameNodeSchemaV04,
   FrameNodeSchemaV05,
+  FrameNodeSchemaV06,
+  FrameNodeSchemaV07,
 } from "./nodes.js";
 import type { DesignNode, FrameNode } from "./nodes.js";
 import type { BorderStyle, Color } from "./style.js";
@@ -15,6 +17,8 @@ import {
   DESIGN_SCHEMA_VERSION_V03,
   DESIGN_SCHEMA_VERSION_V04,
   DESIGN_SCHEMA_VERSION_V05,
+  DESIGN_SCHEMA_VERSION_V06,
+  DESIGN_SCHEMA_VERSION_V07,
 } from "./version.js";
 
 const CaptureSourceSchema = z.strictObject({
@@ -90,6 +94,24 @@ const RawDesignDocumentV05Schema = z.strictObject({
   capture: CaptureMetadataSchema,
   viewport: ViewportMetadataSchema,
   root: FrameNodeSchemaV05,
+  assets: z.array(AssetRecordSchema),
+  warnings: z.array(WarningSchema).optional(),
+});
+
+const RawDesignDocumentV06Schema = z.strictObject({
+  schemaVersion: z.literal(DESIGN_SCHEMA_VERSION_V06),
+  capture: CaptureMetadataSchema,
+  viewport: ViewportMetadataSchema,
+  root: FrameNodeSchemaV06,
+  assets: z.array(AssetRecordSchema),
+  warnings: z.array(WarningSchema).optional(),
+});
+
+const RawDesignDocumentV07Schema = z.strictObject({
+  schemaVersion: z.literal(DESIGN_SCHEMA_VERSION_V07),
+  capture: CaptureMetadataSchema,
+  viewport: ViewportMetadataSchema,
+  root: FrameNodeSchemaV07,
   assets: z.array(AssetRecordSchema),
   warnings: z.array(WarningSchema).optional(),
 });
@@ -178,29 +200,35 @@ export const DesignDocumentV02Schema = RawDesignDocumentV02Schema.superRefine(va
 export const DesignDocumentV03Schema = RawDesignDocumentV03Schema.superRefine(validateDocumentReferences);
 export const DesignDocumentV04Schema = RawDesignDocumentV04Schema.superRefine(validateDocumentReferences);
 export const DesignDocumentV05Schema = RawDesignDocumentV05Schema.superRefine(validateDocumentReferences);
+export const DesignDocumentV06Schema = RawDesignDocumentV06Schema.superRefine(validateDocumentReferences);
+export const DesignDocumentV07Schema = RawDesignDocumentV07Schema.superRefine(validateDocumentReferences);
 
-export const DesignDocumentSchema = DesignDocumentV05Schema;
+export const DesignDocumentSchema = DesignDocumentV07Schema;
 
 export type DesignDocumentV01 = z.infer<typeof DesignDocumentV01Schema>;
 export type DesignDocumentV02 = z.infer<typeof DesignDocumentV02Schema>;
 export type DesignDocumentV03 = z.infer<typeof DesignDocumentV03Schema>;
 export type DesignDocumentV04 = z.infer<typeof DesignDocumentV04Schema>;
 export type DesignDocumentV05 = z.infer<typeof DesignDocumentV05Schema>;
+export type DesignDocumentV06 = z.infer<typeof DesignDocumentV06Schema>;
+export type DesignDocumentV07 = z.infer<typeof DesignDocumentV07Schema>;
 
 export type VersionedDesignDocument =
   | DesignDocumentV01
   | DesignDocumentV02
   | DesignDocumentV03
   | DesignDocumentV04
-  | DesignDocumentV05;
-export type LatestDesignDocument = DesignDocumentV05;
-export type DesignDocument = DesignDocumentV05;
+  | DesignDocumentV05
+  | DesignDocumentV06
+  | DesignDocumentV07;
+export type LatestDesignDocument = DesignDocumentV07;
+export type DesignDocument = DesignDocumentV07;
 
 export type CaptureMetadata = z.infer<typeof CaptureMetadataSchema>;
 export type ViewportMetadata = z.infer<typeof ViewportMetadataSchema>;
 export type DesignWarning = z.infer<typeof WarningSchema>;
 
-function normalizeNodeToV05(node: DesignNode): DesignNode {
+function normalizeNodeToV07(node: DesignNode): DesignNode {
   let updatedNode = node;
   if (node.style) {
     const style = { ...node.style };
@@ -218,20 +246,20 @@ function normalizeNodeToV05(node: DesignNode): DesignNode {
   if (updatedNode.type === "frame") {
     updatedNode = {
       ...updatedNode,
-      children: updatedNode.children.map(normalizeNodeToV05),
+      children: updatedNode.children.map(normalizeNodeToV07),
     };
   }
   return updatedNode;
 }
 
-export function normalizeDesignDocument(document: VersionedDesignDocument): DesignDocumentV05 {
-  if (document.schemaVersion === "0.5") {
-    return document as DesignDocumentV05;
+export function normalizeDesignDocument(document: VersionedDesignDocument): DesignDocumentV07 {
+  if (document.schemaVersion === "0.7") {
+    return document as DesignDocumentV07;
   }
   return {
     ...document,
-    schemaVersion: "0.5",
-    root: normalizeNodeToV05(document.root) as FrameNode,
+    schemaVersion: "0.7",
+    root: normalizeNodeToV07(document.root) as FrameNode,
   };
 }
 

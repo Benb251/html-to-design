@@ -1,0 +1,4118 @@
+{
+  "figmaType": "FRAME",
+  "name": "Web2Design — Web2Design rich text fidelity",
+  "x": 100,
+  "y": -967,
+  "width": 800,
+  "height": 2934,
+  "absoluteX": 0,
+  "absoluteY": 0,
+  "opacity": 1,
+  "sourceId": "root",
+  "sourceType": "frame",
+  "sourceTag": "html",
+  "fills": [
+    {
+      "type": "SOLID",
+      "color": {
+        "r": 0.9725,
+        "g": 0.9804,
+        "b": 0.9882,
+        "a": 1
+      }
+    }
+  ],
+  "children": [
+    {
+      "figmaType": "FRAME",
+      "name": "body",
+      "x": 20,
+      "y": 21.4375,
+      "width": 745,
+      "height": 2892.4375,
+      "absoluteX": 20,
+      "absoluteY": 21.4375,
+      "opacity": 1,
+      "sourceId": "w2d-element-body",
+      "sourceType": "frame",
+      "sourceTag": "body",
+      "children": [
+        {
+          "figmaType": "TEXT",
+          "name": "Text",
+          "x": 0,
+          "y": -6,
+          "width": 736.7656,
+          "height": 36,
+          "absoluteX": 20,
+          "absoluteY": 15.4375,
+          "opacity": 1,
+          "sourceId": "w2d-text-1-0",
+          "sourceType": "text",
+          "sourceTag": "h1",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 0.0588,
+                "g": 0.0902,
+                "b": 0.1647,
+                "a": 1
+              }
+            }
+          ],
+          "text": {
+            "characters": "Web2Design Rich-Text Paragraph Spans Fidelity",
+            "fontFamily": "Arial",
+            "fontStyle": "Bold",
+            "fontSize": 32,
+            "lineHeight": 24,
+            "letterSpacing": 0,
+            "textAlignHorizontal": "LEFT"
+          }
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 45.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 66.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-5",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 13,
+              "y": 32,
+              "width": 375.3125,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 98.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-5-1-0",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Plain simple paragraph text without any inline styling.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 143.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 164.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-9",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 157.9688,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 196.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-9-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Prefix bold text suffix.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "Prefix ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 16,
+                    "characters": "bold text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 16,
+                    "end": 24,
+                    "characters": " suffix.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 241.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 262.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-13",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 153.5469,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 294.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-13-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Prefix italic text suffix.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "Prefix ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 18,
+                    "characters": "italic text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Italic",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 18,
+                    "end": 26,
+                    "characters": " suffix.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 339.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 360.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-17",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 224.9375,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 392.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-17-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "normal bold bold-italic normal.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "normal ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 12,
+                    "characters": "bold ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 12,
+                    "end": 23,
+                    "characters": "bold-italic",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold Italic",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 23,
+                    "end": 31,
+                    "characters": " normal.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 437.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 458.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-21",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 141.4063,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 490.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-21-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "black red text black.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 6,
+                    "characters": "black ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 6,
+                    "end": 14,
+                    "characters": "red text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.9373,
+                      "g": 0.2667,
+                      "b": 0.2667,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 14,
+                    "end": 21,
+                    "characters": " black.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 535.4375,
+          "width": 745,
+          "height": 85,
+          "absoluteX": 20,
+          "absoluteY": 556.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-25",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 27,
+              "width": 209.875,
+              "height": 27,
+              "absoluteX": 33,
+              "absoluteY": 583.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-25-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "normal large text normal.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "normal ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 17,
+                    "characters": "large text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 24,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 17,
+                    "end": 25,
+                    "characters": " normal.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 636.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 657.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-29",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 186.7656,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 689.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-29-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "normal roboto text normal.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "normal ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 18,
+                    "characters": "roboto text",
+                    "fontFamily": "Roboto",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 18,
+                    "end": 26,
+                    "characters": " normal.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 734.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 755.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-33",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 195.6406,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 787.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-33-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "normal fallback text normal.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "normal ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 20,
+                    "characters": "fallback text",
+                    "fontFamily": "Inter",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 20,
+                    "end": 28,
+                    "characters": " normal.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 832.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 853.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-37",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 214.9844,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 885.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-37-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "normal spaced text normal.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "normal ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 18,
+                    "characters": "spaced text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 2
+                  },
+                  {
+                    "start": 18,
+                    "end": 26,
+                    "characters": " normal.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 930.4375,
+          "width": 745,
+          "height": 90,
+          "absoluteX": 20,
+          "absoluteY": 951.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-41",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 36,
+              "width": 191.2031,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 987.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-41-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "normal tall line text normal.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "normal ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 21,
+                    "characters": "tall line text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 32,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 21,
+                    "end": 29,
+                    "characters": " normal.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1036.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 1057.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-45",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 216.125,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 1089.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-45-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "normal underlined text normal.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "normal ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 22,
+                    "characters": "underlined text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "decoration": "UNDERLINE"
+                  },
+                  {
+                    "start": 22,
+                    "end": 30,
+                    "characters": " normal.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1134.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 1155.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-49",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 179.625,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 1187.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-49-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "normal strike text normal.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 7,
+                    "characters": "normal ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 7,
+                    "end": 18,
+                    "characters": "strike text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "decoration": "STRIKETHROUGH"
+                  },
+                  {
+                    "start": 18,
+                    "end": 26,
+                    "characters": " normal.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1232.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 1253.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-53",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 160.6875,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 1285.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-53-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Visit example link now.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 6,
+                    "characters": "Visit ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 6,
+                    "end": 18,
+                    "characters": "example link",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0.9333,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "decoration": "UNDERLINE",
+                    "hyperlink": "https://example.com/single"
+                  },
+                  {
+                    "start": 18,
+                    "end": 23,
+                    "characters": " now.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1330.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 1351.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-57",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 179.6719,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 1383.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-57-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Link first and second link.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 5,
+                    "characters": "Link ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 5,
+                    "end": 10,
+                    "characters": "first",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0.9333,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "decoration": "UNDERLINE",
+                    "hyperlink": "https://example.com/one"
+                  },
+                  {
+                    "start": 10,
+                    "end": 15,
+                    "characters": " and ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 15,
+                    "end": 21,
+                    "characters": "second",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0.9333,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "decoration": "UNDERLINE",
+                    "hyperlink": "https://example.com/two"
+                  },
+                  {
+                    "start": 21,
+                    "end": 27,
+                    "characters": " link.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1428.4375,
+          "width": 745,
+          "height": 84,
+          "absoluteX": 20,
+          "absoluteY": 1449.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-61",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 30,
+              "width": 248.8438,
+              "height": 22,
+              "absoluteX": 33,
+              "absoluteY": 1479.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-61-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "outer mid inner blue mid outer.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 6,
+                    "characters": "outer ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 6,
+                    "end": 10,
+                    "characters": "mid ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 20,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 10,
+                    "end": 20,
+                    "characters": "inner blue",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 20,
+                    "fill": {
+                      "r": 0.2314,
+                      "g": 0.5098,
+                      "b": 0.9647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 20,
+                    "end": 24,
+                    "characters": " mid",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 20,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 24,
+                    "end": 31,
+                    "characters": " outer.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1528.4375,
+          "width": 745,
+          "height": 106,
+          "absoluteX": 20,
+          "absoluteY": 1549.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-65",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 130.6875,
+              "height": 41,
+              "absoluteX": 33,
+              "absoluteY": 1581.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-65-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "first line\nsecond bold line.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 11,
+                    "characters": "first line\n",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 11,
+                    "end": 27,
+                    "characters": "second bold line",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 27,
+                    "end": 28,
+                    "characters": ".",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1650.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 1671.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-69",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 143.1875,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 1703.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-69-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "word1 word2 word3",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 12,
+                    "characters": "word1 word2 ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 12,
+                    "end": 17,
+                    "characters": "word3",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1748.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 1769.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-73",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 174.6406,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 1801.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-73-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Hello 👋 bold 🌍 world.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 9,
+                    "characters": "Hello 👋 ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 9,
+                    "end": 16,
+                    "characters": "bold 🌍",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 16,
+                    "end": 23,
+                    "characters": " world.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1846.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 1867.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-77",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 31,
+              "width": 183.3125,
+              "height": 19,
+              "absoluteX": 33,
+              "absoluteY": 1898.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-77-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Run npm test command.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 4,
+                    "characters": "Run ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 4,
+                    "end": 12,
+                    "characters": "npm test",
+                    "fontFamily": "Inter",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 12,
+                    "end": 21,
+                    "characters": " command.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 1944.4375,
+          "width": 745,
+          "height": 154,
+          "absoluteX": 20,
+          "absoluteY": 1965.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-81",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 237.4531,
+              "height": 89,
+              "absoluteX": 33,
+              "absoluteY": 1997.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-81-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "This is a paragraph that wraps across multiple lines in browser layout while retaining bold text in the middle of it.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 87,
+                    "characters": "This is a paragraph that wraps across multiple lines in browser layout while retaining ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 87,
+                    "end": 96,
+                    "characters": "bold text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 96,
+                    "end": 117,
+                    "characters": " in the middle of it.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2114.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 2135.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-85",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 15.9099,
+              "y": 2.4102,
+              "width": 245.453,
+              "height": 56,
+              "absoluteX": 35.9099,
+              "absoluteY": 2138.2852,
+              "opacity": 1,
+              "sourceId": "w2d-element-85-1",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "rotation": -5.0025,
+              "relativeTransform": [
+                [
+                  0.9962,
+                  -0.0872,
+                  15.9099
+                ],
+                [
+                  0.0872,
+                  0.9962,
+                  2.4102
+                ]
+              ],
+              "visualAabb": {
+                "x": 31.0267,
+                "y": 2138.2852,
+                "width": 249.4035,
+                "height": 77.1907
+              },
+              "children": [
+                {
+                  "figmaType": "TEXT",
+                  "name": "p",
+                  "x": -0.0019,
+                  "y": 19.0001,
+                  "width": 245.452,
+                  "height": 16.989,
+                  "absoluteX": 35.908,
+                  "absoluteY": 2157.2853,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-85-1-1",
+                  "sourceType": "text",
+                  "sourceTag": "p",
+                  "visualAabb": {
+                    "x": 32.7698,
+                    "y": 2157.2129,
+                    "width": 246.0007,
+                    "height": 38.3279
+                  },
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": {
+                        "r": 0.0588,
+                        "g": 0.0902,
+                        "b": 0.1647,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "text": {
+                    "characters": "Container rotated bold text inside.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "textAlignHorizontal": "LEFT",
+                    "ranges": [
+                      {
+                        "start": 0,
+                        "end": 18,
+                        "characters": "Container rotated ",
+                        "fontFamily": "Arial",
+                        "fontStyle": "Regular",
+                        "fontSize": 16,
+                        "fill": {
+                          "r": 0.0588,
+                          "g": 0.0902,
+                          "b": 0.1647,
+                          "a": 1
+                        },
+                        "lineHeight": 24,
+                        "letterSpacing": 0
+                      },
+                      {
+                        "start": 18,
+                        "end": 27,
+                        "characters": "bold text",
+                        "fontFamily": "Arial",
+                        "fontStyle": "Bold",
+                        "fontSize": 16,
+                        "fill": {
+                          "r": 0.0588,
+                          "g": 0.0902,
+                          "b": 0.1647,
+                          "a": 1
+                        },
+                        "lineHeight": 24,
+                        "letterSpacing": 0
+                      },
+                      {
+                        "start": 27,
+                        "end": 35,
+                        "characters": " inside.",
+                        "fontFamily": "Arial",
+                        "fontStyle": "Regular",
+                        "fontSize": 16,
+                        "fill": {
+                          "r": 0.0588,
+                          "g": 0.0902,
+                          "b": 0.1647,
+                          "a": 1
+                        },
+                        "lineHeight": 24,
+                        "letterSpacing": 0
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2212.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 2233.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-89",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 12.3434,
+              "y": 37.9692,
+              "width": 204.562,
+              "height": 24,
+              "absoluteX": 32.3434,
+              "absoluteY": 2271.8442,
+              "opacity": 1,
+              "sourceId": "w2d-element-89-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "rotation": 5.0025,
+              "relativeTransform": [
+                [
+                  0.9962,
+                  0.0872,
+                  12.3434
+                ],
+                [
+                  -0.0872,
+                  0.9962,
+                  37.9692
+                ]
+              ],
+              "visualAabb": {
+                "x": 32.3434,
+                "y": 2254.0064,
+                "width": 205.8775,
+                "height": 41.7466
+              },
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Rotated rich text node itself.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 8,
+                    "characters": "Rotated ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 8,
+                    "end": 17,
+                    "characters": "rich text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 17,
+                    "end": 30,
+                    "characters": " node itself.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2310.4375,
+          "width": 745,
+          "height": 56,
+          "absoluteX": 20,
+          "absoluteY": 2331.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-93",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "FRAME",
+              "name": "div",
+              "x": 13,
+              "y": 13,
+              "width": 160,
+              "height": 30,
+              "absoluteX": 33,
+              "absoluteY": 2344.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-93-1",
+              "sourceType": "frame",
+              "sourceTag": "div",
+              "clipsContent": true,
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.5804,
+                    "g": 0.6392,
+                    "b": 0.7216,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "children": [
+                {
+                  "figmaType": "TEXT",
+                  "name": "p",
+                  "x": 1,
+                  "y": 20,
+                  "width": 153.8594,
+                  "height": 41,
+                  "absoluteX": 34,
+                  "absoluteY": 2364.875,
+                  "opacity": 1,
+                  "sourceId": "w2d-element-93-1-1",
+                  "sourceType": "text",
+                  "sourceTag": "p",
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": {
+                        "r": 0.0588,
+                        "g": 0.0902,
+                        "b": 0.1647,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "text": {
+                    "characters": "Clipped rich text flow container.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "textAlignHorizontal": "LEFT",
+                    "ranges": [
+                      {
+                        "start": 0,
+                        "end": 8,
+                        "characters": "Clipped ",
+                        "fontFamily": "Arial",
+                        "fontStyle": "Regular",
+                        "fontSize": 16,
+                        "fill": {
+                          "r": 0.0588,
+                          "g": 0.0902,
+                          "b": 0.1647,
+                          "a": 1
+                        },
+                        "lineHeight": 24,
+                        "letterSpacing": 0
+                      },
+                      {
+                        "start": 8,
+                        "end": 17,
+                        "characters": "rich text",
+                        "fontFamily": "Arial",
+                        "fontStyle": "Bold",
+                        "fontSize": 16,
+                        "fill": {
+                          "r": 0.0588,
+                          "g": 0.0902,
+                          "b": 0.1647,
+                          "a": 1
+                        },
+                        "lineHeight": 24,
+                        "letterSpacing": 0
+                      },
+                      {
+                        "start": 17,
+                        "end": 33,
+                        "characters": " flow container.",
+                        "fontFamily": "Arial",
+                        "fontStyle": "Regular",
+                        "fontSize": 16,
+                        "fill": {
+                          "r": 0.0588,
+                          "g": 0.0902,
+                          "b": 0.1647,
+                          "a": 1
+                        },
+                        "lineHeight": 24,
+                        "letterSpacing": 0
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2382.4375,
+          "width": 745,
+          "height": 50,
+          "absoluteX": 20,
+          "absoluteY": 2403.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-97",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 13,
+              "y": 16,
+              "width": 66.6875,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 2419.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-97-0",
+              "sourceType": "text",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Text with ",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "span",
+              "x": 79.6875,
+              "y": 16,
+              "width": 108.5156,
+              "height": 17,
+              "absoluteX": 99.6875,
+              "absoluteY": 2419.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-97-1",
+              "sourceType": "frame",
+              "sourceTag": "span",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.9961,
+                    "g": 0.9412,
+                    "b": 0.5412,
+                    "a": 1
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "figmaType": "TEXT",
+                  "name": "Text",
+                  "x": 0,
+                  "y": 0,
+                  "width": 108.5156,
+                  "height": 17,
+                  "absoluteX": 99.6875,
+                  "absoluteY": 2419.875,
+                  "opacity": 1,
+                  "sourceId": "w2d-text-97-1-0",
+                  "sourceType": "text",
+                  "sourceTag": "span",
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": {
+                        "r": 0.0588,
+                        "g": 0.0902,
+                        "b": 0.1647,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "text": {
+                    "characters": "yellow highlight",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "textAlignHorizontal": "LEFT"
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 188.2031,
+              "y": 16,
+              "width": 92.5156,
+              "height": 17,
+              "absoluteX": 208.2031,
+              "absoluteY": 2419.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-97-2",
+              "sourceType": "text",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": " background.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2448.4375,
+          "width": 745,
+          "height": 50,
+          "absoluteX": 20,
+          "absoluteY": 2469.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-101",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 13,
+              "y": 16,
+              "width": 51.5938,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 2485.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-101-0",
+              "sourceType": "text",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Before ",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "span",
+              "x": 64.5938,
+              "y": 11,
+              "width": 100.7344,
+              "height": 27,
+              "absoluteX": 84.5938,
+              "absoluteY": 2480.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-101-1",
+              "sourceType": "frame",
+              "sourceTag": "span",
+              "strokes": [
+                {
+                  "color": {
+                    "r": 0.3922,
+                    "g": 0.4549,
+                    "b": 0.5451,
+                    "a": 1
+                  },
+                  "width": 1
+                }
+              ],
+              "radius": {
+                "uniform": 4
+              },
+              "children": [
+                {
+                  "figmaType": "TEXT",
+                  "name": "Text",
+                  "x": 9,
+                  "y": 5,
+                  "width": 82.7344,
+                  "height": 17,
+                  "absoluteX": 93.5938,
+                  "absoluteY": 2485.875,
+                  "opacity": 1,
+                  "sourceId": "w2d-text-101-1-0",
+                  "sourceType": "text",
+                  "sourceTag": "span",
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": {
+                        "r": 0.0588,
+                        "g": 0.0902,
+                        "b": 0.1647,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "text": {
+                    "characters": "boxed span",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "textAlignHorizontal": "LEFT"
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 165.3281,
+              "y": 16,
+              "width": 40.0313,
+              "height": 17,
+              "absoluteX": 185.3281,
+              "absoluteY": 2485.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-101-2",
+              "sourceType": "text",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": " after.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2514.4375,
+          "width": 745,
+          "height": 50,
+          "absoluteX": 20,
+          "absoluteY": 2535.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-105",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 13,
+              "y": 16,
+              "width": 66.6875,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 2551.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-105-0",
+              "sourceType": "text",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Text with ",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            },
+            {
+              "figmaType": "FRAME",
+              "name": "span",
+              "x": 79.6875,
+              "y": 13,
+              "width": 50,
+              "height": 20,
+              "absoluteX": 99.6875,
+              "absoluteY": 2548.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-105-1",
+              "sourceType": "frame",
+              "sourceTag": "span",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.8863,
+                    "g": 0.9098,
+                    "b": 0.9412,
+                    "a": 1
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "figmaType": "TEXT",
+                  "name": "Text",
+                  "x": 2.75,
+                  "y": 3,
+                  "width": 44.5,
+                  "height": 17,
+                  "absoluteX": 102.4375,
+                  "absoluteY": 2551.875,
+                  "opacity": 1,
+                  "sourceId": "w2d-text-105-1-0",
+                  "sourceType": "text",
+                  "sourceTag": "span",
+                  "fills": [
+                    {
+                      "type": "SOLID",
+                      "color": {
+                        "r": 0.0588,
+                        "g": 0.0902,
+                        "b": 0.1647,
+                        "a": 1
+                      }
+                    }
+                  ],
+                  "text": {
+                    "characters": "badge",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "lineHeight": 24,
+                    "letterSpacing": 0,
+                    "textAlignHorizontal": "CENTER"
+                  }
+                }
+              ]
+            },
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 129.6875,
+              "y": 16,
+              "width": 50.7031,
+              "height": 17,
+              "absoluteX": 149.6875,
+              "absoluteY": 2551.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-105-2",
+              "sourceType": "text",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": " inside.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2580.4375,
+          "width": 745,
+          "height": 50,
+          "absoluteX": 20,
+          "absoluteY": 2601.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-109",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 13,
+              "y": 16,
+              "width": 83.6094,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 2617.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-109-0",
+              "sourceType": "text",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Text before ",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            },
+            {
+              "figmaType": "RECTANGLE",
+              "name": "img",
+              "x": 96.6094,
+              "y": 14,
+              "width": 16,
+              "height": 16,
+              "absoluteX": 116.6094,
+              "absoluteY": 2615.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-109-1",
+              "sourceType": "image",
+              "sourceTag": "img",
+              "fills": [
+                {
+                  "type": "IMAGE",
+                  "scaleMode": "FILL",
+                  "imageHash": "url-hash-_dot.png"
+                }
+              ],
+              "image": {
+                "scaleMode": "FILL",
+                "imageHash": "url-hash-_dot.png"
+              }
+            },
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 112.6094,
+              "y": 16,
+              "width": 70.2656,
+              "height": 17,
+              "absoluteX": 132.6094,
+              "absoluteY": 2617.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-109-2",
+              "sourceType": "text",
+              "sourceTag": "div",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": " text after.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2646.4375,
+          "width": 745,
+          "height": 50,
+          "absoluteX": 20,
+          "absoluteY": 2667.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-113",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "::before",
+              "x": 13,
+              "y": 13,
+              "width": 13.3281,
+              "height": 24,
+              "absoluteX": 33,
+              "absoluteY": 2680.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-113::before",
+              "sourceType": "text",
+              "sourceTag": "::before",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.9608,
+                    "g": 0.6196,
+                    "b": 0.0431,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "★ ",
+                "fontFamily": "Arial",
+                "fontStyle": "Bold",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT"
+              }
+            },
+            {
+              "figmaType": "TEXT",
+              "name": "Text",
+              "x": 30.7813,
+              "y": 16,
+              "width": 197.4531,
+              "height": 17,
+              "absoluteX": 50.7813,
+              "absoluteY": 2683.875,
+              "opacity": 1,
+              "sourceId": "w2d-text-113-0",
+              "sourceType": "text",
+              "sourceTag": "text",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Main styled paragraph text.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 5,
+                    "characters": "Main ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 5,
+                    "end": 11,
+                    "characters": "styled",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 11,
+                    "end": 27,
+                    "characters": " paragraph text.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2712.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 2733.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-117",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 275.5938,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 2765.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-117-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0.0588,
+                    "g": 0.0902,
+                    "b": 0.1647,
+                    "a": 1
+                  }
+                }
+              ],
+              "text": {
+                "characters": "rich transformed uppercase.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 5,
+                    "characters": "rich ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 5,
+                    "end": 16,
+                    "characters": "transformed",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 16,
+                    "end": 27,
+                    "characters": " uppercase.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0.0588,
+                      "g": 0.0902,
+                      "b": 0.1647,
+                      "a": 1
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "figmaType": "FRAME",
+          "name": "div",
+          "x": 0,
+          "y": 2810.4375,
+          "width": 745,
+          "height": 82,
+          "absoluteX": 20,
+          "absoluteY": 2831.875,
+          "opacity": 1,
+          "sourceId": "w2d-element-121",
+          "sourceType": "frame",
+          "sourceTag": "div",
+          "fills": [
+            {
+              "type": "SOLID",
+              "color": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 1
+              }
+            }
+          ],
+          "strokes": [
+            {
+              "color": {
+                "r": 0.8863,
+                "g": 0.9098,
+                "b": 0.9412,
+                "a": 1
+              },
+              "width": 1
+            }
+          ],
+          "radius": {
+            "uniform": 6
+          },
+          "children": [
+            {
+              "figmaType": "TEXT",
+              "name": "p",
+              "x": 13,
+              "y": 32,
+              "width": 160.1094,
+              "height": 17,
+              "absoluteX": 33,
+              "absoluteY": 2863.875,
+              "opacity": 1,
+              "sourceId": "w2d-element-121-1",
+              "sourceType": "text",
+              "sourceTag": "p",
+              "fills": [
+                {
+                  "type": "SOLID",
+                  "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0,
+                    "a": 0
+                  }
+                }
+              ],
+              "text": {
+                "characters": "Gradient text heading.",
+                "fontFamily": "Arial",
+                "fontStyle": "Regular",
+                "fontSize": 16,
+                "lineHeight": 24,
+                "letterSpacing": 0,
+                "textAlignHorizontal": "LEFT",
+                "ranges": [
+                  {
+                    "start": 0,
+                    "end": 9,
+                    "characters": "Gradient ",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 9,
+                    "end": 13,
+                    "characters": "text",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Bold",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  },
+                  {
+                    "start": 13,
+                    "end": 22,
+                    "characters": " heading.",
+                    "fontFamily": "Arial",
+                    "fontStyle": "Regular",
+                    "fontSize": 16,
+                    "fill": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0,
+                      "a": 0
+                    },
+                    "lineHeight": 24,
+                    "letterSpacing": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -8,6 +8,9 @@ import type {
   NormalizedStroke,
   NormalizedSvg,
   NormalizedText,
+  NormalizedTextRange,
+  NormalizedAutoLayout,
+  NormalizedAutoLayoutChild,
 } from "./types.js";
 
 function round4(val: number): number {
@@ -304,6 +307,88 @@ interface NodeWithStrokeProperties {
   if (node.type === "TEXT") {
     const textNode = node as TextNode;
     const fontName = textNode.fontName as FontName;
+
+    let ranges: NormalizedTextRange[] | undefined;
+    interface SegmentLike {
+      start: number;
+      end: number;
+      characters: string;
+      fontSize?: number;
+      fontName?: FontName;
+      fills?: readonly Paint[];
+      lineHeight?: LineHeight;
+      letterSpacing?: LetterSpacing;
+      textDecoration?: TextDecoration;
+      hyperlink?: HyperlinkTarget | null;
+    }
+    const hostNode = textNode as unknown as {
+      getStyledTextSegments?: (fields: string[]) => SegmentLike[];
+    };
+    if (typeof hostNode.getStyledTextSegments === "function") {
+      try {
+        const segs = hostNode.getStyledTextSegments([
+          "fontSize",
+          "fontName",
+          "fills",
+          "lineHeight",
+          "letterSpacing",
+          "textDecoration",
+          "hyperlink",
+        ]);
+        if (Array.isArray(segs) && segs.length > 0) {
+          const isRich =
+            segs.length > 1 ||
+            segs.some(
+              (s) =>
+                (s.textDecoration && s.textDecoration !== "NONE") ||
+                (s.hyperlink && s.hyperlink !== null),
+            );
+          if (isRich) {
+            ranges = segs.map((s) => {
+              const solidFill = Array.isArray(s.fills)
+                ? s.fills.find((f): f is SolidPaint => f.type === "SOLID")
+                : undefined;
+              const fill =
+                solidFill && solidFill.color
+                  ? {
+                      r: round4(solidFill.color.r),
+                      g: round4(solidFill.color.g),
+                      b: round4(solidFill.color.b),
+                      a: round4(solidFill.opacity ?? 1),
+                    }
+                  : undefined;
+
+              const fallbackSize = typeof textNode.fontSize === "number" ? textNode.fontSize : 16;
+              const rObj: NormalizedTextRange = {
+                start: s.start,
+                end: s.end,
+                characters: s.characters,
+                fontFamily: s.fontName?.family ?? fontName.family,
+                fontStyle: s.fontName?.style ?? fontName.style,
+                fontSize: round4(typeof s.fontSize === "number" ? s.fontSize : fallbackSize),
+              };
+              if (fill) rObj.fill = fill;
+              if (s.lineHeight && s.lineHeight.unit === "PIXELS") {
+                rObj.lineHeight = round4(s.lineHeight.value);
+              }
+              if (s.letterSpacing && s.letterSpacing.unit === "PIXELS") {
+                rObj.letterSpacing = round4(s.letterSpacing.value);
+              }
+              if (s.textDecoration && s.textDecoration !== "NONE") {
+                rObj.decoration = s.textDecoration;
+              }
+              if (s.hyperlink && s.hyperlink.value) {
+                rObj.hyperlink = s.hyperlink.value;
+              }
+              return rObj;
+            });
+          }
+        }
+      } catch {
+        // Fallback to plain text
+      }
+    }
+
     text = {
       characters: textNode.characters,
       fontFamily: fontName.family,
@@ -319,12 +404,50 @@ interface NodeWithStrokeProperties {
           : undefined,
       textAlignHorizontal: textNode.textAlignHorizontal,
     };
+    if (ranges && ranges.length > 0) {
+      text.ranges = ranges;
+    }
   }
 
   // SVG
   let svg: NormalizedSvg | undefined;
   if (sourceType === "svg" || node.name === "SVG Group") {
     svg = { isVectorContainer: true };
+  }
+
+  // Auto Layout on frame
+  let layout: NormalizedAutoLayout | undefined;
+  if ("layoutMode" in node && (node.layoutMode === "HORIZONTAL" || node.layoutMode === "VERTICAL")) {
+    const fn = node as FrameNode;
+    layout = {
+      layoutMode: fn.layoutMode,
+      itemSpacing: "itemSpacing" in fn ? round4(fn.itemSpacing) : undefined,
+      paddingTop: "paddingTop" in fn ? round4(fn.paddingTop) : undefined,
+      paddingRight: "paddingRight" in fn ? round4(fn.paddingRight) : undefined,
+      paddingBottom: "paddingBottom" in fn ? round4(fn.paddingBottom) : undefined,
+      paddingLeft: "paddingLeft" in fn ? round4(fn.paddingLeft) : undefined,
+      primaryAxisAlignItems: "primaryAxisAlignItems" in fn ? fn.primaryAxisAlignItems : undefined,
+      counterAxisAlignItems: "counterAxisAlignItems" in fn ? fn.counterAxisAlignItems : undefined,
+      primaryAxisSizingMode: "primaryAxisSizingMode" in fn ? fn.primaryAxisSizingMode : undefined,
+      counterAxisSizingMode: "counterAxisSizingMode" in fn ? fn.counterAxisSizingMode : undefined,
+    };
+  }
+
+  // Child layout metadata
+  let layoutChild: NormalizedAutoLayoutChild | undefined;
+  const rawNode = node as unknown as {
+    layoutPositioning?: string;
+    layoutGrow?: number;
+    layoutAlign?: string;
+  };
+  if (rawNode.layoutPositioning === "ABSOLUTE") {
+    layoutChild = { ...(layoutChild ?? {}), layoutPositioning: "ABSOLUTE" };
+  }
+  if (rawNode.layoutGrow === 1) {
+    layoutChild = { ...(layoutChild ?? {}), layoutGrow: 1 };
+  }
+  if (rawNode.layoutAlign && rawNode.layoutAlign !== "INHERIT") {
+    layoutChild = { ...(layoutChild ?? {}), layoutAlign: rawNode.layoutAlign };
   }
 
   // Children
@@ -364,6 +487,8 @@ interface NodeWithStrokeProperties {
   if (text) result.text = text;
   if (imageInfo) result.image = imageInfo;
   if (svg) result.svg = svg;
+  if (layout) result.layout = layout;
+  if (layoutChild) result.layoutChild = layoutChild;
   if (children && children.length > 0) result.children = children;
 
   return result;

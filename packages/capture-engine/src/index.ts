@@ -18,3 +18,23 @@ export {
   type TransformOrigin,
   type ParsedTransformResult,
 } from "./transform.js";
+export {
+  isEligibleRichTextRoot,
+  collectRichTextFlow,
+  hasIndependentBoxSemantics,
+  resolveSafeHyperlink,
+  areRunStylesEqual,
+  type CollectedRichTextFlow,
+} from "./richtext.js";
+export {
+  analyzeFlexContainer,
+  predictAutoLayoutGeometry,
+  getNodeLayoutBounds,
+  type AutoLayoutContainerSpec,
+  type AutoLayoutChildSpec,
+  type PredictedChildPlacement,
+  type FlexAnalysisContext,
+  type FlexAnalysisResult,
+  type NodeInspectionMetadata,
+} from "./autolayout.js";
+

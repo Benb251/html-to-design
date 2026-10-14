@@ -103,7 +103,7 @@
               "text": {
                 "characters": "Start: ",
                 "fontFamily": "Arial",
-                "fontStyle": "Regular",
+                "fontStyle": "Bold",
                 "fontSize": 16,
                 "lineHeight": 24,
                 "letterSpacing": 0,
@@ -246,7 +246,7 @@
               "text": {
                 "characters": " :End",
                 "fontFamily": "Arial",
-                "fontStyle": "Regular",
+                "fontStyle": "Bold",
                 "fontSize": 16,
                 "lineHeight": 24,
                 "letterSpacing": 0,
@@ -775,7 +775,7 @@
                   "text": {
                     "characters": "NEW",
                     "fontFamily": "Arial",
-                    "fontStyle": "Regular",
+                    "fontStyle": "Bold",
                     "fontSize": 12,
                     "lineHeight": 20,
                     "letterSpacing": 0,

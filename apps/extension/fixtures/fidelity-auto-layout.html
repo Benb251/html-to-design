@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web2Design Auto Layout fidelity</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    margin: 20px;
+    font: 14px/20px Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+  }
+  .test-section {
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+  }
+  .box {
+    background: #3b82f6;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .box-green { background: #10b981; }
+  .box-purple { background: #8b5cf6; }
+  .box-amber { background: #f59e0b; }
+  .with-pseudo::before {
+    content: "P";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: #ec4899;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+  }
+</style>
+</head>
+<body>
+<h1>Web2Design Auto Layout Inference Fidelity</h1>
+
+<!-- 1. simple horizontal row -->
+<div class="test-section">
+  <div id="test-row-simple" style="display: flex; flex-direction: row; width: 200px; height: 50px;">
+    <div style="width: 50px; height: 50px;" class="box">1</div>
+    <div style="width: 50px; height: 50px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 2. simple vertical column -->
+<div class="test-section">
+  <div id="test-col-simple" style="display: flex; flex-direction: column; width: 100px; height: 120px;">
+    <div style="width: 100px; height: 50px;" class="box">1</div>
+    <div style="width: 100px; height: 50px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 3. horizontal gap -->
+<div class="test-section">
+  <div id="test-gap-row" style="display: flex; flex-direction: row; column-gap: 16px; width: 250px; height: 50px;">
+    <div style="width: 50px; height: 50px;" class="box">1</div>
+    <div style="width: 50px; height: 50px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 4. vertical gap -->
+<div class="test-section">
+  <div id="test-gap-col" style="display: flex; flex-direction: column; row-gap: 12px; width: 100px; height: 150px;">
+    <div style="width: 100px; height: 40px;" class="box">1</div>
+    <div style="width: 100px; height: 40px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 5. asymmetric padding -->
+<div class="test-section">
+  <div id="test-padding-asym" style="display: flex; flex-direction: row; padding: 10px 20px 15px 30px; width: 250px; height: 80px;">
+    <div style="width: 40px; height: 40px;" class="box">1</div>
+    <div style="width: 40px; height: 40px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 6. justify start -->
+<div class="test-section">
+  <div id="test-justify-start" style="display: flex; flex-direction: row; justify-content: flex-start; width: 200px; height: 50px;">
+    <div style="width: 40px; height: 50px;" class="box">1</div>
+    <div style="width: 40px; height: 50px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 7. justify center -->
+<div class="test-section">
+  <div id="test-justify-center" style="display: flex; flex-direction: row; justify-content: center; width: 200px; height: 50px;">
+    <div style="width: 40px; height: 50px;" class="box">1</div>
+    <div style="width: 40px; height: 50px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 8. justify end -->
+<div class="test-section">
+  <div id="test-justify-end" style="display: flex; flex-direction: row; justify-content: flex-end; width: 200px; height: 50px;">
+    <div style="width: 40px; height: 50px;" class="box">1</div>
+    <div style="width: 40px; height: 50px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 9. space-between -->
+<div class="test-section">
+  <div id="test-justify-space-between" style="display: flex; flex-direction: row; justify-content: space-between; width: 250px; height: 50px;">
+    <div style="width: 50px; height: 50px;" class="box">1</div>
+    <div style="width: 50px; height: 50px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 10. align start -->
+<div class="test-section">
+  <div id="test-align-start" style="display: flex; flex-direction: row; align-items: flex-start; width: 200px; height: 80px;">
+    <div style="width: 50px; height: 40px;" class="box">1</div>
+    <div style="width: 50px; height: 40px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 11. align center -->
+<div class="test-section">
+  <div id="test-align-center" style="display: flex; flex-direction: row; align-items: center; width: 200px; height: 80px;">
+    <div style="width: 50px; height: 40px;" class="box">1</div>
+    <div style="width: 50px; height: 40px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 12. align end -->
+<div class="test-section">
+  <div id="test-align-end" style="display: flex; flex-direction: row; align-items: flex-end; width: 200px; height: 80px;">
+    <div style="width: 50px; height: 40px;" class="box">1</div>
+    <div style="width: 50px; height: 40px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 13. stretch -->
+<div class="test-section">
+  <div id="test-align-stretch" style="display: flex; flex-direction: row; align-items: stretch; width: 200px; height: 80px;">
+    <div style="width: 50px;" class="box">1</div>
+    <div style="width: 50px;" class="box box-green">2</div>
+  </div>
+</div>
+
+<!-- 14. nested row inside column -->
+<div class="test-section">
+  <div id="test-nested-row-in-col" style="display: flex; flex-direction: column; gap: 8px; width: 250px; height: 120px;">
+    <div style="width: 250px; height: 30px;" class="box">Header</div>
+    <div id="test-inner-row" style="display: flex; flex-direction: row; gap: 10px; width: 250px; height: 50px;">
+      <div style="width: 60px; height: 50px;" class="box box-purple">A</div>
+      <div style="width: 60px; height: 50px;" class="box box-amber">B</div>
+    </div>
+  </div>
+</div>
+
+<!-- 15. nested column inside row -->
+<div class="test-section">
+  <div id="test-nested-col-in-row" style="display: flex; flex-direction: row; gap: 12px; width: 300px; height: 100px;">
+    <div style="width: 60px; height: 100px;" class="box">Sidebar</div>
+    <div id="test-inner-col" style="display: flex; flex-direction: column; gap: 8px; width: 120px; height: 100px;">
+      <div style="width: 120px; height: 40px;" class="box box-purple">Top</div>
+      <div style="width: 120px; height: 40px;" class="box box-amber">Bottom</div>
+    </div>
+  </div>
+</div>
+
+<!-- 16. flex-grow:1 child -->
+<div class="test-section">
+  <div id="test-grow-child" style="display: flex; flex-direction: row; width: 300px; height: 50px;">
+    <div style="flex-grow: 1; height: 50px;" class="box">Grow 1</div>
+    <div style="flex-grow: 1; height: 50px;" class="box box-green">Grow 2</div>
+  </div>
+</div>
+
+<!-- 17. fixed siblings + grow child -->
+<div class="test-section">
+  <div id="test-fixed-and-grow" style="display: flex; flex-direction: row; gap: 10px; width: 300px; height: 50px;">
+    <div style="width: 50px; height: 50px;" class="box">Fixed</div>
+    <div style="flex-grow: 1; height: 50px;" class="box box-green">Grow</div>
+  </div>
+</div>
+
+<!-- 18. absolute positioned overlay child -->
+<div class="test-section">
+  <div id="test-abs-child" style="display: flex; flex-direction: row; position: relative; width: 250px; height: 60px; align-items: start;">
+    <div style="width: 80px; height: 60px;" class="box">Flow 1</div>
+    <div style="width: 80px; height: 60px;" class="box box-green">Flow 2</div>
+    <span style="position: absolute; right: 8px; top: 8px; width: 32px; height: 20px; background: #ef4444; color: #fff; font-size: 11px; text-align: center; line-height: 20px;">NEW</span>
+  </div>
+</div>
+
+<!-- 19. rich text as flex child -->
+<div class="test-section">
+  <div id="test-rich-text-child" style="display: flex; flex-direction: row; gap: 12px; width: 350px; height: 60px; align-items: center;">
+    <div style="width: 40px; height: 40px;" class="box">Icon</div>
+    <p style="font-size: 14px; line-height: 20px;">
+      Title <strong>bold text</strong> suffix.
+    </p>
+  </div>
+</div>
+
+<!-- 20. image as flex child -->
+<div class="test-section">
+  <div id="test-image-child" style="display: flex; flex-direction: row; gap: 8px; width: 250px; height: 60px; align-items: center;">
+    <img src="/dot.png" width="40" height="40" style="display: block; width: 40px; height: 40px; object-fit: cover;" alt="Dot">
+    <div style="width: 100px; height: 40px;" class="box">Label</div>
+  </div>
+</div>
+
+<!-- 21. SVG as flex child -->
+<div class="test-section">
+  <div id="test-svg-child" style="display: flex; flex-direction: row; gap: 8px; width: 250px; height: 60px; align-items: center;">
+    <svg width="40" height="40" viewBox="0 0 40 40">
+      <rect width="40" height="40" fill="#3b82f6" />
+    </svg>
+    <div style="width: 100px; height: 40px;" class="box">SVG text</div>
+  </div>
+</div>
+
+<!-- 22. clipping Auto Layout frame -->
+<div class="test-section">
+  <div id="test-clipping-autolayout" style="display: flex; flex-direction: row; overflow: hidden; width: 150px; height: 50px;">
+    <div style="width: 100px; height: 50px;" class="box">Wide 1</div>
+    <div style="width: 100px; height: 50px;" class="box box-green">Wide 2</div>
+  </div>
+</div>
+
+<!-- 23. gradient Auto Layout frame -->
+<div class="test-section">
+  <div id="test-gradient-autolayout" style="display: flex; flex-direction: row; background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%); width: 200px; height: 50px; padding: 5px;">
+    <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.3);" class="box">G1</div>
+    <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.3);" class="box">G2</div>
+  </div>
+</div>
+
+<!-- 24. border/shadow Auto Layout frame -->
+<div class="test-section">
+  <div id="test-border-shadow-autolayout" style="display: flex; flex-direction: row; gap: 8px; border: 2px solid #0f172a; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 220px; height: 60px; padding: 8px;">
+    <div style="width: 50px; height: 40px;" class="box">BS1</div>
+    <div style="width: 50px; height: 40px;" class="box box-green">BS2</div>
+  </div>
+</div>
+
+<!-- 25. transformed child using baseBounds -->
+<div class="test-section">
+  <div id="test-transformed-child" style="display: flex; flex-direction: row; gap: 20px; width: 250px; height: 80px; align-items: center;">
+    <div style="width: 40px; height: 40px;" class="box"></div>
+    <div style="width: 40px; height: 40px; transform: rotate(45deg);" class="box box-purple"></div>
+  </div>
+</div>
+
+<!-- 26. transformed Auto Layout frame -->
+<div class="test-section">
+  <div id="test-transformed-autolayout" style="display: flex; flex-direction: row; gap: 10px; width: 200px; height: 60px; transform: rotate(5deg);">
+    <div style="width: 50px; height: 60px;" class="box"></div>
+    <div style="width: 50px; height: 60px;" class="box box-green"></div>
+  </div>
+</div>
+
+<!-- 27. pseudo child interaction -->
+<div class="test-section">
+  <div id="test-pseudo-child" class="with-pseudo" style="display: flex; flex-direction: row; gap: 8px; width: 200px; height: 50px; align-items: start;">
+    <div style="width: 60px; height: 40px;" class="box">Sibling</div>
+  </div>
+</div>
+
+<!-- 28. flex-wrap rejected -->
+<div class="test-section">
+  <div id="test-flex-wrap-rejected" style="display: flex; flex-wrap: wrap; width: 100px; height: 100px;">
+    <div style="width: 60px; height: 40px;" class="box">W1</div>
+    <div style="width: 60px; height: 40px;" class="box">W2</div>
+  </div>
+</div>
+
+<!-- 29. row-reverse rejected -->
+<div class="test-section">
+  <div id="test-reverse-rejected" style="display: flex; flex-direction: row-reverse; width: 150px; height: 50px;">
+    <div style="width: 50px; height: 50px;" class="box">R1</div>
+    <div style="width: 50px; height: 50px;" class="box">R2</div>
+  </div>
+</div>
+
+<!-- 30. non-zero child margins rejected -->
+<div class="test-section">
+  <div id="test-margins-rejected" style="display: flex; flex-direction: row; width: 200px; height: 50px;">
+    <div style="width: 50px; height: 50px; margin-top: 10px;" class="box">M1</div>
+    <div style="width: 50px; height: 50px;" class="box">M2</div>
+  </div>
+</div>
+
+<!-- 31. order property rejected -->
+<div class="test-section">
+  <div id="test-order-rejected" style="display: flex; flex-direction: row; width: 200px; height: 50px;">
+    <div style="width: 50px; height: 50px; order: 2;" class="box">O1</div>
+    <div style="width: 50px; height: 50px; order: 1;" class="box">O2</div>
+  </div>
+</div>
+
+<!-- 32. baseline alignment rejected -->
+<div class="test-section">
+  <div id="test-baseline-rejected" style="display: flex; flex-direction: row; align-items: baseline; width: 200px; height: 50px;">
+    <div style="width: 50px; height: 30px;" class="box">B1</div>
+    <div style="width: 50px; height: 40px;" class="box">B2</div>
+  </div>
+</div>
+
+<!-- 33. complex grow ratios rejected -->
+<div class="test-section">
+  <div id="test-complex-grow-rejected" style="display: flex; flex-direction: row; width: 300px; height: 50px;">
+    <div style="flex-grow: 2; height: 50px;" class="box">Grow 2</div>
+    <div style="flex-grow: 1; height: 50px;" class="box">Grow 1</div>
+  </div>
+</div>
+
+<!-- 34. grid container deferred -->
+<div class="test-section">
+  <div id="test-grid-deferred" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 200px; height: 60px;">
+    <div style="height: 50px;" class="box">G1</div>
+    <div style="height: 50px;" class="box">G2</div>
+  </div>
+</div>
+
+<!-- 35. plain non-flex absolute regression -->
+<div class="test-section">
+  <div id="test-plain-non-flex" style="width: 200px; height: 60px; background: #e2e8f0;">
+    <div style="width: 60px; height: 30px;" class="box">Static</div>
+  </div>
+</div>
+
+</body>
+</html>

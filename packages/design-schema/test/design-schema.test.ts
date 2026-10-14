@@ -9,6 +9,7 @@ import {
   safeParseDesignDocument,
   upgradeDesignDocumentToLatest,
   type DesignDocument,
+  type FrameNode,
   type ImageNode,
   type RectangleNode,
   type SolidFill,
@@ -279,7 +280,7 @@ describe("Design Schema V0.1", () => {
   });
 
   it("rejects an invalid schema version", () => {
-    const document = { ...createBaseDocument(), schemaVersion: "0.6" };
+    const document = { ...createBaseDocument(), schemaVersion: "0.8" };
     expect(safeParseDesignDocument(document).success).toBe(false);
   });
 
@@ -471,7 +472,9 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
     expect(isSupportedSchemaVersion("0.3")).toBe(true);
     expect(isSupportedSchemaVersion("0.4")).toBe(true);
     expect(isSupportedSchemaVersion("0.5")).toBe(true);
-    expect(isSupportedSchemaVersion("0.6")).toBe(false);
+    expect(isSupportedSchemaVersion("0.6")).toBe(true);
+    expect(isSupportedSchemaVersion("0.7")).toBe(true);
+    expect(isSupportedSchemaVersion("0.8")).toBe(false);
     expect(isSupportedSchemaVersion("1.0")).toBe(false);
     expect(isSupportedSchemaVersion(null)).toBe(false);
   });
@@ -483,13 +486,14 @@ describe("Design Schema V0.2 & Gradient Fill Support", () => {
     expect(parsed.root.style?.fills?.[0]?.type).toBe("solid");
   });
 
-  it("upgrades/normalizes V0.1 documents to V0.5 with identical semantics", () => {
+  it("upgrades/normalizes V0.1 documents to V0.7 with identical semantics", () => {
     const v01Doc = createV01Document();
     const parsed = parseDesignDocument(v01Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.5");
+    expect(upgraded.schemaVersion).toBe("0.7");
     expect(upgraded.root.id).toBe(v01Doc.root.id);
     expect(upgraded.root.style?.fills).toEqual(v01Doc.root.style.fills);
+    expect(upgraded.root.layout).toBeUndefined();
     expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
   });
 
@@ -853,7 +857,7 @@ describe("Design Schema V0.3 & Border/Shadow Support", () => {
     };
     const parsed = parseDesignDocument(v01Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.5");
+    expect(upgraded.schemaVersion).toBe("0.7");
     expect(upgraded.root.style?.border?.top).toEqual({
       width: 2,
       style: "solid",
@@ -862,18 +866,20 @@ describe("Design Schema V0.3 & Border/Shadow Support", () => {
     expect(upgraded.root.style?.border?.right).toEqual(upgraded.root.style?.border?.top);
     expect(upgraded.root.style?.border?.bottom).toEqual(upgraded.root.style?.border?.top);
     expect(upgraded.root.style?.border?.left).toEqual(upgraded.root.style?.border?.top);
+    expect(upgraded.root.layout).toBeUndefined();
   });
 
-  it("upgrades/normalizes V0.2 gradient documents to V0.5 preserving gradients and borders", () => {
+  it("upgrades/normalizes V0.2 gradient documents to V0.7 preserving gradients and borders", () => {
     const v02Doc = createV02Document();
     const parsed = parseDesignDocument(v02Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.5");
+    expect(upgraded.schemaVersion).toBe("0.7");
     expect(upgraded.root.style?.fills?.[0]?.type).toBe("linear-gradient");
     expect(upgraded.root.style?.border?.top.width).toBe(2);
     expect(upgraded.root.style?.border?.right.width).toBe(2);
     expect(upgraded.root.style?.border?.bottom.width).toBe(2);
     expect(upgraded.root.style?.border?.left.width).toBe(2);
+    expect(upgraded.root.layout).toBeUndefined();
   });
 
   it("strictly rejects negative border width or invalid border style in V0.3", () => {
@@ -1126,13 +1132,14 @@ describe("Design Schema V0.4 & Clipping Support", () => {
     expect(safeParseDesignDocument(v01WithClip).success).toBe(false);
   });
 
-  it("upgrades/normalizes V0.3 documents to V0.5 preserving all semantics and without phantom clip/transform", () => {
+  it("upgrades/normalizes V0.3 documents to V0.7 preserving all semantics and without phantom clip/transform", () => {
     const v03Doc = createV03Document();
     const parsed = parseDesignDocument(v03Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.5");
+    expect(upgraded.schemaVersion).toBe("0.7");
     expect(upgraded.root.clip).toBeUndefined();
     expect(upgraded.root.transform).toBeUndefined();
+    expect(upgraded.root.layout).toBeUndefined();
     expect(upgraded.root.style?.border?.top.width).toBe(2);
     expect(upgraded.root.style?.boxShadows?.length).toBe(1);
     expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
@@ -1219,15 +1226,17 @@ describe("Design Schema V0.5 — CSS Transforms + Rotation", () => {
     baseBounds: { x: 100, y: 100, width: 100, height: 100 },
   };
 
-  it("exposes current producer version as 0.5 and supports 0.1, 0.2, 0.3, 0.4, 0.5", () => {
-    expect(DESIGN_SCHEMA_VERSION).toBe("0.5");
-    expect(SUPPORTED_SCHEMA_VERSIONS).toEqual(["0.1", "0.2", "0.3", "0.4", "0.5"]);
+  it("exposes current producer version as 0.7 and supports 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7", () => {
+    expect(DESIGN_SCHEMA_VERSION).toBe("0.7");
+    expect(SUPPORTED_SCHEMA_VERSIONS).toEqual(["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7"]);
     expect(isSupportedSchemaVersion("0.1")).toBe(true);
     expect(isSupportedSchemaVersion("0.2")).toBe(true);
     expect(isSupportedSchemaVersion("0.3")).toBe(true);
     expect(isSupportedSchemaVersion("0.4")).toBe(true);
     expect(isSupportedSchemaVersion("0.5")).toBe(true);
-    expect(isSupportedSchemaVersion("0.6")).toBe(false);
+    expect(isSupportedSchemaVersion("0.6")).toBe(true);
+    expect(isSupportedSchemaVersion("0.7")).toBe(true);
+    expect(isSupportedSchemaVersion("0.8")).toBe(false);
     expect(isSupportedSchemaVersion("1.0")).toBe(false);
   });
 
@@ -1283,15 +1292,468 @@ describe("Design Schema V0.5 — CSS Transforms + Rotation", () => {
     }
   });
 
-  it("upgrades/normalizes V0.4 documents to V0.5 preserving clip and without phantom transform", () => {
+  it("upgrades/normalizes V0.4 documents to V0.7 preserving clip and without phantom transform", () => {
     const v04Doc = createV05Document();
     v04Doc.schemaVersion = "0.4";
     const parsed = parseDesignDocument(v04Doc);
     const upgraded = normalizeDesignDocument(parsed);
-    expect(upgraded.schemaVersion).toBe("0.5");
+    expect(upgraded.schemaVersion).toBe("0.7");
     expect(upgraded.root.clip).toEqual({ x: true, y: true });
     expect(upgraded.root.transform).toBeUndefined();
+    expect(upgraded.root.layout).toBeUndefined();
     expect(upgraded.root.children[0]?.transform).toBeUndefined();
+  });
+});
+
+describe("Design Schema V0.6 & Rich-Text Runs Support", () => {
+  function createV06Document(textRuns?: unknown): Record<string, unknown> {
+    return {
+      schemaVersion: "0.6",
+      capture: {
+        capturedAt: "2026-03-30T10:00:00.000Z",
+        source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" },
+        page: { url: "https://example.com/richtext", title: "Rich Text Test" },
+      },
+      viewport: { width: 1440, height: 900, devicePixelRatio: 2, scrollX: 0, scrollY: 0 },
+      assets: [],
+      root: {
+        id: "root",
+        type: "frame",
+        name: "Page",
+        x: 0,
+        y: 0,
+        width: 1440,
+        height: 900,
+        visible: true,
+        opacity: 1,
+        children: [
+          {
+            id: "rich-paragraph",
+            type: "text",
+            name: "Paragraph",
+            x: 20,
+            y: 30,
+            width: 400,
+            height: 60,
+            visible: true,
+            opacity: 1,
+            children: [],
+            characters: "Hello bold world and link",
+            textStyle: {
+              fontFamily: "Inter",
+              fontSize: 16,
+              fontWeight: 400,
+              fontStyle: "normal",
+              lineHeight: 24,
+              letterSpacing: 0,
+              textAlign: "left",
+              color: { r: 0, g: 0, b: 0, a: 1 },
+            },
+            ...(textRuns !== undefined ? { runs: textRuns } : {}),
+          },
+        ],
+      },
+    };
+  }
+
+  const validRuns = [
+    {
+      start: 0,
+      end: 6,
+      style: { fontWeight: 400 },
+    },
+    {
+      start: 6,
+      end: 10,
+      style: { fontWeight: 700 },
+    },
+    {
+      start: 10,
+      end: 17,
+      style: { fontStyle: "italic" as const, color: { r: 1, g: 0, b: 0, a: 1 } },
+    },
+    {
+      start: 17,
+      end: 21,
+      style: { fontSize: 20 },
+    },
+    {
+      start: 21,
+      end: 25,
+      style: { textDecoration: "underline" as const, color: { r: 0, g: 0, b: 1, a: 1 } },
+      hyperlink: "https://example.com",
+    },
+  ];
+
+  it("parses valid V0.6 document with mixed rich-text runs", () => {
+    const doc = createV06Document(validRuns);
+    const parsed = parseDesignDocument(doc);
+    expect(parsed.schemaVersion).toBe("0.6");
+    const node = parsed.root.children[0] as TextNode;
+    expect(node.runs).toHaveLength(5);
+    expect(node.runs?.[1]?.style.fontWeight).toBe(700);
+    expect(node.runs?.[4]?.hyperlink).toBe("https://example.com");
+  });
+
+  it("allows V0.6 text node without runs (plain single-style text)", () => {
+    const doc = createV06Document();
+    const parsed = parseDesignDocument(doc);
+    expect(parsed.schemaVersion).toBe("0.6");
+    const node = parsed.root.children[0] as TextNode;
+    expect(node.runs).toBeUndefined();
+  });
+
+  it("strictly rejects negative run start", () => {
+    const doc = createV06Document([
+      { start: -1, end: 5, style: { fontWeight: 700 } },
+      { start: 5, end: 25, style: { fontWeight: 400 } },
+    ]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects run with start >= end", () => {
+    const doc = createV06Document([
+      { start: 0, end: 5, style: { fontWeight: 700 } },
+      { start: 5, end: 5, style: { fontWeight: 400 } },
+      { start: 5, end: 25, style: { fontWeight: 400 } },
+    ]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects run end exceeding characters.length", () => {
+    const doc = createV06Document([
+      { start: 0, end: 30, style: { fontWeight: 700 } },
+    ]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects first run start not starting at 0", () => {
+    const doc = createV06Document([
+      { start: 2, end: 25, style: { fontWeight: 700 } },
+    ]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects last run end not ending at characters.length", () => {
+    const doc = createV06Document([
+      { start: 0, end: 20, style: { fontWeight: 700 } },
+    ]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects gaps between runs", () => {
+    const doc = createV06Document([
+      { start: 0, end: 5, style: { fontWeight: 700 } },
+      { start: 8, end: 25, style: { fontWeight: 400 } },
+    ]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects overlapping runs", () => {
+    const doc = createV06Document([
+      { start: 0, end: 10, style: { fontWeight: 700 } },
+      { start: 8, end: 25, style: { fontWeight: 400 } },
+    ]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects adjacent runs with identical style and hyperlink", () => {
+    const doc = createV06Document([
+      { start: 0, end: 10, style: { fontWeight: 700 } },
+      { start: 10, end: 25, style: { fontWeight: 700 } },
+    ]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects empty runs array when characters are present", () => {
+    const doc = createV06Document([]);
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects runs on historical V0.1, V0.2, V0.3, V0.4, V0.5 documents", () => {
+    for (const ver of ["0.1", "0.2", "0.3", "0.4", "0.5"]) {
+      const doc = createV06Document(validRuns);
+      doc.schemaVersion = ver;
+      expect(safeParseDesignDocument(doc).success).toBe(false);
+    }
+  });
+
+  it("upgrades/normalizes V0.5 documents to V0.6 preserving transforms and setting runs: undefined", () => {
+    const v05Doc = {
+      schemaVersion: "0.5",
+      capture: {
+        capturedAt: "2026-03-30T10:00:00.000Z",
+        source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" },
+      },
+      viewport: { width: 1440, height: 900, devicePixelRatio: 2, scrollX: 0, scrollY: 0 },
+      assets: [],
+      root: {
+        id: "root",
+        type: "frame",
+        name: "Page",
+        x: 0,
+        y: 0,
+        width: 1440,
+        height: 900,
+        visible: true,
+        opacity: 1,
+        transform: {
+          matrix: { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 },
+          origin: { x: 720, y: 450 },
+          baseBounds: { x: 0, y: 0, width: 1440, height: 900 },
+        },
+        children: [
+          {
+            id: "t1",
+            type: "text",
+            name: "Text",
+            x: 10,
+            y: 20,
+            width: 100,
+            height: 30,
+            visible: true,
+            opacity: 1,
+            children: [],
+            characters: "Historical",
+            textStyle: {
+              fontFamily: "Inter",
+              fontSize: 16,
+              fontWeight: 400,
+              fontStyle: "normal",
+              lineHeight: 20,
+              letterSpacing: 0,
+              textAlign: "left",
+              color: { r: 0, g: 0, b: 0, a: 1 },
+            },
+          },
+        ],
+      },
+    };
+    const parsed = parseDesignDocument(v05Doc);
+    const upgraded = normalizeDesignDocument(parsed);
+    expect(upgraded.schemaVersion).toBe("0.7");
+    expect(upgraded.root.transform).toBeDefined();
+    expect(upgraded.root.layout).toBeUndefined();
+    const upgradedText = upgraded.root.children[0] as TextNode;
+    expect(upgradedText.characters).toBe("Historical");
+    expect(upgradedText.runs).toBeUndefined();
+    expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
+  });
+});
+
+describe("Design Schema V0.7 & Auto Layout Support", () => {
+  function createV07Document(layout?: unknown, childLayout?: unknown): Record<string, unknown> {
+    return {
+      schemaVersion: "0.7",
+      capture: {
+        capturedAt: "2026-03-30T10:00:00.000Z",
+        source: { kind: "extension", name: "Web2Design", version: "0.1.0" },
+        page: { url: "https://example.com", title: "Test" },
+      },
+      viewport: {
+        width: 1200,
+        height: 800,
+        devicePixelRatio: 1,
+        scrollX: 0,
+        scrollY: 0,
+      },
+      root: {
+        id: "root",
+        type: "frame",
+        name: "Page",
+        x: 0,
+        y: 0,
+        width: 1200,
+        height: 800,
+        visible: true,
+        opacity: 1,
+        ...(layout !== undefined ? { layout } : {}),
+        children: [
+          {
+            id: "child-1",
+            type: "rectangle",
+            name: "Child 1",
+            x: 10,
+            y: 10,
+            width: 100,
+            height: 50,
+            visible: true,
+            opacity: 1,
+            children: [],
+            ...(childLayout !== undefined ? { layoutChild: childLayout } : {}),
+          },
+        ],
+      },
+      assets: [],
+    };
+  }
+
+  const sampleLayout = {
+    type: "flex" as const,
+    direction: "horizontal" as const,
+    gap: 16,
+    padding: { top: 20, right: 24, bottom: 20, left: 24 },
+    primaryAlign: "space-between" as const,
+    crossAlign: "center" as const,
+    confidence: "high" as const,
+  };
+
+  it("parses a valid V0.7 document with horizontal flex layout", () => {
+    const doc = createV07Document(sampleLayout, { grow: true, stretch: true });
+    const parsed = parseDesignDocument(doc);
+    expect(parsed.schemaVersion).toBe("0.7");
+    expect((parsed.root as FrameNode).layout).toEqual(sampleLayout);
+    expect(parsed.root.children[0]?.layoutChild).toEqual({ grow: true, stretch: true });
+  });
+
+  it("parses vertical column layout with sizing modes", () => {
+    const verticalLayout = {
+      type: "flex" as const,
+      direction: "vertical" as const,
+      gap: 8,
+      padding: { top: 12, right: 12, bottom: 12, left: 12 },
+      primaryAlign: "start" as const,
+      crossAlign: "stretch" as const,
+      primarySizing: "hug" as const,
+      crossSizing: "fixed" as const,
+      confidence: "high" as const,
+    };
+    const doc = createV07Document(verticalLayout, { positioning: "absolute" });
+    const parsed = parseDesignDocument(doc);
+    expect((parsed.root as FrameNode).layout?.direction).toBe("vertical");
+    expect(parsed.root.children[0]?.layoutChild?.positioning).toBe("absolute");
+  });
+
+  it("strictly rejects negative gap", () => {
+    const doc = createV07Document({ ...sampleLayout, gap: -4 });
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects negative padding", () => {
+    const doc = createV07Document({
+      ...sampleLayout,
+      padding: { top: -10, right: 10, bottom: 10, left: 10 },
+    });
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects invalid direction", () => {
+    const doc = createV07Document({ ...sampleLayout, direction: "row" });
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects unknown fields inside layout", () => {
+    const doc = createV07Document({ ...sampleLayout, flexWrap: "wrap" });
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects unknown fields inside layoutChild", () => {
+    const doc = createV07Document(sampleLayout, { grow: true, flexBasis: "auto" });
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects layout on non-frame nodes", () => {
+    const doc = createV07Document();
+    (doc.root as Record<string, unknown>).children = [
+      {
+        id: "rect-1",
+        type: "rectangle",
+        name: "Rect",
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+        visible: true,
+        opacity: 1,
+        children: [],
+        layout: sampleLayout,
+      },
+    ];
+    expect(safeParseDesignDocument(doc).success).toBe(false);
+  });
+
+  it("strictly rejects layout on historical V0.1–V0.6 documents", () => {
+    for (const ver of ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6"]) {
+      const doc = createV07Document(sampleLayout);
+      doc.schemaVersion = ver;
+      expect(safeParseDesignDocument(doc).success).toBe(false);
+    }
+  });
+
+  it("upgrades/normalizes V0.6 documents to V0.7 with layout: undefined", () => {
+    const v06Doc = {
+      schemaVersion: "0.6",
+      capture: {
+        capturedAt: "2026-03-30T10:00:00.000Z",
+        source: { kind: "extension", name: "Web2Design", version: "0.1.0" },
+        page: { url: "https://example.com", title: "Test" },
+      },
+      viewport: {
+        width: 1200,
+        height: 800,
+        devicePixelRatio: 1,
+        scrollX: 0,
+        scrollY: 0,
+      },
+      root: {
+        id: "root",
+        type: "frame",
+        name: "Page",
+        x: 0,
+        y: 0,
+        width: 1200,
+        height: 800,
+        visible: true,
+        opacity: 1,
+        children: [
+          {
+            id: "text-1",
+            type: "text",
+            name: "Text",
+            x: 10,
+            y: 20,
+            width: 100,
+            height: 30,
+            visible: true,
+            opacity: 1,
+            children: [],
+            characters: "V06 Text",
+            textStyle: {
+              fontFamily: "Inter",
+              fontSize: 16,
+              fontWeight: 400,
+              fontStyle: "normal",
+              lineHeight: 20,
+              letterSpacing: 0,
+              textAlign: "left",
+              color: { r: 0, g: 0, b: 0, a: 1 },
+            },
+            runs: [
+              {
+                start: 0,
+                end: 3,
+                style: { fontWeight: 700 },
+              },
+              {
+                start: 3,
+                end: 8,
+                style: {},
+              },
+            ],
+          },
+        ],
+      },
+      assets: [],
+    };
+    const parsed = parseDesignDocument(v06Doc);
+    const upgraded = normalizeDesignDocument(parsed);
+    expect(upgraded.schemaVersion).toBe("0.7");
+    expect(upgraded.root.layout).toBeUndefined();
+    expect(upgraded.root.children[0]?.layoutChild).toBeUndefined();
+    const upgradedText = upgraded.root.children[0] as TextNode;
+    expect(upgradedText.characters).toBe("V06 Text");
+    expect(upgradedText.runs?.length).toBe(2);
+    expect(upgradeDesignDocumentToLatest(parsed)).toEqual(upgraded);
   });
 });
 

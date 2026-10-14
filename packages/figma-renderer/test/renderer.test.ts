@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { renderDesignDocument, deriveNodeName } from "../src/renderer.js";
+import type { VersionedDesignDocument } from "@web2design/design-schema";
 import {
   imageFixture,
   inlineSvgFixture,
@@ -7,7 +8,13 @@ import {
   simpleTextFixture,
   styledRectangleFixture,
 } from "@web2design/test-fixtures";
-import { FakeFigmaHost, type FakeFrameNode, type FakeRectangleNode, type FakeTextNode } from "./helpers/fake-figma-host.js";
+import {
+  FakeFigmaHost,
+  type FakeFrameNode,
+  type FakeLayoutNode,
+  type FakeRectangleNode,
+  type FakeTextNode,
+} from "./helpers/fake-figma-host.js";
 
 describe("figma-renderer - renderDesignDocument", () => {
   it("renders simpleTextFixture with root frame and child text node", async () => {
@@ -31,7 +38,7 @@ describe("figma-renderer - renderDesignDocument", () => {
     // Traceability metadata
     expect(root.getPluginData("web2design:id")).toBe("root");
     expect(root.getPluginData("web2design:type")).toBe("frame");
-    expect(root.getPluginData("web2design:schemaVersion")).toBe("0.5");
+    expect(root.getPluginData("web2design:schemaVersion")).toBe("0.7");
 
     // Children
     expect(root.children.length).toBe(1);
@@ -267,6 +274,260 @@ describe("figma-renderer - renderDesignDocument", () => {
       const frame = root.children[0]! as unknown as FakeFrameNode;
       expect(frame.clipsContent).toBe(true);
       expect(result.warnings.some(w => w.code === "AXIS_CLIP_APPROXIMATED" && w.nodeId === "clip-frame")).toBe(true);
+    });
+  });
+
+  describe("W2D-017 Native Auto Layout rendering", () => {
+    it("renders horizontal Auto Layout frame with padding, gap, and child alignment", async () => {
+      const host = new FakeFigmaHost();
+      const doc: VersionedDesignDocument = {
+        schemaVersion: "0.7",
+        capture: {
+          capturedAt: "2026-10-14T00:00:00.000Z",
+          source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" },
+          page: { url: "https://example.com", title: "Auto Layout" },
+        },
+        viewport: { width: 800, height: 600, devicePixelRatio: 1, scrollX: 0, scrollY: 0 },
+        assets: [],
+        warnings: [],
+        root: {
+          id: "root",
+          type: "frame",
+          sourceTag: "html",
+          name: "Page",
+          x: 0,
+          y: 0,
+          width: 800,
+          height: 600,
+          visible: true,
+          opacity: 1,
+          style: {},
+          children: [
+            {
+              id: "flex-frame",
+              type: "frame",
+              sourceTag: "div",
+              name: "Row",
+              x: 50,
+              y: 50,
+              width: 300,
+              height: 100,
+              visible: true,
+              opacity: 1,
+              style: {},
+              layout: {
+                type: "flex",
+                direction: "horizontal",
+                gap: 16,
+                padding: { top: 12, right: 20, bottom: 12, left: 20 },
+                primaryAlign: "center",
+                crossAlign: "center",
+                primarySizing: "fixed",
+                crossSizing: "fixed",
+                confidence: "high",
+              },
+              children: [
+                {
+                  id: "item-1",
+                  type: "rectangle",
+                  sourceTag: "div",
+                  name: "Item 1",
+                  x: 0,
+                  y: 0,
+                  width: 50,
+                  height: 40,
+                  visible: true,
+                  opacity: 1,
+                  style: {},
+                  children: [],
+                },
+                {
+                  id: "item-2",
+                  type: "rectangle",
+                  sourceTag: "div",
+                  name: "Item 2",
+                  x: 0,
+                  y: 0,
+                  width: 60,
+                  height: 50,
+                  visible: true,
+                  opacity: 1,
+                  style: {},
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      await renderDesignDocument(doc, host);
+      const root = host.roots[0]!;
+      const frame = root.children[0]! as unknown as FakeFrameNode;
+      expect(frame.layoutMode).toBe("HORIZONTAL");
+      expect(frame.itemSpacing).toBe(16);
+      expect(frame.paddingTop).toBe(12);
+      expect(frame.paddingRight).toBe(20);
+      expect(frame.paddingBottom).toBe(12);
+      expect(frame.paddingLeft).toBe(20);
+      expect(frame.primaryAxisAlignItems).toBe("CENTER");
+      expect(frame.counterAxisAlignItems).toBe("CENTER");
+
+      // Verify FakeFigmaHost simulated native Auto Layout placement
+      const item1 = frame.children[0]! as unknown as FakeLayoutNode;
+      const item2 = frame.children[1]! as unknown as FakeLayoutNode;
+      expect(item1.layoutPositioning).toBe("AUTO");
+      expect(item2.layoutPositioning).toBe("AUTO");
+      // Total inner width = 300 - 40 = 260. Flow = 50 + 16 + 60 = 126. Start = 20 + (260 - 126) / 2 = 87.
+      expect(item1.x).toBe(87);
+      expect(item2.x).toBe(87 + 50 + 16); // 153
+    });
+
+    it("renders absolute child inside Auto Layout frame with layoutPositioning = ABSOLUTE", async () => {
+      const host = new FakeFigmaHost();
+      const doc: VersionedDesignDocument = {
+        schemaVersion: "0.7",
+        capture: {
+          capturedAt: "2026-10-14T00:00:00.000Z",
+          source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" },
+          page: { url: "https://example.com", title: "Overlay" },
+        },
+        viewport: { width: 800, height: 600, devicePixelRatio: 1, scrollX: 0, scrollY: 0 },
+        assets: [],
+        warnings: [],
+        root: {
+          id: "root",
+          type: "frame",
+          sourceTag: "html",
+          name: "Page",
+          x: 0,
+          y: 0,
+          width: 800,
+          height: 600,
+          visible: true,
+          opacity: 1,
+          style: {},
+          children: [
+            {
+              id: "card",
+              type: "frame",
+              sourceTag: "div",
+              name: "Card",
+              x: 100,
+              y: 100,
+              width: 200,
+              height: 100,
+              visible: true,
+              opacity: 1,
+              style: {},
+              layout: {
+                type: "flex",
+                direction: "vertical",
+                gap: 8,
+                padding: { top: 8, right: 8, bottom: 8, left: 8 },
+                primaryAlign: "start",
+                crossAlign: "start",
+                primarySizing: "fixed",
+                crossSizing: "fixed",
+                confidence: "high",
+              },
+              children: [
+                {
+                  id: "flow-child",
+                  type: "rectangle",
+                  sourceTag: "div",
+                  name: "Flow",
+                  x: 108,
+                  y: 108,
+                  width: 50,
+                  height: 20,
+                  visible: true,
+                  opacity: 1,
+                  style: {},
+                  children: [],
+                },
+                {
+                  id: "badge",
+                  type: "rectangle",
+                  sourceTag: "span",
+                  name: "Badge",
+                  x: 180,
+                  y: 90,
+                  width: 30,
+                  height: 15,
+                  visible: true,
+                  opacity: 1,
+                  style: {},
+                  layoutChild: {
+                    positioning: "absolute",
+                  },
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      };
+
+      await renderDesignDocument(doc, host);
+      const root = host.roots[0]!;
+      const card = root.children[0]! as unknown as FakeFrameNode;
+      expect(card.layoutMode).toBe("VERTICAL");
+
+      const badge = card.children[1]! as unknown as FakeLayoutNode;
+      expect(badge.layoutPositioning).toBe("ABSOLUTE");
+      // Badge retains parent-local absolute position 180 - 100 = 80, 90 - 100 = -10
+      expect(badge.x).toBe(80);
+      expect(badge.y).toBe(-10);
+    });
+
+    it("renders historical document with layoutMode = NONE", async () => {
+      const host = new FakeFigmaHost();
+      const doc: VersionedDesignDocument = {
+        schemaVersion: "0.6",
+        capture: {
+          capturedAt: "2026-10-14T00:00:00.000Z",
+          source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" },
+          page: { url: "https://example.com", title: "Historical" },
+        },
+        viewport: { width: 800, height: 600, devicePixelRatio: 1, scrollX: 0, scrollY: 0 },
+        assets: [],
+        warnings: [],
+        root: {
+          id: "root",
+          type: "frame",
+          sourceTag: "html",
+          name: "Page",
+          x: 0,
+          y: 0,
+          width: 800,
+          height: 600,
+          visible: true,
+          opacity: 1,
+          style: {},
+          children: [
+            {
+              id: "plain-frame",
+              type: "frame",
+              sourceTag: "div",
+              name: "Plain",
+              x: 10,
+              y: 10,
+              width: 100,
+              height: 100,
+              visible: true,
+              opacity: 1,
+              style: {},
+              children: [],
+            },
+          ],
+        },
+      };
+
+      await renderDesignDocument(doc, host);
+      const root = host.roots[0]!;
+      const frame = root.children[0]! as unknown as FakeFrameNode;
+      expect(frame.layoutMode).toBe("NONE");
     });
   });
 });

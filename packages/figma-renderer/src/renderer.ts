@@ -1,6 +1,7 @@
 /// <reference types="@figma/plugin-typings" />
 import {
   normalizeDesignDocument,
+  type AutoLayout,
   type DesignNode,
   type FrameNode as SchemaFrameNode,
   type Transform2D,
@@ -158,6 +159,93 @@ function applyPlacementToNode(
   }
 }
 
+function applyAutoLayoutToFrame(frame: FrameNode, layout: AutoLayout, schemaFrame?: DesignNode): void {
+  frame.layoutMode = layout.direction === "horizontal" ? "HORIZONTAL" : "VERTICAL";
+  frame.itemSpacing = layout.gap;
+  frame.paddingTop = layout.padding.top;
+  frame.paddingRight = layout.padding.right;
+  frame.paddingBottom = layout.padding.bottom;
+  frame.paddingLeft = layout.padding.left;
+  if (schemaFrame && "style" in schemaFrame && schemaFrame.style?.border) {
+    frame.strokesIncludedInLayout = true;
+  }
+
+  switch (layout.primaryAlign) {
+    case "start":
+      frame.primaryAxisAlignItems = "MIN";
+      break;
+    case "center":
+      frame.primaryAxisAlignItems = "CENTER";
+      break;
+    case "end":
+      frame.primaryAxisAlignItems = "MAX";
+      break;
+    case "space-between":
+      frame.primaryAxisAlignItems = "SPACE_BETWEEN";
+      break;
+  }
+
+  switch (layout.crossAlign) {
+    case "start":
+      frame.counterAxisAlignItems = "MIN";
+      break;
+    case "center":
+      frame.counterAxisAlignItems = "CENTER";
+      break;
+    case "end":
+      frame.counterAxisAlignItems = "MAX";
+      break;
+    case "stretch":
+      frame.counterAxisAlignItems = "MIN";
+      break;
+  }
+
+  frame.primaryAxisSizingMode = layout.primarySizing === "hug" ? "AUTO" : "FIXED";
+  frame.counterAxisSizingMode = layout.crossSizing === "hug" ? "AUTO" : "FIXED";
+}
+
+function applyPlacementOrAutoLayoutToChild(
+  figmaNode: SceneNode & {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    rotation?: number;
+    relativeTransform?: Transform;
+    rescale?(scale: number): void;
+    resize(w: number, h: number): void;
+  },
+  childSchema: DesignNode,
+  parentSchema: SchemaFrameNode,
+  childPlacement: CalculatedPlacement,
+  warnings: WarningCollector,
+): void {
+  const isParentAutoLayout = Boolean(parentSchema.layout);
+  const isAbsoluteChild = childSchema.layoutChild?.positioning === "absolute";
+
+  if (!isParentAutoLayout || isAbsoluteChild) {
+    if (isAbsoluteChild) {
+      (figmaNode as unknown as { layoutPositioning?: string }).layoutPositioning = "ABSOLUTE";
+    }
+    applyPlacementToNode(figmaNode, childPlacement, warnings, childSchema.id);
+  } else {
+    // Normal Auto Layout flow child
+    (figmaNode as unknown as { layoutPositioning?: string }).layoutPositioning = "AUTO";
+    figmaNode.resize(Math.max(0.01, childPlacement.width), Math.max(0.01, childPlacement.height));
+
+    if (childPlacement.rotation !== undefined && "rotation" in figmaNode) {
+      figmaNode.rotation = childPlacement.rotation;
+    }
+
+    if (childSchema.layoutChild?.grow) {
+      (figmaNode as unknown as { layoutGrow?: number }).layoutGrow = 1;
+    }
+    if (childSchema.layoutChild?.stretch) {
+      (figmaNode as unknown as { layoutAlign?: string }).layoutAlign = "STRETCH";
+    }
+  }
+}
+
 export async function renderDesignDocument(
   rawDocument: VersionedDesignDocument,
   host: FigmaRendererHost,
@@ -179,7 +267,11 @@ export async function renderDesignDocument(
   rootFrame.name = pageTitle ? `Web2Design — ${pageTitle}` : "Web2Design — Page";
 
   rootFrame.resize(Math.max(1, rootSchema.width), Math.max(1, rootSchema.height));
-  rootFrame.layoutMode = "NONE";
+  if (rootSchema.layout) {
+    applyAutoLayoutToFrame(rootFrame, rootSchema.layout);
+  } else {
+    rootFrame.layoutMode = "NONE";
+  }
   applyFrameClipping(rootFrame, rootSchema, warnings);
 
   // Root placement centered in viewport
@@ -237,14 +329,20 @@ export async function renderDesignDocument(
             case "frame": {
               const frame = host.createFrame();
               frame.name = deriveNodeName(childSchema);
-              frame.layoutMode = "NONE";
               applyFrameClipping(frame, childSchema, warnings);
-              applyPlacementToNode(
+              applyPlacementOrAutoLayoutToChild(
                 frame as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childSchema,
+                parentSchema,
                 childPlacement,
                 warnings,
-                childSchema.id,
               );
+
+              if (childSchema.layout) {
+                applyAutoLayoutToFrame(frame, childSchema.layout, childSchema);
+              } else {
+                frame.layoutMode = "NONE";
+              }
 
               applyVisualStyle(
                 frame,
@@ -285,11 +383,12 @@ export async function renderDesignDocument(
             case "rectangle": {
               const rect = host.createRectangle();
               rect.name = deriveNodeName(childSchema);
-              applyPlacementToNode(
+              applyPlacementOrAutoLayoutToChild(
                 rect as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childSchema,
+                parentSchema,
                 childPlacement,
                 warnings,
-                childSchema.id,
               );
 
               applyVisualStyle(
@@ -311,12 +410,13 @@ export async function renderDesignDocument(
               const textNode = host.createText();
               textNode.name = deriveNodeName(childSchema);
 
-              const fontName = await fontManager.resolveAndLoadFont(
+              const { baseFont, runFonts } = await fontManager.resolveAndLoadTextAndRunFonts(
                 childSchema.textStyle,
+                childSchema.runs,
                 warnings,
                 childSchema.id,
               );
-              textNode.fontName = fontName;
+              textNode.fontName = baseFont;
               textNode.characters = childSchema.characters;
               textNode.fontSize = childSchema.textStyle.fontSize;
               textNode.lineHeight = {
@@ -349,11 +449,59 @@ export async function renderDesignDocument(
               textNode.fills = [toFigmaSolidPaint(childSchema.textStyle.color)];
               textNode.opacity = Math.max(0, Math.min(1, childSchema.opacity));
 
-              applyPlacementToNode(
+              if (childSchema.runs && childSchema.runs.length > 0) {
+                for (let rIdx = 0; rIdx < childSchema.runs.length; rIdx++) {
+                  const run = childSchema.runs[rIdx]!;
+                  const start = run.start;
+                  const end = run.end;
+                  if (start < end && end <= childSchema.characters.length) {
+                    const runFont = runFonts[rIdx] ?? baseFont;
+                    if (typeof textNode.setRangeFontName === "function") {
+                      textNode.setRangeFontName(start, end, runFont);
+                    }
+                    if (run.style.fontSize !== undefined && typeof textNode.setRangeFontSize === "function") {
+                      textNode.setRangeFontSize(start, end, run.style.fontSize);
+                    }
+                    if (run.style.color !== undefined && typeof textNode.setRangeFills === "function") {
+                      textNode.setRangeFills(start, end, [toFigmaSolidPaint(run.style.color)]);
+                    }
+                    if (run.style.lineHeight !== undefined && typeof textNode.setRangeLineHeight === "function") {
+                      textNode.setRangeLineHeight(start, end, {
+                        value: run.style.lineHeight,
+                        unit: "PIXELS",
+                      });
+                    }
+                    if (run.style.letterSpacing !== undefined && typeof textNode.setRangeLetterSpacing === "function") {
+                      textNode.setRangeLetterSpacing(start, end, {
+                        value: run.style.letterSpacing,
+                        unit: "PIXELS",
+                      });
+                    }
+                    if (run.style.textDecoration !== undefined && typeof textNode.setRangeTextDecoration === "function") {
+                      let deco: TextDecoration = "NONE";
+                      if (run.style.textDecoration === "underline") {
+                        deco = "UNDERLINE";
+                      } else if (run.style.textDecoration === "line-through") {
+                        deco = "STRIKETHROUGH";
+                      }
+                      textNode.setRangeTextDecoration(start, end, deco);
+                    }
+                    if (run.hyperlink && typeof textNode.setRangeHyperlink === "function") {
+                      textNode.setRangeHyperlink(start, end, {
+                        type: "URL",
+                        value: run.hyperlink,
+                      });
+                    }
+                  }
+                }
+              }
+
+              applyPlacementOrAutoLayoutToChild(
                 textNode as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childSchema,
+                parentSchema,
                 childPlacement,
                 warnings,
-                childSchema.id,
               );
 
               if (childPlacement.width > 0 && childPlacement.height > 0) {
@@ -372,11 +520,12 @@ export async function renderDesignDocument(
             case "image": {
               const imageRect = host.createRectangle();
               imageRect.name = deriveNodeName(childSchema);
-              applyPlacementToNode(
+              applyPlacementOrAutoLayoutToChild(
                 imageRect as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childSchema,
+                parentSchema,
                 childPlacement,
                 warnings,
-                childSchema.id,
               );
 
               applyVisualStyle(
@@ -458,11 +607,12 @@ export async function renderDesignDocument(
                 // Create rectangle placeholder
                 const placeholder = host.createRectangle();
                 placeholder.name = deriveNodeName(childSchema);
-                applyPlacementToNode(
+                applyPlacementOrAutoLayoutToChild(
                   placeholder as unknown as Parameters<typeof applyPlacementToNode>[0],
+                  childSchema,
+                  parentSchema,
                   childPlacement,
                   warnings,
-                  childSchema.id,
                 );
                 placeholder.fills = [
                   {
@@ -479,11 +629,12 @@ export async function renderDesignDocument(
 
               const svgSceneNode = renderSvgNode(childSchema, svgMarkup, host, warnings);
               svgSceneNode.name = deriveNodeName(childSchema);
-              applyPlacementToNode(
+              applyPlacementOrAutoLayoutToChild(
                 svgSceneNode as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childSchema,
+                parentSchema,
                 childPlacement,
                 warnings,
-                childSchema.id,
               );
               svgSceneNode.opacity = Math.max(0, Math.min(1, childSchema.opacity));
 

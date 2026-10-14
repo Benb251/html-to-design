@@ -45,7 +45,9 @@ async function runFidelity() {
   let totalTransformChecks = 0;
   let totalStyleChecks = 0;
   let totalTextChecks = 0;
+  let totalRichTextRangeChecks = 0;
   let totalAssetChecks = 0;
+  let totalAutoLayoutChecks = 0;
   let totalWarningsExpected = 0;
   let totalWarningsUnexpected = 0;
   const allFailures = [];
@@ -136,7 +138,9 @@ async function runFidelity() {
     totalTransformChecks += stats.transformChecks ?? 0;
     totalStyleChecks += stats.styleChecks;
     totalTextChecks += stats.textChecks;
+    totalRichTextRangeChecks += stats.richTextRangeChecks ?? 0;
     totalAssetChecks += stats.assetChecks;
+    totalAutoLayoutChecks += stats.autoLayoutChecks ?? 0;
     totalWarningsExpected += stats.warningsExpected;
     totalWarningsUnexpected += stats.warningsUnexpected;
 
@@ -147,7 +151,7 @@ async function runFidelity() {
       console.log(
         `  [PASS] ${entry.id.padEnd(28)} | ${String(stats.nodesCompared).padStart(3)} nodes | ` +
           `${String(stats.geometryChecks).padStart(3)} geom | ${String(stats.transformChecks ?? 0).padStart(2)} xform | ${String(stats.styleChecks).padStart(3)} style | ` +
-          `${String(stats.textChecks).padStart(2)} text | ${String(stats.assetChecks).padStart(2)} asset | ` +
+          `${String(stats.textChecks).padStart(2)} text (${String(stats.richTextRangeChecks ?? 0).padStart(2)} runs) | ${String(stats.assetChecks).padStart(2)} asset | ` +
           `${String(stats.warningsExpected).padStart(2)} warn`,
       );
     }
@@ -160,7 +164,9 @@ async function runFidelity() {
     transformChecks: totalTransformChecks,
     styleChecks: totalStyleChecks,
     textChecks: totalTextChecks,
+    richTextRangeChecks: totalRichTextRangeChecks,
     assetChecks: totalAssetChecks,
+    autoLayoutChecks: totalAutoLayoutChecks,
     warningsExpected: totalWarningsExpected,
     warningsUnexpected: totalWarningsUnexpected,
     failures: allFailures.length,
@@ -181,7 +187,9 @@ async function runFidelity() {
   console.log(`   Transform assertions:   ${totalTransformChecks}`);
   console.log(`   Style assertions:       ${totalStyleChecks}`);
   console.log(`   Text assertions:        ${totalTextChecks}`);
+  console.log(`   Rich-text range checks: ${totalRichTextRangeChecks}`);
   console.log(`   Asset assertions:       ${totalAssetChecks}`);
+  console.log(`   Auto Layout checks:     ${totalAutoLayoutChecks}`);
   console.log(`   Expected warnings:      ${totalWarningsExpected}`);
   console.log(`   Unexpected warnings:    ${totalWarningsUnexpected}`);
   console.log(`   Fidelity failures:      ${allFailures.length}`);

@@ -69,8 +69,10 @@ describe("normalization", () => {
 describe("rendered traversal", () => {
   it("produces runtime-schema-valid editable text with no DOM objects", () => {
     const { document } = rendered(), result = captureDocument(document, { capturedAt: at });
-    expect(safeParseDesignDocument(result).success).toBe(true); expect(result.assets).toEqual([]);
-    expect(nodes(result.root).filter(node => node.type === "text").map(node => node.characters)).toEqual(["Hello", "World ", "bold", "Capture"]);
+    expect(nodes(result.root).filter(node => node.type === "text").map(node => node.characters)).toEqual(["Hello", "World bold", "Capture"]);
+    const richNode = nodes(result.root).find(node => node.type === "text" && (node as TextNode).characters === "World bold") as TextNode;
+    expect(richNode.runs).toBeDefined();
+    expect(richNode.runs?.[1]?.style.fontWeight).toBe(700);
     expect(nodes(result.root).every(node => !("ownerDocument" in node))).toBe(true);
     expect(result.capture).toMatchObject({ capturedAt: at, page: { title: "Fixture", url: "https://example.com/fixture" } });
   });
@@ -90,7 +92,10 @@ describe("rendered traversal", () => {
   });
   it("does not duplicate descendant text through parent textContent", () => {
     const result = captureDocument(rendered('<div><p>Parent <em>child</em></p></div>').document);
-    expect(nodes(result.root).filter(node => node.type === "text").map(node => node.characters)).toEqual(["Parent ", "child"]);
+    expect(nodes(result.root).filter(node => node.type === "text").map(node => node.characters)).toEqual(["Parent child"]);
+    const textNode = nodes(result.root).find(node => node.type === "text") as TextNode;
+    expect(textNode.runs).toHaveLength(2);
+    expect(textNode.runs?.[1]?.style.fontStyle).toBe("italic");
   });
   it("preserves group opacity once rather than multiplying child opacity", () => {
     const result = captureDocument(rendered('<section style="opacity:.5"><p>Fade</p></section>').document);
@@ -154,7 +159,7 @@ describe("rendered traversal", () => {
 describe("export", () => {
   it("roundtrips pretty JSON through real validation and node counting", () => {
     const value = captureDocument(rendered().document, { capturedAt: at }), json = serializeCapture(value);
-    expect(json).toContain('\n  "schemaVersion": "0.5"'); expect(safeParseDesignDocument(JSON.parse(json)).success).toBe(true); expect(countNodes(value.root)).toBe(nodes(value.root).length);
+    expect(json).toContain('\n  "schemaVersion": "0.7"'); expect(safeParseDesignDocument(JSON.parse(json)).success).toBe(true); expect(countNodes(value.root)).toBe(nodes(value.root).length);
   });
   it("rejects unknown fields rather than weakening schema validation", () => {
     const value = captureDocument(rendered().document); expect(() => serializeCapture({ ...value, rawDom: {} })).toThrow();

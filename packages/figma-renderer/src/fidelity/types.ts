@@ -13,7 +13,8 @@ export type FidelityCategory =
   | "WARNING"
   | "ASSET"
   | "CLIPPING"
-  | "TRANSFORM";
+  | "TRANSFORM"
+  | "AUTO_LAYOUT";
 
 export interface NormalizedGradientStop {
   position: number;
@@ -56,6 +57,20 @@ export interface NormalizedShadow {
   color: { r: number; g: number; b: number; a: number };
 }
 
+export interface NormalizedTextRange {
+  start: number;
+  end: number;
+  characters: string;
+  fontFamily: string;
+  fontStyle: string;
+  fontSize: number;
+  fill?: { r: number; g: number; b: number; a: number } | undefined;
+  lineHeight?: number | undefined;
+  letterSpacing?: number | undefined;
+  decoration?: "NONE" | "UNDERLINE" | "STRIKETHROUGH" | undefined;
+  hyperlink?: string | undefined;
+}
+
 export interface NormalizedText {
   characters: string;
   fontFamily: string;
@@ -64,6 +79,7 @@ export interface NormalizedText {
   lineHeight?: number | undefined;
   letterSpacing?: number | undefined;
   textAlignHorizontal: "LEFT" | "CENTER" | "RIGHT" | "JUSTIFIED";
+  ranges?: NormalizedTextRange[] | undefined;
 }
 
 export interface NormalizedImage {
@@ -73,6 +89,25 @@ export interface NormalizedImage {
 
 export interface NormalizedSvg {
   isVectorContainer: boolean;
+}
+
+export interface NormalizedAutoLayout {
+  layoutMode: "NONE" | "HORIZONTAL" | "VERTICAL" | "GRID";
+  itemSpacing?: number | undefined;
+  paddingTop?: number | undefined;
+  paddingRight?: number | undefined;
+  paddingBottom?: number | undefined;
+  paddingLeft?: number | undefined;
+  primaryAxisAlignItems?: string | undefined;
+  counterAxisAlignItems?: string | undefined;
+  primaryAxisSizingMode?: string | undefined;
+  counterAxisSizingMode?: string | undefined;
+}
+
+export interface NormalizedAutoLayoutChild {
+  layoutPositioning?: "AUTO" | "ABSOLUTE" | undefined;
+  layoutGrow?: number | undefined;
+  layoutAlign?: string | undefined;
 }
 
 export interface NormalizedRenderedNode {
@@ -108,6 +143,8 @@ export interface NormalizedRenderedNode {
   text?: NormalizedText | undefined;
   image?: NormalizedImage | undefined;
   svg?: NormalizedSvg | undefined;
+  layout?: NormalizedAutoLayout | undefined;
+  layoutChild?: NormalizedAutoLayoutChild | undefined;
 
   children?: NormalizedRenderedNode[] | undefined;
 }
@@ -147,7 +184,9 @@ export interface FidelityReport {
   transformChecks: number;
   styleChecks: number;
   textChecks: number;
+  richTextRangeChecks: number;
   assetChecks: number;
+  autoLayoutChecks?: number | undefined;
   warningsExpected: number;
   warningsUnexpected: number;
   failures: number;

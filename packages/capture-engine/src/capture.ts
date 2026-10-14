@@ -3,8 +3,10 @@ import { captureId, documentRect, renderDecision } from "./geometry.js";
 import { cssColor, cssPixels, textStyle, visualStyle, type Warn } from "./styles.js";
 import { processElementTransform } from "./transform.js";
 import { renderedText } from "./text.js";
+import { collectRichTextFlow, isEligibleRichTextRoot, hasIndependentBoxSemantics } from "./richtext.js";
 import { createAssetRegistry, inferUrlMimeType, parseDataUrlMimeType, materializeBlobImage, serializeAndSanitizeSvg } from "./assets.js";
 import { capturePseudoElement } from "./pseudo.js";
+import { analyzeFlexContainer, type NodeInspectionMetadata } from "./autolayout.js";
 
 const ignored = new Set(["script", "style", "head", "meta", "link", "noscript", "template"]);
 const unsupportedMedia = new Set(["canvas", "video", "audio", "iframe", "object", "embed"]);
@@ -18,6 +20,7 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
   const viewport = { width: view.innerWidth, height: view.innerHeight, devicePixelRatio: view.devicePixelRatio, scrollX: view.scrollX, scrollY: view.scrollY };
   const warnings: DesignWarning[] = [], warned = new Set<string>();
   const assetRegistry = createAssetRegistry();
+  const nodeMetadataMap = new Map<string, NodeInspectionMetadata>();
   const htmlStyle = view.getComputedStyle(document.documentElement), bodyStyle = view.getComputedStyle(document.body);
   // HTML canvas background propagation: BODY's used background moves to the canvas
   // when HTML is transparent. Do not paint that alpha a second time on the body box.
@@ -38,6 +41,7 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
       const text = renderedText(node, inheritedStyle, document);
       if (!text) return [];
       const id = captureId(path, "text"), warnText: Warn = (code, message) => warn(code, message, id);
+      nodeMetadataMap.set(id, { style: inheritedStyle });
       if (text.fragments > 1) warnText("TEXT_RANGE_APPROXIMATED", "Wrapped/bidirectional text uses one axis-aligned union box per DOM text run; line fragments are not reconstructed.");
       if (inheritedStyle.textTransform && inheritedStyle.textTransform !== "none") warnText("TEXT_TRANSFORM_UNSUPPORTED", "Text uses original characters; CSS text-transform is not applied.");
       return emit({ id, type: "text", sourceTag: node.parentElement?.localName ?? "text", name: "Text",
@@ -48,6 +52,7 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     if (ignored.has(tag)) return [];
     const style = element === document.body ? bodyStyle : view!.getComputedStyle(element), rect = element.getBoundingClientRect();
     const id = captureId(path, "element"), warnElement: Warn = (code, message) => warn(code, message, id);
+    nodeMetadataMap.set(id, { element, style });
     const decision = renderDecision(style, rect);
     if (decision === "skip-subtree") return [];
     if (style.position === "fixed" || style.position === "sticky") {
@@ -222,11 +227,178 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
       scrollY: viewport.scrollY,
       warn,
     }).flatMap(emit);
+    if (beforeNodes.length > 0) {
+      const bStyle = view!.getComputedStyle(element, "::before");
+      for (const bn of beforeNodes) {
+        nodeMetadataMap.set(bn.id, { style: bStyle, isPseudo: true });
+      }
+    }
 
     const hasMeaningfulClip = hasClip && (contentChildren.length > 0 || beforeNodes.length > 0);
     const hasTransform = Boolean(transform);
+
+    const isRichTextCandidate = isEligibleRichTextRoot(element, view!);
+    const richFlow = isRichTextCandidate
+      ? collectRichTextFlow(element, view!, document, warn, id)
+      : undefined;
+
+    if (!isRichTextCandidate) {
+      const hasTextChild = Array.from(element.childNodes).some(c => c.nodeType === 3 && /[^\t\r\n\f ]/.test(c.textContent ?? ""));
+      const hasEmbeddedBoxChild = Array.from(element.childNodes).some(c => c.nodeType === 1 && (unsupportedMedia.has((c as Element).localName.toLowerCase()) || (c as Element).localName.toLowerCase() === "img" || (c as Element).localName.toLowerCase() === "svg" || hasIndependentBoxSemantics(c as Element, view!.getComputedStyle(c as Element))));
+      if (hasTextChild && hasEmbeddedBoxChild) {
+        warnElement("RICH_TEXT_EMBEDDED_NODE_SPLIT", "Replaced or box element inside inline flow split text into separate nodes.");
+      }
+    }
+
+    if (richFlow) {
+      const afterNodes = capturePseudoElement({
+        element,
+        pseudoKind: "::after",
+        parentId: id,
+        parentRect: rect,
+        parentStyle: style,
+        view: view!,
+        scrollX: viewport.scrollX,
+        scrollY: viewport.scrollY,
+        warn,
+      }).flatMap(emit);
+      if (afterNodes.length > 0) {
+        const aStyle = view!.getComputedStyle(element, "::after");
+        for (const an of afterNodes) {
+          nodeMetadataMap.set(an.id, { style: aStyle, isPseudo: true });
+        }
+      }
+
+      const hasPseudos = beforeNodes.length > 0 || afterNodes.length > 0;
+      const isContainerFrame = decision === "capture" && (groups.has(tag) || styled || base.opacity < 1 || hasMeaningfulClip || hasTransform || hasPseudos || (tag === "div" && !hasTransform));
+
+      if (!isContainerFrame) {
+        return emit({
+          id,
+          sourceTag: tag,
+          name: tag,
+          type: "text",
+          ...documentRect(richFlow.rect, viewport.scrollX, viewport.scrollY),
+          visible: true,
+          opacity: base.opacity,
+          characters: richFlow.characters,
+          textStyle: richFlow.textStyle,
+          ...(richFlow.runs ? { runs: richFlow.runs } : {}),
+          children: [],
+        });
+      }
+
+      const textId = captureId([...path, 0], "text");
+      nodeMetadataMap.set(textId, { style });
+      const textChild: TextNode = {
+        id: textId,
+        sourceTag: "text",
+        name: "Text",
+        type: "text",
+        ...documentRect(richFlow.rect, viewport.scrollX, viewport.scrollY),
+        visible: true,
+        opacity: 1,
+        characters: richFlow.characters,
+        textStyle: richFlow.textStyle,
+        ...(richFlow.runs ? { runs: richFlow.runs } : {}),
+        children: [],
+      };
+
+      const children: DesignNode[] = [...beforeNodes, textChild, ...afterNodes];
+      const activeClip = hasClip && children.length > 0 ? { x: clipX, y: clipY } : undefined;
+
+      if (!styled && !hasClip && children.length === 1 && children[0]!.type === "text" && transform && tag !== "div" && !groups.has(tag)) {
+        return [{
+          id,
+          sourceTag: tag,
+          name: tag,
+          type: "text",
+          ...geometry,
+          visible: true,
+          opacity: base.opacity,
+          characters: richFlow.characters,
+          textStyle: richFlow.textStyle,
+          ...(richFlow.runs ? { runs: richFlow.runs } : {}),
+          children: [],
+          transform,
+        }];
+      }
+
+    function finalizeFrame(
+      frameBase: typeof base,
+      clip: { x: boolean; y: boolean } | undefined,
+      frameChildren: DesignNode[],
+    ): FrameNode {
+      const containerBounds = frameBase.transform?.baseBounds ?? { x: frameBase.x, y: frameBase.y, width: frameBase.width, height: frameBase.height };
+      const flexResult = analyzeFlexContainer({
+        element,
+        style,
+        children: frameChildren,
+        containerBounds,
+        nodeMetadataMap,
+        warn: warnElement,
+        containerId: id,
+      });
+
+      if (flexResult) {
+        for (const c of frameChildren) {
+          const childMeta = flexResult.childMetadata.get(c.id);
+          if (childMeta) {
+            c.layoutChild = childMeta;
+          }
+        }
+      }
+
+      return {
+        ...frameBase,
+        type: "frame",
+        ...(clip ? { clip } : {}),
+        ...(flexResult ? { layout: flexResult.layout } : {}),
+        children: frameChildren,
+      };
+    }
+
+      return [finalizeFrame(base, activeClip, children)];
+    }
+
+    const isFlexOrGrid = style.display === "flex" || style.display === "inline-flex" || style.display === "grid" || style.display === "inline-grid";
     const isFrame = decision === "capture" && (contentChildren.length > 0 || beforeNodes.length > 0) &&
-      (groups.has(tag) || styled || base.opacity < 1 || hasMeaningfulClip || hasTransform || tag === "div" && (contentChildren.length > 1 || beforeNodes.length > 0) || (beforeNodes.length > 0 && styled));
+      (groups.has(tag) || styled || base.opacity < 1 || hasMeaningfulClip || hasTransform || isFlexOrGrid || tag === "div" && (contentChildren.length > 1 || beforeNodes.length > 0) || (beforeNodes.length > 0 && styled));
+
+    function finalizeFrame(
+      frameBase: typeof base,
+      clip: { x: boolean; y: boolean } | undefined,
+      frameChildren: DesignNode[],
+    ): FrameNode {
+      const containerBounds = frameBase.transform?.baseBounds ?? { x: frameBase.x, y: frameBase.y, width: frameBase.width, height: frameBase.height };
+      const flexResult = analyzeFlexContainer({
+        element,
+        style,
+        children: frameChildren,
+        containerBounds,
+        nodeMetadataMap,
+        warn: warnElement,
+        containerId: id,
+      });
+
+      if (flexResult) {
+        for (const c of frameChildren) {
+          const childMeta = flexResult.childMetadata.get(c.id);
+          if (childMeta) {
+            c.layoutChild = childMeta;
+          }
+        }
+      }
+
+      return {
+        ...frameBase,
+        type: "frame",
+        ...(clip ? { clip } : {}),
+        ...(flexResult ? { layout: flexResult.layout } : {}),
+        children: frameChildren,
+      };
+    }
+
     // Reserve ancestors before descending so truncation preserves grouping and local opacity.
     if (isFrame) count++;
     const children: DesignNode[] = [...beforeNodes];
@@ -250,12 +422,18 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
       scrollY: viewport.scrollY,
       warn,
     }).flatMap(emit);
+    if (afterNodes.length > 0) {
+      const aStyle = view!.getComputedStyle(element, "::after");
+      for (const an of afterNodes) {
+        nodeMetadataMap.set(an.id, { style: aStyle, isPseudo: true });
+      }
+    }
 
     children.push(...afterNodes);
 
     const activeClip = hasClip && children.length > 0 ? { x: clipX, y: clipY } : undefined;
 
-    if (!styled && !hasClip && children.length === 1 && children[0]!.type === "text" && transform) {
+    if (!styled && !hasClip && children.length === 1 && children[0]!.type === "text" && transform && tag !== "div" && !groups.has(tag)) {
       const childText = children[0] as TextNode;
       if (isFrame) count--;
       return [{
@@ -268,13 +446,14 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
         opacity: base.opacity,
         characters: childText.characters,
         textStyle: childText.textStyle,
+        ...(childText.runs ? { runs: childText.runs } : {}),
         children: [],
         transform,
       }];
     }
 
-    if (isFrame || (children.length > 0 && decision === "capture" && (groups.has(tag) || styled || base.opacity < 1 || hasClip || hasTransform || (tag === "div" && children.length > 1)))) {
-      return [{ ...base, type: "frame", ...(activeClip ? { clip: activeClip } : {}), children }];
+    if (isFrame || (children.length > 0 && decision === "capture" && (groups.has(tag) || styled || base.opacity < 1 || hasClip || hasTransform || isFlexOrGrid || (tag === "div" && children.length > 1)))) {
+      return [finalizeFrame(base, activeClip, children)];
     }
     if (decision !== "capture") {
       if (children.length && base.opacity < 1 && style.display !== "contents") {
@@ -284,7 +463,7 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
     }
     if (styled || base.opacity < 1) {
       if (children.length > 0) {
-        return [{ ...base, type: "frame", ...(activeClip ? { clip: activeClip } : {}), children }];
+        return [finalizeFrame(base, activeClip, children)];
       }
       return emit({ ...base, type: "rectangle", children: [] });
     }
@@ -326,7 +505,7 @@ export function captureDocument(document: Document, options: CaptureOptions = {}
   const collect = (node: DesignNode) => { emittedIds.add(node.id); node.children.forEach(collect); };
   collect(root);
   for (const warning of warnings) if (warning.nodeId && !emittedIds.has(warning.nodeId)) delete warning.nodeId;
-  warn("CAPTURE_SCOPE", "W2D-015: rendered light-DOM boxes, synthetic pseudo-elements, editable text, basic styles, gradient fills, per-side borders, multi/inset shadows, container clipping, CSS 2D transforms and rotation, images and inline SVG. Full paint order, media and advanced layout/style semantics are not reconstructed.");
+  warn("CAPTURE_SCOPE", "W2D-017: rendered light-DOM boxes, synthetic pseudo-elements, editable text with rich-text style ranges, basic styles, gradient fills, per-side borders, multi/inset shadows, container clipping, CSS 2D transforms and rotation, high-confidence semantic Flexbox Auto Layout inference, images and inline SVG. Full paint order, CSS Grid, media and advanced layout/style semantics are not reconstructed.");
   return parseDesignDocument({ schemaVersion: DESIGN_SCHEMA_VERSION, capture: { capturedAt: options.capturedAt ?? new Date().toISOString(),
     source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" }, page: { url: document.URL, title: document.title } },
     viewport, root, assets: assetRegistry.getAssets(), warnings }) as DesignDocument;

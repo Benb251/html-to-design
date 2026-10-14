@@ -4,6 +4,8 @@ import {
   DesignDocumentV03Schema,
   DesignDocumentV04Schema,
   DesignDocumentV05Schema,
+  DesignDocumentV06Schema,
+  DesignDocumentV07Schema,
   type VersionedDesignDocument,
 } from "./document.js";
 import { isSupportedSchemaVersion, SUPPORTED_SCHEMA_VERSIONS } from "./version.js";
@@ -64,7 +66,11 @@ export function safeParseDesignDocument(input: unknown): SafeParseDesignDocument
           ? DesignDocumentV03Schema
           : version === "0.4"
             ? DesignDocumentV04Schema
-            : DesignDocumentV05Schema;
+            : version === "0.5"
+              ? DesignDocumentV05Schema
+              : version === "0.6"
+                ? DesignDocumentV06Schema
+                : DesignDocumentV07Schema;
   const result = schema.safeParse(input);
 
   if (result.success) {

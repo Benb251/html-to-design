@@ -11,7 +11,7 @@ const candidates = [process.env.CHROME_PATH, "C:/Program Files/Google/Chrome/App
 let executable;
 for (const candidate of candidates) { try { await fs.access(candidate); executable = candidate; break; } catch { /* Try next configured path. */ } }
 if (!executable) throw new Error("Chrome was not found. Set CHROME_PATH. Manual extension loading is a separate check.");
-const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows", "fidelity-clipping", "fidelity-transforms"];
+const names = ["landing", "fidelity-geometry", "fidelity-text", "fidelity-styles", "fidelity-limits", "fidelity-assets", "fidelity-pseudo", "fidelity-gradients", "fidelity-borders-shadows", "fidelity-clipping", "fidelity-transforms", "fidelity-rich-text", "fidelity-auto-layout"];
 const fixtures = new Map(await Promise.all(names.map(async name => ["/" + name + ".html", await fs.readFile(new URL("../fixtures/" + name + ".html", import.meta.url))])));
 const dotPng = await fs.readFile(new URL("../fixtures/dot.png", import.meta.url));
 const content = await fs.readFile(new URL("../dist/content.js", import.meta.url), "utf8");
@@ -350,8 +350,8 @@ try {
       });
     }
     if (name === "fidelity-gradients") {
-      check("fidelity-gradients document valid V0.5 schema", () => {
-        assert.equal(doc.schemaVersion, "0.5");
+      check("fidelity-gradients document valid V0.7 schema", () => {
+        assert.equal(doc.schemaVersion, "0.7");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("linear gradient default direction (to bottom = 180deg)", () => {
@@ -449,8 +449,8 @@ try {
       });
     }
     if (name === "fidelity-borders-shadows") {
-      check("fidelity-borders-shadows document valid V0.5 schema", () => {
-        assert.equal(doc.schemaVersion, "0.5");
+      check("fidelity-borders-shadows document valid V0.7 schema", () => {
+        assert.equal(doc.schemaVersion, "0.7");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("1. uniform solid border regression", () => {
@@ -600,8 +600,8 @@ try {
       });
     }
     if (name === "fidelity-clipping") {
-      check("fidelity-clipping document valid V0.5 schema", () => {
-        assert.equal(doc.schemaVersion, "0.5");
+      check("fidelity-clipping document valid V0.7 schema", () => {
+        assert.equal(doc.schemaVersion, "0.7");
         assert.equal(safeParseDesignDocument(doc).success, true);
       });
       check("1. overflow:hidden both axes", () => {
@@ -793,8 +793,8 @@ try {
         }
       }
 
-      check("1. schemaVersion is 0.5", () => {
-        assert.equal(doc.schemaVersion, "0.5");
+      check("1. schemaVersion is 0.7", () => {
+        assert.equal(doc.schemaVersion, "0.7");
       });
       check("2. rotate 15deg exact matrix and AABB geometry", () => {
         assertTransformedGeometry("test-rotate-15", 15);
@@ -981,6 +981,430 @@ try {
         assert.ok(node.transform);
         near(node.transform.baseBounds.width, 100.5, "fractional width");
         near(node.transform.baseBounds.height, 60.25, "fractional height");
+      });
+    }
+    if (name === "fidelity-rich-text") {
+      check("fidelity-rich-text document valid V0.7 schema", () => {
+        assert.equal(doc.schemaVersion, "0.7");
+        assert.equal(safeParseDesignDocument(doc).success, true);
+      });
+      check("1. plain text regression remains single TextNode without runs", () => {
+        const el = all.find(n => n.characters === "Plain simple paragraph text without any inline styling.");
+        assert.ok(el, "plain text node must exist");
+        assert.equal(el.type, "text");
+        assert.equal(el.runs, undefined);
+      });
+      check("2. strong produces single TextNode with bold run", () => {
+        const el = element("test-strong");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "Prefix bold text suffix.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const boldRun = el.runs.find(r => r.style.fontWeight >= 700);
+        assert.ok(boldRun);
+        assert.equal(el.characters.slice(boldRun.start, boldRun.end), "bold text");
+      });
+      check("3. em produces single TextNode with italic run", () => {
+        const el = element("test-em");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "Prefix italic text suffix.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const italicRun = el.runs.find(r => r.style.fontStyle === "italic");
+        assert.ok(italicRun);
+        assert.equal(el.characters.slice(italicRun.start, italicRun.end), "italic text");
+      });
+      check("4. strong + em nested inherits both bold and italic", () => {
+        const el = element("test-strong-em");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "normal bold bold-italic normal.");
+        assert.ok(el.runs && el.runs.length >= 4);
+        const boldItalicRun = el.runs.find(r => r.style.fontWeight >= 700 && r.style.fontStyle === "italic");
+        assert.ok(boldItalicRun);
+        assert.equal(el.characters.slice(boldItalicRun.start, boldItalicRun.end), "bold-italic");
+      });
+      check("5. colored span produces color run", () => {
+        const el = element("test-color");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "black red text black.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const redRun = el.runs.find(r => r.style.color && r.style.color.r > 0.8 && r.style.color.g < 0.4);
+        assert.ok(redRun);
+        assert.equal(el.characters.slice(redRun.start, redRun.end), "red text");
+      });
+      check("6. mixed font sizes in single TextNode", () => {
+        const el = element("test-mixed-size");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "normal large text normal.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const largeRun = el.runs.find(r => r.style.fontSize === 24);
+        assert.ok(largeRun);
+        assert.equal(el.characters.slice(largeRun.start, largeRun.end), "large text");
+      });
+      check("7. mixed font families in single TextNode", () => {
+        const el = element("test-mixed-family");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "normal roboto text normal.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const robotoRun = el.runs.find(r => r.style.fontFamily === "Roboto");
+        assert.ok(robotoRun);
+        assert.equal(el.characters.slice(robotoRun.start, robotoRun.end), "roboto text");
+      });
+      check("8. unavailable font fallback", () => {
+        const el = element("test-font-fallback");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "normal fallback text normal.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const fbRun = el.runs.find(r => r.style.fontFamily === "NonExistentFontXYZ");
+        assert.ok(fbRun);
+      });
+      check("9. letter spacing run preserved", () => {
+        const el = element("test-letter-spacing");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "normal spaced text normal.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const lsRun = el.runs.find(r => r.style.letterSpacing === 2);
+        assert.ok(lsRun);
+      });
+      check("10. line-height difference preserved", () => {
+        const el = element("test-line-height");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "normal tall line text normal.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const lhRun = el.runs.find(r => r.style.lineHeight === 32);
+        assert.ok(lhRun);
+      });
+      check("11. underline text decoration preserved", () => {
+        const el = element("test-underline");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "normal underlined text normal.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const uRun = el.runs.find(r => r.style.textDecoration === "underline");
+        assert.ok(uRun);
+        assert.equal(el.characters.slice(uRun.start, uRun.end), "underlined text");
+      });
+      check("12. line-through text decoration preserved", () => {
+        const el = element("test-linethrough");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "normal strike text normal.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const sRun = el.runs.find(r => r.style.textDecoration === "line-through");
+        assert.ok(sRun);
+        assert.equal(el.characters.slice(sRun.start, sRun.end), "strike text");
+      });
+      check("13. anchor hyperlink captured as run metadata", () => {
+        const el = element("test-link");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "Visit example link now.");
+        assert.ok(el.runs && el.runs.length >= 3);
+        const linkRun = el.runs.find(r => r.hyperlink === "https://example.com/single");
+        assert.ok(linkRun);
+        assert.equal(el.characters.slice(linkRun.start, linkRun.end), "example link");
+      });
+      check("14. multiple distinct hyperlinks preserved", () => {
+        const el = element("test-multi-link");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "Link first and second link.");
+        assert.ok(el.runs);
+        const link1 = el.runs.find(r => r.hyperlink === "https://example.com/one");
+        const link2 = el.runs.find(r => r.hyperlink === "https://example.com/two");
+        assert.ok(link1 && link2);
+        assert.equal(el.characters.slice(link1.start, link1.end), "first");
+        assert.equal(el.characters.slice(link2.start, link2.end), "second");
+      });
+      check("15. nested styled spans properly resolved", () => {
+        const el = element("test-nested-spans");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "outer mid inner blue mid outer.");
+        assert.ok(el.runs);
+        const innerBlue = el.runs.find(r => r.style.fontSize === 20 && r.style.color && r.style.color.b > 0.8);
+        assert.ok(innerBlue);
+        assert.equal(el.characters.slice(innerBlue.start, innerBlue.end), "inner blue");
+      });
+      check("16. <br> becomes newline with preserved offsets", () => {
+        const el = element("test-br");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "first line\nsecond bold line.");
+        assert.ok(el.runs);
+        const boldRun = el.runs.find(r => r.style.fontWeight >= 700);
+        assert.ok(boldRun);
+        assert.equal(el.characters.slice(boldRun.start, boldRun.end), "second bold line");
+      });
+      check("17. whitespace properly normalized across inline elements", () => {
+        const el = element("test-whitespace");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "word1 word2 word3");
+        assert.ok(el.runs && el.runs.length === 2);
+        assert.equal(el.characters.slice(el.runs[0].start, el.runs[0].end), "word1 word2 ");
+        assert.equal(el.characters.slice(el.runs[1].start, el.runs[1].end), "word3");
+      });
+      check("18. emoji around styled ranges accurately indexed", () => {
+        const el = element("test-emoji");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "Hello 👋 bold 🌍 world.");
+        assert.ok(el.runs);
+        const boldRun = el.runs.find(r => r.style.fontWeight >= 700);
+        assert.ok(boldRun);
+        assert.equal(el.characters.slice(boldRun.start, boldRun.end), "bold 🌍");
+      });
+      check("19. code tag preserves monospace inline font", () => {
+        const el = element("test-code");
+        assert.equal(el.type, "text");
+        assert.equal(el.characters, "Run npm test command.");
+        assert.ok(el.runs);
+        const codeRun = el.runs.find(r => r.style.fontFamily?.toLowerCase().includes("mono") || r.style.fontFamily?.toLowerCase().includes("courier"));
+        assert.ok(codeRun);
+        assert.equal(el.characters.slice(codeRun.start, codeRun.end), "npm test");
+      });
+      check("20. multiline wrapped paragraph remains single TextNode", () => {
+        const el = element("test-multiline");
+        assert.equal(el.type, "text");
+        assert.ok(el.characters.includes("This is a paragraph that wraps across multiple lines"));
+        assert.ok(el.runs);
+        const boldRun = el.runs.find(r => r.style.fontWeight >= 700);
+        assert.ok(boldRun);
+        assert.equal(el.characters.slice(boldRun.start, boldRun.end), "bold text");
+      });
+      check("21. rich text inside transformed container", () => {
+        const container = element("test-transformed-container");
+        assert.ok(container.transform);
+        const textChild = container.children[0];
+        assert.equal(textChild.type, "text");
+        assert.ok(textChild.runs);
+      });
+      check("22. rich TextNode itself rotated preserves transform and runs", () => {
+        const el = element("test-rotated-text");
+        assert.equal(el.type, "text");
+        assert.ok(el.transform, "rotated text must have transform");
+        assert.ok(el.runs);
+      });
+      check("23. clipping parent around rich text", () => {
+        const clipFrame = element("test-clipped-parent");
+        assert.deepEqual(clipFrame.clip, { x: true, y: true });
+        const textChild = clipFrame.children[0];
+        assert.equal(textChild.type, "text");
+        assert.ok(textChild.runs);
+      });
+      check("24. inline background preserved as independent node", () => {
+        const p = element("test-inline-bg");
+        assert.ok(p.children.some(c => c.style?.fills?.length > 0), "highlight span must retain independent fill box");
+      });
+      check("25. inline border and padding prevents unsafe collapse", () => {
+        const p = element("test-inline-border-padding");
+        assert.ok(p.children.some(c => c.style?.border), "boxed span must retain border box");
+      });
+      check("26. inline-block child remains independent layout box", () => {
+        const p = element("test-inline-block");
+        assert.ok(p.children.length > 1, "inline-block badge must not collapse into text runs");
+      });
+      check("27. image embedded splits text flow and emits warning", () => {
+        const p = element("test-embedded-img");
+        assert.ok(p.children.some(c => c.type === "image"), "image node preserved");
+        assert.ok(doc.warnings.some(w => w.code === "RICH_TEXT_EMBEDDED_NODE_SPLIT"));
+      });
+      check("28. pseudo-generated text preserved", () => {
+        const pseudo = byId.get(oracle.elements["test-pseudo"].id + "::before");
+        assert.ok(pseudo, "pseudo element must exist");
+        assert.equal(pseudo.type, "text");
+      });
+      check("29. text-transform retains warning", () => {
+        assert.ok(element("test-text-transform"));
+        assert.ok(doc.warnings.some(w => w.code === "TEXT_TRANSFORM_UNSUPPORTED"));
+      });
+      check("30. gradient text unsupported warning", () => {
+        assert.ok(element("test-gradient-text"));
+        assert.ok(doc.warnings.some(w => w.code === "TEXT_GRADIENT_UNSUPPORTED"));
+      });
+    }
+    if (name === "fidelity-auto-layout") {
+      check("1. simple horizontal row", () => {
+        const row = element("test-row-simple");
+        assert.ok(row.layout);
+        assert.equal(row.layout.direction, "horizontal");
+        assert.equal(row.layout.gap, 0);
+        assert.equal(row.layout.confidence, "high");
+      });
+      check("2. simple vertical column", () => {
+        const col = element("test-col-simple");
+        assert.ok(col.layout);
+        assert.equal(col.layout.direction, "vertical");
+      });
+      check("3. horizontal gap", () => {
+        const row = element("test-gap-row");
+        assert.ok(row.layout);
+        assert.equal(row.layout.direction, "horizontal");
+        assert.equal(row.layout.gap, 16);
+      });
+      check("4. vertical gap", () => {
+        const col = element("test-gap-col");
+        assert.ok(col.layout);
+        assert.equal(col.layout.direction, "vertical");
+        assert.equal(col.layout.gap, 12);
+      });
+      check("5. asymmetric padding", () => {
+        const row = element("test-padding-asym");
+        assert.ok(row.layout);
+        assert.deepEqual(row.layout.padding, { top: 10, right: 20, bottom: 15, left: 30 });
+      });
+      check("6. justify start", () => {
+        const row = element("test-justify-start");
+        assert.ok(row.layout);
+        assert.equal(row.layout.primaryAlign, "start");
+      });
+      check("7. justify center", () => {
+        const row = element("test-justify-center");
+        assert.ok(row.layout);
+        assert.equal(row.layout.primaryAlign, "center");
+      });
+      check("8. justify end", () => {
+        const row = element("test-justify-end");
+        assert.ok(row.layout);
+        assert.equal(row.layout.primaryAlign, "end");
+      });
+      check("9. space-between", () => {
+        const row = element("test-justify-space-between");
+        assert.ok(row.layout);
+        assert.equal(row.layout.primaryAlign, "space-between");
+      });
+      check("10. align start", () => {
+        const row = element("test-align-start");
+        assert.ok(row.layout);
+        assert.equal(row.layout.crossAlign, "start");
+      });
+      check("11. align center", () => {
+        const row = element("test-align-center");
+        assert.ok(row.layout);
+        assert.equal(row.layout.crossAlign, "center");
+      });
+      check("12. align end", () => {
+        const row = element("test-align-end");
+        assert.ok(row.layout);
+        assert.equal(row.layout.crossAlign, "end");
+      });
+      check("13. stretch", () => {
+        const row = element("test-align-stretch");
+        assert.ok(row.layout);
+        assert.equal(row.layout.crossAlign, "stretch");
+      });
+      check("14. nested row inside column", () => {
+        const col = element("test-nested-row-in-col");
+        const innerRow = element("test-inner-row");
+        assert.ok(col.layout);
+        assert.equal(col.layout.direction, "vertical");
+        assert.ok(innerRow.layout);
+        assert.equal(innerRow.layout.direction, "horizontal");
+      });
+      check("15. nested column inside row", () => {
+        const row = element("test-nested-col-in-row");
+        const innerCol = element("test-inner-col");
+        assert.ok(row.layout);
+        assert.equal(row.layout.direction, "horizontal");
+        assert.ok(innerCol.layout);
+        assert.equal(innerCol.layout.direction, "vertical");
+      });
+      check("16. flex-grow:1 child", () => {
+        const row = element("test-grow-child");
+        assert.ok(row.layout);
+        assert.ok(row.children.every(c => c.layoutChild?.grow));
+      });
+      check("17. fixed siblings + grow child", () => {
+        const row = element("test-fixed-and-grow");
+        assert.ok(row.layout);
+        assert.equal(row.children[0].layoutChild?.grow, undefined);
+        assert.equal(row.children[1].layoutChild?.grow, true);
+      });
+      check("18. absolute positioned overlay child", () => {
+        const row = element("test-abs-child");
+        assert.ok(row.layout);
+        const absChild = row.children.find(c => c.layoutChild?.positioning === "absolute");
+        assert.ok(absChild, "absolute badge must have layoutChild.positioning = absolute");
+      });
+      check("19. rich text as flex child", () => {
+        const row = element("test-rich-text-child");
+        assert.ok(row.layout);
+        const textChild = row.children.find(c => c.type === "text");
+        assert.ok(textChild, "text child must exist in flex row");
+        assert.ok(textChild.runs, "rich text runs must be preserved");
+      });
+      check("20. image as flex child", () => {
+        const row = element("test-image-child");
+        assert.ok(row.layout);
+        assert.ok(row.children.some(c => c.type === "image"));
+      });
+      check("21. SVG as flex child", () => {
+        const row = element("test-svg-child");
+        assert.ok(row.layout);
+        assert.ok(row.children.some(c => c.type === "svg"));
+      });
+      check("22. clipping Auto Layout frame", () => {
+        const row = element("test-clipping-autolayout");
+        assert.ok(row.layout);
+        assert.deepEqual(row.clip, { x: true, y: true });
+      });
+      check("23. gradient Auto Layout frame", () => {
+        const row = element("test-gradient-autolayout");
+        assert.ok(row.layout);
+        assert.ok(row.style?.fills?.some(f => f.type === "linear-gradient"));
+      });
+      check("24. border/shadow Auto Layout frame", () => {
+        const row = element("test-border-shadow-autolayout");
+        assert.ok(row.layout);
+        assert.ok(row.style?.border);
+        assert.ok(row.style?.boxShadows?.length > 0);
+      });
+      check("25. transformed child using baseBounds", () => {
+        const row = element("test-transformed-child");
+        assert.ok(row.layout);
+        const rotatedChild = row.children.find(c => c.transform);
+        assert.ok(rotatedChild, "transformed child must retain transform");
+        assert.ok(rotatedChild.transform.baseBounds);
+      });
+      check("26. transformed Auto Layout frame", () => {
+        const row = element("test-transformed-autolayout");
+        assert.ok(row.layout);
+        assert.ok(row.transform, "transformed frame must retain transform");
+      });
+      check("27. pseudo child interaction", () => {
+        const row = element("test-pseudo-child");
+        assert.ok(row.layout);
+        assert.ok(row.children.length >= 2, "pseudo element must be a child of flex row");
+      });
+      check("28. flex-wrap rejected", () => {
+        const row = element("test-flex-wrap-rejected");
+        assert.equal(row.layout, undefined);
+        assert.ok(doc.warnings.some(w => w.code === "AUTO_LAYOUT_WRAP_DEFERRED"));
+      });
+      check("29. row-reverse rejected", () => {
+        const row = element("test-reverse-rejected");
+        assert.equal(row.layout, undefined);
+        assert.ok(doc.warnings.some(w => w.code === "AUTO_LAYOUT_REVERSE_DEFERRED"));
+      });
+      check("30. non-zero child margins rejected", () => {
+        const row = element("test-margins-rejected");
+        assert.equal(row.layout, undefined);
+        assert.ok(doc.warnings.some(w => w.code === "AUTO_LAYOUT_MARGIN_DEFERRED"));
+      });
+      check("31. order property rejected", () => {
+        const row = element("test-order-rejected");
+        assert.equal(row.layout, undefined);
+        assert.ok(doc.warnings.some(w => w.code === "AUTO_LAYOUT_ORDER_DEFERRED"));
+      });
+      check("32. baseline alignment rejected", () => {
+        const row = element("test-baseline-rejected");
+        assert.equal(row.layout, undefined);
+        assert.ok(doc.warnings.some(w => w.code === "AUTO_LAYOUT_BASELINE_DEFERRED"));
+      });
+      check("33. complex grow ratios rejected", () => {
+        const row = element("test-complex-grow-rejected");
+        assert.equal(row.layout, undefined);
+        assert.ok(doc.warnings.some(w => w.code === "AUTO_LAYOUT_GROW_RATIO_DEFERRED"));
+      });
+      check("34. grid container deferred", () => {
+        const grid = element("test-grid-deferred");
+        assert.equal(grid.layout, undefined);
+        assert.ok(doc.warnings.some(w => w.code === "GRID_LAYOUT_SEMANTICS_DEFERRED"));
+      });
+      check("35. plain non-flex absolute regression", () => {
+        const plain = element("test-plain-non-flex");
+        assert.equal(plain.layout, undefined);
       });
     }
     await fs.writeFile(new URL(name + ".json", evidence), JSON.stringify(doc, null, 2));

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Web2Design rich text fidelity</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 20px;
+    font: 16px/24px Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+  }
+  .test-row {
+    margin-bottom: 16px;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
+  .with-pseudo::before {
+    content: "★ ";
+    color: #f59e0b;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<h1>Web2Design Rich-Text Paragraph Spans Fidelity</h1>
+
+<!-- 1. plain text regression -->
+<div class="test-row">
+  <p id="test-plain">Plain simple paragraph text without any inline styling.</p>
+</div>
+
+<!-- 2. strong -->
+<div class="test-row">
+  <p id="test-strong">Prefix <strong>bold text</strong> suffix.</p>
+</div>
+
+<!-- 3. em -->
+<div class="test-row">
+  <p id="test-em">Prefix <em>italic text</em> suffix.</p>
+</div>
+
+<!-- 4. strong + em nested -->
+<div class="test-row">
+  <p id="test-strong-em">normal <strong>bold <em>bold-italic</em></strong> normal.</p>
+</div>
+
+<!-- 5. colored span -->
+<div class="test-row">
+  <p id="test-color">black <span style="color: #ef4444;">red text</span> black.</p>
+</div>
+
+<!-- 6. mixed font sizes -->
+<div class="test-row">
+  <p id="test-mixed-size">normal <span style="font-size: 24px;">large text</span> normal.</p>
+</div>
+
+<!-- 7. mixed font families -->
+<div class="test-row">
+  <p id="test-mixed-family">normal <span style="font-family: Roboto, sans-serif;">roboto text</span> normal.</p>
+</div>
+
+<!-- 8. unavailable font fallback -->
+<div class="test-row">
+  <p id="test-font-fallback">normal <span style="font-family: 'NonExistentFontXYZ', sans-serif;">fallback text</span> normal.</p>
+</div>
+
+<!-- 9. letter spacing run -->
+<div class="test-row">
+  <p id="test-letter-spacing">normal <span style="letter-spacing: 2px;">spaced text</span> normal.</p>
+</div>
+
+<!-- 10. line-height difference -->
+<div class="test-row">
+  <p id="test-line-height">normal <span style="line-height: 32px;">tall line text</span> normal.</p>
+</div>
+
+<!-- 11. underline -->
+<div class="test-row">
+  <p id="test-underline">normal <span style="text-decoration: underline;">underlined text</span> normal.</p>
+</div>
+
+<!-- 12. line-through -->
+<div class="test-row">
+  <p id="test-linethrough">normal <span style="text-decoration: line-through;">strike text</span> normal.</p>
+</div>
+
+<!-- 13. anchor hyperlink -->
+<div class="test-row">
+  <p id="test-link">Visit <a href="https://example.com/single">example link</a> now.</p>
+</div>
+
+<!-- 14. multiple links -->
+<div class="test-row">
+  <p id="test-multi-link">Link <a href="https://example.com/one">first</a> and <a href="https://example.com/two">second</a> link.</p>
+</div>
+
+<!-- 15. nested styled spans -->
+<div class="test-row">
+  <p id="test-nested-spans">outer <span style="font-size: 20px;">mid <span style="color: #3b82f6;">inner blue</span> mid</span> outer.</p>
+</div>
+
+<!-- 16. <br> support -->
+<div class="test-row">
+  <p id="test-br">first line<br><strong>second bold line</strong>.</p>
+</div>
+
+<!-- 17. whitespace across inline elements -->
+<div class="test-row">
+  <p id="test-whitespace">  word1   <span>  word2  </span>   <strong> word3 </strong>  </p>
+</div>
+
+<!-- 18. emoji around styled ranges -->
+<div class="test-row">
+  <p id="test-emoji">Hello 👋 <strong>bold 🌍</strong> world.</p>
+</div>
+
+<!-- 19. <code> inline font -->
+<div class="test-row">
+  <p id="test-code">Run <code>npm test</code> command.</p>
+</div>
+
+<!-- 20. multiline wrapped paragraph -->
+<div class="test-row">
+  <p id="test-multiline" style="width: 250px;">This is a paragraph that wraps across multiple lines in browser layout while retaining <strong>bold text</strong> in the middle of it.</p>
+</div>
+
+<!-- 21. rich text inside transformed container -->
+<div class="test-row">
+  <div id="test-transformed-container" style="transform: rotate(5deg); display: inline-block;">
+    <p>Container rotated <strong>bold text</strong> inside.</p>
+  </div>
+</div>
+
+<!-- 22. rich TextNode itself rotated -->
+<div class="test-row">
+  <p id="test-rotated-text" style="transform: rotate(-5deg); display: inline-block;">Rotated <strong>rich text</strong> node itself.</p>
+</div>
+
+<!-- 23. clipping parent around rich text -->
+<div class="test-row">
+  <div id="test-clipped-parent" style="overflow: hidden; width: 160px; height: 30px; border: 1px dashed #94a3b8;">
+    <p>Clipped <strong>rich text</strong> flow container.</p>
+  </div>
+</div>
+
+<!-- 24. inline background unsupported/preserved policy -->
+<div class="test-row" id="test-inline-bg">
+  Text with <span style="background-color: #fef08a;">yellow highlight</span> background.
+</div>
+
+<!-- 25. inline border/padding preventing unsafe collapse -->
+<div class="test-row" id="test-inline-border-padding">
+  Before <span style="padding: 4px 8px; border: 1px solid #64748b; border-radius: 4px;">boxed span</span> after.
+</div>
+
+<!-- 26. inline-block child preventing unsafe collapse -->
+<div class="test-row" id="test-inline-block">
+  Text with <span style="display: inline-block; width: 50px; height: 20px; background: #e2e8f0; text-align: center;">badge</span> inside.
+</div>
+
+<!-- 27. image embedded between text flows -->
+<div class="test-row" id="test-embedded-img">
+  Text before <img src="/dot.png" alt="dot" width="16" height="16"> text after.
+</div>
+
+<!-- 28. pseudo-generated text interaction -->
+<div class="test-row with-pseudo" id="test-pseudo">
+  Main <strong>styled</strong> paragraph text.
+</div>
+
+<!-- 29. text-transform retention/warning -->
+<div class="test-row">
+  <p id="test-text-transform" style="text-transform: uppercase;">rich <strong>transformed</strong> uppercase.</p>
+</div>
+
+<!-- 30. gradient-text unsupported behavior -->
+<div class="test-row">
+  <p id="test-gradient-text" style="background: linear-gradient(90deg, #ef4444, #3b82f6); -webkit-background-clip: text; color: transparent;">Gradient <strong>text</strong> heading.</p>
+</div>
+
+</body>
+</html>

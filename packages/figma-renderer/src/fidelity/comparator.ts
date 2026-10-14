@@ -812,6 +812,139 @@ export function compareText(
     });
   }
 
+  // Rich text runs
+  if (schemaNode.runs && schemaNode.runs.length > 0) {
+    const renderedRanges = text.ranges ?? [];
+    if (renderedRanges.length === 0) {
+      failures.push({
+        fixtureId,
+        sourceId: schemaNode.id,
+        nodeType: schemaNode.type,
+        category: "TEXT",
+        property: "ranges",
+        expected: `${schemaNode.runs.length} text range(s) present`,
+        actual: "none",
+        message: `Node '${schemaNode.id}' expected ${schemaNode.runs.length} rich text range(s), got none`,
+      });
+    } else if (renderedRanges.length !== schemaNode.runs.length) {
+      failures.push({
+        fixtureId,
+        sourceId: schemaNode.id,
+        nodeType: schemaNode.type,
+        category: "TEXT",
+        property: "ranges.length",
+        expected: schemaNode.runs.length,
+        actual: renderedRanges.length,
+        message: `Node '${schemaNode.id}' rich text range count mismatch: expected ${schemaNode.runs.length}, got ${renderedRanges.length}`,
+      });
+    } else {
+      for (let rIdx = 0; rIdx < schemaNode.runs.length; rIdx++) {
+        const expectedRun = schemaNode.runs[rIdx]!;
+        const actualRange = renderedRanges[rIdx];
+        if (!actualRange) continue;
+
+        if (actualRange.start !== expectedRun.start) {
+          failures.push({
+            fixtureId,
+            sourceId: schemaNode.id,
+            nodeType: schemaNode.type,
+            category: "TEXT",
+            property: `ranges[${rIdx}].start`,
+            expected: expectedRun.start,
+            actual: actualRange.start,
+            message: `Node '${schemaNode.id}' range[${rIdx}] start mismatch: expected ${expectedRun.start}, got ${actualRange.start}`,
+          });
+        }
+
+        if (actualRange.end !== expectedRun.end) {
+          failures.push({
+            fixtureId,
+            sourceId: schemaNode.id,
+            nodeType: schemaNode.type,
+            category: "TEXT",
+            property: `ranges[${rIdx}].end`,
+            expected: expectedRun.end,
+            actual: actualRange.end,
+            message: `Node '${schemaNode.id}' range[${rIdx}] end mismatch: expected ${expectedRun.end}, got ${actualRange.end}`,
+          });
+        }
+
+        if (expectedRun.style.fontSize !== undefined) {
+          const diffSize = numDiff(actualRange.fontSize, expectedRun.style.fontSize, tol);
+          if (diffSize !== null) {
+            failures.push({
+              fixtureId,
+              sourceId: schemaNode.id,
+              nodeType: schemaNode.type,
+              category: "TEXT",
+              property: `ranges[${rIdx}].fontSize`,
+              expected: expectedRun.style.fontSize,
+              actual: actualRange.fontSize,
+              difference: diffSize,
+              tolerance: tol,
+              message: `Node '${schemaNode.id}' range[${rIdx}] fontSize expected ${expectedRun.style.fontSize}, got ${actualRange.fontSize}`,
+            });
+          }
+        }
+
+        if (expectedRun.style.color !== undefined && actualRange.fill) {
+          const diffC = colorDiff(actualRange.fill, expectedRun.style.color, colorTol);
+          if (diffC) {
+            failures.push({
+              fixtureId,
+              sourceId: schemaNode.id,
+              nodeType: schemaNode.type,
+              category: "TEXT",
+              property: `ranges[${rIdx}].color`,
+              expected: expectedRun.style.color,
+              actual: actualRange.fill,
+              difference: diffC,
+              tolerance: colorTol,
+              message: `Node '${schemaNode.id}' range[${rIdx}] fill color mismatch: ${diffC}`,
+            });
+          }
+        }
+
+        if (expectedRun.style.textDecoration !== undefined) {
+          const expDeco =
+            expectedRun.style.textDecoration === "underline"
+              ? "UNDERLINE"
+              : expectedRun.style.textDecoration === "line-through"
+                ? "STRIKETHROUGH"
+                : "NONE";
+          const actDeco = actualRange.decoration ?? "NONE";
+          if (actDeco !== expDeco) {
+            failures.push({
+              fixtureId,
+              sourceId: schemaNode.id,
+              nodeType: schemaNode.type,
+              category: "TEXT",
+              property: `ranges[${rIdx}].decoration`,
+              expected: expDeco,
+              actual: actDeco,
+              message: `Node '${schemaNode.id}' range[${rIdx}] decoration expected '${expDeco}', got '${actDeco}'`,
+            });
+          }
+        }
+
+        if (expectedRun.hyperlink !== undefined) {
+          if (actualRange.hyperlink !== expectedRun.hyperlink) {
+            failures.push({
+              fixtureId,
+              sourceId: schemaNode.id,
+              nodeType: schemaNode.type,
+              category: "TEXT",
+              property: `ranges[${rIdx}].hyperlink`,
+              expected: expectedRun.hyperlink,
+              actual: actualRange.hyperlink,
+              message: `Node '${schemaNode.id}' range[${rIdx}] hyperlink expected '${expectedRun.hyperlink}', got '${actualRange.hyperlink}'`,
+            });
+          }
+        }
+      }
+    }
+  }
+
   return failures;
 }
 
@@ -941,6 +1074,200 @@ export function compareClipping(
   return failures;
 }
 
+export function compareAutoLayout(
+  schemaNode: DesignNode,
+  rendered: NormalizedRenderedNode,
+  fixtureId: string,
+): FidelityFailure[] {
+  const failures: FidelityFailure[] = [];
+
+  if (schemaNode.type === "frame") {
+    if (schemaNode.layout) {
+      const exp = schemaNode.layout;
+      const act = rendered.layout;
+      if (!act || act.layoutMode === "NONE") {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "layoutMode",
+          expected: exp.direction === "horizontal" ? "HORIZONTAL" : "VERTICAL",
+          actual: act?.layoutMode ?? "NONE",
+          message: `Frame '${schemaNode.id}' expected native Auto Layout mode '${exp.direction === "horizontal" ? "HORIZONTAL" : "VERTICAL"}', got '${act?.layoutMode ?? "NONE"}'`,
+        });
+        return failures;
+      }
+
+      const expectedMode = exp.direction === "horizontal" ? "HORIZONTAL" : "VERTICAL";
+      if (act.layoutMode !== expectedMode) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "layoutMode",
+          expected: expectedMode,
+          actual: act.layoutMode,
+          message: `Frame '${schemaNode.id}' layoutMode expected '${expectedMode}', got '${act.layoutMode}'`,
+        });
+      }
+
+      if (act.itemSpacing !== undefined && Math.abs(act.itemSpacing - exp.gap) > 0.1) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "itemSpacing",
+          expected: exp.gap,
+          actual: act.itemSpacing,
+          message: `Frame '${schemaNode.id}' itemSpacing expected ${exp.gap}, got ${act.itemSpacing}`,
+        });
+      }
+
+      if (act.paddingTop !== undefined && Math.abs(act.paddingTop - exp.padding.top) > 0.1) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "paddingTop",
+          expected: exp.padding.top,
+          actual: act.paddingTop,
+          message: `Frame '${schemaNode.id}' paddingTop expected ${exp.padding.top}, got ${act.paddingTop}`,
+        });
+      }
+      if (act.paddingRight !== undefined && Math.abs(act.paddingRight - exp.padding.right) > 0.1) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "paddingRight",
+          expected: exp.padding.right,
+          actual: act.paddingRight,
+          message: `Frame '${schemaNode.id}' paddingRight expected ${exp.padding.right}, got ${act.paddingRight}`,
+        });
+      }
+      if (act.paddingBottom !== undefined && Math.abs(act.paddingBottom - exp.padding.bottom) > 0.1) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "paddingBottom",
+          expected: exp.padding.bottom,
+          actual: act.paddingBottom,
+          message: `Frame '${schemaNode.id}' paddingBottom expected ${exp.padding.bottom}, got ${act.paddingBottom}`,
+        });
+      }
+      if (act.paddingLeft !== undefined && Math.abs(act.paddingLeft - exp.padding.left) > 0.1) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "paddingLeft",
+          expected: exp.padding.left,
+          actual: act.paddingLeft,
+          message: `Frame '${schemaNode.id}' paddingLeft expected ${exp.padding.left}, got ${act.paddingLeft}`,
+        });
+      }
+
+      const expPrimaryAlign = exp.primaryAlign === "start" ? "MIN" : exp.primaryAlign === "center" ? "CENTER" : exp.primaryAlign === "end" ? "MAX" : "SPACE_BETWEEN";
+      if (act.primaryAxisAlignItems && act.primaryAxisAlignItems !== expPrimaryAlign) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "primaryAxisAlignItems",
+          expected: expPrimaryAlign,
+          actual: act.primaryAxisAlignItems,
+          message: `Frame '${schemaNode.id}' primaryAxisAlignItems expected '${expPrimaryAlign}', got '${act.primaryAxisAlignItems}'`,
+        });
+      }
+
+      const expCounterAlign = exp.crossAlign === "start" ? "MIN" : exp.crossAlign === "center" ? "CENTER" : exp.crossAlign === "end" ? "MAX" : "MIN";
+      if (act.counterAxisAlignItems && act.counterAxisAlignItems !== expCounterAlign) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "counterAxisAlignItems",
+          expected: expCounterAlign,
+          actual: act.counterAxisAlignItems,
+          message: `Frame '${schemaNode.id}' counterAxisAlignItems expected '${expCounterAlign}', got '${act.counterAxisAlignItems}'`,
+        });
+      }
+    } else {
+      // Historical or un-inferred frame must NOT have Auto Layout
+      if (rendered.layout && rendered.layout.layoutMode !== "NONE") {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "layoutMode",
+          expected: "NONE",
+          actual: rendered.layout.layoutMode,
+          message: `Frame '${schemaNode.id}' has layout=undefined in schema but rendered with layoutMode='${rendered.layout.layoutMode}'`,
+        });
+      }
+    }
+  }
+
+  // Child layout metadata checks
+  if (schemaNode.layoutChild) {
+    if (schemaNode.layoutChild.positioning === "absolute") {
+      if (rendered.layoutChild?.layoutPositioning !== "ABSOLUTE") {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "layoutPositioning",
+          expected: "ABSOLUTE",
+          actual: rendered.layoutChild?.layoutPositioning ?? "AUTO",
+          message: `Node '${schemaNode.id}' layoutPositioning expected 'ABSOLUTE', got '${rendered.layoutChild?.layoutPositioning ?? "AUTO"}'`,
+        });
+      }
+    }
+    if (schemaNode.layoutChild.grow) {
+      if (rendered.layoutChild?.layoutGrow !== 1) {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "layoutGrow",
+          expected: 1,
+          actual: rendered.layoutChild?.layoutGrow ?? 0,
+          message: `Node '${schemaNode.id}' layoutGrow expected 1, got ${rendered.layoutChild?.layoutGrow ?? 0}`,
+        });
+      }
+    }
+    if (schemaNode.layoutChild.stretch) {
+      if (rendered.layoutChild?.layoutAlign !== "STRETCH") {
+        failures.push({
+          fixtureId,
+          sourceId: schemaNode.id,
+          nodeType: schemaNode.type,
+          category: "AUTO_LAYOUT",
+          property: "layoutAlign",
+          expected: "STRETCH",
+          actual: rendered.layoutChild?.layoutAlign ?? "INHERIT",
+          message: `Node '${schemaNode.id}' layoutAlign expected 'STRETCH', got '${rendered.layoutChild?.layoutAlign ?? "INHERIT"}'`,
+        });
+      }
+    }
+  }
+
+  return failures;
+}
+
 export interface SourceIndex {
   bySourceId: Map<string, NormalizedRenderedNode>;
   duplicates: string[];
@@ -985,7 +1312,9 @@ export function runDocumentFidelity(
     transformChecks: number;
     styleChecks: number;
     textChecks: number;
+    richTextRangeChecks: number;
     assetChecks: number;
+    autoLayoutChecks: number;
     warningsExpected: number;
     warningsUnexpected: number;
   };
@@ -1011,7 +1340,9 @@ export function runDocumentFidelity(
   let geometryChecks = 0;
   let styleChecks = 0;
   let textChecks = 0;
+  let richTextRangeChecks = 0;
   let assetChecks = 0;
+  let autoLayoutChecks = 0;
   let transformChecks = 0;
 
   const cats = new Set(manifestEntry.expectedCategories);
@@ -1082,6 +1413,9 @@ export function runDocumentFidelity(
     // 7. Text
     if (schemaNode.type === "text" && cats.has("TEXT")) {
       textChecks++;
+      if (schemaNode.runs && schemaNode.runs.length > 0) {
+        richTextRangeChecks += schemaNode.runs.length;
+      }
       failures.push(...compareText(schemaNode, rendered, manifestEntry.id));
     }
 
@@ -1107,6 +1441,17 @@ export function runDocumentFidelity(
     if (cats.has("TRANSFORM") && schemaNode.transform) {
       transformChecks++;
       failures.push(...compareTransform(schemaNode, rendered, manifestEntry.id));
+    }
+
+    // 12. Auto Layout
+    if (cats.has("AUTO_LAYOUT")) {
+      if (schemaNode.type === "frame" && schemaNode.layout) {
+        autoLayoutChecks++;
+      }
+      if (schemaNode.layoutChild) {
+        autoLayoutChecks++;
+      }
+      failures.push(...compareAutoLayout(schemaNode, rendered, manifestEntry.id));
     }
 
     // Recurse children for frames
@@ -1136,7 +1481,9 @@ export function runDocumentFidelity(
       transformChecks,
       styleChecks,
       textChecks,
+      richTextRangeChecks,
       assetChecks,
+      autoLayoutChecks,
       warningsExpected: warningResult.expectedCount,
       warningsUnexpected: warningResult.unexpectedCount,
     },
