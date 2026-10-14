@@ -177,7 +177,21 @@ Audit details recorded in `docs/evidence/w2d-018/console-errors.txt`.
    - *Fix*: `renderer.ts` sets `strokesIncludedInLayout = true` whenever the frame possesses border styles; `autolayout.ts` accounts for border widths during geometry prediction.
    - *Test*: Verified in `packages/capture-engine/test/autolayout.test.ts` and `apps/extension/fixtures/fidelity-auto-layout.html`.
 
-3. **Multi-Stage Flex Accounting Reconciled**:
+3. **Real-Figma Runtime Blocker: Import Expression Rejection**:
+   - *Actual Figma Error*: Immediately upon plugin launch after `[jsvm-cpp] main called`, Figma console threw:
+     ```text
+     SyntaxError: possible import expression rejected around line 1
+     ```
+   - *Root Cause*: Figma's desktop JavaScript sandbox (`jsvm-cpp`) runs a pre-parser regex/token scanner across the entire plugin script to block dynamic module loading. In `apps/figma-plugin/dist/main.js:16910`, an unminified library comment from `node_modules/zod/v4/core/json-schema-generator.js` survived:
+     ```js
+     // annotated so the .d.cts emits an indexed access rather than an inline `import()` of an ESM path
+     ```
+     Figma's lexical scanner detected the literal `import()` token inside the backticks and rejected the bundle at parse time before any plugin code executed.
+   - *Build Fix*: Configured `minify: true` in `apps/figma-plugin/scripts/build.mjs` for both `main.js` and `ui.js`. This strips all non-legal internal and dependency comments while preserving globals, runtime behavior, and sourcemaps (`sourcemap: true`). Bundle size reduced from 874KB to 489KB.
+   - *Deterministic Post-Build Compatibility Guard*: Added an authoritative 4-point guard in `scripts/build.mjs` that statically scans `dist/main.js` and fails the build if dynamic `import(`, `import.meta`, top-level ESM `export`, or external chunk loaders are detected.
+   - *Automated Regression Suite*: Added `apps/figma-plugin/test/bundle.test.ts` with 6 automated tests asserting the compatibility guard and manifest integrity. Total passing tests increased from 508 to **514 tests**.
+
+4. **Multi-Stage Flex Accounting Reconciled**:
    - *Symptom*: 835 DOM flex elements vs 317 inferred frames appeared to suggest a low inference rate.
    - *Fix*: Diagnosed multi-stage funnel showing 181 non-candidate elements (hidden, fixed, leaf), 104 explicitly deferred, and 317 high-confidence inferred out of 550 eligible candidates (57.6%).
    - *Documentation*: Updated Section 6 of `docs/w2d-017-report.md`.
@@ -196,33 +210,46 @@ Audit details recorded in `docs/evidence/w2d-018/console-errors.txt`.
 
 ```text
 Interactive Figma Desktop:
-NOT AVAILABLE
+BLOCKED PENDING REAL FIGMA RETEST
 
 W2D-009:
-STILL OPEN (MANUAL VALIDATION REQUIRED)
+BLOCKED pending real Figma retest
 
 W2D-018:
-MANUAL ACCEPTANCE REQUIRED
+BLOCKED pending real Figma retest
 ```
 
-The codebase, fresh production bundles (`apps/extension/dist/`, `apps/figma-plugin/dist/`), automated test suite (508 tests), Chrome smoke tests (225 checks), fidelity regression suite (20 fixtures), compact acceptance corpus (Scenarios A through H), and interactive checklist (`docs/w2d-018-manual-checklist.md`) are 100% prepared and verified green.
+The build pipeline has been corrected, verified green, and fortified with post-build compatibility guards. The runtime blocker in `main.js` has been eliminated. The gates remain classified as `BLOCKED pending real Figma retest` until an evaluator relaunches the plugin in Figma Desktop and confirms the plugin UI opens successfully.
 
 ---
 
-## 12. Remaining Documented Limitations
+## 12. Human Retest Procedure in Figma Desktop
+
+To confirm the runtime fix in Figma Desktop:
+1. Open Figma Desktop.
+2. In the design file, open **Plugins $\to$ Development $\to$ Web2Design** (or right-click canvas $\to$ **Plugins $\to$ Development $\to$ Web2Design**).
+3. If previously imported, right-click the plugin in the menu and click **Re-load plugin** (or re-import from `D:\Tool\html-to-design\apps\figma-plugin\dist\manifest.json`).
+4. **Verification Criteria**:
+   - The plugin dialog opens cleanly with the Web2Design UI.
+   - No `SyntaxError: possible import expression rejected around line 1` appears in the developer console.
+   - Click **Load Sample Document** $\to$ **Validate & Prepare** $\to$ **Import to Figma** and verify the root frame appears on canvas.
+5. If verified, update `docs/w2d-009-report.md` and `docs/w2d-018-report.md` statuses to `DONE`.
+
+---
+
+## 13. Remaining Documented Limitations
 
 1. **CSS Grid Semantics**: CSS Grid containers fall back to absolute positioning (`GRID_LAYOUT_SEMANTICS_DEFERRED`).
 2. **Flexbox Advanced Features**: Flex wrap, reverse directions, non-zero flow item margins, visual `order`, and multi-item grow ratios fall back to absolute positioning with structured warnings.
 3. **Single-Axis Clipping**: Figma only supports uniform 2D frame clipping; single-axis clipping is approximated with `clipsContent = true` and `AXIS_CLIP_APPROXIMATED`.
 4. **Font Parity**: Unavailable web fonts fall back gracefully to Inter with `FONT_FALLBACK`.
-5. **Interactive Desktop GUI Gate**: Awaiting manual execution in Figma Desktop.
+5. **Interactive Desktop GUI Gate**: Awaiting human execution of the retest procedure above.
 
 ---
 
-## 13. Recommended Next Task
+## 14. Recommended Next Task
 
-Based on evidence from the reconciled accounting audit and real-site spot checks:
-1. **Human Acceptance Sign-off**: Execute `docs/w2d-018-manual-checklist.md` using the packaged corpus in `docs/evidence/w2d-018/corpus/` in Figma Desktop to close W2D-009 and W2D-018.
-2. **Roadmap Recommendation**:
-   - **W2D-019 — CSS Grid Semantic Inference**: With 67 Grid containers on modern frameworks like Tailwind CSS, CSS Grid represents the next major uncaptured layout paradigm.
-   - Alternatively: **W2D-019 — Flexbox Margin Reconciliation**: Reconciling flow-child margins (the cause of 96 deferred containers) into Auto Layout gap/padding would expand the Flexbox candidate inference rate from 57.6% toward 75%+.
+1. **Execute Human Retest in Figma Desktop**: Verify the plugin dialog launches and imports the canonical sample without sandbox syntax errors to close W2D-009 and W2D-018.
+2. **Roadmap Recommendation Post-Retest**:
+   - **`W2D-019 — CSS Grid Semantic Inference`**: Address the 67 Grid containers observed on modern utility-first frameworks.
+   - Alternatively: **`W2D-019 — Flexbox Margin Reconciliation`**: Reconcile flow-child margins (the cause of 96 deferred containers) into Auto Layout gap/padding.
