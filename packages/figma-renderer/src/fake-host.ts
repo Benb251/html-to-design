@@ -101,6 +101,8 @@ export class FakeLayoutNode extends FakeBaseNode {
   protected _layoutAlign: "INHERIT" | "MIN" | "CENTER" | "MAX" | "STRETCH" = "INHERIT";
   protected _layoutGrow: number = 0;
   protected _layoutPositioning: "AUTO" | "ABSOLUTE" = "AUTO";
+  protected _layoutSizingHorizontal: "FIXED" | "HUG" | "FILL" = "FIXED";
+  protected _layoutSizingVertical: "FIXED" | "HUG" | "FILL" = "FIXED";
 
   get layoutAlign(): "INHERIT" | "MIN" | "CENTER" | "MAX" | "STRETCH" {
     return this._layoutAlign;
@@ -132,6 +134,26 @@ export class FakeLayoutNode extends FakeBaseNode {
     }
   }
 
+  get layoutSizingHorizontal(): "FIXED" | "HUG" | "FILL" {
+    return this._layoutSizingHorizontal;
+  }
+  set layoutSizingHorizontal(val: "FIXED" | "HUG" | "FILL") {
+    this._layoutSizingHorizontal = val;
+    if (this.parent && "relayout" in this.parent && typeof (this.parent as { relayout: () => void }).relayout === "function") {
+      (this.parent as { relayout: () => void }).relayout();
+    }
+  }
+
+  get layoutSizingVertical(): "FIXED" | "HUG" | "FILL" {
+    return this._layoutSizingVertical;
+  }
+  set layoutSizingVertical(val: "FIXED" | "HUG" | "FILL") {
+    this._layoutSizingVertical = val;
+    if (this.parent && "relayout" in this.parent && typeof (this.parent as { relayout: () => void }).relayout === "function") {
+      (this.parent as { relayout: () => void }).relayout();
+    }
+  }
+
   resize(w: number, h: number): void {
     this._width = w;
     this._height = h;
@@ -144,6 +166,7 @@ export class FakeLayoutNode extends FakeBaseNode {
     }
   }
 }
+
 
 export class FakeStyleableNode extends FakeLayoutNode {
   fills: readonly Paint[] = [];
@@ -164,20 +187,113 @@ export class FakeStyleableNode extends FakeLayoutNode {
 
 export class FakeFrameNode extends FakeStyleableNode {
   readonly type = "FRAME";
-  layoutMode: "NONE" | "HORIZONTAL" | "VERTICAL" = "NONE";
-  primaryAxisSizingMode: "FIXED" | "AUTO" = "FIXED";
-  counterAxisSizingMode: "FIXED" | "AUTO" = "FIXED";
-  primaryAxisAlignItems: "MIN" | "MAX" | "CENTER" | "SPACE_BETWEEN" = "MIN";
-  counterAxisAlignItems: "MIN" | "MAX" | "CENTER" | "BASELINE" = "MIN";
-  paddingTop: number = 0;
-  paddingRight: number = 0;
-  paddingBottom: number = 0;
-  paddingLeft: number = 0;
-  itemSpacing: number = 0;
+  private _layoutMode: "NONE" | "HORIZONTAL" | "VERTICAL" = "NONE";
+  private _primaryAxisSizingMode: "FIXED" | "AUTO" = "FIXED";
+  private _counterAxisSizingMode: "FIXED" | "AUTO" = "FIXED";
+  private _primaryAxisAlignItems: "MIN" | "MAX" | "CENTER" | "SPACE_BETWEEN" = "MIN";
+  private _counterAxisAlignItems: "MIN" | "MAX" | "CENTER" | "BASELINE" = "MIN";
+  private _paddingTop: number = 0;
+  private _paddingRight: number = 0;
+  private _paddingBottom: number = 0;
+  private _paddingLeft: number = 0;
+  private _itemSpacing: number = 0;
   itemReverseZIndex: boolean = false;
-  strokesIncludedInLayout: boolean = false;
+  private _strokesIncludedInLayout: boolean = false;
   clipsContent: boolean = false;
   readonly children: SceneNode[] = [];
+
+  get layoutMode(): "NONE" | "HORIZONTAL" | "VERTICAL" {
+    return this._layoutMode;
+  }
+  set layoutMode(val: "NONE" | "HORIZONTAL" | "VERTICAL") {
+    this._layoutMode = val;
+    this.relayout();
+  }
+
+  get primaryAxisSizingMode(): "FIXED" | "AUTO" {
+    return this._primaryAxisSizingMode;
+  }
+  set primaryAxisSizingMode(val: "FIXED" | "AUTO") {
+    this._primaryAxisSizingMode = val;
+    this.relayout();
+  }
+
+  get counterAxisSizingMode(): "FIXED" | "AUTO" {
+    return this._counterAxisSizingMode;
+  }
+  set counterAxisSizingMode(val: "FIXED" | "AUTO") {
+    this._counterAxisSizingMode = val;
+    this.relayout();
+  }
+
+  get primaryAxisAlignItems(): "MIN" | "MAX" | "CENTER" | "SPACE_BETWEEN" {
+    return this._primaryAxisAlignItems;
+  }
+  set primaryAxisAlignItems(val: "MIN" | "MAX" | "CENTER" | "SPACE_BETWEEN") {
+    this._primaryAxisAlignItems = val;
+    this.relayout();
+  }
+
+  get counterAxisAlignItems(): "MIN" | "MAX" | "CENTER" | "BASELINE" {
+    return this._counterAxisAlignItems;
+  }
+  set counterAxisAlignItems(val: "MIN" | "MAX" | "CENTER" | "BASELINE") {
+    this._counterAxisAlignItems = val;
+    this.relayout();
+  }
+
+  get paddingTop(): number {
+    return this._paddingTop;
+  }
+  set paddingTop(val: number) {
+    this._paddingTop = val;
+    this.relayout();
+  }
+
+  get paddingRight(): number {
+    return this._paddingRight;
+  }
+  set paddingRight(val: number) {
+    this._paddingRight = val;
+    this.relayout();
+  }
+
+  get paddingBottom(): number {
+    return this._paddingBottom;
+  }
+  set paddingBottom(val: number) {
+    this._paddingBottom = val;
+    this.relayout();
+  }
+
+  get paddingLeft(): number {
+    return this._paddingLeft;
+  }
+  set paddingLeft(val: number) {
+    this._paddingLeft = val;
+    this.relayout();
+  }
+
+  get itemSpacing(): number {
+    return this._itemSpacing;
+  }
+  set itemSpacing(val: number) {
+    this._itemSpacing = val;
+    this.relayout();
+  }
+
+  get strokesIncludedInLayout(): boolean {
+    return this._strokesIncludedInLayout;
+  }
+  set strokesIncludedInLayout(val: boolean) {
+    this._strokesIncludedInLayout = val;
+    this.relayout();
+  }
+
+  override resize(w: number, h: number): void {
+    super.resize(w, h);
+    this.relayout();
+  }
 
   appendChild(node: SceneNode): void {
     (node as unknown as FakeBaseNode).parent = this;
@@ -337,11 +453,25 @@ export class FakeTextNode extends FakeLayoutNode {
   private _lineHeight: LineHeight = { unit: "AUTO" };
   private _letterSpacing: LetterSpacing = { value: 0, unit: "PIXELS" };
   textAlignHorizontal: "LEFT" | "CENTER" | "RIGHT" | "JUSTIFIED" = "LEFT";
-  textAutoResize: "NONE" | "WIDTH_AND_HEIGHT" | "HEIGHT" | "TRUNCATE" = "NONE";
+  textAutoResize: "NONE" | "WIDTH_AND_HEIGHT" | "HEIGHT" | "TRUNCATE" = "WIDTH_AND_HEIGHT";
   private _fills: readonly Paint[] = [];
   private _textDecoration: TextDecoration = "NONE";
   private _hyperlink: HyperlinkTarget | null = null;
   effects: readonly Effect[] = [];
+
+  override resize(w: number, h: number): void {
+    if (this.textAutoResize === "WIDTH_AND_HEIGHT") {
+      // In real Figma, calling resize() while textAutoResize is WIDTH_AND_HEIGHT is ignored
+      return;
+    }
+    if (this.textAutoResize === "HEIGHT") {
+      this._width = w;
+      return;
+    }
+    this._width = w;
+    this._height = h;
+  }
+
 
   private _charStyles: FakeCharStyle[] = [];
 

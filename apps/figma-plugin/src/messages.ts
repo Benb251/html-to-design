@@ -44,6 +44,7 @@ export type UiToPluginMessage =
     }
   | {
       type: "import-document";
+      diagnosticLayoutMode?: "normal" | "absolute-only" | undefined;
     }
   | {
       type: "close-plugin";

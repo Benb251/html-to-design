@@ -338,6 +338,30 @@ body {
   transition: background 0.15s ease;
 }
 
+.diagnostic-row {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  background: var(--figma-color-bg-subtle, #f9fafb);
+  border: 1px dashed var(--figma-color-border, #d1d5db);
+  border-radius: 5px;
+  margin-top: 6px;
+}
+
+.diagnostic-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--figma-color-text-secondary, #4b5563);
+  cursor: pointer;
+  user-select: none;
+}
+
+.diagnostic-label input[type="checkbox"] {
+  cursor: pointer;
+}
+
 .btn-success:hover {
   background: #047857;
 }

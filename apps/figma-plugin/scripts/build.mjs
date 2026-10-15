@@ -2,7 +2,7 @@ import { build } from "esbuild";
 import { mkdir, copyFile, readFile, writeFile, access } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { representativeFixtures } from "@web2design/test-fixtures";
+import { SAMPLE_DOCUMENT } from "../src/sample.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const out = path.join(root, "dist");
@@ -52,7 +52,7 @@ await writeFile(path.join(out, "ui.html"), standaloneHtml, "utf8");
 await copyFile(path.join(root, "manifest.json"), path.join(out, "manifest.json"));
 
 // 5. Generate deterministic sample document artifact (Requirement 18)
-const sampleDocument = representativeFixtures.image;
+const sampleDocument = SAMPLE_DOCUMENT;
 await writeFile(
   path.join(out, "sample-w2d-document.json"),
   JSON.stringify(sampleDocument, null, 2),

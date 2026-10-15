@@ -298,6 +298,39 @@ describe("Figma plugin - message handling protocol", () => {
     }
   });
 
+  it("handles import-document with diagnosticLayoutMode = absolute-only", async () => {
+    const harness = createHarness();
+    const host = createFakeHost();
+    const sessionState: SessionState = { currentValidatedDoc: null, isImporting: false };
+
+    // 1. Validate
+    await handleUiMessage(
+      { type: "validate-document", raw: simpleTextFixture },
+      harness.postMessage,
+      harness.notify,
+      harness.close,
+      host,
+      sessionState,
+    );
+    expect(harness.messages[0]?.type).toBe("validation-success");
+
+    // 2. Import with diagnosticLayoutMode: "absolute-only"
+    await handleUiMessage(
+      { type: "import-document", diagnosticLayoutMode: "absolute-only" },
+      harness.postMessage,
+      harness.notify,
+      harness.close,
+      host,
+      sessionState,
+    );
+
+    expect(harness.messages.length).toBe(3);
+    expect(harness.messages[2]?.type).toBe("import-success");
+    if (harness.messages[2]?.type === "import-success") {
+      expect(harness.messages[2].result.createdNodeCount).toBe(2);
+    }
+  });
+
   it("rejects import-document if no document was validated yet", async () => {
     const harness = createHarness();
     const host = createFakeHost();

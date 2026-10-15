@@ -7,122 +7,7 @@ function elem<T extends HTMLElement>(id: string): T {
   return el as T;
 }
 
-const SAMPLE_DOCUMENT = {
-  schemaVersion: "0.1",
-  capture: {
-    capturedAt: "2026-10-13T12:00:00.000Z",
-    source: { kind: "chrome-extension", name: "Web2Design", version: "0.1.0" },
-    page: { url: "https://example.com/demo", title: "Web2Design Demo Page" },
-  },
-  viewport: { width: 1440, height: 900, devicePixelRatio: 1, scrollX: 0, scrollY: 0 },
-  root: {
-    id: "root",
-    type: "frame",
-    sourceTag: "html",
-    name: "Web2Design Demo Page",
-    x: 0,
-    y: 0,
-    width: 1440,
-    height: 900,
-    visible: true,
-    opacity: 1,
-    children: [
-      {
-        id: "w2d-element-body",
-        type: "frame",
-        sourceTag: "body",
-        name: "body",
-        x: 0,
-        y: 0,
-        width: 1440,
-        height: 900,
-        visible: true,
-        opacity: 1,
-        children: [
-          {
-            id: "w2d-text-1",
-            type: "text",
-            sourceTag: "h1",
-            name: "Text",
-            x: 48,
-            y: 48,
-            width: 380,
-            height: 40,
-            visible: true,
-            opacity: 1,
-            children: [],
-            characters: "Web2Design V0.1 Sample",
-            textStyle: {
-              fontFamily: "Inter",
-              fontFallbacks: ["sans-serif"],
-              fontSize: 32,
-              fontWeight: 700,
-              fontStyle: "normal",
-              lineHeight: 40,
-              letterSpacing: 0,
-              textAlign: "start",
-              color: { r: 0.1, g: 0.1, b: 0.1, a: 1 },
-            },
-          },
-          {
-            id: "w2d-image-1",
-            type: "image",
-            sourceTag: "img",
-            name: "img",
-            x: 48,
-            y: 110,
-            width: 320,
-            height: 180,
-            visible: true,
-            opacity: 1,
-            children: [],
-            assetId: "asset-image-1",
-            fit: "cover",
-          },
-          {
-            id: "w2d-svg-1",
-            type: "svg",
-            sourceTag: "svg",
-            name: "svg",
-            x: 48,
-            y: 310,
-            width: 48,
-            height: 48,
-            visible: true,
-            opacity: 1,
-            children: [],
-            inlineSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgb(24, 160, 251)"/></svg>',
-            assetId: "asset-svg-1",
-          },
-        ],
-      },
-    ],
-  },
-  assets: [
-    {
-      id: "asset-image-1",
-      kind: "image",
-      source: { type: "url", url: "https://example.com/demo.png" },
-      contentHash: "url:demo-image-1",
-      mimeType: "image/png",
-      intrinsicDimensions: { width: 640, height: 360 },
-    },
-    {
-      id: "asset-svg-1",
-      kind: "svg",
-      source: {
-        type: "data-url",
-        dataUrl: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgb(24, 160, 251)"/></svg>',
-      },
-      contentHash: "svg:demo-circle",
-      mimeType: "image/svg+xml",
-      intrinsicDimensions: { width: 24, height: 24 },
-    },
-  ],
-  warnings: [
-    { code: "CAPTURE_SCOPE", message: "W2D-005: rendered light-DOM boxes, text, styles, images and inline SVG." },
-  ],
-};
+import { SAMPLE_DOCUMENT } from "./sample.js";
 
 function postToPlugin(message: UiToPluginMessage): void {
   parent.postMessage({ pluginMessage: message }, "*");
@@ -135,6 +20,7 @@ export function initUi(): void {
   const sampleBtn = elem<HTMLButtonElement>("sample-btn");
   const clearBtn = elem<HTMLButtonElement>("clear-btn");
   const importBtn = elem<HTMLButtonElement>("import-btn");
+  const diagnosticCheckbox = elem<HTMLInputElement>("diagnostic-layout-checkbox");
   const statusBar = elem<HTMLElement>("status-bar");
   const statusText = elem<HTMLElement>("status-text");
   const summarySection = elem<HTMLElement>("summary-section");
@@ -157,11 +43,13 @@ export function initUi(): void {
     sampleBtn.disabled = disabled;
     clearBtn.disabled = disabled;
     importBtn.disabled = disabled;
+    if (diagnosticCheckbox) diagnosticCheckbox.disabled = disabled;
   }
 
   function clearState(): void {
     jsonInput.value = "";
     if (fileInput) fileInput.value = "";
+    if (diagnosticCheckbox) diagnosticCheckbox.checked = false;
     summarySection.classList.add("hidden");
     resultSection.classList.add("hidden");
     errorSection.classList.add("hidden");
@@ -224,7 +112,8 @@ export function initUi(): void {
   function handleImport(): void {
     setButtonsDisabled(true);
     setStatus("importing", "Rendering nodes into Figma canvas...");
-    postToPlugin({ type: "import-document" });
+    const diagnosticLayoutMode = diagnosticCheckbox?.checked ? "absolute-only" : "normal";
+    postToPlugin({ type: "import-document", diagnosticLayoutMode });
   }
 
   validateBtn.addEventListener("click", handleValidate);

@@ -1,3 +1,4 @@
+import "./url-polyfill.js";
 import { safeParseDesignDocument, type VersionedDesignDocument } from "@web2design/design-schema";
 import { renderDesignDocument, type FigmaRendererHost } from "@web2design/figma-renderer";
 import { createFigmaHost } from "./host.js";
@@ -139,7 +140,9 @@ export async function handleUiMessage(
     postMessage({ type: "import-started" });
 
     try {
-      const renderResult = await renderDesignDocument(state.currentValidatedDoc, host);
+      const renderResult = await renderDesignDocument(state.currentValidatedDoc, host, {
+        diagnosticLayoutMode: message.diagnosticLayoutMode ?? "normal",
+      });
       state.isImporting = false;
       postMessage({
         type: "import-success",

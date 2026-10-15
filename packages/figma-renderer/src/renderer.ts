@@ -202,6 +202,10 @@ function applyAutoLayoutToFrame(frame: FrameNode, layout: AutoLayout, schemaFram
 
   frame.primaryAxisSizingMode = layout.primarySizing === "hug" ? "AUTO" : "FIXED";
   frame.counterAxisSizingMode = layout.crossSizing === "hug" ? "AUTO" : "FIXED";
+
+  if ("relayout" in frame && typeof (frame as unknown as { relayout: () => void }).relayout === "function") {
+    (frame as unknown as { relayout: () => void }).relayout();
+  }
 }
 
 function applyPlacementOrAutoLayoutToChild(
@@ -219,32 +223,85 @@ function applyPlacementOrAutoLayoutToChild(
   parentSchema: SchemaFrameNode,
   childPlacement: CalculatedPlacement,
   warnings: WarningCollector,
+  diagnosticLayoutMode?: "normal" | "absolute-only",
 ): void {
-  const isParentAutoLayout = Boolean(parentSchema.layout);
+  const isParentAutoLayout =
+    diagnosticLayoutMode !== "absolute-only" && Boolean(parentSchema.layout);
   const isAbsoluteChild = childSchema.layoutChild?.positioning === "absolute";
 
   if (!isParentAutoLayout || isAbsoluteChild) {
     if (isAbsoluteChild) {
-      (figmaNode as unknown as { layoutPositioning?: string }).layoutPositioning = "ABSOLUTE";
+      try {
+        (figmaNode as unknown as { layoutPositioning?: string }).layoutPositioning = "ABSOLUTE";
+      } catch {
+        // Ignore unsupported host property
+      }
     }
     applyPlacementToNode(figmaNode, childPlacement, warnings, childSchema.id);
   } else {
     // Normal Auto Layout flow child
-    (figmaNode as unknown as { layoutPositioning?: string }).layoutPositioning = "AUTO";
+    try {
+      (figmaNode as unknown as { layoutPositioning?: string }).layoutPositioning = "AUTO";
+    } catch {
+      // Ignore unsupported host property
+    }
+
     figmaNode.resize(Math.max(0.01, childPlacement.width), Math.max(0.01, childPlacement.height));
 
     if (childPlacement.rotation !== undefined && "rotation" in figmaNode) {
       figmaNode.rotation = childPlacement.rotation;
     }
 
+    const isHoriz = parentSchema.layout?.direction === "horizontal";
+
     if (childSchema.layoutChild?.grow) {
-      (figmaNode as unknown as { layoutGrow?: number }).layoutGrow = 1;
+      try {
+        (figmaNode as unknown as { layoutGrow?: number }).layoutGrow = 1;
+      } catch {
+        // Ignore unsupported host property
+      }
+      try {
+        if (isHoriz && "layoutSizingHorizontal" in figmaNode) {
+          (figmaNode as unknown as { layoutSizingHorizontal: string }).layoutSizingHorizontal = "FILL";
+        } else if (!isHoriz && "layoutSizingVertical" in figmaNode) {
+          (figmaNode as unknown as { layoutSizingVertical: string }).layoutSizingVertical = "FILL";
+        }
+      } catch {
+        // Ignore unsupported host property
+      }
+    } else {
+      try {
+        (figmaNode as unknown as { layoutGrow?: number }).layoutGrow = 0;
+      } catch {
+        // Ignore unsupported host property
+      }
     }
+
     if (childSchema.layoutChild?.stretch) {
-      (figmaNode as unknown as { layoutAlign?: string }).layoutAlign = "STRETCH";
+      try {
+        (figmaNode as unknown as { layoutAlign?: string }).layoutAlign = "STRETCH";
+      } catch {
+        // Ignore unsupported host property
+      }
+      try {
+        if (isHoriz && "layoutSizingVertical" in figmaNode) {
+          (figmaNode as unknown as { layoutSizingVertical: string }).layoutSizingVertical = "FILL";
+        } else if (!isHoriz && "layoutSizingHorizontal" in figmaNode) {
+          (figmaNode as unknown as { layoutSizingHorizontal: string }).layoutSizingHorizontal = "FILL";
+        }
+      } catch {
+        // Ignore unsupported host property
+      }
+    } else {
+      try {
+        (figmaNode as unknown as { layoutAlign?: string }).layoutAlign = "INHERIT";
+      } catch {
+        // Ignore unsupported host property
+      }
     }
   }
 }
+
 
 export async function renderDesignDocument(
   rawDocument: VersionedDesignDocument,
@@ -256,6 +313,7 @@ export async function renderDesignDocument(
   const fontManager = new FontManager(host, options?.defaultFont);
   await fontManager.init();
 
+  const diagnosticLayoutMode = options?.diagnosticLayoutMode ?? "normal";
   let createdNodeCount = 0;
   let skippedNodeCount = 0;
 
@@ -267,11 +325,7 @@ export async function renderDesignDocument(
   rootFrame.name = pageTitle ? `Web2Design — ${pageTitle}` : "Web2Design — Page";
 
   rootFrame.resize(Math.max(1, rootSchema.width), Math.max(1, rootSchema.height));
-  if (rootSchema.layout) {
-    applyAutoLayoutToFrame(rootFrame, rootSchema.layout);
-  } else {
-    rootFrame.layoutMode = "NONE";
-  }
+  rootFrame.layoutMode = "NONE";
   applyFrameClipping(rootFrame, rootSchema, warnings);
 
   // Root placement centered in viewport
@@ -330,19 +384,7 @@ export async function renderDesignDocument(
               const frame = host.createFrame();
               frame.name = deriveNodeName(childSchema);
               applyFrameClipping(frame, childSchema, warnings);
-              applyPlacementOrAutoLayoutToChild(
-                frame as unknown as Parameters<typeof applyPlacementToNode>[0],
-                childSchema,
-                parentSchema,
-                childPlacement,
-                warnings,
-              );
-
-              if (childSchema.layout) {
-                applyAutoLayoutToFrame(frame, childSchema.layout, childSchema);
-              } else {
-                frame.layoutMode = "NONE";
-              }
+              frame.layoutMode = "NONE";
 
               applyVisualStyle(
                 frame,
@@ -356,6 +398,15 @@ export async function renderDesignDocument(
 
               createdNodeCount++;
               parentFigma.appendChild(frame);
+
+              applyPlacementOrAutoLayoutToChild(
+                frame as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childSchema,
+                parentSchema,
+                childPlacement,
+                warnings,
+                diagnosticLayoutMode,
+              );
 
               // Recurse descendants with updated transform context
               let nextContext: TransformContext | undefined;
@@ -377,19 +428,21 @@ export async function renderDesignDocument(
               }
 
               await renderChildren(childSchema, frame, nextContext);
+
+              if (diagnosticLayoutMode !== "absolute-only" && childSchema.layout) {
+                applyAutoLayoutToFrame(frame, childSchema.layout, childSchema);
+                if (childSchema.layout.primarySizing === "fixed" || childSchema.layout.crossSizing === "fixed") {
+                  frame.resize(Math.max(1, childPlacement.width), Math.max(1, childPlacement.height));
+                }
+              } else {
+                frame.layoutMode = "NONE";
+              }
               break;
             }
 
             case "rectangle": {
               const rect = host.createRectangle();
               rect.name = deriveNodeName(childSchema);
-              applyPlacementOrAutoLayoutToChild(
-                rect as unknown as Parameters<typeof applyPlacementToNode>[0],
-                childSchema,
-                parentSchema,
-                childPlacement,
-                warnings,
-              );
 
               applyVisualStyle(
                 rect,
@@ -403,8 +456,18 @@ export async function renderDesignDocument(
 
               createdNodeCount++;
               parentFigma.appendChild(rect);
+
+              applyPlacementOrAutoLayoutToChild(
+                rect as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childSchema,
+                parentSchema,
+                childPlacement,
+                warnings,
+                diagnosticLayoutMode,
+              );
               break;
             }
+
 
             case "text": {
               const textNode = host.createText();
@@ -496,37 +559,39 @@ export async function renderDesignDocument(
                 }
               }
 
+              // Explicitly set textAutoResize to NONE before resizing to desired bounds
+              if (childPlacement.width > 0 && childPlacement.height > 0) {
+                textNode.textAutoResize = "NONE";
+                textNode.resize(Math.max(1, childPlacement.width), Math.max(1, childPlacement.height));
+              } else {
+                textNode.textAutoResize = "WIDTH_AND_HEIGHT";
+              }
+
+              tagPluginData(textNode, childSchema);
+              createdNodeCount++;
+              parentFigma.appendChild(textNode);
+
               applyPlacementOrAutoLayoutToChild(
                 textNode as unknown as Parameters<typeof applyPlacementToNode>[0],
                 childSchema,
                 parentSchema,
                 childPlacement,
                 warnings,
+                diagnosticLayoutMode,
               );
 
+              // Reinforce explicit textAutoResize and width/height after appending to parent
               if (childPlacement.width > 0 && childPlacement.height > 0) {
                 textNode.textAutoResize = "NONE";
-              } else {
-                textNode.textAutoResize = "WIDTH_AND_HEIGHT";
+                textNode.resize(Math.max(1, childPlacement.width), Math.max(1, childPlacement.height));
               }
 
-              tagPluginData(textNode, childSchema);
-
-              createdNodeCount++;
-              parentFigma.appendChild(textNode);
               break;
             }
 
             case "image": {
               const imageRect = host.createRectangle();
               imageRect.name = deriveNodeName(childSchema);
-              applyPlacementOrAutoLayoutToChild(
-                imageRect as unknown as Parameters<typeof applyPlacementToNode>[0],
-                childSchema,
-                parentSchema,
-                childPlacement,
-                warnings,
-              );
 
               applyVisualStyle(
                 imageRect,
@@ -575,9 +640,17 @@ export async function renderDesignDocument(
               }
 
               tagPluginData(imageRect, childSchema);
-
               createdNodeCount++;
               parentFigma.appendChild(imageRect);
+
+              applyPlacementOrAutoLayoutToChild(
+                imageRect as unknown as Parameters<typeof applyPlacementToNode>[0],
+                childSchema,
+                parentSchema,
+                childPlacement,
+                warnings,
+                diagnosticLayoutMode,
+              );
               break;
             }
 
@@ -607,13 +680,6 @@ export async function renderDesignDocument(
                 // Create rectangle placeholder
                 const placeholder = host.createRectangle();
                 placeholder.name = deriveNodeName(childSchema);
-                applyPlacementOrAutoLayoutToChild(
-                  placeholder as unknown as Parameters<typeof applyPlacementToNode>[0],
-                  childSchema,
-                  parentSchema,
-                  childPlacement,
-                  warnings,
-                );
                 placeholder.fills = [
                   {
                     type: "SOLID",
@@ -624,24 +690,34 @@ export async function renderDesignDocument(
                 tagPluginData(placeholder, childSchema);
                 createdNodeCount++;
                 parentFigma.appendChild(placeholder);
+
+                applyPlacementOrAutoLayoutToChild(
+                  placeholder as unknown as Parameters<typeof applyPlacementToNode>[0],
+                  childSchema,
+                  parentSchema,
+                  childPlacement,
+                  warnings,
+                  diagnosticLayoutMode,
+                );
                 break;
               }
 
               const svgSceneNode = renderSvgNode(childSchema, svgMarkup, host, warnings);
               svgSceneNode.name = deriveNodeName(childSchema);
+              svgSceneNode.opacity = Math.max(0, Math.min(1, childSchema.opacity));
+
+              tagPluginData(svgSceneNode, childSchema);
+              createdNodeCount++;
+              parentFigma.appendChild(svgSceneNode);
+
               applyPlacementOrAutoLayoutToChild(
                 svgSceneNode as unknown as Parameters<typeof applyPlacementToNode>[0],
                 childSchema,
                 parentSchema,
                 childPlacement,
                 warnings,
+                diagnosticLayoutMode,
               );
-              svgSceneNode.opacity = Math.max(0, Math.min(1, childSchema.opacity));
-
-              tagPluginData(svgSceneNode, childSchema);
-
-              createdNodeCount++;
-              parentFigma.appendChild(svgSceneNode);
               break;
             }
 
@@ -668,7 +744,17 @@ export async function renderDesignDocument(
 
     await renderChildren(rootSchema, rootFrame);
 
-    // 3. Append to canvas and set viewport/selection
+    // 3. Activate root Auto Layout only after all children are appended and placed
+    if (diagnosticLayoutMode !== "absolute-only" && rootSchema.layout) {
+      applyAutoLayoutToFrame(rootFrame, rootSchema.layout, rootSchema);
+      if (rootSchema.layout.primarySizing === "fixed" || rootSchema.layout.crossSizing === "fixed") {
+        rootFrame.resize(Math.max(1, rootSchema.width), Math.max(1, rootSchema.height));
+      }
+    } else {
+      rootFrame.layoutMode = "NONE";
+    }
+
+    // 4. Append to canvas and set viewport/selection
     host.appendRoot(rootFrame);
     host.setSelection?.([rootFrame]);
     host.scrollAndZoomIntoView?.([rootFrame]);

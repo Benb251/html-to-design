@@ -33,4 +33,6 @@ export interface FigmaRendererHost {
 export interface RenderOptions {
   viewportCenter?: { x: number; y: number } | undefined;
   defaultFont?: FontName | undefined;
+  diagnosticLayoutMode?: "normal" | "absolute-only" | undefined;
 }
+

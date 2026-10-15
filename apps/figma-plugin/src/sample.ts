@@ -1,0 +1,146 @@
+// apps/figma-plugin/src/sample.ts
+// Authoritative bundled sample document for Web2Design Figma plugin.
+// Conforms to current V0.7 Design Document Schema.
+// Uses deterministic, offline-first embedded base64 and data-url assets
+// to ensure 100% deterministic local validation and rendering without network dependencies.
+
+import type { VersionedDesignDocument } from "@web2design/design-schema";
+
+export const SAMPLE_DOCUMENT: VersionedDesignDocument = {
+  schemaVersion: "0.7",
+  capture: {
+    capturedAt: "2026-10-14T12:00:00.000Z",
+    source: {
+      kind: "chrome-extension",
+      name: "Web2Design",
+      version: "0.7.0",
+    },
+    page: {
+      url: "https://example.com/demo",
+      title: "Web2Design Demo Page",
+    },
+  },
+  viewport: {
+    width: 1440,
+    height: 900,
+    devicePixelRatio: 1,
+    scrollX: 0,
+    scrollY: 0,
+  },
+  root: {
+    id: "root",
+    type: "frame",
+    sourceTag: "html",
+    name: "Web2Design Demo Page",
+    x: 0,
+    y: 0,
+    width: 1440,
+    height: 900,
+    visible: true,
+    opacity: 1,
+    children: [
+      {
+        id: "w2d-element-body",
+        type: "frame",
+        sourceTag: "body",
+        name: "body",
+        x: 0,
+        y: 0,
+        width: 1440,
+        height: 900,
+        visible: true,
+        opacity: 1,
+        children: [
+          {
+            id: "w2d-text-1",
+            type: "text",
+            sourceTag: "h1",
+            name: "Text",
+            x: 48,
+            y: 48,
+            width: 380,
+            height: 40,
+            visible: true,
+            opacity: 1,
+            children: [],
+            characters: "Web2Design V0.7 Sample",
+            textStyle: {
+              fontFamily: "Inter",
+              fontFallbacks: ["sans-serif"],
+              fontSize: 32,
+              fontWeight: 700,
+              fontStyle: "normal",
+              lineHeight: 40,
+              letterSpacing: 0,
+              textAlign: "start",
+              color: { r: 0.1, g: 0.1, b: 0.1, a: 1 },
+            },
+          },
+          {
+            id: "w2d-image-1",
+            type: "image",
+            sourceTag: "img",
+            name: "img",
+            x: 48,
+            y: 110,
+            width: 320,
+            height: 180,
+            visible: true,
+            opacity: 1,
+            children: [],
+            assetId: "asset-image-1",
+            fit: "cover",
+          },
+          {
+            id: "w2d-svg-1",
+            type: "svg",
+            sourceTag: "svg",
+            name: "svg",
+            x: 48,
+            y: 310,
+            width: 48,
+            height: 48,
+            visible: true,
+            opacity: 1,
+            children: [],
+            inlineSvg:
+              '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgb(24, 160, 251)"/></svg>',
+            assetId: "asset-svg-1",
+          },
+        ],
+      },
+    ],
+  },
+  assets: [
+    {
+      id: "asset-image-1",
+      kind: "image",
+      source: {
+        type: "embedded",
+        encoding: "base64",
+        data: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+      },
+      contentHash: "embedded:sample-1x1-png",
+      mimeType: "image/png",
+      intrinsicDimensions: { width: 320, height: 180 },
+    },
+    {
+      id: "asset-svg-1",
+      kind: "svg",
+      source: {
+        type: "data-url",
+        dataUrl:
+          'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgb(24, 160, 251)"/></svg>',
+      },
+      contentHash: "svg:demo-circle",
+      mimeType: "image/svg+xml",
+      intrinsicDimensions: { width: 24, height: 24 },
+    },
+  ],
+  warnings: [
+    {
+      code: "CAPTURE_SCOPE",
+      message: "W2D-005: rendered light-DOM boxes, text, styles, images and inline SVG.",
+    },
+  ],
+};
